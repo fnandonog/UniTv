@@ -1,0 +1,367 @@
+/* --- GERAL --- */
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+body { background-color: #050505; color: white; overflow-x: hidden; }
+
+/* Variáveis de Cor (UniTV Style) */
+:root {
+    --gradiente-uni: linear-gradient(90deg, #ff4d00, #ff0055, #a600ff);
+    --laranja: #ff4d00;
+    --roxo: #a600ff;
+    --cinza-card: #141414;
+    --borda: #333;
+}
+
+/* Header */
+header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 15px 5%; position: fixed; width: 100%; top: 0;
+    background: rgba(5, 5, 5, 0.95); z-index: 1000; border-bottom: 1px solid #222;
+}
+.logo img { height: 40px; }
+nav ul { display: flex; list-style: none; gap: 20px; }
+nav a { color: #ccc; text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
+nav a:hover { color: white; }
+.btn-header {
+    background: white; color: black; padding: 8px 20px;
+    border-radius: 50px; text-decoration: none; font-weight: 700;
+    font-size: 0.85rem; transition: 0.3s;
+}
+.btn-header:hover { transform: scale(1.05); }
+
+/* Hero */
+.hero {
+    padding: 140px 20px 80px; text-align: center;
+    background: radial-gradient(circle at center, #2a0a3d 0%, #050505 70%);
+}
+.badge {
+    background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255,255,255,0.2);
+    padding: 5px 15px; border-radius: 20px; font-size: 0.8rem;
+    text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; display: inline-block;
+}
+h1 { font-size: 3rem; line-height: 1.1; margin-bottom: 20px; font-weight: 800; }
+.text-gradient { background: var(--gradiente-uni); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.hero-sub { color: #ccc; font-size: 1.1rem; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto; }
+
+/* Botão CTA */
+.btn-cta {
+    background: var(--gradiente-uni); background-size: 200% 200%;
+    color: white; padding: 16px 40px; border-radius: 50px;
+    font-size: 1.1rem; font-weight: 700; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 10px;
+    box-shadow: 0 0 20px rgba(166, 0, 255, 0.4);
+    animation: gradientMove 3s ease infinite; transition: 0.3s;
+}
+.btn-cta:hover { transform: translateY(-3px); box-shadow: 0 0 40px rgba(255, 77, 0, 0.6); }
+@keyframes gradientMove { 0% {background-position: 0% 50%} 50% {background-position: 100% 50%} 100% {background-position: 0% 50%} }
+
+/* Seções Gerais */
+section { padding: 80px 20px; }
+.section-title { text-align: center; font-size: 2.2rem; margin-bottom: 50px; }
+
+/* Recursos (Features) */
+.features-grid { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
+.feature-box {
+    background: var(--cinza-card); padding: 30px; border-radius: 12px;
+    width: 300px; border: 1px solid var(--borda); transition: 0.3s;
+}
+.feature-box:hover { border-color: var(--roxo); }
+.feature-box i { font-size: 2rem; color: var(--laranja); margin-bottom: 15px; }
+.feature-box h3 { margin-bottom: 10px; }
+.feature-box p { color: #999; font-size: 0.9rem; line-height: 1.5; }
+
+/* Downloads Section */
+.download-section { background: #0f0f0f; text-align: center; }
+.download-buttons { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+.btn-download {
+    background: transparent; border: 1px solid #444; color: white;
+    padding: 15px 30px; border-radius: 8px; text-decoration: none;
+    display: flex; align-items: center; gap: 10px; transition: 0.3s;
+}
+.btn-download:hover { background: #222; border-color: white; }
+.btn-download i { font-size: 1.5rem; }
+
+/* Preço */
+.price-card {
+    background: #141414; border: 2px solid #333; border-radius: 20px;
+    padding: 40px; max-width: 400px; margin: 0 auto; position: relative;
+    box-shadow: 0 0 40px rgba(0,0,0,0.5); text-align: center; overflow: hidden;
+}
+.price-card::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px; background: var(--gradiente-uni);
+}
+.price-val { font-size: 3.5rem; font-weight: 800; color: white; margin: 20px 0; }
+.price-val span { font-size: 1rem; color: #888; font-weight: 400; }
+.features-list { list-style: none; text-align: left; margin-bottom: 30px; }
+.features-list li { margin-bottom: 12px; display: flex; align-items: center; gap: 10px; color: #ddd; }
+.features-list i { color: #00ff88; }
+
+/* --- PÁGINA FAQ --- */
+.faq-container { max-width: 800px; margin: 0 auto; }
+.faq-item { background: var(--cinza-card); border-radius: 8px; margin-bottom: 15px; overflow: hidden; border: 1px solid var(--borda); }
+.faq-question {
+    padding: 20px; width: 100%; text-align: left; background: none; border: none;
+    color: white; font-weight: 600; font-size: 1rem; cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center;
+}
+.faq-question::after { content: '+'; font-size: 1.5rem; color: var(--laranja); transition: 0.3s; }
+.faq-item.active .faq-question::after { content: '-'; transform: rotate(180deg); }
+.faq-answer {
+    max-height: 0; overflow: hidden; padding: 0 20px; color: #aaa;
+    line-height: 1.6; transition: 0.3s ease; background: #0a0a0a;
+}
+.faq-item.active .faq-answer { padding: 20px; max-height: 500px; }
+
+/* --- FOOTER COMPLETO --- */
+footer { background: #080808; border-top: 1px solid #222; padding: 60px 20px 20px; font-size: 0.9rem; color: #777; }
+.footer-grid {
+    max-width: 1200px; margin: 0 auto; display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px;
+}
+.footer-col h4 { color: white; margin-bottom: 20px; font-size: 1.1rem; }
+.footer-links { list-style: none; }
+.footer-links li { margin-bottom: 10px; }
+.footer-links a { color: #777; text-decoration: none; transition: 0.3s; }
+.footer-links a:hover { color: var(--laranja); }
+.payment-icons { display: flex; gap: 10px; font-size: 2rem; margin-top: 10px; color: #ccc; }
+.footer-bottom { text-align: center; margin-top: 60px; padding-top: 20px; border-top: 1px solid #222; font-size: 0.8rem; }
+
+/* Botão Zap Flutuante */
+.float-zap {
+    position: fixed; bottom: 20px; right: 20px;
+    background: #25D366; color: white; width: 55px; height: 55px;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 28px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); z-index: 2000;
+    text-decoration: none; transition: 0.3s;
+}
+.float-zap:hover { transform: scale(1.1); }
+
+@media (max-width: 768px) {
+    .features-grid { flex-direction: column; align-items: center; }
+    h1 { font-size: 2.5rem; }
+    nav ul { display: none; } /* Simplificado para mobile */
+}
+
+/* --- ATUALIZAÇÃO DE PREÇOS (GRID) --- */
+.pricing-section { padding: 80px 20px; background: #0a0a0a; }
+
+.pricing-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.price-card {
+    background: #141414; border: 2px solid #333; border-radius: 20px;
+    padding: 40px 30px; width: 100%; max-width: 380px; position: relative;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3); text-align: center; overflow: hidden;
+    display: flex; flex-direction: column;
+}
+
+/* Destaque para o Anual */
+.price-card.destaque {
+    border-color: var(--roxo);
+    background: linear-gradient(160deg, #141414 0%, #1a0525 100%);
+    transform: scale(1.05); /* Fica um pouquinho maior */
+    z-index: 2;
+    box-shadow: 0 0 40px rgba(166, 0, 255, 0.2);
+}
+
+.price-card::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px; 
+    background: var(--gradiente-uni);
+}
+
+.economy-tag {
+    position: absolute; top: 15px; right: 15px;
+    background: #00ff88; color: black; font-weight: 800; font-size: 0.75rem;
+    padding: 4px 12px; border-radius: 20px; text-transform: uppercase;
+}
+
+.price-title { color: #aaa; font-size: 1.2rem; margin-bottom: 10px; }
+.price-val { font-size: 3rem; font-weight: 800; color: white; margin: 15px 0; }
+.price-val span { font-size: 1rem; color: #888; font-weight: 400; }
+
+@media (max-width: 768px) {
+    .price-card.destaque { transform: scale(1); } /* No celular fica tamanho normal */
+}
+
+/* --- HERO SECTION (ATUALIZADO COM IMAGEM) --- */
+.hero {
+    padding: 140px 20px 80px;
+    background: radial-gradient(circle at center, #2a0a3d 0%, #050505 70%);
+    display: flex; justify-content: center;
+}
+
+/* Novo container que organiza texto e imagem lado a lado */
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Duas colunas iguais */
+    gap: 40px; align-items: center; max-width: 1100px;
+}
+
+/* Coluna do Texto */
+.hero-text { text-align: left; }
+.hero-text h1 { font-size: 3.2rem; }
+.hero-text .hero-sub { margin-bottom: 30px; }
+
+/* Coluna da Imagem */
+.hero-image img {
+    width: 100%; max-width: 600px; /* Garante que não estoure */
+    height: auto; filter: drop-shadow(0 0 30px rgba(166, 0, 255, 0.3)); /* Efeito de brilho roxo */
+    animation: float 4s ease-in-out infinite;
+}
+
+/* Animação de flutuar para a TV */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+}
+
+/* --- OTIMIZAÇÃO TOTAL PARA CELULAR --- */
+@media (max-width: 768px) {
+    
+    /* 1. Ajuste Geral de Espaçamento */
+    section { 
+        padding: 60px 20px; /* Reduz o espaço entre as seções */
+    }
+
+    /* 2. Hero (Topo do Site) */
+    .hero { 
+        padding-top: 100px; /* Sobe um pouco o conteúdo */
+        padding-bottom: 40px;
+        text-align: center; 
+    }
+    
+    .hero-grid { 
+        display: flex; 
+        flex-direction: column; 
+        gap: 30px; 
+    }
+
+    /* Inverte a ordem: Texto Primeiro, Imagem Depois */
+    .hero-text { order: 1; }
+    .hero-image { order: 2; margin-top: -10px; }
+
+    /* Reduz o tamanho do Título Gigante */
+    h1 { 
+        font-size: 2rem; /* Estava 3.5rem, diminuí para caber */
+        line-height: 1.2;
+    }
+    
+    .hero-sub {
+        font-size: 1rem;
+        margin-bottom: 25px;
+    }
+
+    /* Ajusta a Imagem da TV para não ficar colossal */
+    .hero-image img { 
+        max-width: 85%; 
+        margin: 0 auto; 
+        display: block; 
+    }
+
+    /* 3. Seção de Preços (Onde estava estourando) */
+    .pricing-section {
+        padding: 50px 15px; /* Mais espaço nas laterais */
+    }
+
+    .section-title {
+        font-size: 1.8rem; /* Reduz título da seção */
+        margin-bottom: 30px;
+    }
+
+    .price-card {
+        padding: 30px 20px; /* Card mais compacto */
+        max-width: 100%; /* Garante que não passe da tela */
+        width: 100%;
+        box-shadow: 0 0 15px rgba(0,0,0,0.3); /* Sombra mais suave */
+    }
+
+    .price-val { 
+        font-size: 2.8rem; /* Reduz o preço (estava 3.5rem) */
+    }
+
+    /* 4. Botões e Header */
+    .btn-cta {
+        width: 100%; /* Botão ocupa a largura total no celular */
+        justify-content: center;
+        padding: 15px;
+        font-size: 1rem;
+    }
+
+    header {
+        padding: 15px 20px; /* Header mais compacto */
+    }
+    
+    .logo img { height: 35px; } /* Logo um pouco menor */
+    
+    .btn-header {
+        font-size: 0.8rem;
+        padding: 8px 15px;
+    }
+
+    /* 5. Ajuste dos Ícones de Recursos */
+    .features-grid { gap: 15px; }
+    .feature-box { 
+        width: 100%; /* Card de recursos ocupa a largura toda */
+        margin-bottom: 10px;
+    }
+}
+
+/* --- CHECKOUT MODAL STYLE --- */
+.checkout-overlay {
+    display: none; /* Escondido por padrão */
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px);
+    z-index: 5000;
+    justify-content: center; align-items: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.checkout-box {
+    background: #1a1a1a; width: 90%; max-width: 400px;
+    padding: 30px; border-radius: 15px; border: 1px solid #333;
+    position: relative; box-shadow: 0 0 50px rgba(0,0,0,0.5);
+}
+
+.close-btn {
+    position: absolute; top: 15px; right: 20px;
+    font-size: 2rem; color: #888; cursor: pointer;
+}
+.close-btn:hover { color: white; }
+
+.checkout-header h3 { font-size: 1.5rem; margin-bottom: 5px; color: white; }
+.checkout-header p { font-size: 0.9rem; color: #aaa; margin-bottom: 20px; }
+
+.order-summary {
+    background: #111; padding: 15px; border-radius: 8px; margin-bottom: 20px;
+    border: 1px solid #222;
+}
+.summary-row { display: flex; justify-content: space-between; font-weight: 600; font-size: 1.1rem; }
+.price-highlight { color: #00ff88; }
+.order-summary hr { border: 0; border-top: 1px solid #333; margin-top: 10px; }
+
+.input-group { margin-bottom: 15px; text-align: left; }
+.input-group label { display: block; color: #ccc; margin-bottom: 5px; font-size: 0.9rem; }
+.input-group input {
+    width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #333;
+    background: #0d0d0d; color: white; font-size: 1rem; outline: none;
+    transition: 0.3s;
+}
+.input-group input:focus { border-color: var(--roxo); }
+
+.btn-finalizar {
+    width: 100%; padding: 15px; border: none; border-radius: 50px;
+    background: #25D366; color: white; font-size: 1.1rem; font-weight: 700;
+    cursor: pointer; transition: 0.3s; margin-top: 10px;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+}
+.btn-finalizar:hover { background: #1ebc57; transform: scale(1.02); }
+
+.secure-info { margin-top: 15px; font-size: 0.8rem; color: #666; }
+
+@keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajuda e FAQ - UniTV</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+
+        <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+
+    fbq('init', '1535028304394811'); // Seu Novo ID
+    fbq('track', 'PageView'); // Rastreia a visita na página
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1535028304394811&ev=PageView&noscript=1"
+    /></noscript>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <a href="index.html"><img src="img/logo-unitv.png" alt="UniTV"></a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Voltar ao Início</a></li>
+            </ul>
+        </nav>
+        <a href="index.html#comprar" class="btn-header">Comprar</a>
+    </header>
+
+    <section class="hero" style="min-height: auto; padding-bottom: 40px;">
+        <h1>Central de Ajuda</h1>
+        <p class="hero-sub">Tire suas dúvidas sobre instalação, recarga e funcionamento.</p>
+    </section>
+
+    <section>
+        <div class="faq-container">
+            
+            <div class="faq-item">
+                <button class="faq-question">Como inserir o código de recarga?</button>
+                <div class="faq-answer">
+                    <p>1. Abra o UniTV na sua TV Box ou Celular.<br>
+                    2. Vá até "Perfil" ou "Minha Conta".<br>
+                    3. Clique em "Recarregar" ou "Código de Recarga".<br>
+                    4. Digite o código de 16 dígitos que enviamos no seu WhatsApp e confirme.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">Funciona em Smart TV Samsung ou LG?</button>
+                <div class="faq-answer">
+                    <p>O aplicativo UniTV é nativo para sistema Android. Para usar em TV Samsung ou LG (que usam sistemas Tizen/WebOS), você precisará conectar uma <strong>TV Box Android</strong> ou um <strong>Fire Stick</strong> na sua televisão.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">Quantas telas posso usar?</button>
+                <div class="faq-answer">
+                    <p>O plano padrão permite o uso em <strong>2 telas simultâneas</strong>. Você pode usar, por exemplo, na sua TV Box e no seu celular ao mesmo tempo com a mesma conta.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">Qual a velocidade de internet recomendada?</button>
+                <div class="faq-answer">
+                    <p>Recomendamos uma internet de pelo menos <strong>10 Mega</strong> estáveis para canais HD e <strong>20 Mega</strong> para conteúdos em 4K. O uso via cabo de rede na TV Box garante maior estabilidade.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">O código tem validade?</button>
+                <div class="faq-answer">
+                    <p>O código só começa a contar os dias a partir do momento que você ativa ele no aplicativo. Se você comprar hoje e ativar só semana que vem, os 30 dias só começam a contar na semana que vem.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">Esqueci minha senha, e agora?</button>
+                <div class="faq-answer">
+                    <p>Você pode recuperar sua senha clicando em "Esqueci a Senha" na tela de login do aplicativo, usando o e-mail ou telefone cadastrado na sua conta UniTV.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Vendas UniTV. Revenda Autorizada.</p>
+        </div>
+    </footer>
+
+    <script>
+        const faqItems = document.querySelectorAll('.faq-item');
+
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                // Fecha os outros se quiser (opcional)
+                // faqItems.forEach(i => i !== item && i.classList.remove('active'));
+                
+                item.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>
