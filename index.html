@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recarga UniTV Oficial - Promoção Relâmpago</title>
     
-    <link rel="stylesheet" href="[https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css)">
-    <link href="[https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap](https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap)" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css"> 
     <link rel="icon" href="img/logo-unitv.png" type="image/png">
 
@@ -18,15 +18,15 @@
     n.queue=[];t=b.createElement(e);t.async=!0;
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
-    '[https://connect.facebook.net/en_US/fbevents.js](https://connect.facebook.net/en_US/fbevents.js)');
+    'https://connect.facebook.net/en_US/fbevents.js');
 
     fbq('init', '1535028304394811'); 
     fbq('track', 'PageView');
     </script>
     <noscript><img height="1" width="1" style="display:none"
-    src="[https://www.facebook.com/tr?id=1535028304394811&ev=PageView&noscript=1](https://www.facebook.com/tr?id=1535028304394811&ev=PageView&noscript=1)"
+    src="https://www.facebook.com/tr?id=1535028304394811&ev=PageView&noscript=1"
     /></noscript>
-    </head>
+</head>
 <body>
 
     <div class="promo-bar">
@@ -52,7 +52,7 @@
             <div class="hero-text">
                 <span class="badge">Revenda Autorizada</span>
                 <h1>Sua Recarga <span class="text-gradient">UniTV</span><br>Entrega Automática</h1>
-                <p class="hero-sub">Receba seu código de 16 dígitos em segundos no WhatsApp. Tudo liberado em 2 telas simultâneas.</p>
+                <p class="hero-sub">Receba seu código de 16 dígitos em segundos no E-mail e WhatsApp. Tudo liberado em 2 telas simultâneas.</p>
                 
                 <a href="#comprar" class="btn-cta">
                     <i class="fa-brands fa-whatsapp"></i> PEGAR PROMOÇÃO
@@ -122,7 +122,7 @@
                     <li><i class="fa-solid fa-check"></i> Entrega Imediata</li>
                 </ul>
 
-                <a href="#" class="btn-cta" style="width: 100%; justify-content: center; background: #333; box-shadow: none;" onclick="abrirCheckout('mensal')">
+                <a href="https://pay.kirvano.com/07f96a4e-ecdf-4538-83ca-01e5c35f1425" class="btn-cta" style="width: 100%; justify-content: center; background: #333; box-shadow: none;" target="_blank">
                     Comprar Oferta
                 </a>
             </div>
@@ -142,7 +142,7 @@
                     <li><i class="fa-solid fa-check"></i> Proteção contra Reajuste</li>
                 </ul>
 
-                <a href="#" class="btn-cta" style="width: 100%; justify-content: center;" onclick="abrirCheckout('anual')">
+                <a href="https://pay.kirvano.com/0aadf253-f4b6-47dd-8d0a-f5f16714ce98" class="btn-cta" style="width: 100%; justify-content: center;" target="_blank">
                     Garantir Promoção
                 </a>
                 <p style="margin-top: 15px; font-size: 0.9rem; color: #00ff88; font-weight: bold;">
@@ -151,6 +151,14 @@
             </div>
 
         </div>
+
+        <div style="text-align: center; margin-top: 50px;">
+            <p style="color: #ccc; font-size: 1.1rem; margin-bottom: 20px;">Não sabe qual plano escolher ou teve problema no pagamento?</p>
+            <a href="https://wa.me/5519981765840?text=Ol%C3%A1!%20Estou%20com%20d%C3%BAvidas%20sobre%20o%20UniTV" target="_blank" class="btn-download" style="display: inline-flex; background: #25D366; border-color: #25D366; font-weight: bold;">
+                <i class="fa-brands fa-whatsapp"></i> Falar com Suporte no WhatsApp
+            </a>
+        </div>
+
     </section>
 
     <footer>
@@ -188,44 +196,9 @@
         </div>
     </footer>
 
-    <a href="#" class="float-zap" onclick="abrirCheckout('duvida')"><i class="fa-brands fa-whatsapp"></i></a>
-
-    <div id="modalCheckout" class="checkout-overlay">
-        <div class="checkout-box">
-            <span class="close-btn" onclick="fecharCheckout()">&times;</span>
-            
-            <div class="checkout-header">
-                <h3>Finalizar Compra</h3>
-                <p>Preencha para receber seu código no WhatsApp.</p>
-            </div>
-
-            <div class="order-summary">
-                <div class="summary-row">
-                    <span id="resumoPlano">Plano Mensal</span>
-                    <span id="resumoValor" class="price-highlight">R$ 30,00</span>
-                </div>
-                <hr>
-            </div>
-
-            <form id="formCheckout" onsubmit="enviarPedido(event)">
-                <div class="input-group">
-                    <label>Seu Nome</label>
-                    <input type="text" id="inputNome" placeholder="Ex: João Silva" required>
-                </div>
-
-                <div class="input-group">
-                    <label>Seu WhatsApp (com DDD)</label>
-                    <input type="tel" id="inputZap" placeholder="Ex: 19999999999" required>
-                </div>
-
-                <button type="submit" class="btn-finalizar">
-                    <i class="fa-brands fa-whatsapp"></i> Pagar e Receber Código
-                </button>
-                
-                <p class="secure-info"><i class="fa-solid fa-lock"></i> Dados criptografados e seguros.</p>
-            </form>
-        </div>
-    </div>
+    <a href="https://wa.me/5519981765840?text=Ol%C3%A1!%20Estou%20com%20d%C3%BAvidas%20sobre%20o%20UniTV" class="float-zap" target="_blank">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
 
     <script>
         // 1. Cronômetro da Barra
@@ -253,77 +226,6 @@
             var display = document.querySelector('#timer');
             if(display) startTimer(duration, display);
         };
-
-        // 2. Variáveis de Preço
-        let planoSelecionado = "";
-        let valorSelecionado = 0.00;
-
-        function abrirCheckout(plano) {
-            const modal = document.getElementById('modalCheckout');
-            const txtPlano = document.getElementById('resumoPlano');
-            const txtValor = document.getElementById('resumoValor');
-
-            // --- CONFIGURAÇÃO DOS PREÇOS DA PROMOÇÃO ---
-            if (plano === 'mensal') {
-                planoSelecionado = "Mensal Promo (30 Dias)";
-                valorSelecionado = 24.90;
-            } else if (plano === 'anual') {
-                planoSelecionado = "Anual Black (365 Dias)";
-                valorSelecionado = 179.90;
-            } else {
-                planoSelecionado = "Dúvidas / Geral";
-                valorSelecionado = 0.00;
-            }
-
-            txtPlano.innerText = planoSelecionado;
-            txtValor.innerText = "R$ " + valorSelecionado.toFixed(2).replace('.', ',');
-            modal.style.display = 'flex';
-
-            if(typeof fbq !== 'undefined') {
-                fbq('track', 'InitiateCheckout', {
-                    content_name: planoSelecionado,
-                    currency: 'BRL',
-                    value: valorSelecionado
-                });
-            }
-        }
-
-        function fecharCheckout() {
-            document.getElementById('modalCheckout').style.display = 'none';
-        }
-
-        function enviarPedido(e) {
-            e.preventDefault();
-            let nome = document.getElementById('inputNome').value;
-            let zap = document.getElementById('inputZap').value;
-            let zapLimpo = zap.replace(/\D/g, ''); 
-            
-            if (!zapLimpo.startsWith('55') && zapLimpo.length > 9) {
-                zapLimpo = '55' + zapLimpo;
-            }
-
-            if(typeof fbq !== 'undefined') {
-                fbq('track', 'Purchase', {
-                    content_name: planoSelecionado,
-                    currency: 'BRL',
-                    value: valorSelecionado,
-                    user_data: { fn: nome, ph: zapLimpo }
-                });
-            }
-
-            let numeroVendedor = "5519981765840"; 
-            let mensagem = `🔥 Olá! Sou *${nome}* e quero aproveitar a PROMOÇÃO.\nPlano: *${planoSelecionado}*.\nValor Promocional: R$ ${valorSelecionado.toFixed(2)}`;
-
-            setTimeout(() => {
-                window.open(`https://wa.me/${numeroVendedor}?text=${encodeURIComponent(mensagem)}`, '_blank');
-                fecharCheckout();
-            }, 500);
-        }
-
-        window.onclick = function(event) {
-            const modal = document.getElementById('modalCheckout');
-            if (event.target == modal) { fecharCheckout(); }
-        }
     </script>
 </body>
 </html>
