@@ -256,65 +256,6 @@ footer {
     nav ul { display: none; }
 }
 
-/* --- BOX DE SUPORTE (CORRIGIDO) --- */
-.support-box {
-    margin: 60px 20px 0; /* Margem lateral para não colar na borda do celular */
-    background: linear-gradient(90deg, #111 0%, #161616 100%);
-    border: 1px solid #222;
-    border-left: 4px solid #25D366;
-    border-radius: 12px;
-    padding: 30px 20px;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    position: relative;
-    max-width: 700px;
-}
 
-/* Centraliza a box na tela em telas grandes */
-@media (min-width: 768px) {
-    .support-box { margin: 60px auto 0; }
-}
 
-.support-box p {
-    color: #e0e0e0;
-    font-size: 1.1rem;
-    font-weight: 500;
-    margin-bottom: 25px;
-    line-height: 1.4;
-}
 
-/* Correção do Botão para ficar Sólido */
-.support-box .btn-suporte-zap {
-    display: inline-flex !important; /* Torna o botão um bloco flexível */
-    align-items: center;
-    justify-content: center;
-    gap: 10px; /* Espaço entre ícone e texto */
-    
-    background: #25D366 !important;
-    color: #000 !important;
-    border: none !important;
-    font-weight: 700 !important;
-    font-size: 1rem !important; /* Tamanho da fonte legível */
-    
-    padding: 15px 30px !important; /* Mais gordinho */
-    border-radius: 50px !important; /* Arredondado */
-    text-decoration: none;
-    
-    box-shadow: 0 5px 15px rgba(37, 211, 102, 0.2);
-    transition: 0.3s;
-    
-    /* Garante que cabe na tela do celular sem estourar */
-    max-width: 100%; 
-    white-space: normal; /* Permite quebrar linha se o celular for muito pequeno */
-    text-align: center;
-}
-
-.support-box .btn-suporte-zap:hover {
-    background: #1ebc57 !important;
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
-}
-
-.support-box .btn-suporte-zap i {
-    font-size: 1.3rem; /* Ícone um pouco maior */
-}
