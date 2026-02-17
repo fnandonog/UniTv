@@ -7,8 +7,299 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css"> 
-    <link rel="icon" href="img/logo-unitv.png" type="image/png">
+    
+    <style>
+        /* --- ESTILOS GERAIS (MANTIDOS) --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        :root {
+            --bg-body: #050505;
+            --bg-card: #0f0f0f;
+            --gradiente-premium: linear-gradient(135deg, #FF512F 0%, #DD2476 100%);
+            --gradiente-texto: linear-gradient(90deg, #ff8c00, #ff0080, #7928ca);
+            --borda-sutil: 1px solid rgba(255, 255, 255, 0.08);
+            --verde-zap: #25D366;
+            --wa-header: #075e54; --wa-bg: #e5ddd5; --wa-msg-user: #dcf8c6;
+            --cor-destaque: #ff0080;
+        }
+
+        body { background-color: var(--bg-body); color: #f0f0f0; overflow-x: hidden; line-height: 1.6; padding-top: 40px; }
+
+        .promo-bar {
+            background: linear-gradient(90deg, #1a0b2e, #2d0b1e);
+            color: #e0e0e0; text-align: center; padding: 8px 10px; font-size: 0.85rem; font-weight: 500;
+            position: fixed; top: 0; width: 100%; z-index: 2000; border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .promo-bar span { color: #ff0055; font-weight: 700; }
+
+        header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 10px 5%; position: fixed; width: 100%; top: 38px;
+            background: rgba(5, 5, 5, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            z-index: 1000; border-bottom: var(--borda-sutil); height: 60px;
+        }
+        .logo img { height: 32px; filter: brightness(1.1); }
+        nav ul { display: flex; list-style: none; gap: 30px; }
+        nav a { color: #bbb; text-decoration: none; font-size: 0.85rem; font-weight: 500; text-transform: uppercase; transition: 0.3s; }
+        nav a:hover { color: white; }
+        .btn-header { background: rgba(255, 255, 255, 0.1); color: white; padding: 6px 18px; border-radius: 4px; text-decoration: none; font-size: 0.75rem; font-weight: 600; border: 1px solid rgba(255,255,255,0.1); }
+
+        /* --- HERO --- */
+        .hero { padding: 140px 5% 100px; background: radial-gradient(circle at 70% 20%, #1a0525 0%, #050505 60%); display: flex; justify-content: center; }
+        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 50px; max-width: 1200px; margin: 0 auto; }
+        .hero-text { text-align: left; }
+        h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 25px; font-weight: 700; }
+        .text-gradient { background: var(--gradiente-texto); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-sub { color: #888; font-size: 1.1rem; margin-bottom: 40px; max-width: 500px; font-weight: 300; }
+        .badge { background: rgba(255, 0, 85, 0.1); color: #ff0055; border: 1px solid rgba(255, 0, 85, 0.2); padding: 6px 16px; border-radius: 50px; font-size: 0.75rem; margin-bottom: 25px; display: inline-block; }
+        .btn-cta { background: var(--gradiente-premium); color: white; padding: 18px 45px; border-radius: 50px; font-size: 1rem; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; transition: 0.4s; }
+        .hero-image img { width: 100%; max-width: 650px; animation: float 6s ease-in-out infinite; }
+        @keyframes float { 0%, 100% {transform: translateY(0);} 50% {transform: translateY(-20px);} }
+
+        section { padding: 80px 20px; }
+        .section-title { text-align: center; font-size: 2rem; margin-bottom: 60px; font-weight: 700; }
+        
+        /* --- RECURSOS --- */
+        .features-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+        .feature-box { background: var(--bg-card); padding: 40px 30px; border-radius: 16px; width: 280px; border: var(--borda-sutil); transition: 0.4s; }
+        .feature-box i { font-size: 1.8rem; margin-bottom: 20px; color: #fff; }
+
+        /* --- DOWNLOAD --- */
+        .download-section { background: #080808; text-align: center; }
+        .download-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 900px; margin: 0 auto; }
+        .dl-card { background: #111; border: 1px solid #222; border-radius: 20px; padding: 40px 30px; position: relative; overflow: hidden; transition: all 0.3s ease; text-align: left; }
+        .dl-card:hover { transform: translateY(-5px); border-color: #444; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
+        .dl-icon { font-size: 2.5rem; color: #fff; margin-bottom: 20px; background: linear-gradient(135deg, #333, #111); width: 70px; height: 70px; display: flex; align-items: center; justify-content: center; border-radius: 15px; border: 1px solid #333; }
+        .dl-card h3 { font-size: 1.3rem; margin-bottom: 10px; color: white; }
+        .dl-card p { color: #777; font-size: 0.9rem; margin-bottom: 25px; line-height: 1.5; }
+        .btn-dl-card { display: inline-flex; align-items: center; gap: 10px; width: 100%; justify-content: center; padding: 14px; background: #fff; color: #000; font-weight: 700; border-radius: 8px; text-decoration: none; transition: 0.3s; cursor: pointer; border: none; font-size: 0.95rem; }
+        .btn-dl-card:hover { background: #ccc; }
+        .btn-dl-card.dark { background: #222; color: #fff; border: 1px solid #333; }
+        .btn-dl-card.dark:hover { background: #333; border-color: #fff; }
+
+        /* --- PRICING REDESIGNED (PREMIUM) --- */
+        .pricing-section { background: #020202; position: relative; padding: 100px 20px; }
+        .pricing-grid { 
+            display: flex; justify-content: center; align-items: center; 
+            gap: 40px; max-width: 1000px; margin: 0 auto; flex-wrap: wrap; 
+        }
+        
+        /* Cartão Padrão (Mensal) */
+        .price-card { 
+            background: #0a0a0a; border: 1px solid #222; border-radius: 20px; 
+            padding: 40px; width: 100%; max-width: 320px; position: relative; 
+            transition: 0.3s; height: fit-content;
+        }
+        .price-card:hover { border-color: #444; }
+        
+        /* Cartão Destaque (Anual) */
+        .price-card.destaque { 
+            background: linear-gradient(160deg, #180a1f 0%, #050505 100%);
+            border: 2px solid var(--cor-destaque);
+            box-shadow: 0 0 50px rgba(255, 0, 128, 0.1);
+            transform: scale(1.1); /* Aumenta o tamanho no PC */
+            z-index: 10; max-width: 360px; padding: 50px 40px;
+        }
+
+        .price-header { border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 20px; margin-bottom: 20px; text-align: center; }
+        .price-title { color: #888; font-size: 1rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; margin-bottom: 5px; }
+        .destaque .price-title { color: var(--cor-destaque); }
+        
+        .price-val { font-size: 2.8rem; font-weight: 800; color: white; line-height: 1; }
+        .destaque .price-val { font-size: 3.5rem; text-shadow: 0 0 20px rgba(255, 0, 128, 0.3); }
+        
+        .price-period { font-size: 0.9rem; color: #666; font-weight: 400; }
+        .old-price { font-size: 1rem; color: #444; text-decoration: line-through; display: block; margin-bottom: 5px; }
+
+        .economy-tag { 
+            position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
+            background: var(--gradiente-premium); color: white; font-weight: 700; 
+            font-size: 0.8rem; padding: 8px 20px; border-radius: 30px; 
+            box-shadow: 0 5px 15px rgba(221, 36, 118, 0.4); text-transform: uppercase; letter-spacing: 1px;
+            white-space: nowrap;
+        }
+
+        .features-list { list-style: none; margin: 30px 0; text-align: left; }
+        .features-list li { margin-bottom: 15px; display: flex; align-items: flex-start; gap: 12px; color: #ccc; font-size: 0.95rem; }
+        .features-list i { color: #00ff88; margin-top: 4px; }
+        .destaque .features-list i { color: var(--cor-destaque); }
+
+        .btn-price {
+            display: flex; justify-content: center; align-items: center; width: 100%;
+            padding: 16px; border-radius: 12px; font-weight: 700; text-decoration: none;
+            transition: 0.3s; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px;
+        }
+        .btn-price.normal { background: #222; color: white; border: 1px solid #333; }
+        .btn-price.normal:hover { background: #fff; color: #000; }
+        
+        .btn-price.glow { 
+            background: var(--gradiente-premium); color: white; border: none; 
+            box-shadow: 0 10px 30px -5px rgba(221, 36, 118, 0.4);
+        }
+        .btn-price.glow:hover { transform: translateY(-3px); box-shadow: 0 20px 40px -10px rgba(221, 36, 118, 0.6); }
+
+        .support-box { margin: 80px auto 0; background: #111; border-left: 4px solid #25D366; padding: 30px; border-radius: 12px; text-align: center; max-width: 700px; }
+        
+        /* ADICIONADO: Estilo do botão de suporte */
+        .btn-suporte-zap { 
+            background: #25D366 !important; 
+            color: #000 !important; 
+            font-weight: 700; 
+            padding: 15px 30px; 
+            border-radius: 50px; 
+            text-decoration: none; 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 10px; 
+            cursor: pointer; 
+            border: none;
+            font-size: 1rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+        }
+        .btn-suporte-zap:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5); 
+        }
+
+        /* --- VANTAGENS --- */
+        .vantagens-section { background: #050505; overflow: hidden; padding-bottom: 60px; }
+        .vantagens-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto; }
+        .vantagem-card { display: flex; align-items: flex-start; gap: 20px; background: rgba(255,255,255,0.03); padding: 25px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.05); transition: 0.5s all; opacity: 0; }
+        .vantagem-icon { font-size: 2.5rem; color: #ff0080; min-width: 60px; }
+        .vantagem-info h3 { font-size: 1.2rem; color: #fff; margin-bottom: 10px; }
+        .vantagem-info p { font-size: 0.9rem; color: #888; }
+        .slide-left { transform: translateX(-100px); }
+        .slide-right { transform: translateX(100px); }
+        .vantagem-card.visible { opacity: 1; transform: translateX(0); }
+
+        /* --- NOVA SEÇÃO DE CATÁLOGO (API TMDB) & BANNER --- */
+        .catalog-section { padding: 40px 0 60px; background: #080808; border-top: 1px solid #1a1a1a; }
+        .catalog-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .catalog-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 30px; }
+        .catalog-header h2 { font-size: 1.6rem; color: #fff; font-weight: 700; margin: 0; }
+        .catalog-header .tag { background: #ff0055; color: white; font-size: 0.7rem; padding: 6px 12px; border-radius: 4px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(255, 0, 85, 0.4); }
+
+        /* Slider */
+        .movie-slider { 
+            display: flex; gap: 20px; overflow-x: auto; padding-bottom: 25px; 
+            scroll-behavior: smooth; -webkit-overflow-scrolling: touch;
+        }
+        .movie-slider::-webkit-scrollbar { height: 8px; }
+        .movie-slider::-webkit-scrollbar-track { background: #111; border-radius: 4px; }
+        .movie-slider::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; border: 1px solid #111; }
+        .movie-slider::-webkit-scrollbar-thumb:hover { background: #ff0055; }
+
+        .movie-card { 
+            flex: 0 0 160px; position: relative; border-radius: 12px; overflow: hidden; 
+            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); cursor: pointer; 
+            background: #111; aspect-ratio: 2/3; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .movie-card:hover { transform: scale(1.08) translateY(-5px); z-index: 5; box-shadow: 0 15px 30px rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.2); }
+        .movie-card img { width: 100%; height: 100%; object-fit: cover; }
+
+        .movie-info { 
+            position: absolute; bottom: 0; left: 0; width: 100%; 
+            background: linear-gradient(to top, rgba(0,0,0,0.95) 10%, rgba(0,0,0,0.7) 50%, transparent); 
+            padding: 40px 10px 10px; opacity: 0; transition: opacity 0.3s ease;
+            display: flex; flex-direction: column; justify-content: flex-end;
+        }
+        .movie-card:hover .movie-info { opacity: 1; }
+        .movie-title { color: white; font-size: 0.85rem; font-weight: 700; line-height: 1.3; margin-bottom: 5px; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
+        .movie-rating { color: #00ff88; font-size: 0.8rem; font-weight: 700; display: flex; align-items: center; gap: 5px; }
+        .movie-rating i { font-size: 0.7rem; }
+
+        /* FEATURED BANNER (DESTACADO) */
+        .featured-series-section { 
+            position: relative; height: 500px; width: 100%; overflow: hidden; 
+            display: flex; align-items: center; margin: 40px 0;
+            background-color: #000;
+        }
+        .featured-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover; background-position: center top; 
+            opacity: 0.6; mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.2) 100%);
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%, transparent 100%);
+        }
+        .featured-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(90deg, #020202 0%, rgba(2,2,2,0.8) 40%, transparent 100%);
+            z-index: 1;
+        }
+        .featured-content { 
+            position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; 
+            padding: 0 20px; width: 100%;
+        }
+        .featured-badge { 
+            background: #ff0055; color: white; padding: 5px 12px; font-weight: 700; 
+            border-radius: 4px; font-size: 0.8rem; display: inline-block; margin-bottom: 15px; 
+        }
+        .featured-title { font-size: 3rem; line-height: 1.1; margin-bottom: 15px; font-weight: 800; max-width: 600px; }
+        .featured-meta { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; font-size: 0.9rem; color: #ccc; }
+        .featured-rating { color: #00ff88; font-weight: 700; }
+        .featured-desc { color: #bbb; max-width: 500px; margin-bottom: 30px; font-size: 0.95rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+        
+        .btn-featured { 
+            background: white; color: black; padding: 12px 30px; border-radius: 5px; 
+            font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; 
+            gap: 10px; transition: 0.3s;
+        }
+        .btn-featured:hover { background: #ccc; }
+
+        /* FOOTER */
+        footer { background: #020202; border-top: 1px solid #111; padding: 60px 5% 30px; font-size: 0.85rem; color: #555; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto; }
+        .footer-col h4 { color: white; margin-bottom: 25px; }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { color: #777; text-decoration: none; transition: 0.3s; }
+        .footer-links a:hover { color: white; }
+
+        /* --- WHATSAPP WIDGET --- */
+        .wa-widget {
+            position: fixed; bottom: 85px; right: 20px; width: 340px;
+            background: var(--wa-bg); border-radius: 12px; z-index: 9999;
+            box-shadow: 0 12px 24px rgba(0,0,0,0.3); display: flex; flex-direction: column; overflow: hidden;
+            transform: scale(0); transform-origin: bottom right; transition: transform 0.3s ease;
+            font-family: 'Segoe UI', Tahoma, Helvetica, sans-serif;
+        }
+        .wa-widget.active { transform: scale(1); }
+        .wa-header { background: var(--wa-header); color: white; padding: 12px 15px; display: flex; align-items: center; justify-content: space-between; }
+        .wa-profile { display: flex; align-items: center; gap: 10px; }
+        .wa-profile img { width: 38px; height: 38px; border-radius: 50%; background: #eee; }
+        .wa-info { display: flex; flex-direction: column; }
+        .wa-name { font-weight: 600; font-size: 0.95rem; }
+        .wa-status { font-size: 0.75rem; color: #cfd8dc; }
+        .wa-close { background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
+        .wa-chat-body { height: 380px; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png'); background-size: contain; }
+        .wa-msg { max-width: 85%; padding: 8px 12px; border-radius: 8px; font-size: 0.88rem; position: relative; box-shadow: 0 1px 1px rgba(0,0,0,0.15); line-height: 1.4; color: #333; }
+        .wa-msg-bot { background: white; align-self: flex-start; border-top-left-radius: 0; }
+        .wa-msg-user { background: var(--wa-msg-user); align-self: flex-end; border-top-right-radius: 0; }
+        .wa-time { font-size: 0.65rem; color: #999; display: block; text-align: right; margin-top: 4px; }
+        .wa-options { padding: 12px; background: #f0f0f0; border-top: 1px solid #ddd; display: flex; flex-direction: column; gap: 8px; }
+        .wa-options button { background: white; border: 1px solid #ddd; padding: 10px; border-radius: 20px; font-size: 0.85rem; color: #075e54; font-weight: 600; cursor: pointer; text-align: center; width: 100%; }
+        .wa-options button:hover { background: #e7f7f5; }
+        .wa-input-fake { background: #f0f0f0; padding: 10px 15px; display: flex; align-items: center; gap: 10px; border-top: 1px solid #ddd; }
+        .wa-input-box { background: white; flex: 1; padding: 8px 15px; border-radius: 20px; color: #999; font-size: 0.85rem; border: 1px solid #ddd; }
+        .typing span { height: 8px; width: 8px; background: #bbb; display: inline-block; border-radius: 50%; margin-right: 3px; animation: waTyping 1s infinite; }
+        .typing span:nth-child(2) { animation-delay: 0.2s; }
+        .typing span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes waTyping { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+        .float-zap { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; z-index: 10000; box-shadow: 0 4px 12px rgba(0,0,0,0.3); cursor: pointer; }
+
+        @media (max-width: 768px) {
+            .hero-grid { grid-template-columns: 1fr; text-align: center; }
+            .hero-text { order: 1; }
+            .hero-image { order: 2; }
+            h1 { font-size: 2.2rem; }
+            .pricing-grid { flex-direction: column; gap: 40px; }
+            .price-card.destaque { transform: scale(1); max-width: 100%; } /* Remove zoom no mobile */
+            .wa-widget { width: 90%; right: 5%; bottom: 80px; }
+            .dl-card { text-align: center; }
+            .dl-icon { margin: 0 auto 20px; }
+            .featured-title { font-size: 2rem; }
+            .featured-series-section { height: 450px; }
+        }
+    </style>
 
     <script>
     !function(f,b,e,v,n,t,s)
@@ -23,9 +314,6 @@
     fbq('init', '1535028304394811'); 
     fbq('track', 'PageView');
     </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=1535028304394811&ev=PageView&noscript=1"
-    /></noscript>
 </head>
 <body>
 
@@ -53,13 +341,10 @@
                 <span class="badge">Revenda Autorizada</span>
                 <h1>Sua Recarga <span class="text-gradient">UniTV</span><br>Entrega Automática</h1>
                 <p class="hero-sub">Receba seu código de 16 dígitos em segundos no E-mail e WhatsApp. Tudo liberado em 2 telas simultâneas.</p>
-                
-                <a href="#comprar" class="btn-cta">
-                    <i class="fa-brands fa-whatsapp"></i> PEGAR PROMOÇÃO
-                </a>
+                <a href="#comprar" class="btn-cta">PEGAR PROMOÇÃO</a>
             </div>
             <div class="hero-image">
-                <img src="img/hero-tv.png" alt="UniTV na TV com Cartões">
+                <img src="img/hero-tv.png" alt="UniTV na TV">
             </div>
         </div>
     </section>
@@ -75,7 +360,7 @@
             <div class="feature-box">
                 <i class="fa-solid fa-film"></i>
                 <h3>Cinema VOD</h3>
-                <p>Catálogo com mais de 20.000 filmes e séries, incluindo lançamentos do cinema e streamings.</p>
+                <p>Catálogo com mais de 20.000 filmes e séries, incluindo lançamentos do cinema.</p>
             </div>
             <div class="feature-box">
                 <i class="fa-solid fa-mobile-screen"></i>
@@ -85,147 +370,513 @@
             <div class="feature-box">
                 <i class="fa-solid fa-lock"></i>
                 <h3>Controle Parental</h3>
-                <p>Bloqueie canais adultos ou categorias específicas com senha para proteger as crianças.</p>
+                <p>Bloqueie canais adultos ou categorias específicas com senha.</p>
             </div>
         </div>
     </section>
 
     <section id="download" class="download-section">
         <h2 class="section-title">Baixe o Aplicativo</h2>
-        <p style="color: #aaa; margin-bottom: 30px;">Instale a versão mais recente para evitar travamentos.</p>
-        <div class="download-buttons">
-            <a href="#" class="btn-download">
-                <i class="fa-brands fa-android"></i> Versão TV Box
-            </a>
-            <a href="#" class="btn-download">
-                <i class="fa-solid fa-mobile"></i> Versão Celular
-            </a>
+        <p style="color: #888; margin-bottom: 40px; font-weight: 300;">Escolha a versão ideal para o seu dispositivo.</p>
+        
+        <div class="download-grid">
+            <div class="dl-card">
+                <div class="dl-icon"><i class="fa-solid fa-tv"></i></div>
+                <h3>Para TV Box & Android TV</h3>
+                <p>Versão otimizada para controle remoto. Ideal para Tv Box, Fire Stick, Mi Stick e Smart TVs Android.</p>
+                <button onclick="toggleChat(); userAction('Quero baixar para TV Box', 'pre_download_tv')" class="btn-dl-card">
+                    <i class="fa-brands fa-android"></i> INICIAR DOWNLOAD
+                </button>
+            </div>
+
+            <div class="dl-card">
+                <div class="dl-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+                <h3>Para Celular & Tablet</h3>
+                <p>Versão Touch Screen para usar no seu smartphone. Leve sua TV para qualquer lugar.</p>
+                <button onclick="toggleChat(); userAction('Quero baixar para Celular', 'pre_download_cel')" class="btn-dl-card dark">
+                    <i class="fa-solid fa-download"></i> BAIXAR APK
+                </button>
+            </div>
         </div>
     </section>
 
+    <!-- SECTION PRICING REDESENHADA -->
     <section id="comprar" class="pricing-section">
-        <h2 class="section-title">Escolha seu Plano Promocional</h2>
-        
+        <h2 class="section-title">Escolha seu Plano Oficial</h2>
         <div class="pricing-grid">
             
+            <!-- PLANO MENSAL (Menor) -->
             <div class="price-card">
-                <h3 class="price-title">Mensal</h3>
-                <div class="price-val">
-                    <span class="old-price">R$ 30,00</span>
-                    R$ 24,90<span>/mês</span>
+                <div class="price-header">
+                    <h3 class="price-title">Plano Mensal</h3>
+                    <div class="price-val">
+                        <span class="old-price">R$ 30,00</span>
+                        R$ 24<span style="font-size: 1.5rem">,90</span>
+                    </div>
+                    <p class="price-period">Pagamento Único / 30 Dias</p>
                 </div>
                 
                 <ul class="features-list">
+                    <li><i class="fa-solid fa-check"></i> Liberação Imediata</li>
                     <li><i class="fa-solid fa-check"></i> 2 Telas Simultâneas</li>
-                    <li><i class="fa-solid fa-check"></i> 30 Dias de Acesso</li>
-                    <li><i class="fa-solid fa-check"></i> +500 Canais + VOD</li>
-                    <li><i class="fa-solid fa-check"></i> Entrega Imediata</li>
+                    <li><i class="fa-solid fa-check"></i> Qualidade 4K Ultra HD</li>
+                    <li><i class="fa-solid fa-check"></i> Teste para conhecer</li>
                 </ul>
 
-                <a href="https://pay.kirvano.com/07f96a4e-ecdf-4538-83ca-01e5c35f1425" class="btn-cta" style="width: 100%; justify-content: center; background: #333; box-shadow: none;" target="_blank">
-                    Comprar Oferta
+                <a href="https://pay.kirvano.com/07f96a4e-ecdf-4538-83ca-01e5c35f1425" class="btn-price normal" target="_blank">
+                    Comprar Mensal
                 </a>
             </div>
 
+            <!-- PLANO ANUAL (Destaque Principal) -->
             <div class="price-card destaque">
-                <div class="economy-tag">🔥 Desconto de R$ 100,00</div>
-                <h3 class="price-title" style="color: var(--roxo); font-weight: 700;">Anual VIP</h3>
-                <div class="price-val">
-                    <span class="old-price">R$ 280,00</span>
-                    R$ 179,90<span>/ano</span>
+                <div class="economy-tag">🔥 Mais Vendido - Economize R$ 100</div>
+                <div class="price-header">
+                    <h3 class="price-title">Anual VIP</h3>
+                    <div class="price-val">
+                        <span class="old-price" style="color:#666">R$ 280,00</span>
+                        R$ 179<span style="font-size: 1.8rem">,90</span>
+                    </div>
+                    <p class="price-period">Apenas R$ 14,99 / mês</p>
                 </div>
                 
                 <ul class="features-list">
-                    <li><i class="fa-solid fa-check"></i> <strong>2 Telas Simultâneas</strong></li>
-                    <li><i class="fa-solid fa-check"></i> <strong>365 Dias de Acesso</strong></li>
-                    <li><i class="fa-solid fa-check"></i> Sem Mensalidade</li>
-                    <li><i class="fa-solid fa-check"></i> Proteção contra Reajuste</li>
+                    <li><i class="fa-solid fa-star"></i> <strong>Acesso por 365 Dias</strong></li>
+                    <li><i class="fa-solid fa-mobile-screen"></i> <strong>2 Telas Simultâneas</strong></li>
+                    <li><i class="fa-solid fa-shield-halved"></i> Proteção contra Aumentos</li>
+                    <li><i class="fa-solid fa-bolt"></i> Suporte Prioritário VIP</li>
                 </ul>
 
-                <a href="https://pay.kirvano.com/0aadf253-f4b6-47dd-8d0a-f5f16714ce98" class="btn-cta" style="width: 100%; justify-content: center;" target="_blank">
-                    Garantir Promoção
+                <a href="https://pay.kirvano.com/0aadf253-f4b6-47dd-8d0a-f5f16714ce98" class="btn-price glow" target="_blank">
+                    GARANTIR OFERTA ANUAL
                 </a>
-                <p style="margin-top: 15px; font-size: 0.9rem; color: #00ff88; font-weight: bold;">
-                    Sai por apenas R$ 14,99/mês
-                </p>
             </div>
 
         </div>
 
         <div class="support-box">
-            <p>Não sabe qual plano escolher ou teve problema no pagamento?</p>
-            <a href="https://wa.me/5519981765840?text=Ol%C3%A1!%20Estou%20com%20d%C3%BAvidas%20sobre%20o%20UniTV" target="_blank" class="btn-suporte-zap">
-                <i class="fa-brands fa-whatsapp"></i> Falar com Suporte no WhatsApp
-            </a>
+            <p>Dúvidas sobre planos ou instalação?</p>
+            <button onclick="toggleChat()" class="btn-suporte-zap">
+                <i class="fa-brands fa-whatsapp"></i> Falar com Suporte no Chat
+            </button>
         </div>
+    </section>
 
+    <section id="vantagens" class="vantagens-section">
+        <h2 class="section-title">Recursos Exclusivos</h2>
+        <div class="vantagens-grid">
+            <div class="vantagem-card slide-left">
+                <div class="vantagem-icon"><i class="fa-solid fa-futbol"></i></div>
+                <div class="vantagem-info">
+                    <h3>Esportes Ao Vivo</h3>
+                    <p>Todos os campeonatos de futebol, lutas e corridas. Premiere, ESPN, Combate e muito mais.</p>
+                </div>
+            </div>
+            <div class="vantagem-card slide-right">
+                <div class="vantagem-icon"><i class="fa-solid fa-film"></i></div>
+                <div class="vantagem-info">
+                    <h3>Filmes e Séries</h3>
+                    <p>Lançamentos do cinema e catálogos completos da Netflix, Prime, HBO e Disney+.</p>
+                </div>
+            </div>
+            <div class="vantagem-card slide-left">
+                <div class="vantagem-icon"><i class="fa-solid fa-tv"></i></div>
+                <div class="vantagem-info">
+                    <h3>Canais 4K</h3>
+                    <p>Qualidade de imagem cristalina com tecnologia anti-travamento para sua internet.</p>
+                </div>
+            </div>
+            <div class="vantagem-card slide-right">
+                <div class="vantagem-icon"><i class="fa-solid fa-child"></i></div>
+                <div class="vantagem-info">
+                    <h3>Conteúdo Infantil</h3>
+                    <p>Desenhos 24h e canais educativos para as crianças, com opção de bloqueio parental.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 1. FILMES EM ALTA -->
+    <section class="catalog-section" id="filmes-em-alta">
+        <div class="catalog-container">
+            <div class="catalog-header">
+                <h2>Filmes em Alta no UniTV</h2>
+                <span class="tag">CINEMA EM CASA</span>
+            </div>
+            <div class="movie-slider" id="movie-slider-content">
+                <!-- Conteúdo API -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. BANNER DESTAQUE (SÉRIE TOP 1) -->
+    <div id="featured-series" class="featured-series-section" style="display:none;">
+        <div class="featured-bg" id="featured-bg"></div>
+        <div class="featured-overlay"></div>
+        <div class="featured-content">
+            <span class="featured-badge">SÉRIE MAIS ASSISTIDA DA SEMANA</span>
+            <h2 class="featured-title" id="featured-title">Carregando...</h2>
+            <div class="featured-meta">
+                <span class="featured-rating"><i class="fa-solid fa-star"></i> <span id="featured-rate">9.8</span></span>
+                <span>Lançamento</span>
+                <span>HD / 4K</span>
+            </div>
+            <p class="featured-desc" id="featured-desc">...</p>
+            <a href="#comprar" class="btn-featured"><i class="fa-solid fa-play"></i> ASSISTIR AGORA</a>
+        </div>
+    </div>
+
+    <!-- 3. SÉRIES POPULARES -->
+    <section class="catalog-section" id="series-em-alta" style="background: #050505; border: none; padding-top: 0;">
+        <div class="catalog-container">
+            <div class="catalog-header">
+                <h2>Séries que todo mundo vê</h2>
+                <span class="tag" style="background: #7928ca;">MARATONA</span>
+            </div>
+            <div class="movie-slider" id="tv-slider-content">
+                <!-- Conteúdo API -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. CARROSSEL INFANTIL -->
+    <section class="catalog-section" id="kids-section" style="background: #050505; border: none; padding-bottom: 80px;">
+        <div class="catalog-container">
+            <div class="catalog-header">
+                <h2>Para a Criançada</h2>
+                <span class="tag" style="background: #00ff88; color: #004422;">DESENHOS</span>
+            </div>
+            <div class="movie-slider" id="kids-slider-content">
+                <!-- Conteúdo API -->
+            </div>
+        </div>
     </section>
 
     <footer>
         <div class="footer-grid">
             <div class="footer-col">
-                <h4>Sobre a Revenda</h4>
-                <p style="line-height: 1.6;">Somos revendedores autorizados das recargas UniTV. Garantimos código original, envio imediato e suporte para ativação.</p>
+                <h4>Revenda Autorizada</h4>
+                <p>Garantimos código original, envio imediato e suporte para ativação.</p>
             </div>
             <div class="footer-col">
-                <h4>Links Rápidos</h4>
+                <h4>Links Úteis</h4>
                 <ul class="footer-links">
-                    <li><a href="#comprar">Comprar Recarga</a></li>
-                    <li><a href="#download">Baixar App</a></li>
-                    <li><a href="faq.html">Central de Ajuda</a></li>
+                    <li><a href="#comprar">Planos</a></li>
+                    <li><a href="#download">Download</a></li>
+                    <li><a href="faq.html">Ajuda</a></li>
                 </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Pagamento Seguro</h4>
-                <p>Aceitamos PIX com aprovação imediata.</p>
-                <div class="payment-icons">
-                    <i class="fa-brands fa-pix" style="color: #32bcad;"></i>
-                    <i class="fa-solid fa-credit-card"></i>
-                </div>
             </div>
             <div class="footer-col">
                 <h4>Atendimento</h4>
-                <ul class="footer-links">
-                    <li><i class="fa-brands fa-whatsapp"></i> (19) 98176-5840</li>
-                    <li>Seg a Sex: 08h às 22h</li>
-                </ul>
+                <p>(19) 98176-5840</p>
+                <p>Seg a Sex: 08h às 22h</p>
             </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 Vendas UniTV. Todos os direitos reservados.</p>
         </div>
     </footer>
 
-    <a href="https://wa.me/5519981765840?text=Ol%C3%A1!%20Estou%20com%20d%C3%BAvidas%20sobre%20o%20UniTV" class="float-zap" target="_blank">
+    <!-- WIDGET WHATSAPP -->
+    <div id="chat-widget" class="wa-widget">
+        <div class="wa-header">
+            <div class="wa-profile">
+                <img src="img/logo-unitv.png" alt="UniTV">
+                <div class="wa-info">
+                    <span class="wa-name">Suporte UniTV</span>
+                    <span id="wa-status" class="wa-status">Online</span>
+                </div>
+            </div>
+            <button onclick="toggleChat()" class="wa-close">×</button>
+        </div>
+        <div id="chat-content" class="wa-chat-body">
+            <div class="wa-msg wa-msg-bot">
+                Olá! 👋 Sou o especialista de vendas UniTV. Como posso te ajudar hoje?
+                <span class="wa-time">10:45</span>
+            </div>
+        </div>
+        <div id="typing-indicator" class="wa-msg wa-msg-bot typing" style="display: none;">
+            <span></span><span></span><span></span>
+        </div>
+        <div id="wa-options" class="wa-options">
+            <button onclick="userAction('Qual o valor?', 'preco')">Qual o valor?</button>
+            <button onclick="userAction('Funciona na Smart TV?', 'smart_tv_select')">Funciona na Smart TV?</button>
+            <button onclick="userAction('Como baixar?', 'pre_download')">Como baixar?</button>
+        </div>
+        <div class="wa-input-fake">
+            <div class="wa-input-box">Escreva uma mensagem...</div>
+            <i class="fa-solid fa-paper-plane" style="color: #075e54;"></i>
+        </div>
+    </div>
+
+    <div class="float-zap" onclick="toggleChat()">
         <i class="fa-brands fa-whatsapp"></i>
-    </a>
+    </div>
 
     <script>
-        // 1. Cronômetro da Barra
+        // 1. Timer
         function startTimer(duration, display) {
             var timer = duration, hours, minutes, seconds;
             setInterval(function () {
-                hours = parseInt(timer / 3600, 10);
-                minutes = parseInt((timer % 3600) / 60, 10);
-                seconds = parseInt(timer % 60, 10);
-
-                hours = hours < 10 ? "0" + hours : hours;
-                minutes = minutes < 10 ? "0" + minutes : minutes;
-                seconds = seconds < 10 ? "0" + seconds : seconds;
-
-                display.textContent = hours + ":" + minutes + ":" + seconds;
-
-                if (--timer < 0) {
-                    timer = duration;
-                }
+                hours = Math.floor(timer / 3600);
+                minutes = Math.floor((timer % 3600) / 60);
+                seconds = Math.floor(timer % 60);
+                display.textContent = (hours < 10 ? "0" + hours : hours) + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
+                if (--timer < 0) timer = duration;
             }, 1000);
         }
 
+        // 2. FETCH API (TMDB) - FILMES, SÉRIES, KIDS & BANNER
+        const apiKey = '9cb2f018163da4a3f89d718ee6be8677';
+        const imageBase = 'https://image.tmdb.org/t/p/w500';
+        const backdropBase = 'https://image.tmdb.org/t/p/original';
+
+        async function fetchContent() {
+            try {
+                // A. FILMES (Trending Movies)
+                const resMovies = await fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=${apiKey}&language=pt-BR`);
+                const dataMovies = await resMovies.json();
+                populateSlider('movie-slider-content', dataMovies.results);
+
+                // B. SÉRIES (Trending TV) + BANNER DESTAQUE
+                const resTV = await fetch(`https://api.themoviedb.org/3/trending/tv/week?api_key=${apiKey}&language=pt-BR`);
+                const dataTV = await resTV.json();
+                populateSlider('tv-slider-content', dataTV.results);
+                
+                // Configurar Banner com a série #1
+                if(dataTV.results && dataTV.results.length > 0) {
+                    const topSerie = dataTV.results[0];
+                    setupFeaturedBanner(topSerie);
+                }
+
+                // C. KIDS (Filmes de Animação - Genre 16)
+                const resKids = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_genres=16&language=pt-BR&sort_by=popularity.desc`);
+                const dataKids = await resKids.json();
+                populateSlider('kids-slider-content', dataKids.results);
+
+            } catch (error) {
+                console.log("Erro ao carregar catálogo API.");
+            }
+        }
+
+        function populateSlider(elementId, items) {
+            const slider = document.getElementById(elementId);
+            if (!slider) return;
+            slider.innerHTML = '';
+            
+            items.forEach(item => {
+                if(item.poster_path) {
+                    const title = item.title || item.name; // Filmes usam title, Séries usam name
+                    const html = `
+                        <div class="movie-card">
+                            <img src="${imageBase}${item.poster_path}" alt="${title}" loading="lazy">
+                            <div class="movie-info">
+                                <div class="movie-title">${title}</div>
+                                <div class="movie-rating"><i class="fa-solid fa-star"></i> ${item.vote_average.toFixed(1)}</div>
+                            </div>
+                        </div>
+                    `;
+                    slider.innerHTML += html;
+                }
+            });
+        }
+
+        function setupFeaturedBanner(serie) {
+            const section = document.getElementById('featured-series');
+            const bg = document.getElementById('featured-bg');
+            const title = document.getElementById('featured-title');
+            const desc = document.getElementById('featured-desc');
+            const rate = document.getElementById('featured-rate');
+
+            if(serie.backdrop_path) {
+                section.style.display = 'flex'; // Mostra a seção
+                bg.style.backgroundImage = `url('${backdropBase}${serie.backdrop_path}')`;
+                title.innerText = serie.name;
+                desc.innerText = serie.overview || "Uma das séries mais aclamadas do momento. Assista agora em 4K no UniTV.";
+                rate.innerText = serie.vote_average.toFixed(1);
+            }
+        }
+
         window.onload = function () {
-            var duration = 60 * 60 * 5; // 5 Horas
-            var display = document.querySelector('#timer');
-            if(display) startTimer(duration, display);
+            startTimer(17940, document.querySelector('#timer'));
+            fetchContent();
+            
+            // Animação de Scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.vantagem-card').forEach((el) => observer.observe(el));
         };
+
+        // 3. Lógica Avançada do Chat (Mantida)
+        function toggleChat() {
+            document.getElementById('chat-widget').classList.toggle('active');
+        }
+
+        function showTyping(callback) {
+            const status = document.getElementById('wa-status');
+            const typing = document.getElementById('typing-indicator');
+            const content = document.getElementById('chat-content');
+            status.innerText = "Digitando...";
+            typing.style.display = "block";
+            content.appendChild(typing);
+            content.scrollTop = content.scrollHeight;
+            setTimeout(() => {
+                typing.style.display = "none";
+                status.innerText = "Online";
+                callback();
+            }, 1200);
+        }
+
+        function addMessage(text, side) {
+            const content = document.getElementById('chat-content');
+            const now = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            const checks = side === 'user' ? ' <i class="fa-solid fa-check-double" style="color:#34b7f1; font-size: 0.7rem"></i>' : '';
+            content.innerHTML += `<div class="wa-msg wa-msg-${side}">${text}<span class="wa-time">${now}${checks}</span></div>`;
+            content.scrollTop = content.scrollHeight;
+        }
+
+        function setOptions(options) {
+            const container = document.getElementById('wa-options');
+            container.innerHTML = "";
+            options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.innerText = opt.label;
+                btn.onclick = () => userAction(opt.label, opt.type);
+                container.appendChild(btn);
+            });
+        }
+
+        function userAction(text, type) {
+            addMessage(text, 'user');
+            setOptions([]); 
+            showTyping(() => {
+                
+                // FLUXO DE PREÇOS
+                if(type === 'preco') {
+                    addMessage("<strong>Escolha seu plano para liberação imediata:</strong><br><br>💳 <a href='https://pay.kirvano.com/07f96a4e-ecdf-4538-83ca-01e5c35f1425' target='_blank'><strong>PLANO MENSAL (R$ 24,90)</strong></a><br>🚀 <a href='https://pay.kirvano.com/0aadf253-f4b6-47dd-8d0a-f5f16714ce98' target='_blank'><strong>PLANO ANUAL (R$ 179,90)</strong></a>", 'bot');
+                    setOptions([{label: 'Já fiz o pix!', type: 'pix_feito'}, {label: 'Tenho outra dúvida', type: 'reset'}]);
+                } 
+                else if(type === 'pix_feito') {
+                    addMessage("O código chegará no seu e-mail em instantes! Verifique sua caixa de entrada e spam.", 'bot');
+                    setOptions([{label: 'Voltar ao início', type: 'reset'}]);
+                }
+
+                // FLUXO DE SMART TV
+                else if(type === 'smart_tv_select') {
+                    addMessage("Para te ajudar melhor, qual a marca da sua TV?", 'bot');
+                    setOptions([
+                        {label: 'Samsung', type: 'smart_tv_solution'},
+                        {label: 'LG', type: 'smart_tv_solution'},
+                        {label: 'Roku', type: 'smart_tv_solution'},
+                        {label: 'Voltar', type: 'reset'}
+                    ]);
+                }
+                else if(type === 'smart_tv_solution') {
+                    addMessage("Infelizmente o UniTV não roda nativo nessas marcas (sistema fechado).", 'bot');
+                    setTimeout(() => showTyping(() => {
+                        addMessage("Mas a solução é simples: Baixe o app <strong>ULTRA PLAYER</strong> na loja da sua TV. Ele funciona super bem! Gostaria de testar?", 'bot');
+                        setOptions([
+                            {label: 'Sim, vou testar!', type: 'baixou_ultra'},
+                            {label: 'Voltar', type: 'smart_tv_select'}
+                        ]);
+                    }), 1000);
+                }
+                else if(type === 'baixou_ultra') {
+                    addMessage("Perfeito! Assim que baixar, me envie uma foto da tela no WhatsApp para eu liberar seu acesso.", 'bot');
+                    const btn = document.createElement('button');
+                    btn.innerText = "ENVIAR FOTO NO ZAP";
+                    btn.style.background = "#25d366"; btn.style.color = "white"; btn.style.border = "none";
+                    btn.onclick = () => window.open("https://wa.me/5519981765840?text=Baixei o Ultra Player na minha TV, quero testar!");
+                    document.getElementById('wa-options').appendChild(btn);
+                }
+
+                // FLUXO DE DOWNLOAD
+                else if(type === 'pre_download' || type === 'pre_download_tv' || type === 'pre_download_cel') {
+                    addMessage("Antes de enviar o link, preciso saber: <strong>Você já usou o UniTV neste aparelho antes?</strong>", 'bot');
+                    setOptions([
+                        {label: 'Sim, já usei/testei', type: 'ja_usou'},
+                        {label: 'Não, primeira vez', type: 'nunca_usou'},
+                        {label: 'Voltar', type: 'reset'}
+                    ]);
+                }
+                else if(type === 'ja_usou') {
+                    addMessage("Entendi! O período de teste é válido apenas uma vez por aparelho.", 'bot');
+                    setTimeout(() => showTyping(() => {
+                        addMessage("Para continuar assistindo, você precisa adquirir um código de recarga. A liberação é imediata!", 'bot');
+                        setOptions([{label: 'Ver Planos', type: 'preco'}, {label: 'Falar com Suporte', type: 'suporte_humano'}]);
+                    }), 1000);
+                }
+                else if(type === 'nunca_usou') {
+                    addMessage("Ótimo! Então você tem direito ao teste grátis. Qual seu aparelho?", 'bot');
+                    setOptions([
+                        {label: 'Celular Android', type: 'dl_cel'},
+                        {label: 'TV Box / Android TV', type: 'dl_tv'},
+                        {label: 'Voltar', type: 'reset'}
+                    ]);
+                }
+                
+                // LINKS DE DOWNLOAD + CHECK
+                else if(type === 'dl_cel') {
+                    addMessage("Link Oficial Celular: <a href='http://mkdw.qrdldunitvss.com/download' target='_blank'>Baixar Agora</a>", 'bot');
+                    setTimeout(() => checkDownloadSuccess(), 3000);
+                }
+                else if(type === 'dl_tv') {
+                    addMessage("Para TV Box, baixe o app Downloader e digite um destes códigos:<br><br>👉 <strong>645641</strong><br>👉 <strong>867283</strong><br><br>Ou veja o vídeo tutorial: <a href='https://youtu.be/HCLfafWRvx8' target='_blank'>Ver Vídeo Tutorial</a>", 'bot');
+                    setTimeout(() => checkDownloadSuccess(), 5000);
+                }
+
+                // CHECK DE SUCESSO
+                else if(type === 'check_success') {
+                    addMessage("Conseguiu baixar e instalar certinho?", 'bot');
+                    setOptions([
+                        {label: 'Sim, deu certo!', type: 'sucesso_instalar'},
+                        {label: 'Não consegui', type: 'erro_instalar'},
+                        {label: 'Voltar', type: 'nunca_usou'}
+                    ]);
+                }
+                else if(type === 'sucesso_instalar') {
+                    addMessage("Excelente! Aproveite seu teste. Quando quiser renovar, compre direto pelo site para garantir o melhor preço.", 'bot');
+                    setOptions([{label: 'Comprar Agora', type: 'preco'}, {label: 'Encerrar', type: 'reset'}]);
+                }
+                else if(type === 'erro_instalar') {
+                    addMessage("Tente usar o código alternativo <strong>867283</strong> ou <strong>645641</strong> no Downloader. Funcionou agora?", 'bot');
+                    setOptions([
+                         {label: 'Sim, agora foi!', type: 'sucesso_instalar'},
+                         {label: 'Ainda com erro', type: 'erro_persistente'}
+                    ]);
+                }
+                else if(type === 'erro_persistente') {
+                     addMessage("Entendo. Nesse caso, vou te passar para o suporte técnico.", 'bot');
+                     setOptions([{label: 'Chamar Suporte', type: 'suporte_humano'}]);
+                }
+
+                // SUPORTE GERAL
+                else if(type === 'suporte_humano') {
+                    window.open("https://wa.me/5519981765840?text=Preciso de ajuda com a instalação!");
+                }
+                
+                // RESET
+                else if(type === 'reset') {
+                    addMessage("Como posso ajudar?", 'bot');
+                    setOptions([{label: 'Qual o valor?', type: 'preco'}, {label: 'Smart TV?', type: 'smart_tv_select'}, {label: 'Como baixar?', type: 'pre_download'}]);
+                }
+            });
+        }
+
+        // Função auxiliar para disparar o check após download
+        function checkDownloadSuccess() {
+            showTyping(() => {
+                addMessage("E aí, conseguiu baixar?", 'bot');
+                setOptions([
+                    {label: 'Sim, baixei!', type: 'sucesso_instalar'},
+                    {label: 'Não consegui', type: 'erro_instalar'},
+                    {label: 'Voltar', type: 'nunca_usou'}
+                ]);
+            });
+        }
     </script>
 </body>
 </html>
