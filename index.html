@@ -645,12 +645,22 @@
                     setOptions([{label: 'Samsung', type: 'smart_tv_solution'}, {label: 'LG', type: 'smart_tv_solution'}, {label: 'Roku', type: 'smart_tv_solution'}, {label: 'Voltar', type: 'reset'}]);
                 } else if(type === 'smart_tv_solution') {
                     addMessage("O UniTV não é nativo nessas marcas. Baixe o app <strong>ULTRA PLAYER</strong> na loja da TV.", 'bot');
-                    setTimeout(() => showTyping(() => { addMessage("Quer testar o Ultra Player?", 'bot'); setOptions([{label: 'Sim, testar', type: 'baixou_ultra'}, {label: 'Voltar', type: 'smart_tv_select'}]); }), 1000);
+                    setTimeout(() => showTyping(() => { addMessage("Quer testar o Ultra Player?", 'bot'); setOptions([{label: 'Sim, testar', type: 'baixou_ultra'}, {label: 'Não encontrei o app', type: 'smart_tv_funplay'}, {label: 'Voltar', type: 'smart_tv_select'}]); }), 1000);
                 } else if(type === 'baixou_ultra') {
                     addMessage("Me envie uma foto da tela no WhatsApp para liberar seu acesso.", 'bot');
                     const btn = document.createElement('button'); btn.innerText = "ENVIAR FOTO NO ZAP"; btn.style.background = "#25d366"; btn.style.color = "white"; btn.onclick = () => window.open("https://wa.me/5519981765840?text=Baixei o Ultra Player, quero testar!"); document.getElementById('wa-options').appendChild(btn);
+                } else if(type === 'smart_tv_funplay') {
+                    addMessage("Sem problemas! Procure por <strong>FUN PLAY</strong>. Achou esse?", 'bot');
+                    setOptions([{label: 'Sim, baixei', type: 'baixou_ultra'}, {label: 'Não encontrei', type: 'smart_tv_dream'}]);
+                } else if(type === 'smart_tv_dream') {
+                    addMessage("Ok, última tentativa: Procure por <strong>DREAM TV</strong>. Se não achar, te passo pro suporte.", 'bot');
+                    setOptions([{label: 'Achei!', type: 'baixou_ultra'}, {label: 'Não achei nada', type: 'suporte_humano'}]);
                 } else if(type === 'pre_download') {
                     addMessage("Já usou o UniTV neste aparelho?", 'bot'); setOptions([{label: 'Sim, já usei', type: 'ja_usou'}, {label: 'Não, primeira vez', type: 'nunca_usou'}]);
+                } else if(type === 'pre_download_tv') {
+                    addMessage("Já usou o UniTV nesta TV Box antes?", 'bot'); setOptions([{label: 'Sim, já usei', type: 'ja_usou'}, {label: 'Não, primeira vez', type: 'dl_tv'}]);
+                } else if(type === 'pre_download_cel') {
+                    addMessage("Já usou o UniTV neste celular antes?", 'bot'); setOptions([{label: 'Sim, já usei', type: 'ja_usou'}, {label: 'Não, primeira vez', type: 'dl_cel'}]);
                 } else if(type === 'ja_usou') {
                     addMessage("O teste é único por aparelho. Para continuar, adquira uma recarga.", 'bot'); setOptions([{label: 'Ver Planos', type: 'preco'}, {label: 'Suporte', type: 'suporte_humano'}]);
                 } else if(type === 'nunca_usou') {
@@ -658,7 +668,7 @@
                 } else if(type === 'dl_cel') {
                     addMessage("Link Celular: <a href='http://mkdw.qrdldunitvss.com/download' target='_blank'>Baixar Agora</a>", 'bot'); setTimeout(() => checkDownloadSuccess(), 3000);
                 } else if(type === 'dl_tv') {
-                    addMessage("Para TV Box, use o app Downloader com código: <strong>645641</strong>", 'bot'); setTimeout(() => checkDownloadSuccess(), 5000);
+                    addMessage("Para TV Box, use o app Downloader com código: <strong>645641</strong> ou <strong>867283</strong><br><br>Ou veja o vídeo: <a href='https://youtu.be/HCLfafWRvx8' target='_blank'>Tutorial</a>", 'bot'); setTimeout(() => checkDownloadSuccess(), 5000);
                 } else if(type === 'check_success') {
                     addMessage("Conseguiu baixar?", 'bot'); setOptions([{label: 'Sim!', type: 'sucesso_instalar'}, {label: 'Não', type: 'erro_instalar'}]);
                 } else if(type === 'sucesso_instalar') {
