@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        /* --- ESTILOS GERAIS (MANTIDOS) --- */
+        /* --- ESTILOS GERAIS --- */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         :root {
             --bg-body: #050505;
@@ -34,8 +34,9 @@
         header {
             display: flex; justify-content: space-between; align-items: center;
             padding: 10px 5%; position: fixed; width: 100%; top: 38px;
-            background: rgba(5, 5, 5, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            background: rgba(5, 5, 5, 0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
             z-index: 1000; border-bottom: var(--borda-sutil); height: 60px;
+            transition: all 0.3s ease;
         }
         .logo img { height: 32px; filter: brightness(1.1); }
         nav ul { display: flex; list-style: none; gap: 30px; }
@@ -76,40 +77,31 @@
         .btn-dl-card.dark { background: #222; color: #fff; border: 1px solid #333; }
         .btn-dl-card.dark:hover { background: #333; border-color: #fff; }
 
-        /* --- PRICING REDESIGNED (PREMIUM) --- */
+        /* --- PRICING --- */
         .pricing-section { background: #020202; position: relative; padding: 100px 20px; }
         .pricing-grid { 
             display: flex; justify-content: center; align-items: center; 
             gap: 40px; max-width: 1000px; margin: 0 auto; flex-wrap: wrap; 
         }
-        
-        /* Cartão Padrão (Mensal) */
         .price-card { 
             background: #0a0a0a; border: 1px solid #222; border-radius: 20px; 
             padding: 40px; width: 100%; max-width: 320px; position: relative; 
             transition: 0.3s; height: fit-content;
         }
         .price-card:hover { border-color: #444; }
-        
-        /* Cartão Destaque (Anual) */
         .price-card.destaque { 
             background: linear-gradient(160deg, #180a1f 0%, #050505 100%);
             border: 2px solid var(--cor-destaque);
             box-shadow: 0 0 50px rgba(255, 0, 128, 0.1);
-            transform: scale(1.1); /* Aumenta o tamanho no PC */
-            z-index: 10; max-width: 360px; padding: 50px 40px;
+            transform: scale(1.1); z-index: 10; max-width: 360px; padding: 50px 40px;
         }
-
         .price-header { border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 20px; margin-bottom: 20px; text-align: center; }
         .price-title { color: #888; font-size: 1rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; margin-bottom: 5px; }
         .destaque .price-title { color: var(--cor-destaque); }
-        
         .price-val { font-size: 2.8rem; font-weight: 800; color: white; line-height: 1; }
         .destaque .price-val { font-size: 3.5rem; text-shadow: 0 0 20px rgba(255, 0, 128, 0.3); }
-        
         .price-period { font-size: 0.9rem; color: #666; font-weight: 400; }
         .old-price { font-size: 1rem; color: #444; text-decoration: line-through; display: block; margin-bottom: 5px; }
-
         .economy-tag { 
             position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
             background: var(--gradiente-premium); color: white; font-weight: 700; 
@@ -117,12 +109,10 @@
             box-shadow: 0 5px 15px rgba(221, 36, 118, 0.4); text-transform: uppercase; letter-spacing: 1px;
             white-space: nowrap;
         }
-
         .features-list { list-style: none; margin: 30px 0; text-align: left; }
         .features-list li { margin-bottom: 15px; display: flex; align-items: flex-start; gap: 12px; color: #ccc; font-size: 0.95rem; }
         .features-list i { color: #00ff88; margin-top: 4px; }
         .destaque .features-list i { color: var(--cor-destaque); }
-
         .btn-price {
             display: flex; justify-content: center; align-items: center; width: 100%;
             padding: 16px; border-radius: 12px; font-weight: 700; text-decoration: none;
@@ -130,36 +120,21 @@
         }
         .btn-price.normal { background: #222; color: white; border: 1px solid #333; }
         .btn-price.normal:hover { background: #fff; color: #000; }
-        
         .btn-price.glow { 
             background: var(--gradiente-premium); color: white; border: none; 
             box-shadow: 0 10px 30px -5px rgba(221, 36, 118, 0.4);
         }
         .btn-price.glow:hover { transform: translateY(-3px); box-shadow: 0 20px 40px -10px rgba(221, 36, 118, 0.6); }
-
         .support-box { margin: 80px auto 0; background: #111; border-left: 4px solid #25D366; padding: 30px; border-radius: 12px; text-align: center; max-width: 700px; }
         
-        /* ADICIONADO: Estilo do botão de suporte */
         .btn-suporte-zap { 
-            background: #25D366 !important; 
-            color: #000 !important; 
-            font-weight: 700; 
-            padding: 15px 30px; 
-            border-radius: 50px; 
-            text-decoration: none; 
-            display: inline-flex; 
-            align-items: center; 
-            gap: 10px; 
-            cursor: pointer; 
-            border: none;
-            font-size: 1rem;
-            transition: transform 0.2s, box-shadow 0.2s;
+            background: #25D366 !important; color: #000 !important; font-weight: 700; 
+            padding: 15px 30px; border-radius: 50px; text-decoration: none; 
+            display: inline-flex; align-items: center; gap: 10px; cursor: pointer; border: none;
+            font-size: 1rem; transition: transform 0.2s, box-shadow 0.2s;
             box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
         }
-        .btn-suporte-zap:hover { 
-            transform: translateY(-2px); 
-            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5); 
-        }
+        .btn-suporte-zap:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5); }
 
         /* --- VANTAGENS --- */
         .vantagens-section { background: #050505; overflow: hidden; padding-bottom: 60px; }
@@ -172,88 +147,54 @@
         .slide-right { transform: translateX(100px); }
         .vantagem-card.visible { opacity: 1; transform: translateX(0); }
 
-        /* --- NOVA SEÇÃO DE CATÁLOGO (API TMDB) & BANNER --- */
+        /* --- CATÁLOGO & BANNER --- */
         .catalog-section { padding: 40px 0 60px; background: #080808; border-top: 1px solid #1a1a1a; }
         .catalog-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         .catalog-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 30px; }
         .catalog-header h2 { font-size: 1.6rem; color: #fff; font-weight: 700; margin: 0; }
         .catalog-header .tag { background: #ff0055; color: white; font-size: 0.7rem; padding: 6px 12px; border-radius: 4px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(255, 0, 85, 0.4); }
-
-        /* Slider */
-        .movie-slider { 
-            display: flex; gap: 20px; overflow-x: auto; padding-bottom: 25px; 
-            scroll-behavior: smooth; -webkit-overflow-scrolling: touch;
-        }
+        .movie-slider { display: flex; gap: 20px; overflow-x: auto; padding-bottom: 25px; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; }
         .movie-slider::-webkit-scrollbar { height: 8px; }
         .movie-slider::-webkit-scrollbar-track { background: #111; border-radius: 4px; }
         .movie-slider::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; border: 1px solid #111; }
         .movie-slider::-webkit-scrollbar-thumb:hover { background: #ff0055; }
-
-        .movie-card { 
-            flex: 0 0 160px; position: relative; border-radius: 12px; overflow: hidden; 
-            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); cursor: pointer; 
-            background: #111; aspect-ratio: 2/3; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
+        .movie-card { flex: 0 0 160px; position: relative; border-radius: 12px; overflow: hidden; transition: transform 0.3s; cursor: pointer; background: #111; aspect-ratio: 2/3; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
         .movie-card:hover { transform: scale(1.08) translateY(-5px); z-index: 5; box-shadow: 0 15px 30px rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.2); }
         .movie-card img { width: 100%; height: 100%; object-fit: cover; }
-
-        .movie-info { 
-            position: absolute; bottom: 0; left: 0; width: 100%; 
-            background: linear-gradient(to top, rgba(0,0,0,0.95) 10%, rgba(0,0,0,0.7) 50%, transparent); 
-            padding: 40px 10px 10px; opacity: 0; transition: opacity 0.3s ease;
-            display: flex; flex-direction: column; justify-content: flex-end;
-        }
+        .movie-info { position: absolute; bottom: 0; left: 0; width: 100%; background: linear-gradient(to top, rgba(0,0,0,0.95) 10%, rgba(0,0,0,0.7) 50%, transparent); padding: 40px 10px 10px; opacity: 0; transition: opacity 0.3s ease; display: flex; flex-direction: column; justify-content: flex-end; }
         .movie-card:hover .movie-info { opacity: 1; }
         .movie-title { color: white; font-size: 0.85rem; font-weight: 700; line-height: 1.3; margin-bottom: 5px; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
         .movie-rating { color: #00ff88; font-size: 0.8rem; font-weight: 700; display: flex; align-items: center; gap: 5px; }
         .movie-rating i { font-size: 0.7rem; }
 
-        /* FEATURED BANNER (DESTACADO) */
-        .featured-series-section { 
-            position: relative; height: 500px; width: 100%; overflow: hidden; 
-            display: flex; align-items: center; margin: 40px 0;
-            background-color: #000;
-        }
-        .featured-bg {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-size: cover; background-position: center top; 
-            opacity: 0.6; mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.2) 100%);
-            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%, transparent 100%);
-        }
-        .featured-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(90deg, #020202 0%, rgba(2,2,2,0.8) 40%, transparent 100%);
-            z-index: 1;
-        }
-        .featured-content { 
-            position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; 
-            padding: 0 20px; width: 100%;
-        }
-        .featured-badge { 
-            background: #ff0055; color: white; padding: 5px 12px; font-weight: 700; 
-            border-radius: 4px; font-size: 0.8rem; display: inline-block; margin-bottom: 15px; 
-        }
+        .featured-series-section { position: relative; height: 500px; width: 100%; overflow: hidden; display: flex; align-items: center; margin: 40px 0; background-color: #000; }
+        .featured-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center top; opacity: 0.6; mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.2) 100%); -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%, transparent 100%); }
+        .featured-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, #020202 0%, rgba(2,2,2,0.8) 40%, transparent 100%); z-index: 1; }
+        .featured-content { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; padding: 0 20px; width: 100%; }
+        .featured-badge { background: #ff0055; color: white; padding: 5px 12px; font-weight: 700; border-radius: 4px; font-size: 0.8rem; display: inline-block; margin-bottom: 15px; }
         .featured-title { font-size: 3rem; line-height: 1.1; margin-bottom: 15px; font-weight: 800; max-width: 600px; }
         .featured-meta { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; font-size: 0.9rem; color: #ccc; }
         .featured-rating { color: #00ff88; font-weight: 700; }
         .featured-desc { color: #bbb; max-width: 500px; margin-bottom: 30px; font-size: 0.95rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-        
-        .btn-featured { 
-            background: white; color: black; padding: 12px 30px; border-radius: 5px; 
-            font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; 
-            gap: 10px; transition: 0.3s;
-        }
+        .btn-featured { background: white; color: black; padding: 12px 30px; border-radius: 5px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; transition: 0.3s; }
         .btn-featured:hover { background: #ccc; }
 
-        /* FOOTER */
-        footer { background: #020202; border-top: 1px solid #111; padding: 60px 5% 30px; font-size: 0.85rem; color: #555; }
-        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto; }
-        .footer-col h4 { color: white; margin-bottom: 25px; }
+        /* --- FOOTER PROFISSIONAL --- */
+        footer { background: #050505; border-top: 1px solid #1a1a1a; padding: 80px 20px 40px; color: #999; font-size: 0.9rem; }
+        .footer-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; }
+        .footer-logo { margin-bottom: 20px; filter: brightness(1.2); height: 40px; }
+        .footer-desc { margin-bottom: 20px; line-height: 1.6; max-width: 300px; font-size: 0.85rem; }
+        .footer-col h4 { color: #fff; margin-bottom: 25px; font-size: 1.1rem; }
         .footer-links { list-style: none; }
         .footer-links li { margin-bottom: 12px; }
-        .footer-links a { color: #777; text-decoration: none; transition: 0.3s; }
-        .footer-links a:hover { color: white; }
-
+        .footer-links a { color: #888; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
+        .footer-links a:hover { color: #ff0055; transform: translateX(5px); }
+        .payment-methods { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px; }
+        .payment-methods i { font-size: 1.8rem; color: #ccc; transition: 0.3s; }
+        .payment-methods i:hover { color: #fff; }
+        .secure-badge { display: inline-flex; align-items: center; gap: 10px; background: rgba(0,255,136,0.1); border: 1px solid rgba(0,255,136,0.2); padding: 10px 15px; border-radius: 8px; margin-top: 20px; color: #00ff88; font-weight: 600; font-size: 0.8rem; }
+        .footer-bottom { margin-top: 60px; padding-top: 30px; border-top: 1px solid #1a1a1a; text-align: center; font-size: 0.8rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+        
         /* --- WHATSAPP WIDGET --- */
         .wa-widget {
             position: fixed; bottom: 85px; right: 20px; width: 340px;
@@ -286,18 +227,32 @@
         @keyframes waTyping { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
         .float-zap { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; z-index: 10000; box-shadow: 0 4px 12px rgba(0,0,0,0.3); cursor: pointer; }
 
+        /* --- RESPONSIVIDADE (MOBILE FIXES) --- */
         @media (max-width: 768px) {
+            body { padding-top: 0; }
+            .promo-bar { position: relative; height: auto; padding: 10px; }
+            header { position: sticky; top: 0; margin-top: 0; padding: 10px 20px; background: rgba(5,5,5,0.98); }
             .hero-grid { grid-template-columns: 1fr; text-align: center; }
             .hero-text { order: 1; }
             .hero-image { order: 2; }
             h1 { font-size: 2.2rem; }
+            nav { display: none; } /* Oculta menu texto no mobile para não espremer */
             .pricing-grid { flex-direction: column; gap: 40px; }
-            .price-card.destaque { transform: scale(1); max-width: 100%; } /* Remove zoom no mobile */
-            .wa-widget { width: 90%; right: 5%; bottom: 80px; }
+            .price-card.destaque { transform: scale(1); max-width: 100%; } 
+            
+            /* Ajuste Zap Mobile */
+            .wa-widget { width: 90%; right: 5%; left: 5%; bottom: 90px; }
+            
             .dl-card { text-align: center; }
             .dl-icon { margin: 0 auto 20px; }
             .featured-title { font-size: 2rem; }
             .featured-series-section { height: 450px; }
+            
+            /* Footer Mobile */
+            .footer-container { grid-template-columns: 1fr; gap: 30px; text-align: center; }
+            .footer-links a { justify-content: center; }
+            .payment-methods { justify-content: center; }
+            .footer-bottom { flex-direction: column; gap: 10px; }
         }
     </style>
 
@@ -375,37 +330,12 @@
         </div>
     </section>
 
-    <section id="download" class="download-section">
-        <h2 class="section-title">Baixe o Aplicativo</h2>
-        <p style="color: #888; margin-bottom: 40px; font-weight: 300;">Escolha a versão ideal para o seu dispositivo.</p>
-        
-        <div class="download-grid">
-            <div class="dl-card">
-                <div class="dl-icon"><i class="fa-solid fa-tv"></i></div>
-                <h3>Para TV Box & Android TV</h3>
-                <p>Versão otimizada para controle remoto. Ideal para Tv Box, Fire Stick, Mi Stick e Smart TVs Android.</p>
-                <button onclick="toggleChat(); userAction('Quero baixar para TV Box', 'pre_download_tv')" class="btn-dl-card">
-                    <i class="fa-brands fa-android"></i> INICIAR DOWNLOAD
-                </button>
-            </div>
-
-            <div class="dl-card">
-                <div class="dl-icon"><i class="fa-solid fa-mobile-screen"></i></div>
-                <h3>Para Celular & Tablet</h3>
-                <p>Versão Touch Screen para usar no seu smartphone. Leve sua TV para qualquer lugar.</p>
-                <button onclick="toggleChat(); userAction('Quero baixar para Celular', 'pre_download_cel')" class="btn-dl-card dark">
-                    <i class="fa-solid fa-download"></i> BAIXAR APK
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION PRICING REDESENHADA -->
+    <!-- SECTION PRICING (AGORA ANTES DO DOWNLOAD) -->
     <section id="comprar" class="pricing-section">
         <h2 class="section-title">Escolha seu Plano Oficial</h2>
         <div class="pricing-grid">
             
-            <!-- PLANO MENSAL (Menor) -->
+            <!-- PLANO MENSAL -->
             <div class="price-card">
                 <div class="price-header">
                     <h3 class="price-title">Plano Mensal</h3>
@@ -428,7 +358,7 @@
                 </a>
             </div>
 
-            <!-- PLANO ANUAL (Destaque Principal) -->
+            <!-- PLANO ANUAL -->
             <div class="price-card destaque">
                 <div class="economy-tag">🔥 Mais Vendido - Economize R$ 100</div>
                 <div class="price-header">
@@ -459,6 +389,32 @@
             <button onclick="toggleChat()" class="btn-suporte-zap">
                 <i class="fa-brands fa-whatsapp"></i> Falar com Suporte no Chat
             </button>
+        </div>
+    </section>
+
+    <!-- SECTION DOWNLOAD (MOVIDA PARA BAIXO) -->
+    <section id="download" class="download-section">
+        <h2 class="section-title">Baixe o Aplicativo</h2>
+        <p style="color: #888; margin-bottom: 40px; font-weight: 300;">Escolha a versão ideal para o seu dispositivo.</p>
+        
+        <div class="download-grid">
+            <div class="dl-card">
+                <div class="dl-icon"><i class="fa-solid fa-tv"></i></div>
+                <h3>Para TV Box & Android TV</h3>
+                <p>Versão otimizada para controle remoto. Ideal para Tv Box, Fire Stick, Mi Stick e Smart TVs Android.</p>
+                <button onclick="toggleChat(); userAction('Quero baixar para TV Box', 'pre_download_tv')" class="btn-dl-card">
+                    <i class="fa-brands fa-android"></i> INICIAR DOWNLOAD
+                </button>
+            </div>
+
+            <div class="dl-card">
+                <div class="dl-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+                <h3>Para Celular & Tablet</h3>
+                <p>Versão Touch Screen para usar no seu smartphone. Leve sua TV para qualquer lugar.</p>
+                <button onclick="toggleChat(); userAction('Quero baixar para Celular', 'pre_download_cel')" class="btn-dl-card dark">
+                    <i class="fa-solid fa-download"></i> BAIXAR APK
+                </button>
+            </div>
         </div>
     </section>
 
@@ -552,24 +508,63 @@
         </div>
     </section>
 
+    <!-- FOOTER PROFISSIONAL -->
     <footer>
-        <div class="footer-grid">
+        <div class="footer-container">
+            <!-- Coluna 1: Marca -->
             <div class="footer-col">
-                <h4>Revenda Autorizada</h4>
-                <p>Garantimos código original, envio imediato e suporte para ativação.</p>
+                <img src="img/logo-unitv.png" alt="UniTV" class="footer-logo">
+                <p class="footer-desc">
+                    Somos revendedores autorizados UniTV. Levamos entretenimento premium com qualidade 4K para sua casa. 
+                    Atendimento rápido e entrega imediata de códigos.
+                </p>
+                <div class="secure-badge">
+                    <i class="fa-solid fa-shield-halved"></i> Site 100% Seguro
+                </div>
             </div>
+
+            <!-- Coluna 2: Navegação -->
             <div class="footer-col">
-                <h4>Links Úteis</h4>
+                <h4>Navegação</h4>
                 <ul class="footer-links">
-                    <li><a href="#comprar">Planos</a></li>
-                    <li><a href="#download">Download</a></li>
-                    <li><a href="faq.html">Ajuda</a></li>
+                    <li><a href="#comprar"><i class="fa-solid fa-chevron-right"></i> Comprar Recarga</a></li>
+                    <li><a href="#download"><i class="fa-solid fa-chevron-right"></i> Baixar App</a></li>
+                    <li><a href="#recursos"><i class="fa-solid fa-chevron-right"></i> Funcionalidades</a></li>
+                    <li><a href="#vantagens"><i class="fa-solid fa-chevron-right"></i> Canais e Filmes</a></li>
                 </ul>
             </div>
+
+            <!-- Coluna 3: Suporte -->
             <div class="footer-col">
-                <h4>Atendimento</h4>
-                <p>(19) 98176-5840</p>
-                <p>Seg a Sex: 08h às 22h</p>
+                <h4>Suporte ao Cliente</h4>
+                <ul class="footer-links">
+                    <li><a href="faq.html"><i class="fa-solid fa-circle-question"></i> Perguntas Frequentes</a></li>
+                    <li><a href="#" onclick="toggleChat()"><i class="fa-brands fa-whatsapp"></i> Falar no WhatsApp</a></li>
+                    <li><a href="#"><i class="fa-regular fa-envelope"></i> suporte@unitv.com</a></li>
+                    <li><span style="color:#666; font-size:0.8rem; margin-top:5px; display:block;">Seg a Sex: 08h às 22h</span></li>
+                </ul>
+            </div>
+
+            <!-- Coluna 4: Pagamento -->
+            <div class="footer-col">
+                <h4>Formas de Pagamento</h4>
+                <p style="margin-bottom: 15px;">Aceitamos as principais formas de pagamento com aprovação imediata.</p>
+                <div class="payment-methods">
+                    <i class="fa-brands fa-pix" style="color:#32bcad; font-size: 2rem;"></i>
+                    <i class="fa-brands fa-cc-mastercard" style="font-size: 2rem;"></i>
+                    <i class="fa-brands fa-cc-visa" style="font-size: 2rem;"></i>
+                    <i class="fa-solid fa-credit-card" style="font-size: 2rem;"></i>
+                </div>
+                <div style="margin-top: 20px; font-size: 0.8rem; color: #666;">
+                    <i class="fa-solid fa-lock" style="color:#00ff88;"></i> Pagamento Processado via Kirvano
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div>&copy; 2024 UniTV Revenda Oficial. Todos os direitos reservados.</div>
+            <div>
+                CNPJ: 00.000.000/0001-00 | Termos de Uso | Política de Privacidade
             </div>
         </div>
     </footer>
