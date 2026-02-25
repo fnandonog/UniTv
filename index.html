@@ -151,7 +151,7 @@
         .payment-methods { display: flex; gap: 15px; font-size: 1.8rem; margin-top: 15px; color: #444; }
         .footer-bottom { text-align: center; margin-top: 60px; padding-top: 20px; border-top: 1px solid #111; font-size: 0.75rem; }
 
-        /* --- WHATSAPP WIDGET (CORRIGIDO) --- */
+        /* --- WHATSAPP WIDGET --- */
         .wa-widget {
             position: fixed; 
             bottom: 85px; 
@@ -194,11 +194,37 @@
         
         .float-zap { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; z-index: 10000; box-shadow: 0 4px 12px rgba(0,0,0,0.3); cursor: pointer; }
 
+        /* --- MODAL AVISO SMART TV (NOVO) --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
+            display: flex; justify-content: center; align-items: center;
+            z-index: 100000; opacity: 0; visibility: hidden; transition: 0.3s ease;
+        }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+        .modal-content {
+            background: #111; border: 1px solid #333; border-radius: 16px;
+            width: 90%; max-width: 480px; padding: 30px; text-align: center;
+            transform: translateY(20px); transition: 0.3s ease; box-shadow: 0 10px 50px rgba(0,0,0,0.8);
+        }
+        .modal-overlay.active .modal-content { transform: translateY(0); }
+        .modal-header i { color: #ffcc00; font-size: 3rem; margin-bottom: 15px; }
+        .modal-header h3 { color: #fff; font-size: 1.4rem; font-weight: 800; margin-bottom: 20px; line-height: 1.2;}
+        .modal-body p { color: #ccc; font-size: 0.95rem; margin-bottom: 15px; line-height: 1.5; }
+        .alert-box { background: rgba(255, 0, 85, 0.1); border-left: 4px solid #ff0055; padding: 15px; margin-bottom: 20px; text-align: left; border-radius: 0 8px 8px 0; }
+        .alert-box p { color: #ff8888; font-size: 0.9rem; font-weight: 600; margin: 0; }
+        .modal-actions { display: flex; flex-direction: column; gap: 12px; margin-top: 25px; }
+        .btn-modal-buy { background: #25d366; color: #000; border: none; padding: 14px; font-weight: 700; font-size: 0.95rem; border-radius: 8px; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .btn-modal-buy:hover { background: #1ebd5b; transform: scale(1.02); }
+        .btn-modal-support { background: #222; color: #fff; border: 1px solid #444; padding: 14px; font-weight: 600; font-size: 0.9rem; border-radius: 8px; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.3s; }
+        .btn-modal-support:hover { background: #333; }
+        .btn-modal-close { background: transparent; color: #777; border: none; padding: 10px; cursor: pointer; text-decoration: underline; font-size: 0.85rem; margin-top: 5px; transition: 0.3s; }
+        .btn-modal-close:hover { color: #fff; }
+
         /* --- RESPONSIVIDADE & CORREÇÕES MOBILE --- */
         @media (max-width: 768px) {
-            body { padding-top: 0; } /* Remove padding do body no mobile */
+            body { padding-top: 0; } 
             
-            /* Ajuste da Barra de Promoção para fluir e não cortar */
             .promo-bar { 
                 position: relative; 
                 height: auto; 
@@ -208,7 +234,6 @@
                 font-size: 0.75rem;
             }
             
-            /* Ajuste do Header para Stickar corretamente */
             header { 
                 position: sticky; 
                 top: 0; 
@@ -218,7 +243,7 @@
                 min-height: 60px;
             }
             .logo img { height: 26px; }
-            nav { display: none; } /* Oculta menu no mobile */
+            nav { display: none; } 
             
             .hero { padding-top: 60px; text-align: center; }
             .hero-grid { grid-template-columns: 1fr; gap: 30px; }
@@ -229,13 +254,12 @@
             .pricing-grid { flex-direction: column; gap: 40px; }
             .price-card.destaque { transform: scale(1); max-width: 100%; } 
             
-            /* --- CORREÇÃO DO CHAT WHATSAPP NO MOBILE --- */
             .wa-widget { 
                 width: auto;
                 left: 15px; 
                 right: 15px; 
                 bottom: 90px; 
-                max-height: 70vh; /* Limita altura */
+                max-height: 70vh;
                 border-radius: 15px;
             }
             .wa-chat-body { 
@@ -329,7 +353,7 @@
 
     <!-- SECTION PRICING -->
     <section id="comprar" class="pricing-section">
-        <h2 class="section-title">Escolha seu Plano Oficial</h2>
+        <h2 class="section-title">Escolha seu Plano Ofixcial</h2>
         <div class="pricing-grid">
             <!-- PLANO MENSAL -->
             <div class="price-card">
@@ -343,7 +367,8 @@
                     <li><i class="fa-solid fa-check"></i> 2 Telas Simultâneas</li>
                     <li><i class="fa-solid fa-check"></i> Qualidade 4K Ultra HD</li>
                 </ul>
-                <a href="https://pay.kirvano.com/07f96a4e-ecdf-4538-83ca-01e5c35f1425" class="btn-price normal" target="_blank">Comprar Mensal</a>
+                <!-- BOTÃO ALTERADO PARA CHAMAR O MODAL -->
+                <a href="javascript:void(0)" onclick="openWarningModal('https://pay.kirvano.com/07f96a4e-ecdf-4538-83ca-01e5c35f1425')" class="btn-price normal">Comprar Mensal</a>
             </div>
             <!-- PLANO ANUAL -->
             <div class="price-card destaque">
@@ -358,7 +383,8 @@
                     <li><i class="fa-solid fa-mobile-screen"></i> <strong>2 Telas Simultâneas</strong></li>
                     <li><i class="fa-solid fa-shield-halved"></i> Proteção contra Aumentos</li>
                 </ul>
-                <a href="https://pay.kirvano.com/0aadf253-f4b6-47dd-8d0a-f5f16714ce98" class="btn-price glow" target="_blank">GARANTIR OFERTA ANUAL</a>
+                <!-- BOTÃO ALTERADO PARA CHAMAR O MODAL -->
+                <a href="javascript:void(0)" onclick="openWarningModal('https://pay.kirvano.com/0aadf253-f4b6-47dd-8d0a-f5f16714ce98')" class="btn-price glow">GARANTIR OFERTA ANUAL</a>
             </div>
         </div>
         <div class="support-box">
@@ -545,6 +571,28 @@
 
     <div class="float-zap" onclick="toggleChat()"><i class="fa-brands fa-whatsapp"></i></div>
 
+    <!-- MODAL AVISO SMART TV -->
+    <div id="smartTvModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <h3>ATENÇÃO ANTES DE COMPRAR!</h3>
+            </div>
+            <div class="modal-body">
+                <p>O <strong>UniTV</strong> é um aplicativo exclusivo para dispositivos <strong>ANDROID</strong> (TV Box, Celular Android, Android TV e Firestick).</p>
+                <div class="alert-box">
+                    <p>🚫 NÃO FUNCIONA nativamente em Smart TVs LG (WebOS), Samsung (Tizen), Roku ou AOC.</p>
+                </div>
+                <p style="font-size: 0.85rem; color: #aaa;">Se a sua TV for LG ou Samsung, não compre este plano. Temos <strong>outros aplicativos compatíveis</strong> para a sua TV. Chame nosso suporte!</p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-modal-buy" onclick="proceedToCheckout()"><i class="fa-solid fa-check"></i> MEU APARELHO É ANDROID (Continuar)</button>
+                <a href="javascript:void(0)" onclick="closeWarningModal(); document.getElementById('chat-widget').classList.add('active'); userAction('Minha TV é LG/Samsung', 'smart_tv_solution');" class="btn-modal-support"><i class="fa-solid fa-comments"></i> MINHA TV É LG/SAMSUNG (Chat do Site)</a>
+                <button class="btn-modal-close" onclick="closeWarningModal()">Cancelar compra</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // 1. Timer
         function startTimer(duration, display) {
@@ -683,6 +731,25 @@
             });
         }
         function checkDownloadSuccess() { showTyping(() => { addMessage("E aí, conseguiu?", 'bot'); setOptions([{label: 'Sim!', type: 'sucesso_instalar'}, {label: 'Não', type: 'erro_instalar'}]); }); }
+
+        // --- LÓGICA DO MODAL DE AVISO SMART TV ---
+        let checkoutUrlToRedirect = '';
+        
+        function openWarningModal(url) {
+            checkoutUrlToRedirect = url;
+            document.getElementById('smartTvModal').classList.add('active');
+        }
+
+        function closeWarningModal() {
+            document.getElementById('smartTvModal').classList.remove('active');
+        }
+
+        function proceedToCheckout() {
+            if(checkoutUrlToRedirect) {
+                window.open(checkoutUrlToRedirect, '_blank');
+                closeWarningModal();
+            }
+        }
     </script>
 </body>
 </html>
