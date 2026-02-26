@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- SEO AGRESSIVO: Foco em conteúdo -->
+    <title>Lançamentos do Cinema 2026 | Assista em 4K no UniTV</title>
+    <meta name="description" content="Confira os filmes e séries que acabaram de sair no cinema e nas plataformas de streaming. Assista tudo em um só lugar com o UniTV Oficial.">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&family=Montserrat:wght@900&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://unitvnew.shop/img/logo-unitv.png" type="image/png">
+
+    <style>
+        /* --- DESIGN SYSTEM ULTRA PREMIUM --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        
+        :root {
+            --bg-body: #020202;
+            --bg-card: #0a0a0a;
+            --pink-gradient: linear-gradient(135deg, #FF512F 0%, #DD2476 100%);
+            --text-gradient: linear-gradient(90deg, #ff8c00, #ff0080, #7928ca);
+            --borda-glass: 1px solid rgba(255, 255, 255, 0.1);
+            --cor-destaque: #ff0080;
+            --wa-header: #075e54; --wa-bg: #e5ddd5;
+        }
+
+        html, body { background-color: var(--bg-body); color: #f0f0f0; overflow-x: hidden; width: 100%; line-height: 1.6; padding-top: 50px; scroll-behavior: smooth; }
+
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(0.17, 0.55, 0.55, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* --- BARRA DE PROMOÇÃO --- */
+        .promo-bar {
+            background: linear-gradient(90deg, #1a0b2e, #2d0b1e);
+            color: #e0e0e0; text-align: center; padding: 10px; font-size: 0.8rem; font-weight: 600;
+            position: fixed; top: 0; width: 100%; z-index: 2000; border-bottom: 1px solid rgba(255,255,255,0.05);
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+
+        /* --- HEADER COM NAVEGAÇÃO ESTRATÉGICA --- */
+        header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 5%; position: fixed; width: 100%; top: 40px;
+            background: rgba(5, 5, 5, 0.8); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            z-index: 1500; border-bottom: var(--borda-glass); height: 70px;
+        }
+        .logo-box { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo-box img { height: 40px; filter: brightness(1.2); }
+        
+        .nav-links { display: flex; gap: 10px; }
+        .nav-links a { 
+            color: #fff; text-decoration: none; font-size: 0.65rem; font-weight: 700; 
+            text-transform: uppercase; padding: 10px 18px; border-radius: 50px; 
+            border: 1px solid rgba(255,255,255,0.1); transition: 0.3s;
+            background: rgba(255,255,255,0.05); white-space: nowrap;
+        }
+        .nav-links a:hover { background: #fff; color: #000; }
+        .nav-links a.active-btn { background: var(--pink-gradient); border: none; }
+
+        /* --- HERO --- */
+        .hero { padding: 160px 5% 60px; text-align: center; background: radial-gradient(circle at 50% 30%, #2d0b1e 0%, #020202 70%); }
+        h1 { font-family: 'Montserrat', sans-serif; font-size: clamp(2.2rem, 8vw, 4rem); line-height: 1; margin-bottom: 25px; font-weight: 900; letter-spacing: -2px; }
+        .text-gradient { background: var(--text-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .badge { background: rgba(255, 0, 85, 0.15); color: #ff0055; border: 1px solid rgba(255, 0, 85, 0.3); padding: 10px 25px; border-radius: 50px; font-size: 0.85rem; margin-bottom: 25px; display: inline-block; font-weight: 800; }
+
+        /* --- STREAMING ROWS --- */
+        .catalog-section { padding: 40px 0; background: transparent; }
+        .catalog-container { max-width: 1500px; margin: 0 auto; padding: 0 25px; }
+        .cat-title { font-size: 1.8rem; font-weight: 900; margin-bottom: 30px; color: #fff; display: flex; align-items: center; gap: 15px; }
+        .cat-title::before { content: ''; width: 4px; height: 30px; background: var(--pink-gradient); border-radius: 10px; }
+        
+        .movie-row { display: flex; gap: 15px; overflow-x: auto; padding: 10px 5px 40px; scrollbar-width: none; }
+        .movie-row::-webkit-scrollbar { display: none; }
+        
+        .movie-card { flex: 0 0 220px; border-radius: 12px; overflow: hidden; background: #111; aspect-ratio: 2/3; position: relative; transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); border: 1px solid rgba(255,255,255,0.05); }
+        .movie-card:hover { transform: scale(1.1); z-index: 100; border-color: var(--cor-destaque); box-shadow: 0 15px 40px rgba(0,0,0,0.8); }
+        .movie-card img { width: 100%; height: 100%; object-fit: cover; }
+        .movie-info { position: absolute; bottom: 0; left: 0; width: 100%; padding: 20px 15px; background: linear-gradient(to top, #000 20%, transparent 100%); display: flex; flex-direction: column; justify-content: flex-end; opacity: 0; transition: 0.3s; height: 100%; }
+        .movie-card:hover .movie-info { opacity: 1; }
+        .movie-title-card { font-size: 0.9rem; font-weight: 800; color: #fff; margin-bottom: 5px; line-height: 1.2; }
+        .movie-meta { font-size: 0.7rem; color: #00ff88; font-weight: 700; display: flex; align-items: center; gap: 5px; }
+
+        /* --- CTA BANNER --- */
+        .cta-banner { margin: 60px 5%; padding: 60px; background: linear-gradient(135deg, #1a0b2e 0%, #2d0b1e 100%); border-radius: 30px; border: var(--borda-glass); text-align: center; }
+        .cta-banner h2 { font-size: 2.5rem; font-weight: 900; margin-bottom: 20px; }
+        .btn-cta { display: inline-block; background: #fff; color: #000; padding: 20px 50px; border-radius: 50px; text-decoration: none; font-weight: 900; font-size: 1.1rem; transition: 0.3s; }
+        .btn-cta:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(255,255,255,0.2); }
+
+        /* --- FOOTER (CÓPIA DA PRINCIPAL) --- */
+        footer { background: #050505; border-top: 1px solid #1a1a1a; padding: 80px 5% 40px; color: #999; font-size: 0.9rem; }
+        .footer-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; }
+        .footer-logo { margin-bottom: 25px; height: 45px; filter: brightness(1.2); }
+        .footer-col h4 { color: #fff; margin-bottom: 25px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 15px; }
+        .footer-links a { color: #666; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 10px; }
+        .footer-links a:hover { color: #fff; transform: translateX(5px); }
+        .payment-methods { display: flex; gap: 20px; font-size: 2.2rem; margin-top: 25px; color: #222; }
+
+        /* --- WIDGETS --- */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 100000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(15px); }
+        .modal-content { background: #0a0a0a; border: 1px solid #333; border-radius: 30px; width: 90%; max-width: 500px; padding: 50px; text-align: center; }
+        .float-zap { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; width: 65px; height: 65px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; z-index: 10000; cursor: pointer; box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4); }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.8rem; }
+            header { padding: 0 15px; }
+            .nav-links a { padding: 8px 12px; font-size: 0.55rem; }
+            .cta-banner { padding: 40px 20px; }
+            .footer-container { grid-template-columns: 1fr; text-align: center; }
+            .movie-card { flex: 0 0 150px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="promo-bar">
+        🍿 CINEMA EM CASA: Todos esses lançamentos estão liberados no UniTV VIP! 
+    </div>
+
+    <header>
+        <a href="../" class="logo-box">
+            <img src="https://unitvnew.shop/img/logo-unitv.png" alt="UniTV">
+        </a>
+        <nav class="nav-links">
+            <a href="../">Início</a>
+            <a href="../baixar/">Baixar APK</a>
+            <a href="../tv-box/">TV Box</a>
+            <a href="../comparativo/">Comparar</a>
+        </nav>
+    </header>
+
+    <section class="hero reveal">
+        <span class="badge">Catálogo VIP 2026</span>
+        <h1>Os Melhores <span class="text-gradient">Filmes e Séries</span><br>Estão Aqui.</h1>
+        <p class="hero-sub">Esqueça o preço alto das assinaturas. No UniTV você tem acesso aos últimos lançamentos do cinema e todas as plataformas em um único aplicativo 4K.</p>
+    </section>
+
+    <!-- CINEMA AGORA -->
+    <section class="catalog-section reveal">
+        <div class="catalog-container">
+            <h2 class="cat-title">No Cinema agora:</h2>
+            <div class="movie-row" id="cinema-movies"></div>
+        </div>
+    </section>
+
+    <!-- SÉRIES EM ALTA -->
+    <section class="catalog-section reveal" style="padding-top: 0;">
+        <div class="catalog-container">
+            <h2 class="cat-title">Séries do Momento:</h2>
+            <div class="movie-row" id="trending-tv"></div>
+        </div>
+    </section>
+
+    <!-- EM BREVE -->
+    <section class="catalog-section reveal" style="padding-top: 0;">
+        <div class="catalog-container">
+            <h2 class="cat-title">Ação e Aventura:</h2>
+            <div class="movie-row" id="action-movies"></div>
+        </div>
+    </section>
+
+    <section class="cta-banner reveal">
+        <h2>Quer assistir tudo isso agora?</h2>
+        <p style="color: #aaa; margin-bottom: 30px;">Libere seu acesso VIP em menos de 1 minuto com entrega automática.</p>
+        <a href="https://unitvnew.shop/#comprar" class="btn-cta">ATIVAR MEU ACESSO VIP</a>
+    </section>
+
+    <!-- FOOTER OFICIAL -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <img src="https://unitvnew.shop/img/logo-unitv.png" alt="UniTV" class="footer-logo">
+                <p>O maior revendedor autorizado UniTV do Brasil. Entretenimento premium 4K com entrega garantida via Pix.</p>
+                <div style="color: #00ff88; font-size: 0.8rem; margin-top: 20px; display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-shield-halved"></i> Site 100% Seguro</div>
+            </div>
+            <div class="footer-col">
+                <h4>Navegação</h4>
+                <ul class="footer-links">
+                    <li><a href="../"><i class="fa-solid fa-chevron-right"></i> Home</a></li>
+                    <li><a href="../tv-box/"><i class="fa-solid fa-chevron-right"></i> Guia TV Box</a></li>
+                    <li><a href="../baixar/"><i class="fa-solid fa-chevron-right"></i> Download APK</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Central de Ajuda</h4>
+                <ul class="footer-links">
+                    <li><a href="../ajuda/"><i class="fa-solid fa-circle-question"></i> Suporte</a></li>
+                    <li><a href="javascript:void(0)" onclick="toggleChat()"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Pagamento Seguro</h4>
+                <div class="payment-methods">
+                    <i class="fa-brands fa-pix" style="color:#32bcad;"></i>
+                    <i class="fa-brands fa-cc-mastercard"></i>
+                    <i class="fa-brands fa-cc-visa"></i>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 60px; padding-top: 20px; border-top: 1px solid #111; font-size: 0.75rem; color: #444;">
+            &copy; 2024 UniTV Revenda Oficial. CNPJ: 00.000.000/0001-00
+        </div>
+    </footer>
+
+    <!-- WIDGETS -->
+    <div id="smartTvModal" class="modal-overlay">
+        <div class="modal-content">
+            <i class="fa-solid fa-triangle-exclamation" style="color: #ffcc00; font-size: 3.5rem; margin-bottom: 20px;"></i>
+            <h3 style="color: #fff; font-size: 1.5rem; margin-bottom: 15px; font-weight: 900;">SÓ FUNCIONA EM ANDROID!</h3>
+            <div class="alert-box">
+                <p style="color: #fff; font-weight: 700;">Sua TV é LG ou Samsung?</p>
+                <p style="font-size: 0.8rem; color: #aaa; margin-top: 5px;">Se sim, não compre. Temos outros apps para sua TV. Chame no WhatsApp!</p>
+            </div>
+            <button class="btn-modal-buy" onclick="window.open('https://unitvnew.shop/#comprar', '_self')">MEU APARELHO É ANDROID</button>
+        </div>
+    </div>
+
+    <div class="float-zap" onclick="window.open('https://wa.me/5519981765840')"><i class="fa-brands fa-whatsapp"></i></div>
+
+    <script>
+        const apiKey = '9cb2f018163da4a3f89d718ee6be8677';
+        const imgBase = 'https://image.tmdb.org/t/p/w500';
+
+        async function loadCatalog() {
+            try {
+                // Filmes no Cinema
+                const resMovies = await fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=pt-BR&page=1`);
+                const dataMovies = await resMovies.json();
+                render(dataMovies.results, 'cinema-movies');
+
+                // Séries em Alta
+                const resTV = await fetch(`https://api.themoviedb.org/3/trending/tv/week?api_key=${apiKey}&language=pt-BR`);
+                const dataTV = await resTV.json();
+                render(dataTV.results, 'trending-tv');
+
+                // Filmes de Ação
+                const resAction = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_genres=28&language=pt-BR&sort_by=popularity.desc`);
+                const dataAction = await resAction.json();
+                render(dataAction.results, 'action-movies');
+            } catch(e) { console.error(e); }
+        }
+
+        function render(items, id) {
+            const el = document.getElementById(id);
+            el.innerHTML = items.map(i => `
+                <div class="movie-card">
+                    <img src="${imgBase}${i.poster_path}" alt="${i.title || i.name}" loading="lazy">
+                    <div class="movie-info">
+                        <div class="movie-title-card">${i.title || i.name}</div>
+                        <div class="movie-meta"><i class="fa-solid fa-star"></i> ${i.vote_average.toFixed(1)}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        window.onload = () => {
+            loadCatalog();
+            document.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
+        };
+
+        window.addEventListener('scroll', () => {
+            document.querySelectorAll('.reveal').forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight - 50) el.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
