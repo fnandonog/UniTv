@@ -9,6 +9,68 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="icon" href="img/logo-unitv.png" type="image/png">
 
+    <!-- INÍCIO DO CÓDIGO DE SEO (SCHEMA MARKUP PARA O GOOGLE) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Product",
+          "name": "Recarga UniTV Oficial - Anual e Mensal",
+          "image": "https://unitvnew.shop/img/logo-unitv.png",
+          "description": "Recarga oficial do aplicativo UniTV com entrega automática. Assista a canais ao vivo, filmes e séries em 4K no seu Android ou TV Box.",
+          "brand": {
+            "@type": "Brand",
+            "name": "UniTV"
+          },
+          "offers": {
+            "@type": "AggregateOffer",
+            "lowPrice": "24.90",
+            "highPrice": "189.90",
+            "priceCurrency": "BRL",
+            "offerCount": "2",
+            "availability": "https://schema.org/InStock"
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "reviewCount": "1534"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Como recebo minha recarga UniTV?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "A entrega é 100% automática! Assim que o pagamento via Pix é confirmado, você recebe o código de 16 dígitos imediatamente na tela, no seu WhatsApp e no seu E-mail."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "O UniTV funciona em Smart TV LG e Samsung?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "O UniTV é um aplicativo Android. Ele não roda nativamente em sistemas WebOS (LG) ou Tizen (Samsung). Para essas TVs, recomendamos o uso de uma TV Box, Firestick ou contatar nosso suporte para aplicativos alternativos."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Quantas telas posso usar no UniTV?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Com a nossa recarga oficial VIP, você tem direito a assistir em até 2 telas simultâneas. Por exemplo: Uma TV Box na sala e um Celular Android ao mesmo tempo."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+    <!-- FIM DO CÓDIGO DE SEO -->
+
     <style>
         /* --- ESTILOS GERAIS --- */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
@@ -194,7 +256,7 @@
         
         .float-zap { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; z-index: 10000; box-shadow: 0 4px 12px rgba(0,0,0,0.3); cursor: pointer; }
 
-        /* --- MODAL AVISO SMART TV (NOVO) --- */
+        /* --- MODAL AVISO SMART TV --- */
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
@@ -353,7 +415,7 @@
 
     <!-- SECTION PRICING -->
     <section id="comprar" class="pricing-section">
-        <h2 class="section-title">Escolha seu Plano Ofixcial</h2>
+        <h2 class="section-title">Escolha seu Plano Oficial</h2>
         <div class="pricing-grid">
             <!-- PLANO MENSAL -->
             <div class="price-card">
@@ -367,7 +429,6 @@
                     <li><i class="fa-solid fa-check"></i> 2 Telas Simultâneas</li>
                     <li><i class="fa-solid fa-check"></i> Qualidade 4K Ultra HD</li>
                 </ul>
-                <!-- BOTÃO ALTERADO PARA CHAMAR O MODAL -->
                 <a href="javascript:void(0)" onclick="openWarningModal('https://pay.kirvano.com/07f96a4e-ecdf-4538-83ca-01e5c35f1425')" class="btn-price normal">Comprar Mensal</a>
             </div>
             <!-- PLANO ANUAL -->
@@ -383,7 +444,6 @@
                     <li><i class="fa-solid fa-mobile-screen"></i> <strong>2 Telas Simultâneas</strong></li>
                     <li><i class="fa-solid fa-shield-halved"></i> Proteção contra Aumentos</li>
                 </ul>
-                <!-- BOTÃO ALTERADO PARA CHAMAR O MODAL -->
                 <a href="javascript:void(0)" onclick="openWarningModal('https://pay.kirvano.com/0aadf253-f4b6-47dd-8d0a-f5f16714ce98')" class="btn-price glow">GARANTIR OFERTA ANUAL</a>
             </div>
         </div>
