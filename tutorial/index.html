@@ -8,7 +8,7 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="icon" href="img/logo-unitv.png" type="image/png">
+    <link rel="icon" href="/img/logo-unitv.png" type="image/png">
 
     <!-- INÍCIO DO CÓDIGO DE SEO (SCHEMA MARKUP COMPLETO: PRODUCT + FAQ + HOWTO) -->
     <script type="application/ld+json">
@@ -176,7 +176,7 @@
         .section-title { text-align: center; font-size: 2.2rem; margin-bottom: 20px; font-weight: 800; letter-spacing: -0.5px; }
         .section-subtitle { text-align: center; color: #888; font-size: 1.1rem; max-width: 600px; margin: 0 auto 60px; }
 
-        /* --- RECURSOS (IGUAL AO INDEX) --- */
+        /* --- RECURSOS --- */
         .features-grid { display: flex; justify-content: center; gap: 25px; flex-wrap: wrap; max-width: 1200px; margin: 0 auto; }
         .feature-box { background: var(--bg-card); padding: 40px 30px; border-radius: 20px; width: 280px; border: var(--borda-sutil); transition: 0.4s; position: relative; overflow: hidden; }
         .feature-box::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--gradiente-premium); opacity: 0; transition: 0.3s; }
@@ -360,15 +360,15 @@
 
     <header>
         <div class="logo">
-            <a href="/"><img src="img/logo-unitv.png" alt="UniTV Oficial Logo"></a>
+            <a href="/"><img src="/img/logo-unitv.png" alt="UniTV Oficial Logo"></a>
         </div>
         
         <nav id="nav-menu">
             <ul>
                 <li><a href="/">Início</a></li>
-                <li><a href="tutorial" class="active">Instalação</a></li>
-                <li><a href="blog">Blog</a></li>
-                <li><a href="ajuda">Ajuda</a></li>
+                <li><a href="/tutorial" class="active">Instalação</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/ajuda">Ajuda</a></li>
             </ul>
         </nav>
         
@@ -535,7 +535,7 @@
             <h3>Compatibilidade e Requisitos de Rede</h3>
             <p>O aplicativo exige um sistema Android puro. Se possui uma <strong>Fire Stick TV</strong> (da Amazon), o processo funciona perfeitamente ativando o modo de desenvolvedor. A única exigência para rodar canais 4K e filmes VOD (Video On Demand) sem engasgos é uma conexão de internet com velocidade mínima de 15 Mbps. Recomendamos fortemente plugar um cabo de rede (RJ45) diretamente do seu roteador para a sua TV Box, pois o Wi-Fi perde muitos pacotes de dados.</p>
             
-            <p>Ficou com alguma dúvida técnica? Visite o nosso <a href="blog">Blog de Tecnologia e Atualizações</a> ou teste a qualidade da sua conexão na nossa aba de <a href="velocidade">Teste de Velocidade (Velocímetro)</a> para ter certeza que está pronto para o plano Anual VIP.</p>
+            <p>Ficou com alguma dúvida técnica? Visite o nosso <a href="/blog">Blog de Tecnologia e Atualizações</a> ou teste a qualidade da sua conexão na nossa aba de <a href="/velocidade">Teste de Velocidade (Velocímetro)</a> para ter certeza que está pronto para o plano Anual VIP.</p>
         </div>
     </section>
 
@@ -543,7 +543,7 @@
     <footer>
         <div class="footer-container">
             <div class="footer-col">
-                <img src="img/logo-unitv.png" alt="UniTV Oficial" class="footer-logo">
+                <img src="/img/logo-unitv.png" alt="UniTV Oficial" class="footer-logo">
                 <p class="footer-desc">
                     Somos revendedores autorizados da plataforma UniTV. Levamos entretenimento premium com qualidade 4K diretamente para a sua casa com suporte de excelência.
                 </p>
@@ -555,15 +555,15 @@
                 <h4>Acesso Rápido</h4>
                 <ul class="footer-links">
                     <li><a href="/#comprar">Planos e Recargas</a></li>
-                    <li><a href="tutorial">Guia de Instalação</a></li>
-                    <li><a href="blog">Blog de Tecnologia</a></li>
-                    <li><a href="velocidade">Teste de Velocidade</a></li>
+                    <li><a href="/tutorial">Guia de Instalação</a></li>
+                    <li><a href="/blog">Blog de Tecnologia</a></li>
+                    <li><a href="/velocidade">Teste de Velocidade</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <h4>Suporte Dedicado</h4>
                 <ul class="footer-links">
-                    <li><a href="ajuda">Central de Ajuda (FAQ)</a></li>
+                    <li><a href="/ajuda">Central de Ajuda (FAQ)</a></li>
                     <li><a href="#" onclick="toggleChat()">Atendimento WhatsApp</a></li>
                     <li><span style="color:#666; font-size:0.8rem; margin-top:5px; display:block;">Horário: Seg a Sex, das 08h às 22h</span></li>
                 </ul>
@@ -594,7 +594,7 @@
     <div id="chat-widget" class="wa-widget">
         <div class="wa-header">
             <div class="wa-profile">
-                <img src="img/logo-unitv.png" alt="UniTV">
+                <img src="/img/logo-unitv.png" alt="UniTV">
                 <div class="wa-info">
                     <span class="wa-name">Atendimento VIP</span>
                     <span id="wa-status" class="wa-status">Online</span>
@@ -609,6 +609,7 @@
         <div id="wa-options" class="wa-options">
             <button onclick="userAction('Quero assinar / ver planos', 'preco')">Ver planos disponíveis</button>
             <button onclick="userAction('Minha TV Box deu erro', 'erro_box')">O código do Downloader deu erro</button>
+            <button onclick="userAction('Ver tutorial em Vídeo', 'video_youtube')"><i class="fa-brands fa-youtube" style="color:red;"></i> Vídeo de Instalação</button>
             <button onclick="userAction('Funciona na LG/Samsung?', 'smart_tv_select')">Minha TV é Samsung/LG</button>
         </div>
         <div class="wa-input-fake">
@@ -717,7 +718,7 @@
             fetchContent();
         };
 
-        // 5. CHATBOT LOGIC (Focado em Instalação)
+        // 5. CHATBOT LOGIC (Focado em Instalação e YouTube)
         function toggleChat() { document.getElementById('chat-widget').classList.toggle('active'); }
         function showTyping(callback) {
             const status = document.getElementById('wa-status'), typing = document.getElementById('typing-indicator'), content = document.getElementById('chat-content');
@@ -731,7 +732,7 @@
         }
         function setOptions(options) {
             const container = document.getElementById('wa-options'); container.innerHTML = "";
-            options.forEach(opt => { const btn = document.createElement('button'); btn.innerText = opt.label; btn.onclick = () => userAction(opt.label, opt.type); container.appendChild(btn); });
+            options.forEach(opt => { const btn = document.createElement('button'); btn.innerHTML = opt.label; btn.onclick = () => userAction(opt.label.replace(/<[^>]*>?/gm, ''), opt.type); container.appendChild(btn); });
         }
         
         function userAction(text, type) {
@@ -744,8 +745,11 @@
                     addMessage("Perfeito! Se você pagou via Pix, o código é enviado automaticamente em menos de 1 minuto para o seu WhatsApp e E-mail. Olhe a caixa de SPAM.", 'bot'); 
                     setOptions([{label: 'Voltar ao início', type: 'reset'}]);
                 } else if(type === 'erro_box') {
-                    addMessage("Se o código 867283 não funcionou, tente o código alternativo: <strong>645641</strong>. Deu certo?", 'bot');
-                    setOptions([{label: 'Sim, instalou!', type: 'sucesso_instalar'}, {label: 'Não, deu erro de rede', type: 'erro_rede'}, {label: 'Não, erro de fonte', type: 'erro_fonte'}]);
+                    addMessage("Se o código 867283 não funcionou, tente o código alternativo: <strong>645641</strong>. Ou assista ao nosso passo a passo em vídeo. Deu certo?", 'bot');
+                    setOptions([{label: 'Sim, instalou!', type: 'sucesso_instalar'}, {label: '<i class="fa-brands fa-youtube" style="color:red;"></i> Ver Vídeo no YouTube', type: 'video_youtube'}, {label: 'Não, erro de rede', type: 'erro_rede'}, {label: 'Não, erro de fonte', type: 'erro_fonte'}]);
+                } else if(type === 'video_youtube') {
+                    addMessage("Preparamos um passo a passo completo no YouTube para não ter erro!<br><br>👉 <a href='https://youtu.be/HCLfafWRvx8' target='_blank' style='color: var(--cor-destaque); font-weight: bold; text-decoration: underline;'>Assistir Vídeo Tutorial</a>", 'bot');
+                    setOptions([{label: 'Consegui, quero assinar', type: 'preco'}, {label: 'Ainda com erro', type: 'erro_box'}, {label: 'Voltar', type: 'reset'}]);
                 } else if(type === 'erro_rede') {
                     addMessage("Erro de rede no Downloader significa que falta um plugin. Vá na barra de pesquisa e digite: browser.AFTVnews.com e instale o plugin. Depois tente nosso código de novo.", 'bot');
                     setOptions([{label: 'Chamar Suporte', type: 'suporte_humano'}]);
@@ -769,7 +773,7 @@
                     const btn = document.createElement('button'); btn.innerText = "Conversar no WhatsApp"; btn.style.background = "#25d366"; btn.style.color = "white"; btn.onclick = () => window.open("https://wa.me/5519981765840?text=Preciso de atendimento humano VIP para instalação"); document.getElementById('wa-options').appendChild(btn);
                 } else if(type === 'reset') {
                     addMessage("Como mais posso te ajudar a garantir sua diversão?", 'bot'); 
-                    setOptions([{label: 'Ver Planos', type: 'preco'}, {label: 'Erro na TV Box', type: 'erro_box'}, {label: 'Atendimento Humano', type: 'suporte_humano'}]);
+                    setOptions([{label: 'Ver Planos', type: 'preco'}, {label: 'Erro na TV Box', type: 'erro_box'}, {label: '<i class="fa-brands fa-youtube" style="color:red;"></i> Ver vídeo de Instalação', type: 'video_youtube'}, {label: 'Atendimento Humano', type: 'suporte_humano'}]);
                 }
             });
         }
