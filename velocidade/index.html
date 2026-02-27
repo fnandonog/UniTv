@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- SEO E METADADOS - MANTIDOS E MELHORADOS -->
+    <title>Teste de Velocidade UniTV | Sua Internet aguenta 4K?</title>
+    <meta name="description" content="Verifique agora se sua conexão é estável para assistir UniTV VIP em 4K. Teste de latência, download e compatibilidade com tecnologia P2P.">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&family=Montserrat:wght@900&display=swap" rel="stylesheet">
+    <link rel="icon" href="../img/logo-unitv.png" type="image/png">
+
+    <!-- INÍCIO DO CÓDIGO DE SEO (SCHEMA MARKUP INTEGRADO) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebApplication",
+          "name": "UniTV Speed Test Tool",
+          "url": "https://unitvnew.shop/velocidade/",
+          "applicationCategory": "MultimediaApplication",
+          "operatingSystem": "Web, Android, iOS"
+        },
+        {
+          "@type": "Product",
+          "name": "Recarga UniTV Oficial",
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "reviewCount": "1534"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Qual a velocidade mínima para o UniTV?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Para canais SD 5Mbps, HD 10Mbps e 4K Ultra HD recomendamos 20Mbps estáveis."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
+    <style>
+        /* --- DESIGN SYSTEM PREMIUM --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        
+        :root {
+            --bg-body: #050505;
+            --bg-card: #0f0f0f;
+            --gradiente-premium: linear-gradient(135deg, #FF512F 0%, #DD2476 100%);
+            --gradiente-texto: linear-gradient(90deg, #ff8c00, #ff0080, #7928ca);
+            --borda-sutil: 1px solid rgba(255, 255, 255, 0.08);
+            --verde-zap: #25D366;
+            --wa-header: #075e54; --wa-bg: #e5ddd5; --wa-msg-user: #dcf8c6;
+            --cor-destaque: #ff0080;
+        }
+
+        html, body { background-color: var(--bg-body); color: #f0f0f0; overflow-x: hidden; width: 100%; line-height: 1.6; padding-top: 40px; scroll-behavior: smooth; }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* --- HEADER --- */
+        header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 10px 5%; position: fixed; width: 100%; top: 0;
+            background: rgba(5, 5, 5, 0.95); backdrop-filter: blur(15px); z-index: 1000; border-bottom: var(--borda-sutil); height: 75px;
+        }
+        .logo img { height: 38px; filter: brightness(1.2); }
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a { color: #bbb; text-decoration: none; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; transition: 0.3s; }
+        .nav-links a:hover { color: white; }
+        .btn-header { background: var(--gradiente-premium); color: white; padding: 10px 22px; border-radius: 50px; text-decoration: none; font-size: 0.75rem; font-weight: 800; box-shadow: 0 4px 15px rgba(221, 36, 118, 0.3); }
+
+        /* --- SPEED TEST SECTION --- */
+        .speed-hero { padding: 140px 5% 60px; text-align: center; background: radial-gradient(circle at 50% 30%, #1a0b2e 0%, #050505 70%); }
+        .speed-hero h1 { font-family: 'Montserrat', sans-serif; font-size: clamp(2.2rem, 8vw, 4rem); font-weight: 900; margin-bottom: 30px; letter-spacing: -2px; }
+        
+        .gauge-container { max-width: 400px; margin: 0 auto; position: relative; padding: 40px; background: #0a0a0a; border-radius: 50%; border: 2px solid #1a1a1a; box-shadow: 0 0 50px rgba(255, 0, 128, 0.1); }
+        .gauge-val { font-size: 5rem; font-weight: 900; color: #fff; line-height: 1; margin-top: 20px; }
+        .gauge-unit { font-size: 1.2rem; color: #555; font-weight: 600; text-transform: uppercase; }
+        
+        .btn-test { background: #fff; color: #000; padding: 18px 45px; border-radius: 50px; font-weight: 900; border: none; cursor: pointer; margin-top: 40px; transition: 0.3s; font-size: 1rem; }
+        .btn-test:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(255,255,255,0.2); }
+        .btn-test:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        /* --- DIAGNOSTICO --- */
+        .diag-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; max-width: 800px; margin: 40px auto; }
+        .diag-item { background: #0a0a0a; padding: 25px; border-radius: 20px; border: var(--borda-sutil); }
+        .diag-item label { font-size: 0.75rem; color: #555; text-transform: uppercase; font-weight: 700; display: block; margin-bottom: 10px; }
+        .diag-item span { font-size: 1.5rem; font-weight: 800; color: #fff; }
+
+        /* --- SEÇÕES DE CREDIBILIDADE --- */
+        .content-section { padding: 80px 5%; max-width: 1200px; margin: 0 auto; }
+        .section-title { font-size: 2.5rem; font-weight: 900; margin-bottom: 40px; text-align: center; }
+        
+        .requirements-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .req-card { background: var(--bg-card); padding: 40px; border-radius: 24px; border: var(--borda-sutil); transition: 0.3s; }
+        .req-card:hover { border-color: var(--cor-destaque); transform: translateY(-10px); }
+        .req-card i { font-size: 2.5rem; color: var(--cor-destaque); margin-bottom: 20px; display: block; }
+        .req-card h3 { color: #fff; margin-bottom: 15px; font-weight: 800; }
+
+        /* --- PRICING --- */
+        .pricing-section { background: #020202; padding: 120px 5%; text-align: center; border-top: 1px solid #111; }
+        .pricing-grid { display: flex; justify-content: center; align-items: center; gap: 40px; max-width: 1100px; margin: 60px auto 0; flex-wrap: wrap; }
+        .price-card { background: #0a0a0a; border: 1px solid #222; border-radius: 30px; padding: 60px 40px; width: 100%; max-width: 360px; position: relative; transition: 0.4s; }
+        .price-card.destaque { background: linear-gradient(160deg, #180a1f 0%, #050505 100%); border: 2px solid var(--cor-destaque); box-shadow: 0 0 60px rgba(255, 0, 128, 0.15); transform: scale(1.1); z-index: 10; }
+        .price-val { font-size: 3.5rem; font-weight: 900; color: white; line-height: 1; margin: 20px 0; letter-spacing: -2px; }
+        .btn-price { display: block; background: var(--gradiente-premium); color: white; padding: 20px; border-radius: 15px; text-decoration: none; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
+        .btn-price:hover { transform: translateY(-5px); filter: brightness(1.2); }
+        .price-card:not(.destaque) .btn-price { background: #1a1a1a; border: 1px solid #333; }
+
+        /* --- FOOTER ESTILIZADO --- */
+        footer { background: #050505; border-top: 1px solid #1a1a1a; padding: 80px 20px 40px; color: #999; font-size: 0.9rem; }
+        .footer-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; }
+        .footer-logo { margin-bottom: 25px; height: 45px; filter: brightness(1.2); }
+        .footer-col h4 { color: #fff; margin-bottom: 25px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 15px; }
+        .footer-links a { color: #666; text-decoration: none; transition: 0.3s ease; display: flex; align-items: center; gap: 10px; }
+        .footer-links a:hover { color: #fff; transform: translateX(10px); }
+        .footer-links a i { font-size: 0.7rem; color: var(--cor-destaque); opacity: 0.5; }
+        .payment-methods { display: flex; gap: 20px; font-size: 2.2rem; margin-top: 25px; color: #222; }
+
+        /* --- MODAL --- */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 100000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(15px); }
+        .modal-content { background: #0a0a0a; border: 1px solid #333; border-radius: 24px; width: 90%; max-width: 500px; padding: 50px 40px; text-align: center; position: relative; }
+        .modal-close-x { position: absolute; top: 20px; right: 20px; background: none; border: none; color: #444; font-size: 2rem; cursor: pointer; transition: 0.3s; line-height: 1; }
+        .modal-close-x:hover { color: #fff; transform: rotate(90deg); }
+        .btn-modal-buy { background: #25d366; color: #000; border: none; padding: 18px; width: 100%; border-radius: 12px; font-weight: 900; font-size: 1.1rem; cursor: pointer; margin-top: 20px; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3); }
+
+        /* --- CHATBOT --- */
+        .wa-widget { position: fixed; bottom: 85px; right: 20px; width: 340px; background: var(--wa-bg); border-radius: 15px; z-index: 9999; transform: scale(0); transform-origin: bottom right; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 15px 50px rgba(0,0,0,0.7); }
+        .wa-widget.active { transform: scale(1); }
+        .wa-header { background: var(--wa-header); color: white; padding: 15px; display: flex; align-items: center; justify-content: space-between; }
+        .wa-profile { display: flex; align-items: center; gap: 10px; }
+        .wa-profile img { width: 38px; height: 38px; border-radius: 50%; background: #eee; }
+        .wa-chat-body { height: 350px; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png'); background-size: contain; }
+        .wa-msg { max-width: 85%; padding: 12px 16px; border-radius: 12px; font-size: 0.88rem; box-shadow: 0 1px 1px rgba(0,0,0,0.1); color: #333; background: white; border-top-left-radius: 0; align-self: flex-start; }
+        .wa-options { padding: 12px; background: #f0f0f0; border-top: 1px solid #ddd; display: flex; flex-direction: column; gap: 8px; }
+        .wa-options button { background: white; border: 1px solid #ddd; padding: 10px; border-radius: 20px; font-size: 0.85rem; color: #075e54; font-weight: 600; cursor: pointer; }
+        .float-zap { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; width: 65px; height: 65px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; z-index: 10000; cursor: pointer; box-shadow: 0 10px 30px rgba(37,211,102,0.4); }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2rem; }
+            .nav-links { display: none; }
+            .pricing-grid { flex-direction: column; align-items: center; }
+            .price-card.destaque { transform: scale(1); }
+            .footer-container { grid-template-columns: 1fr; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="../index.html" class="logo">
+            <img src="https://unitvnew.shop/img/logo-unitv.png" alt="UniTV Oficial">
+        </a>
+        <nav class="nav-links">
+            <a href="../index.html">Página Inicial</a>
+            <a href="../baixar/index.html">Downloads</a>
+            <a href="../tv-box/index.html">Guia TV Box</a>
+            <a href="../blog/index.html">Blog Oficial</a>
+        </nav>
+        <a href="#comprar" class="btn-header">COMPRAR VIP</a>
+    </header>
+
+    <section class="speed-hero reveal">
+        <span class="badge">Diagnóstico de Rede 2026</span>
+        <h1>Sua internet aguenta <br><span class="text-gradient">UniTV em 4K Real?</span></h1>
+        
+        <div class="gauge-container">
+            <div id="status-text" style="color: #666; font-weight: 800;">PRONTO PARA TESTE</div>
+            <div class="gauge-val" id="speed-val">0</div>
+            <div class="gauge-unit">MBPS</div>
+        </div>
+
+        <button class="btn-test" id="start-btn" onclick="runSpeedTest()">INICIAR TESTE AGORA</button>
+
+        <div class="diag-grid">
+            <div class="diag-item">
+                <label>Latência (Ping)</label>
+                <span id="ping-val">--</span> <small>ms</small>
+            </div>
+            <div class="diag-item">
+                <label>Jitter</label>
+                <span id="jitter-val">--</span> <small>ms</small>
+            </div>
+            <div class="diag-item">
+                <label>Estabilidade</label>
+                <span id="stable-val">--</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section reveal">
+        <h2 class="section-title">Requisitos Mínimos UniTV VIP</h2>
+        <div class="requirements-grid">
+            <div class="req-card">
+                <i class="fa-solid fa-gauge-high"></i>
+                <h3>Canais SD</h3>
+                <p>Mínimo de <strong>5 Mbps</strong> estáveis. Ideal para conexões móveis ou rurais.</p>
+            </div>
+            <div class="req-card">
+                <i class="fa-solid fa-tv"></i>
+                <h3>Canais HD/Full HD</h3>
+                <p>Mínimo de <strong>12 Mbps</strong>. Qualidade cristalina sem buffering.</p>
+            </div>
+            <div class="req-card">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <h3>Cinema 4K VOD</h3>
+                <p>Mínimo de <strong>25 Mbps</strong>. Para extrair o máximo do codec H.265 exclusivo.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION PRICING -->
+    <section id="comprar" class="pricing-section reveal">
+        <h2 style="font-size: 3rem; font-weight: 900; color: #fff;">Sua Conexão é boa? Seja VIP!</h2>
+        <p style="color: #666;">Aproveite nossa infraestrutura CDN mundial para sinal estável.</p>
+        
+        <div class="pricing-grid">
+            <div class="price-card">
+                <div class="price-header">
+                    <h3 class="price-title">Recarga Mensal</h3>
+                    <div class="price-val">R$ 24,90</div>
+                </div>
+                <ul class="features-list" style="list-style:none; text-align:left; margin-bottom: 30px;">
+                    <li><i class="fa-solid fa-check"></i> Liberação Automática</li>
+                    <li><i class="fa-solid fa-check"></i> 2 Telas VIP</li>
+                    <li><i class="fa-solid fa-check"></i> 4K Ultra HD</li>
+                </ul>
+                <a href="javascript:void(0)" onclick="openWarningModal('https://pay.kirvano.com/07f96a4e-ecdf-4538-83ca-01e5c35f1425')" class="btn-price">ATIVAR AGORA</a>
+            </div>
+
+            <div class="price-card destaque">
+                <div class="economy-tag">🔥 RECOMENDADO - ECONOMIZE R$ 100 HOJE</div>
+                <div class="price-header">
+                    <h3 class="price-title" style="color: var(--cor-destaque);">Anual VIP Premium</h3>
+                    <div class="price-val">R$ 189,90</div>
+                </div>
+                <ul class="features-list" style="list-style:none; text-align:left; margin-bottom: 30px;">
+                    <li><i class="fa-solid fa-star" style="color: #ffcc00"></i> 365 Dias de Acesso</li>
+                    <li><i class="fa-solid fa-check"></i> Garantia Anti-Travamento</li>
+                    <li><i class="fa-solid fa-check"></i> Suporte Prioritário 24h</li>
+                </ul>
+                <a href="javascript:void(0)" onclick="openWarningModal('https://pay.kirvano.com/0aadf253-f4b6-47dd-8d0a-f5f16714ce98')" class="btn-price">PEGAR PROMOÇÃO</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER OFICIAL -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <img src="https://unitvnew.shop/img/logo-unitv.png" alt="UniTV" class="footer-logo">
+                <p>Revenda Oficial UniTV Brasil. Tecnologia e entretenimento de elite com segurança total para sua família.</p>
+                <div style="color: #00ff88; font-size: 0.8rem; margin-top: 15px; display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-shield-halved"></i> Site 100% Protegido</div>
+            </div>
+            <div class="footer-col">
+                <h4>Navegação VIP</h4>
+                <ul class="footer-links">
+                    <li><a href="../index.html"><i class="fa-solid fa-chevron-right"></i> Home Page</a></li>
+                    <li><a href="../baixar/index.html"><i class="fa-solid fa-chevron-right"></i> Downloads</a></li>
+                    <li><a href="../tv-box/index.html"><i class="fa-solid fa-chevron-right"></i> Guia TV Box</a></li>
+                    <li><a href="../blog/index.html"><i class="fa-solid fa-chevron-right"></i> Blog Oficial</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Suporte</h4>
+                <ul class="footer-links">
+                    <li><a href="../ajuda/index.html"><i class="fa-solid fa-chevron-right"></i> Ajuda & Erros</a></li>
+                    <li><a href="javascript:void(0)" onclick="toggleChat()"><i class="fa-solid fa-chevron-right"></i> Chat Online</a></li>
+                    <li><a href="https://wa.me/5519981765840" target="_blank"><i class="fa-solid fa-chevron-right"></i> WhatsApp Oficial</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Pagamento Pix</h4>
+                <div class="payment-methods">
+                    <i class="fa-brands fa-pix" style="color:#32bcad;"></i>
+                    <i class="fa-brands fa-cc-mastercard"></i>
+                    <i class="fa-brands fa-cc-visa"></i>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 60px; padding-top: 20px; border-top: 1px solid #111; font-size: 0.75rem; color: #444;">
+            &copy; 2024 UniTV Revenda Oficial. CNPJ: 00.000.000/0001-00
+        </div>
+    </footer>
+
+    <!-- WIDGETS -->
+    <div id="smartTvModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close-x" onclick="closeWarningModal()">×</button>
+            <i class="fa-solid fa-triangle-exclamation" style="color: #ffcc00; font-size: 3.5rem; margin-bottom: 20px;"></i>
+            <h3 style="color: #fff; font-size: 1.5rem; margin-bottom: 15px; font-weight: 900;">APP SÓ PARA ANDROID!</h3>
+            <p style="color: #888; font-size: 0.95rem;">O UniTV VIP funciona exclusivamente em dispositivos <strong>ANDROID</strong>.</p>
+            <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; text-align: left; margin: 20px 0;">
+                <p style="color: #fff; font-weight: 700;">Sua TV é LG ou Samsung?</p>
+                <p style="font-size: 0.8rem; color: #aaa; margin-top: 5px;">Se sim, não compre esta recarga. Temos outros apps para sua TV. Chame no suporte!</p>
+            </div>
+            <button class="btn-modal-buy" onclick="proceedToCheckout()">MEU APARELHO É ANDROID</button>
+        </div>
+    </div>
+
+    <!-- CHATBOT PADRÃO -->
+    <div id="chat-widget" class="wa-widget">
+        <div class="wa-header">
+            <div class="wa-profile">
+                <img src="../img/logo-unitv.png" alt="UniTV">
+                <div class="wa-info">
+                    <span class="wa-name">Suporte UniTV</span>
+                    <span class="wa-status">Online</span>
+                </div>
+            </div>
+            <button onclick="toggleChat()" class="wa-close">×</button>
+        </div>
+        <div id="chat-content" class="wa-chat-body">
+            <div class="wa-msg wa-msg-bot">Olá! 👋 Sua internet deu boa no teste? Quer saber como otimizar o UniTV no seu aparelho?</div>
+        </div>
+        <div id="wa-options" class="wa-options">
+            <button onclick="userAction('Como otimizar?', 'otimizar')">Como otimizar?</button>
+            <button onclick="userAction('Planos VIP', 'preco')">Ver Planos VIP</button>
+            <button onclick="userAction('Ajuda Técnica', 'ajuda')">Ajuda Técnica</button>
+        </div>
+    </div>
+
+    <div class="float-zap" onclick="toggleChat()"><i class="fa-brands fa-whatsapp"></i></div>
+
+    <script>
+        // LÓGICA DO TESTE DE VELOCIDADE (SIMULADO COM PRECISÃO)
+        function runSpeedTest() {
+            const btn = document.getElementById('start-btn');
+            const speedVal = document.getElementById('speed-val');
+            const status = document.getElementById('status-text');
+            const pingVal = document.getElementById('ping-val');
+            const jitterVal = document.getElementById('jitter-val');
+            const stableVal = document.getElementById('stable-val');
+
+            btn.disabled = true;
+            status.innerText = "VERIFICANDO LATÊNCIA...";
+            status.style.color = "var(--cor-destaque)";
+
+            // Simulação progressiva para credibilidade
+            let count = 0;
+            const interval = setInterval(() => {
+                let randomSpeed = (Math.random() * 50 + 10).toFixed(1);
+                speedVal.innerText = randomSpeed;
+                count++;
+
+                if(count > 40) {
+                    clearInterval(interval);
+                    finalizeTest();
+                }
+            }, 100);
+
+            function finalizeTest() {
+                // Resultados baseados em uma média realista do usuário
+                const finalSpeed = (Math.random() * 80 + 20).toFixed(1);
+                const ping = Math.floor(Math.random() * 30 + 5);
+                const jitter = Math.floor(Math.random() * 10 + 2);
+
+                speedVal.innerText = finalSpeed;
+                speedVal.style.color = "#00ff88";
+                pingVal.innerText = ping;
+                jitterVal.innerText = jitter;
+                stableVal.innerText = "99.8%";
+                stableVal.style.color = "#00ff88";
+
+                status.innerText = "TESTE CONCLUÍDO";
+                status.style.color = "#00ff88";
+                btn.innerText = "REPETIR TESTE";
+                btn.disabled = false;
+
+                // Gatilho de conversão
+                setTimeout(() => {
+                    alertUser(`Sua conexão de ${finalSpeed} Mbps é PERFEITA para o UniTV 4K! Aproveite nossa oferta VIP abaixo.`);
+                }, 1000);
+            }
+        }
+
+        function alertUser(msg) {
+            console.log(msg); // Aqui você pode abrir um modal de parabéns
+        }
+
+        // Reveal Animations
+        window.addEventListener('scroll', () => {
+            document.querySelectorAll('.reveal').forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add('active');
+            });
+        });
+
+        window.onload = () => { document.querySelector('.speed-hero').classList.add('active'); };
+
+        // Modais e Chat
+        let urlCheck = '';
+        function openWarningModal(url) { urlCheck = url; document.getElementById('smartTvModal').style.display = 'flex'; }
+        function closeWarningModal() { document.getElementById('smartTvModal').style.display = 'none'; }
+        function proceedToCheckout() { if(urlCheck) window.open(urlCheck, '_blank'); closeWarningModal(); }
+        function toggleChat() { document.getElementById('chat-widget').classList.toggle('active'); }
+
+        function userAction(text, type) {
+            const content = document.getElementById('chat-content');
+            content.innerHTML += `<div class="wa-msg wa-msg-user" style="align-self:flex-end; background:var(--wa-msg-user); border-top-right-radius:0;">${text}</div>`;
+            setTimeout(() => {
+                if(type === 'preco') content.innerHTML += `<div class="wa-msg wa-msg-bot">Planos: Mensal R$ 24,90 | Anual R$ 189,90. Entrega imediata!</div>`;
+                if(type === 'otimizar') content.innerHTML += `<div class="wa-msg wa-msg-bot">Use cabo de rede em vez de Wi-Fi para ter 100% de estabilidade no 4K!</div>`;
+                if(type === 'ajuda') content.innerHTML += `<div class="wa-msg wa-msg-bot">Me chame no WhatsApp para um suporte técnico personalizado!</div>`;
+                content.scrollTop = content.scrollHeight;
+            }, 800);
+        }
+    </script>
+</body>
+</html>
