@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Comprar Recarga UniTV Mensal Oficial | Envio Imediato 30 Dias</title>
-    <meta name="description" content="Adquira sua Recarga UniTV Oficial Mensal (30 Dias) por apenas R$ 24,90. Envio automático do código de 16 dígitos via WhatsApp e E-mail. Sem travamentos em 4K.">
+    <meta name="description" content="Adquira sua Recarga UniTV Oficial Mensal (30 Dias) por apenas R$ 24,90. Envio automático do código VIP via WhatsApp. Assista em 4K sem fidelidade.">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -17,14 +17,14 @@
       "@type": "Product",
       "name": "Recarga UniTV Oficial Mensal - 30 Dias",
       "image": "https://unitvnew.shop/img/logo-unitv.png",
-      "description": "Plano de 30 dias do aplicativo UniTV Oficial. Acesso a canais ao vivo, VOD, filmes e séries em qualidade 4K. Envio instantâneo via WhatsApp.",
+      "description": "Plano Mensal (30 dias) do aplicativo UniTV Oficial. Acesso a canais ao vivo, VOD, filmes e séries em qualidade 4K. Sem fidelidade e envio instantâneo via WhatsApp.",
       "brand": {
         "@type": "Brand",
         "name": "UniTV"
       },
       "offers": {
         "@type": "Offer",
-        "url": "https://unitvnew.shop/plano-mensal",
+        "url": "https://unitvnew.shop/recarga-mensal",
         "priceCurrency": "BRL",
         "price": "24.90",
         "priceValidUntil": "2026-12-31",
@@ -49,18 +49,18 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "Como recebo a minha recarga mensal do UniTV?",
+          "name": "O plano mensal do UniTV renova sozinho?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "O envio é 100% automático. Assim que o Pix for aprovado, o código de 16 dígitos aparece na sua tela e é enviado instantaneamente para o seu WhatsApp e E-mail."
+            "text": "Não! A nossa recarga é pré-paga e sem fidelidade. Você compra os 30 dias e usa. Não faremos cobranças automáticas no seu cartão."
           }
         },
         {
           "@type": "Question",
-          "name": "O plano mensal tem fidelidade ou renovação automática?",
+          "name": "Como recebo o meu código mensal?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Não! A nossa recarga é pré-paga. Você compra os 30 dias e usa. Não faremos cobranças automáticas no seu cartão. Você só renova quando quiser."
+            "text": "O envio é imediato. Assim que o Pix for aprovado, o código de 16 dígitos é enviado automaticamente para o seu WhatsApp e E-mail."
           }
         }
       ]
@@ -106,14 +106,20 @@
         nav a { color: #bbb; text-decoration: none; font-size: 0.85rem; font-weight: 500; text-transform: uppercase; transition: 0.3s; }
         nav a:hover, nav a.active { color: var(--cor-destaque); }
         .header-actions { display: flex; align-items: center; gap: 15px; }
+        
+        .btn-header { background: rgba(255, 255, 255, 0.1); color: white; padding: 8px 20px; border-radius: 6px; text-decoration: none; font-size: 0.8rem; font-weight: 600; border: 1px solid rgba(255,255,255,0.1); transition: 0.3s;}
+        .btn-header:hover { background: #fff; color: #000; }
+        
         .menu-toggle { display: none; color: white; font-size: 1.6rem; cursor: pointer; }
 
-        /* --- PRODUCT HERO (BUY BOX) --- */
+        /* --- PRODUCT HERO (BUY BOX MENSAL) --- */
         .product-hero { padding: 60px 5% 80px; background: radial-gradient(circle at 70% 30%, #1a0525 0%, #050505 60%); display: flex; justify-content: center; border-bottom: 1px solid #111; }
         .product-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; max-width: 1100px; margin: 0 auto; align-items: center; }
         .product-image-container { position: relative; padding: 20px; background: rgba(255,255,255,0.02); border: var(--borda-sutil); border-radius: 20px; text-align: center; }
         .product-image-container img { width: 100%; max-width: 400px; filter: drop-shadow(0 20px 40px rgba(255, 0, 128, 0.2)); animation: float 6s ease-in-out infinite; }
-        .product-badge { position: absolute; top: -15px; left: -15px; background: var(--gradiente-premium); color: white; font-weight: 800; padding: 15px 20px; border-radius: 50%; font-size: 1.2rem; transform: rotate(-10deg); box-shadow: 0 10px 20px rgba(221, 36, 118, 0.4); border: 4px solid #050505; }
+        
+        /* Badge alterada para mensal */
+        .product-badge { position: absolute; top: -15px; left: -15px; background: #ff0080; color: white; font-weight: 800; padding: 15px 20px; border-radius: 50%; font-size: 1.1rem; transform: rotate(-10deg); box-shadow: 0 10px 20px rgba(255, 0, 128, 0.4); border: 4px solid #050505; text-align: center; line-height: 1.2; }
         
         .product-info { text-align: left; }
         .product-category { color: var(--cor-destaque); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; margin-bottom: 10px; display: block; }
@@ -121,7 +127,8 @@
         .product-rating { display: flex; align-items: center; gap: 10px; color: #ffcc00; font-size: 1rem; margin-bottom: 25px; }
         .product-rating span { color: #888; font-size: 0.9rem; }
         
-        .product-price-box { background: #0a0a0a; border: 1px solid #222; padding: 25px; border-radius: 16px; margin-bottom: 30px; box-shadow: inset 0 0 30px rgba(0,0,0,0.5); }
+        .product-price-box { background: #0a0a0a; border: 1px solid #222; padding: 25px; border-radius: 16px; margin-bottom: 30px; box-shadow: inset 0 0 30px rgba(0,0,0,0.5); position: relative; overflow: hidden; }
+        .product-price-box::after { content: ''; position: absolute; top: 0; right: 0; width: 100px; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,0,128,0.1)); transform: skewX(-20deg); }
         .price-current { font-size: 3.5rem; font-weight: 800; color: #fff; line-height: 1; display: flex; align-items: baseline; gap: 8px; }
         .price-current span { font-size: 1.2rem; color: #888; font-weight: 500; }
         .price-old { color: #555; text-decoration: line-through; font-size: 1.2rem; display: block; margin-bottom: 5px; }
@@ -130,8 +137,12 @@
         .product-features li { margin-bottom: 12px; display: flex; align-items: center; gap: 12px; color: #ccc; font-size: 1.05rem; }
         .product-features i { color: #00ff88; font-size: 1.2rem; }
         
-        .btn-buy-huge { background: var(--gradiente-premium); color: white; padding: 20px; border-radius: 12px; font-size: 1.3rem; font-weight: 800; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 15px; transition: 0.4s; box-shadow: 0 10px 40px -10px rgba(221, 36, 118, 0.6); text-transform: uppercase; width: 100%; border: none; cursor: pointer; }
+        .buy-actions { display: flex; flex-direction: column; gap: 15px; }
+        .btn-buy-huge { background: var(--gradiente-premium); color: white; padding: 20px; border-radius: 12px; font-size: 1.2rem; font-weight: 800; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 15px; transition: 0.4s; box-shadow: 0 10px 40px -10px rgba(221, 36, 118, 0.6); text-transform: uppercase; width: 100%; border: none; cursor: pointer; }
         .btn-buy-huge:hover { transform: translateY(-5px); box-shadow: 0 20px 50px -10px rgba(221, 36, 118, 0.8); }
+        .btn-tutorial { background: transparent; color: #fff; border: 1px solid #444; padding: 15px; border-radius: 12px; font-size: 0.95rem; font-weight: 600; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.3s; }
+        .btn-tutorial:hover { background: #222; border-color: #666; }
+
         .delivery-info { display: flex; justify-content: space-between; margin-top: 15px; color: #666; font-size: 0.85rem; font-weight: 500; }
         .delivery-info i { color: #32bcad; }
 
@@ -292,7 +303,7 @@
 
     <div class="top-bars-container">
         <div class="promo-bar">
-            🔥 OFERTA RELÂMPAGO: Receba seu código no WhatsApp na mesma hora!
+            🔥 OFERTA: Liberação Imediata via Pix! Sem mensalidade automática.
         </div>
         <div class="brand-alert">
             <i class="fa-solid fa-shield-check"></i> 
@@ -315,60 +326,68 @@
         </nav>
         
         <div class="header-actions">
-            <a href="#comprar" class="btn-header">Ver Planos</a>
+            <!-- Botão Ver Planos Estilizado Corretamente direcionando para o início -->
+            <a href="/#comprar" class="btn-header"><i class="fa-solid fa-tags"></i> Ver Planos</a>
             <div class="menu-toggle" onclick="toggleMenu()">
                 <i class="fa-solid fa-bars" id="menu-icon"></i>
             </div>
         </div>
     </header>
 
-    <!-- PRODUCT HERO (BUY BOX FOCADA EM CONVERSÃO) -->
-    <section class="product-hero">
+    <!-- PRODUCT HERO (BUY BOX FOCADA EM CONVERSÃO - MENSAL) -->
+    <section class="product-hero" id="comprar">
         <div class="product-grid">
             <div class="product-image-container">
-                <div class="product-badge">30 DIAS</div>
-                <img src="/img/hero-tv.png" alt="Recarga UniTV Mensal rodando na TV e no Celular">
+                <div class="product-badge" style="background: #ff0080; color: #fff;">30<br>DIAS</div>
+                <img src="/img/hero-tv.png" alt="Recarga UniTV Mensal rodando na TV Box">
                 
                 <!-- Micro Reviews embaixo da imagem -->
                 <div class="reviews-compact">
                     <div class="review-card">
                         <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                        <p>"Comprei o mensal pra testar e me surpreendi. Não travou nada no jogo do São Paulo."</p>
+                        <p>"Comprei o mensal pra testar e me surpreendi. Não travou absolutamente nada no jogo de domingo."</p>
                         <h5>Lucas M. <span>✓ Verificado</span></h5>
                     </div>
                     <div class="review-card">
                         <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                        <p>"Código chegou no meu zap em 10 segundos. Muito prático!"</p>
+                        <p>"O código chegou no meu zap em menos de 10 segundos. Muito prático não ter fidelidade."</p>
                         <h5>Ana Beatriz <span>✓ Verificado</span></h5>
                     </div>
                 </div>
             </div>
             
             <div class="product-info">
-                <span class="product-category"><i class="fa-solid fa-bolt"></i> Envio 100% Automático</span>
+                <span class="product-category"><i class="fa-solid fa-bolt"></i> Ideal para Testar</span>
                 <h1>Recarga Oficial UniTV<br><span class="text-gradient">Plano Mensal (30 Dias)</span></h1>
                 
                 <div class="product-rating">
-                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                     <span>4.9/5 (1.845 avaliações)</span>
                 </div>
                 
                 <div class="product-price-box">
                     <span class="price-old">De R$ 30,00 por:</span>
                     <div class="price-current">R$ 24<span>,90</span></div>
-                    <p style="color: #00ff88; font-size: 0.85rem; margin-top: 5px; font-weight: 600;"><i class="fa-solid fa-check"></i> Sem fidelidade. Pague via Pix.</p>
+                    <p style="color: #00ff88; font-size: 0.9rem; margin-top: 5px; font-weight: 600;"><i class="fa-solid fa-check"></i> Sem fidelidade. Renovação manual apenas quando você quiser.</p>
                 </div>
                 
                 <ul class="product-features">
-                    <li><i class="fa-solid fa-mobile-screen"></i> Acesso em 2 Telas Simultâneas</li>
-                    <li><i class="fa-solid fa-tv"></i> Todos os canais em 4K, FHD e HD</li>
-                    <li><i class="fa-solid fa-film"></i> Catálogo completo de Filmes e Séries (VOD)</li>
-                    <li><i class="fa-solid fa-clock-rotate-left"></i> Playback (Volte a programação em até 7 dias)</li>
+                    <li><i class="fa-solid fa-unlock"></i> Acesso Liberado e Contínuo por 30 Dias</li>
+                    <li><i class="fa-solid fa-mobile-screen"></i> Pacote VIP: 2 Telas Simultâneas Inclusas</li>
+                    <li><i class="fa-solid fa-ban"></i> Sem amarras, sem cobranças automáticas</li>
+                    <li><i class="fa-solid fa-headset"></i> Suporte Técnico VIP no WhatsApp</li>
                 </ul>
                 
-                <a href="javascript:void(0)" onclick="openWarningModal('https://pay.kirvano.com/07f96a4e-ecdf-4538-83ca-01e5c35f1425')" class="btn-buy-huge">
-                    <i class="fa-solid fa-cart-shopping"></i> COMPRAR RECARGA MENSAL
-                </a>
+                <div class="buy-actions">
+                    <a href="javascript:void(0)" onclick="openWarningModal('https://pay.kirvano.com/07f96a4e-ecdf-4538-83ca-01e5c35f1425')" class="btn-buy-huge">
+                        <i class="fa-solid fa-cart-shopping"></i> GARANTIR ACESSO MENSAL
+                    </a>
+                    
+                    <!-- BOTÃO ESTILIZADO DE TUTORIAL AQUI -->
+                    <a href="/tutorial" class="btn-tutorial">
+                        <i class="fa-solid fa-book-open"></i> Quero ver o Tutorial de Instalação primeiro
+                    </a>
+                </div>
                 
                 <div class="delivery-info">
                     <span><i class="fa-brands fa-whatsapp"></i> Código enviado no WhatsApp</span>
@@ -381,115 +400,95 @@
     <!-- SEO BÍBLIA 1: COMO FUNCIONA O PRODUTO -->
     <section class="seo-section">
         <div class="seo-container">
-            <h2>O que é a Recarga UniTV Oficial Mensal?</h2>
-            <p>A <strong>Recarga Mensal UniTV</strong> é a porta de entrada perfeita para você descobrir a qualidade da maior plataforma de streaming e canais da América Latina. Diferente dos pacotes anuais, o plano de 30 dias foi desenhado para quem deseja <strong>testar a excelência do nosso ecossistema de entretenimento</strong> sem nenhum compromisso de longo prazo ou fidelidade.</p>
+            <h2>Por que escolher a Recarga Mensal UniTV?</h2>
+            <p>A <strong>Recarga Mensal UniTV</strong> é a porta de entrada perfeita para você descobrir a qualidade da maior plataforma de streaming e canais da América Latina. Diferente dos pacotes anuais, o plano de 30 dias foi desenhado para quem deseja <strong>testar a excelência do nosso ecossistema de entretenimento</strong> sem nenhum compromisso de longo prazo ou contrato abusivo.</p>
             
-            <p>Ao realizar a compra do seu código oficial na nossa revenda, você tem a garantia de não passar por dores de cabeça com cobranças indevidas no seu cartão de crédito. É um serviço 100% pré-pago. <strong>Acabaram os 30 dias? O serviço pausa. Você só renova se quiser e quando quiser.</strong></p>
+            <p>Ao realizar a compra do seu código oficial na nossa revenda, você tem a garantia de não passar por dores de cabeça com cobranças indevidas no seu cartão de crédito. Trata-se de um serviço 100% pré-pago. <strong>Terminaram os 30 dias? O seu acesso é simplesmente suspenso. Você só adquire uma nova recarga quando e se quiser continuar.</strong></p>
             
             <div class="info-grid">
                 <div class="info-box">
                     <h4><i class="fa-solid fa-rocket"></i> Liberação Instantânea</h4>
-                    <p>O nosso sistema é integrado diretamente com o gateway de pagamento. Pagou via Pix? O nosso robô identifica em milissegundos e envia o seu código de 16 dígitos <strong>direto no seu WhatsApp</strong>. Nada de esperar horas para um atendente responder.</p>
+                    <p>O nosso sistema inteligente é integrado diretamente ao processador de pagamentos. Efetuou o pagamento via Pix? O robô identifica em milissegundos e envia o seu código de 16 dígitos <strong>diretamente no seu WhatsApp</strong>. Sem esperas chatas.</p>
                 </div>
                 <div class="info-box">
-                    <h4><i class="fa-solid fa-shield-halved"></i> Sem Travamentos (Anti-Block)</h4>
-                    <p>Esqueça aquelas listas de IPTV gratuitas que travam a cada 5 segundos no dia do jogo do seu time. O UniTV Oficial roda em servidores dedicados com rotas P2P, garantindo qualidade 4K em dias de alta demanda, como no Brasileirão ou UFC.</p>
+                    <h4><i class="fa-solid fa-shield-halved"></i> Tecnologia Anti-Block</h4>
+                    <p>Esqueça de vez aquelas listas IPTV gratuitas que congelam a imagem nos momentos decisivos. O aplicativo UniTV Oficial roda em servidores robustos e privados com tecnologia P2P, garantindo estabilidade invejável em transmissões 4K.</p>
                 </div>
             </div>
 
-            <h3><i class="fa-solid fa-box-open"></i> O que está incluso no seu Plano Mensal?</h3>
-            <p>Apesar de ser o plano mais barato, a Recarga Mensal entrega <strong>100% das funcionalidades VIP</strong> do nosso aplicativo. Não cortamos nada. Você terá acesso imediato à grade completa com todos os canais abertos, fechados, de esportes, documentários e infantis.</p>
-            <p>Além da TV ao vivo, o seu código desbloqueia o nosso <strong>Catálogo VOD (Video On Demand)</strong>, uma biblioteca colossal com dezenas de milhares de filmes e séries, atualizados semanalmente com os lançamentos de todas as plataformas famosas (como Netflix, Prime Video e Max) — tudo no mesmo lugar e numa interface lindíssima, idêntica à das grandes empresas.</p>
+            <h3><i class="fa-solid fa-cubes"></i> Pacote Completo, Sem Limitações</h3>
+            <p>Apesar de ser o nosso plano mais acessível, a Recarga Mensal desbloqueia absolutamente tudo. Não há cortes. Você terá acesso imediato à totalidade da grade: desporto ao vivo, notícias, documentários e os canais mais cobiçados.</p>
         </div>
     </section>
 
     <!-- COMO FUNCIONA (VISUAL) -->
     <section style="padding: 80px 20px; background: #080808;">
         <div style="max-width: 1000px; margin: 0 auto;">
-            <h2 class="section-title">Como ativar seus 30 dias?</h2>
+            <h2 class="section-title">Como ativar o seu mês?</h2>
             <div class="steps-wrapper">
                 <div class="step-item">
-                    <div class="step-icon"><i class="fa-solid fa-mobile-button"></i></div>
-                    <h4>1. Faça o Pedido</h4>
-                    <p>Clique no botão de compra e preencha seus dados reais (E-mail e WhatsApp) de forma 100% segura.</p>
+                    <div class="step-icon"><i class="fa-solid fa-credit-card"></i></div>
+                    <h4>1. Conclua o Pagamento</h4>
+                    <p>Ao clicar em comprar, coloque os seus dados de forma segura (Atenção ao WhatsApp e Email!).</p>
                 </div>
                 <div class="step-item">
                     <div class="step-icon"><i class="fa-brands fa-whatsapp"></i></div>
-                    <h4>2. Receba o Código</h4>
-                    <p>Faça o pagamento via Pix. O código de acesso aparecerá na sua tela e no seu celular na mesma hora.</p>
+                    <h4>2. Receba Instantaneamente</h4>
+                    <p>Sem filas. Após o Pix, o seu código oficial cai de imediato no telemóvel e na sua caixa de e-mail.</p>
                 </div>
                 <div class="step-item">
-                    <div class="step-icon"><i class="fa-solid fa-tv"></i></div>
-                    <h4>3. Insira no App</h4>
-                    <p>Abra o UniTV na sua TV Box ou Celular Android, vá em "Recarga" e digite os números. Pronto!</p>
+                    <div class="step-icon"><i class="fa-solid fa-couch"></i></div>
+                    <h4>3. Cole no Aplicativo</h4>
+                    <p>Aceda à aba "Recarga" no seu UniTV, introduza os 16 números e comece a maratona!</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SEO BÍBLIA 2: TECNOLOGIA E DISPOSITIVOS -->
-    <section class="seo-section" style="background: #020202;">
-        <div class="seo-container">
-            <h2>Por que escolher a versão oficial?</h2>
-            <p>Com o avanço da tecnologia, surgiram inúmeros sites e revendedores piratas (como o UnitvNet e listas aleatórias). A instalação de aplicativos adulterados pode causar sérios danos ao hardware da sua televisão ou <strong>TV Box</strong>, além de ser o principal motivo de "shadowbans" e bloqueios frequentes de IPs pelas operadoras de internet.</p>
-            
-            <p>A nossa revenda garante o fornecimento do software homologado. O <strong>Hardware do seu dispositivo</strong> irá trabalhar em harmonia com o nosso aplicativo, resultando numa interface fluida, sem delay na mudança de canais, e numa renderização de imagem 4K nativa livre de artefactos. Vendemos <strong>Estabilidade de Sinal</strong>, não apenas acesso.</p>
-
-            <h3><i class="fa-brands fa-android"></i> Compatibilidade do Aplicativo</h3>
-            <p>A arquitetura do UniTV foi desenhada para a família Android. Com o seu plano mensal de R$ 24,90, você pode utilizar a conta em:</p>
-            <ul style="color: #aaa; margin-left: 20px; margin-bottom: 20px; line-height: 1.8;">
-                <li><strong>TV Box e Android TV:</strong> A principal forma de uso. Transforma qualquer TV velha numa máquina poderosa.</li>
-                <li><strong>Amazon Fire TV Stick:</strong> Totalmente compatível após ativar a opção de fontes desconhecidas no aparelho.</li>
-                <li><strong>Smartphones Android:</strong> Assista no 4G/5G a caminho do trabalho ou numa viagem, com interface própria para o toque na tela.</li>
-            </ul>
-            <p>Se você possui uma Smart TV da LG ou Samsung, <a href="/tutorial">verifique nosso tutorial</a>, pois o aplicativo não é instalado diretamente nessas marcas, mas temos soluções oficiais e parceiras como o Ultra Player.</p>
-        </div>
-    </section>
-
     <!-- AVISO DE CONFIANÇA -->
-    <section style="padding: 0 20px;">
+    <section style="padding: 60px 20px 0;">
         <div class="guarantee-box">
             <i class="fa-solid fa-shield-halved"></i>
             <div class="guarantee-content">
-                <h4>Compra Protegida e Criptografada</h4>
-                <p>Nós utilizamos a Kirvano, um dos maiores gateways de pagamento do país. Os seus dados bancários não são armazenados no nosso site. A transação possui certificado SSL e a entrega é garantida pelo sistema de aprovação imediata.</p>
+                <h4>Compra Segura e Certificada</h4>
+                <p>Todo o processo financeiro é gerido pela Kirvano, com encriptação de ponta a ponta. Os seus dados estão seguros, a sua recarga é entregue automaticamente e a satisfação é o nosso compromisso número um.</p>
             </div>
         </div>
     </section>
 
     <!-- MEGA FAQ ESPECÍFICO DO PLANO MENSAL -->
     <section class="faq-section" id="faq">
-        <h2 class="section-title">Dúvidas sobre o Plano Mensal</h2>
+        <h2 class="section-title">Dúvidas Frequentes: Plano Mensal 30 Dias</h2>
         
         <div class="faq-container">
             <div class="faq-item">
-                <button class="faq-question">O Plano Mensal renova sozinho no cartão? <i class="fa-solid fa-chevron-down"></i></button>
+                <button class="faq-question">O Plano Mensal tem fidelidade ou renovação automática no cartão? <i class="fa-solid fa-chevron-down"></i></button>
                 <div class="faq-answer">
-                    <p>Fique tranquilo, <strong>não existe renovação automática</strong> nem fidelidade. A recarga de 30 dias é como colocar crédito num telemóvel pré-pago. Quando os dias acabarem, o acesso é suspenso, e você só compra um novo código no nosso site se quiser continuar a usar.</p>
+                    <p>Fique totalmente descansado, <strong>não existe renovação automática</strong> nem contratos de fidelidade. A recarga de 30 dias funciona como um saldo pré-pago. Findo o prazo, a conta pausa e só voltará a funcionar se você regressar ao nosso site e comprar uma nova recarga.</p>
                 </div>
             </div>
             <div class="faq-item">
-                <button class="faq-question">Quantas telas posso usar ao mesmo tempo no Plano Mensal? <i class="fa-solid fa-chevron-down"></i></button>
+                <button class="faq-question">Quantos aparelhos posso ligar com o Plano Mensal? <i class="fa-solid fa-chevron-down"></i></button>
                 <div class="faq-answer">
-                    <p>Tanto o plano Mensal quanto o Anual dão direito ao pacote VIP: <strong>2 telas em simultâneo</strong>. Isso significa que você pode configurar o UniTV na sua TV Box e no seu celular, usando a mesma conta ao mesmo tempo sem que um derrube o outro.</p>
+                    <p>A recarga oficial desbloqueia o pacote VIP em ambos os planos. Assim sendo, tem direito a <strong>2 ecrãs em simultâneo</strong>. Pode colocar na sua TV Box principal e, ao mesmo tempo, num smartphone Android, usando a mesma conta sem conflitos.</p>
                 </div>
             </div>
             <div class="faq-item">
-                <button class="faq-question">Se eu gostar, posso assinar o Anual depois? <i class="fa-solid fa-chevron-down"></i></button>
+                <button class="faq-question">Se eu gostar, posso migrar para o Plano Anual depois? <i class="fa-solid fa-chevron-down"></i></button>
                 <div class="faq-answer">
-                    <p>Com certeza! Muitos clientes compram o Plano Mensal (R$ 24,90) para testar a qualidade de imagem e a estabilidade. Depois que os 30 dias acabam, eles voltam ao nosso site e garantem a promoção do <strong>Anual VIP (R$ 189,90)</strong>, que oferece um desconto de mais de 100 reais no ano.</p>
+                    <p>Sem dúvida! A esmagadora maioria dos nossos clientes adquire o Plano Mensal (R$ 24,90) para comprovar a estabilidade do servidor P2P. Assim que termina, regressam e optam pelo nosso <strong>Anual VIP (R$ 189,90)</strong>, garantindo uma brutal poupança a longo prazo.</p>
                 </div>
             </div>
             <div class="faq-item">
-                <button class="faq-question">A validade dos 30 dias começa assim que eu pago? <i class="fa-solid fa-chevron-down"></i></button>
+                <button class="faq-question">A validade de 30 dias começa assim que faço o pagamento? <i class="fa-solid fa-chevron-down"></i></button>
                 <div class="faq-answer">
-                    <p>Não. Os 30 dias só começam a contar <strong>a partir do momento em que você digita o código na sua TV Box ou Celular</strong> e ativa o aplicativo. Ou seja, você pode comprar em promoção hoje e guardar o código para ativar no próximo final de semana.</p>
+                    <p>Não. O tempo de acesso só começa a descontar <strong>a partir do momento exato em que introduz o código no aplicativo</strong> e o sistema valida. Portanto, pode adquirir a sua recarga agora mesmo e ativá-la só na semana que vem, sem perder qualquer dia.</p>
                 </div>
             </div>
             <div class="faq-item">
-                <button class="faq-question">Onde insiro o código que chegou no WhatsApp? <i class="fa-solid fa-chevron-down"></i></button>
+                <button class="faq-question">Onde devo inserir os 16 números que recebi? <i class="fa-solid fa-chevron-down"></i></button>
                 <div class="faq-answer">
-                    <p>Basta abrir o aplicativo UniTV na sua televisão, navegar até o ícone de perfil (Minha Conta) e clicar na aba "Recarga" ou "Código de Recarga". Digite os 16 números e confirme. Pronto, seus 30 dias serão liberados imediatamente.</p>
+                    <p>Abra o UniTV na sua televisão ou telemóvel. Navegue até ao ícone do Perfil (Boneco no canto superior), selecione a opção "Recarga" ou "Código de Recarga", digite a chave que enviámos e clique em confirmar. É só isto!</p>
                 </div>
             </div>
         </div>
@@ -634,7 +633,7 @@
         function toggleChat() { document.getElementById('chat-widget').classList.toggle('active'); }
         function showTyping(callback) {
             const status = document.getElementById('wa-status'), typing = document.getElementById('typing-indicator'), content = document.getElementById('chat-content');
-            status.innerText = "Digitando..."; typing.style.display = "block"; content.appendChild(typing); content.scrollTop = content.scrollHeight;
+            status.innerText = "A escrever..."; typing.style.display = "block"; content.appendChild(typing); content.scrollTop = content.scrollHeight;
             setTimeout(() => { typing.style.display = "none"; status.innerText = "Online"; callback(); }, 1200);
         }
         function addMessage(text, side) {
@@ -673,7 +672,7 @@
                     addMessage("Ótimo. Abra o app, tire foto do código MAC na tela e me envie no WhatsApp humano para eu liberar seu acesso.", 'bot');
                     const btn = document.createElement('button'); btn.innerText = "ENVIAR FOTO DO MAC"; btn.style.background = "#25d366"; btn.style.color = "white"; btn.onclick = () => window.open("https://wa.me/5519981765840?text=Baixei o Ultra Player na Smart TV, foto do MAC:"); document.getElementById('wa-options').appendChild(btn);
                 } else if(type === 'suporte_humano') {
-                    addMessage("Certo, estou direcionando você para um especialista da equipe.", 'bot');
+                    addMessage("Certo, estou direcionando você para um especialista da equipa.", 'bot');
                     const btn = document.createElement('button'); btn.innerText = "Conversar no WhatsApp"; btn.style.background = "#25d366"; btn.style.color = "white"; btn.onclick = () => window.open("https://wa.me/5519981765840?text=Preciso de atendimento para fechar o plano mensal."); document.getElementById('wa-options').appendChild(btn);
                 } else if(type === 'reset') {
                     addMessage("Posso ajudar com mais alguma coisa?", 'bot'); 
