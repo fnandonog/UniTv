@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Status do Sistema - UniTV Oficial | Monitoramento em Tempo Real</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="img/logo-unitv.png" type="image/png">
+
+    <!-- INÍCIO DO CÓDIGO DE SEO (SCHEMA MARKUP PARA O GOOGLE) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "name": "Status do Sistema UniTV",
+          "description": "Página de monitoramento em tempo real dos servidores UniTV. Verifique a estabilidade dos canais, VOD e entrega de códigos.",
+          "breadcrumb": "Home > Status"
+        },
+        {
+          "@type": "Product",
+          "name": "Recarga UniTV Oficial",
+          "image": "img/logo-unitv.png",
+          "description": "Recarga oficial UniTV com entrega automática via WhatsApp e E-mail.",
+          "brand": { "@type": "Brand", "name": "UniTV" },
+          "offers": {
+            "@type": "AggregateOffer",
+            "lowPrice": "24.90",
+            "highPrice": "189.90",
+            "priceCurrency": "BRL"
+          }
+        }
+      ]
+    }
+    </script>
+    <!-- FIM DO CÓDIGO DE SEO -->
+
+    <style>
+        /* --- ESTILOS GERAIS (Baseados no seu index) --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        
+        :root {
+            --bg-body: #050505;
+            --bg-card: #0f0f0f;
+            --gradiente-premium: linear-gradient(135deg, #FF512F 0%, #DD2476 100%);
+            --gradiente-texto: linear-gradient(90deg, #ff8c00, #ff0080, #7928ca);
+            --borda-sutil: 1px solid rgba(255, 255, 255, 0.08);
+            --verde-live: #00ff88;
+            --wa-header: #075e54; --wa-bg: #e5ddd5; --wa-msg-user: #dcf8c6;
+            --cor-destaque: #ff0080;
+        }
+
+        body { background-color: var(--bg-body); color: #f0f0f0; line-height: 1.6; padding-top: 100px; }
+
+        /* --- BARRA DE PROMOÇÃO --- */
+        .promo-bar {
+            background: linear-gradient(90deg, #1a0b2e, #2d0b1e);
+            color: #e0e0e0; text-align: center; padding: 8px 10px; font-size: 0.85rem; font-weight: 500;
+            position: fixed; top: 0; width: 100%; z-index: 2000; border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* --- HEADER --- */
+        header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 10px 5%; position: fixed; width: 100%; top: 38px;
+            background: rgba(5, 5, 5, 0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            z-index: 1000; border-bottom: var(--borda-sutil); height: 60px;
+        }
+        .logo img { height: 32px; filter: brightness(1.1); }
+        nav ul { display: flex; list-style: none; gap: 25px; }
+        nav a { color: #bbb; text-decoration: none; font-size: 0.85rem; font-weight: 500; text-transform: uppercase; transition: 0.3s; }
+        nav a:hover, nav a.active { color: white; }
+        .btn-header { background: rgba(255, 255, 255, 0.1); color: white; padding: 6px 18px; border-radius: 4px; text-decoration: none; font-size: 0.75rem; font-weight: 600; }
+
+        /* --- STATUS HERO --- */
+        .status-hero { text-align: center; padding: 40px 20px; }
+        .status-indicator { display: inline-flex; align-items: center; gap: 10px; background: rgba(0, 255, 136, 0.1); color: var(--verde-live); padding: 10px 25px; border-radius: 50px; border: 1px solid rgba(0, 255, 136, 0.2); font-weight: 700; font-size: 0.9rem; margin-bottom: 20px; }
+        .status-indicator .pulse { width: 10px; height: 10px; background: var(--verde-live); border-radius: 50%; box-shadow: 0 0 10px var(--verde-live); animation: pulseStatus 2s infinite; }
+        @keyframes pulseStatus { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+
+        /* --- GRID DE STATUS --- */
+        .status-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+        .status-card { background: var(--bg-card); border: var(--borda-sutil); border-radius: 16px; padding: 30px; position: relative; }
+        .status-card h3 { font-size: 1.1rem; margin-bottom: 15px; color: #888; text-transform: uppercase; letter-spacing: 1px; }
+        .status-bar-container { height: 8px; background: #1a1a1a; border-radius: 10px; margin-bottom: 10px; overflow: hidden; }
+        .status-bar { height: 100%; background: var(--verde-live); width: 100%; box-shadow: 0 0 15px rgba(0, 255, 136, 0.3); }
+        .status-info { display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; }
+        .status-label { color: var(--verde-live); }
+
+        /* --- OPERATIONAL LOG --- */
+        .log-section { max-width: 1200px; margin: 0 auto 80px; padding: 0 20px; }
+        .log-table { width: 100%; background: var(--bg-card); border-radius: 16px; border: var(--borda-sutil); overflow: hidden; border-collapse: collapse; }
+        .log-table tr { border-bottom: 1px solid rgba(255,255,255,0.03); }
+        .log-table td { padding: 20px; font-size: 0.9rem; }
+        .log-table td:last-child { text-align: right; }
+        .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--verde-live); margin-right: 8px; }
+
+        /* --- PRICING SECTION --- */
+        .pricing-section { background: #020202; padding: 100px 20px; border-top: 1px solid #111; }
+        .pricing-grid { display: flex; justify-content: center; align-items: center; gap: 40px; max-width: 1000px; margin: 0 auto; flex-wrap: wrap; }
+        .price-card { background: #0a0a0a; border: 1px solid #222; border-radius: 20px; padding: 40px; width: 100%; max-width: 320px; position: relative; }
+        .price-card.destaque { border: 2px solid var(--cor-destaque); transform: scale(1.05); background: linear-gradient(160deg, #180a1f 0%, #050505 100%); }
+        .price-val { font-size: 2.8rem; font-weight: 800; color: white; }
+        .old-price { font-size: 1rem; color: #444; text-decoration: line-through; }
+        .btn-price { display: block; text-align: center; width: 100%; padding: 16px; border-radius: 12px; font-weight: 700; text-decoration: none; margin-top: 20px; }
+        .btn-price.glow { background: var(--gradiente-premium); color: white; }
+        .btn-price.normal { background: #222; color: white; }
+
+        /* --- CATALOG SLIDER --- */
+        .catalog-section { padding: 60px 20px; background: #050505; }
+        .movie-slider { display: flex; gap: 15px; overflow-x: auto; padding-bottom: 20px; }
+        .movie-card { flex: 0 0 150px; border-radius: 10px; overflow: hidden; background: #111; aspect-ratio: 2/3; }
+        .movie-card img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* --- FOOTER --- */
+        footer { background: #050505; border-top: 1px solid #111; padding: 60px 5% 30px; font-size: 0.85rem; color: #555; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto; }
+        .footer-col h4 { color: white; margin-bottom: 20px; }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 10px; }
+        .footer-links a { color: #777; text-decoration: none; }
+
+        /* --- WHATSAPP WIDGET --- */
+        .float-zap { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; z-index: 10000; cursor: pointer; }
+        .wa-widget { position: fixed; bottom: 85px; right: 20px; width: 340px; background: var(--wa-bg); border-radius: 12px; z-index: 9999; display: none; flex-direction: column; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .wa-widget.active { display: flex; }
+        .wa-header { background: var(--wa-header); color: white; padding: 15px; display: flex; align-items: center; justify-content: space-between; }
+        .wa-chat-body { height: 350px; padding: 15px; overflow-y: auto; background: #e5ddd5 url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png'); }
+        .wa-msg { background: white; padding: 8px 12px; border-radius: 8px; margin-bottom: 10px; font-size: 0.85rem; color: #333; max-width: 85%; }
+        .wa-options { padding: 10px; background: #f0f0f0; border-top: 1px solid #ddd; }
+        .wa-options button { width: 100%; padding: 10px; border-radius: 20px; border: 1px solid #ddd; margin-bottom: 5px; cursor: pointer; font-weight: 600; color: #075e54; }
+
+        /* --- POPUP COMPRAR --- */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 100000; display: none; justify-content: center; align-items: center; padding: 20px; }
+        .modal-overlay.active { display: flex; }
+        .modal-content { background: #111; border: 1px solid #333; border-radius: 20px; width: 100%; max-width: 450px; padding: 30px; text-align: center; position: relative; }
+        .modal-close { position: absolute; top: 15px; right: 15px; color: #666; font-size: 1.5rem; cursor: pointer; }
+        .btn-modal-buy { background: #25d366; color: #000; padding: 15px; border-radius: 10px; font-weight: 700; width: 100%; display: block; text-decoration: none; margin-top: 20px; }
+
+        @media (max-width: 768px) {
+            header nav { display: none; }
+            h1 { font-size: 1.8rem; }
+            .pricing-grid { flex-direction: column; }
+            .wa-widget { width: 90%; right: 5%; left: 5%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="promo-bar">
+        🔥 OFERTA DE HOJE: Recarga Anual com R$ 100 OFF! Encerra em: <span id="timer">04:59:00</span>
+    </div>
+
+    <header>
+        <div class="logo">
+            <a href="index.html"><img src="img/logo-unitv.png" alt="UniTV Oficial"></a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="index.html#download">Downloads</a></li>
+                <li><a href="faq.html">Ajuda</a></li>
+                <li><a href="#" class="active">Status</a></li>
+            </ul>
+        </nav>
+        <a href="javascript:void(0)" onclick="openBuyModal()" class="btn-header">Comprar</a>
+    </header>
+
+    <section class="status-hero">
+        <div class="status-indicator">
+            <div class="pulse"></div> SISTEMA OPERACIONAL
+        </div>
+        <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 10px;">Monitoramento UniTV</h1>
+        <p style="color: #888;">Nossos engenheiros monitoram a estabilidade do sinal 24h por dia para garantir a melhor experiência.</p>
+    </section>
+
+    <div class="status-grid">
+        <div class="status-card">
+            <h3>Canais Esportivos</h3>
+            <div class="status-bar-container"><div class="status-bar"></div></div>
+            <div class="status-info">
+                <span>Latência: 12ms</span>
+                <span class="status-label">100% OPERANTE</span>
+            </div>
+        </div>
+        <div class="status-card">
+            <h3>Servidor VOD (Filmes)</h3>
+            <div class="status-bar-container"><div class="status-bar" style="width: 98%"></div></div>
+            <div class="status-info">
+                <span>Uptime: 99.9%</span>
+                <span class="status-label">ESTÁVEL</span>
+            </div>
+        </div>
+        <div class="status-card">
+            <h3>Entrega de Códigos</h3>
+            <div class="status-bar-container"><div class="status-bar"></div></div>
+            <div class="status-info">
+                <span>Tempo Médio: 3s</span>
+                <span class="status-label">INSTANTÂNEA</span>
+            </div>
+        </div>
+    </div>
+
+    <section class="log-section">
+        <h2 style="margin-bottom: 30px; font-size: 1.2rem; color: #fff;">Status Detalhado por Serviço</h2>
+        <table class="log-table">
+            <tr>
+                <td><span class="status-dot"></span> Canais 4K Premium</td>
+                <td>Operante</td>
+            </tr>
+            <tr>
+                <td><span class="status-dot"></span> Catálogo de Séries (Netflix/HBO)</td>
+                <td>Operante</td>
+            </tr>
+            <tr>
+                <td><span class="status-dot"></span> Premiere & Combate (UFC)</td>
+                <td>Operante</td>
+            </tr>
+            <tr>
+                <td><span class="status-dot"></span> Servidor de Playback (7 Dias)</td>
+                <td>Operante</td>
+            </tr>
+            <tr>
+                <td><span class="status-dot"></span> Integração Pix Automática</td>
+                <td>Operante</td>
+            </tr>
+        </table>
+    </section>
+
+    <section class="catalog-section">
+        <div style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto 30px; padding: 0 20px;">
+            <h2 style="font-size: 1.2rem;">Atualizações do Catálogo VOD</h2>
+            <span style="background: var(--cor-destaque); font-size: 0.7rem; padding: 4px 10px; border-radius: 4px; font-weight: 700;">LIVE API</span>
+        </div>
+        <div class="movie-slider" id="status-movie-slider" style="max-width: 1200px; margin: 0 auto;">
+            <!-- Dinâmico -->
+        </div>
+    </section>
+
+    <section class="pricing-section">
+        <h2 style="text-align: center; margin-bottom: 50px;">Renove seu acesso agora</h2>
+        <div class="pricing-grid">
+            <div class="price-card">
+                <p style="color: #666; font-size: 0.8rem; text-transform: uppercase;">Acesso 30 Dias</p>
+                <div class="price-val"><span class="old-price">R$ 30,00</span><br>R$ 24,90</div>
+                <ul style="list-style: none; margin: 20px 0; font-size: 0.9rem; color: #888;">
+                    <li><i class="fa-solid fa-check" style="color: var(--verde-live)"></i> 2 Telas Simultâneas</li>
+                    <li><i class="fa-solid fa-check" style="color: var(--verde-live)"></i> Entrega via WhatsApp</li>
+                </ul>
+                <a href="https://pay.kirvano.com/07f96a4e-ecdf-4538-83ca-01e5c35f1425" class="btn-price normal">Comprar Mensal</a>
+            </div>
+            <div class="price-card destaque">
+                <p style="color: var(--cor-destaque); font-size: 0.8rem; text-transform: uppercase; font-weight: 700;">Anual VIP</p>
+                <div class="price-val"><span class="old-price">R$ 280,00</span><br>R$ 189,90</div>
+                <ul style="list-style: none; margin: 20px 0; font-size: 0.9rem; color: #ccc;">
+                    <li><i class="fa-solid fa-star" style="color: gold"></i> <strong>Melhor Custo Benefício</strong></li>
+                    <li><i class="fa-solid fa-check" style="color: var(--cor-destaque)"></i> Proteção Anti-Reajuste</li>
+                </ul>
+                <a href="https://pay.kirvano.com/0aadf253-f4b6-47dd-8d0a-f5f16714ce98" class="btn-price glow">Garantir Promoção</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <img src="img/logo-unitv.png" height="30" alt="UniTV" style="margin-bottom: 20px;">
+                <p>Revenda Autorizada UniTV. Tecnologia de ponta em transmissão digital.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Navegação</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html">Página Inicial</a></li>
+                    <li><a href="faq.html">FAQ / Ajuda</a></li>
+                    <li><a href="status.html">Status do Servidor</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Pagamento PIX</h4>
+                <div style="font-size: 1.5rem; display: flex; gap: 10px; color: #32bcad;">
+                    <i class="fa-brands fa-pix"></i>
+                    <i class="fa-solid fa-shield-check" style="color: #fff"></i>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 50px; color: #333; font-size: 0.7rem;">
+            &copy; 2024 Vendas UniTV. Monitoramento Oficial de Infraestrutura.
+        </div>
+    </footer>
+
+    <!-- WIDGETS -->
+    <div id="buy-modal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeBuyModal()">&times;</span>
+            <i class="fa-solid fa-cart-shopping" style="font-size: 3rem; color: var(--cor-destaque); margin-bottom: 15px;"></i>
+            <h3>Finalizar Recarga UniTV</h3>
+            <p style="color: #888; margin-top: 10px;">Escolha seu plano e receba o código automaticamente.</p>
+            <a href="https://pay.kirvano.com/0aadf253-f4b6-47dd-8d0a-f5f16714ce98" class="btn-modal-buy">COMPRAR ANUAL (R$ 189,90)</a>
+            <a href="https://pay.kirvano.com/07f96a4e-ecdf-4538-83ca-01e5c35f1425" style="color: #666; font-size: 0.8rem; margin-top: 15px; display: block;">Quero o plano mensal de R$ 24,90</a>
+        </div>
+    </div>
+
+    <div id="chat-widget" class="wa-widget">
+        <div class="wa-header">
+            <span>Suporte de Status</span>
+            <button onclick="toggleChat()" style="background:none; border:none; color:white; cursor:pointer;">&times;</button>
+        </div>
+        <div class="wa-chat-body" id="chat-content">
+            <div class="wa-msg">Olá! O sistema está operando normalmente. Precisando de ajuda para renovar ou instalar?</div>
+        </div>
+        <div class="wa-options" id="wa-options">
+            <button onclick="chatAction('Não consigo recarregar', 'suporte')">Não consigo recarregar</button>
+            <button onclick="chatAction('Como ver o status da minha conta?', 'ajuda')">Como ver status da conta?</button>
+        </div>
+    </div>
+
+    <div class="float-zap" onclick="toggleChat()"><i class="fa-brands fa-whatsapp"></i></div>
+
+    <script>
+        // 1. Timer
+        function startTimer(duration, display) {
+            var timer = duration, hours, minutes, seconds;
+            setInterval(function () {
+                hours = parseInt(timer / 3600, 10);
+                minutes = parseInt((timer % 3600) / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+                display.textContent = (hours < 10 ? "0" + hours : hours) + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
+                if (--timer < 0) timer = duration;
+            }, 1000);
+        }
+
+        // 2. TMDB API (Status Catálogo)
+        async function fetchStatusCatalog() {
+            try {
+                const res = await fetch(`https://api.themoviedb.org/3/trending/all/day?api_key=9cb2f018163da4a3f89d718ee6be8677&language=pt-BR`);
+                const data = await res.json();
+                const slider = document.getElementById('status-movie-slider');
+                data.results.slice(0, 10).forEach(item => {
+                    slider.innerHTML += `<div class="movie-card"><img src="https://image.tmdb.org/t/p/w300${item.poster_path}" alt="UniTV Catalog" loading="lazy"></div>`;
+                });
+            } catch(e) {}
+        }
+
+        // 3. UI Functions
+        function openBuyModal() { document.getElementById('buy-modal').classList.add('active'); }
+        function closeBuyModal() { document.getElementById('buy-modal').classList.remove('active'); }
+        function toggleChat() { document.getElementById('chat-widget').classList.toggle('active'); }
+
+        function chatAction(text, type) {
+            const content = document.getElementById('chat-content');
+            content.innerHTML += `<div class="wa-msg" style="align-self: flex-end; background: #dcf8c6;">${text}</div>`;
+            setTimeout(() => {
+                content.innerHTML += `<div class="wa-msg">Entendido! Vou te encaminhar para nosso especialista humano agora.</div>`;
+                window.open(`https://wa.me/5519981765840?text=${text}`);
+            }, 1000);
+        }
+
+        window.onload = function () {
+            startTimer(17940, document.querySelector('#timer'));
+            fetchStatusCatalog();
+        };
+    </script>
+</body>
+</html>
