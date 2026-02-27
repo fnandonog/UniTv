@@ -104,7 +104,7 @@
         html, body { 
             background-color: var(--bg-body); 
             color: #f0f0f0; 
-            overflow-x: hidden; 
+            overflow-x: hidden; /* Previne o ecrã cortado no mobile */
             width: 100%;
             max-width: 100vw;
             line-height: 1.6;
@@ -133,12 +133,13 @@
 
         /* --- PRODUCT HERO (BUY BOX MENSAL) --- */
         .product-hero { padding: 60px 5% 80px; background: radial-gradient(circle at 70% 30%, #1a0525 0%, #050505 60%); display: flex; justify-content: center; border-bottom: 1px solid #111; }
-        .product-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; max-width: 1100px; margin: 0 auto; align-items: center; }
+        .product-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; max-width: 1100px; margin: 0 auto; align-items: center; width: 100%; max-width: 100%; }
+        .product-image-container, .product-info { min-width: 0; width: 100%; } /* CRUCIAL PARA PREVENIR OVERFLOW HORIZONTAL EM FLEX/GRID */
+        
         .product-image-container { position: relative; padding: 20px; background: rgba(255,255,255,0.02); border: var(--borda-sutil); border-radius: 20px; text-align: center; }
         .product-image-container img { width: 100%; max-width: 400px; filter: drop-shadow(0 20px 40px rgba(255, 0, 128, 0.2)); animation: float 6s ease-in-out infinite; }
         
-        /* Badge alterada para mensal */
-        .product-badge { position: absolute; top: -15px; left: -15px; background: #ff0080; color: white; font-weight: 800; padding: 15px 20px; border-radius: 50%; font-size: 1.1rem; transform: rotate(-10deg); box-shadow: 0 10px 20px rgba(255, 0, 128, 0.4); border: 4px solid #050505; text-align: center; line-height: 1.2; }
+        .product-badge { position: absolute; top: -15px; left: -15px; background: #ff0080; color: white; font-weight: 800; padding: 15px 20px; border-radius: 50%; font-size: 1.1rem; transform: rotate(-10deg); box-shadow: 0 10px 20px rgba(255, 0, 128, 0.4); border: 4px solid #050505; text-align: center; line-height: 1.2; z-index: 10; }
         
         .product-info { text-align: left; }
         .product-category { color: var(--cor-destaque); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; margin-bottom: 10px; display: block; }
@@ -284,13 +285,16 @@
         .btn-modal-support { background: #222; color: #fff; border: 1px solid #444; padding: 16px; font-weight: 600; font-size: 0.95rem; border-radius: 12px; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.3s; }
         .btn-modal-support:hover { background: #333; border-color: #666; }
 
-        /* --- RESPONSIVIDADE MAXIMA --- */
+        /* --- RESPONSIVIDADE MAXIMA (CORREÇÃO DE BUGS AQUI) --- */
         @media (max-width: 992px) {
             .product-grid { grid-template-columns: 1fr; gap: 40px; }
             .info-grid { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 768px) {
+            /* Forçar a grelha a nunca exceder o ecrã */
+            html, body { overflow-x: hidden; position: relative; }
+            
             /* Fix Header */
             .brand-alert { display: none; } 
             header { height: 60px; padding: 10px 15px; }
@@ -304,32 +308,68 @@
             nav a { font-size: 1.3rem; display: block; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-weight: 600; text-align: left; }
             .header-actions .btn-header { display: none; } 
             
-            /* Fix Hero & Product Grid */
+            /* Fix Hero & Product Grid (Bug Cortado) */
             .product-hero { padding: 30px 5% 50px; }
-            .product-grid { gap: 30px; }
-            .product-image-container { padding: 10px 0; border: none; background: transparent; }
-            .product-image-container img { max-width: 85%; margin: 0 auto; display: block; }
-            .product-badge { font-size: 0.9rem; padding: 10px 15px; top: -5px; left: 5px; box-shadow: 0 5px 10px rgba(255, 0, 128, 0.3); border-width: 2px; }
+            .product-grid { gap: 30px; width: 100%; max-width: 100%; overflow: visible; }
             
-            /* Fix Reviews (Scroll Snap Horizontal) */
-            .reviews-compact { padding: 10px 5px; gap: 15px; scroll-snap-type: x mandatory; }
-            .review-card { min-width: 85%; scroll-snap-align: center; padding: 15px; text-align: left; }
+            /* O Segredo Mágico: Impedir que os blocos da grelha forcem expansão */
+            .product-image-container, .product-info { min-width: 0; width: 100%; } 
+            
+            .product-image-container { padding: 10px 0 0; border: none; background: transparent; position: relative; }
+            .product-image-container img { max-width: 90%; margin: 0 auto; display: block; }
+            
+            /* A Etiqueta agora segura dentro da margem */
+            .product-badge { font-size: 0.85rem; padding: 12px 18px; top: -10px; left: 5%; box-shadow: 0 5px 15px rgba(255, 0, 128, 0.4); border-width: 2px; }
+            
+            /* Fix Reviews (Scroll Snap Horizontal Correto) */
+            .reviews-compact { 
+                padding: 10px 0 20px; 
+                gap: 15px; 
+                scroll-snap-type: x mandatory; 
+                width: 100%; 
+                display: flex; 
+                overflow-x: auto; 
+                -webkit-overflow-scrolling: touch; 
+                scrollbar-width: none; 
+            }
+            .reviews-compact::-webkit-scrollbar { display: none; }
+            
+            /* Cartões com limites fixos para arrastar perfeitamente */
+            .review-card { 
+                flex: 0 0 85%; 
+                scroll-snap-align: center; 
+                padding: 18px; 
+                text-align: left; 
+                background: #0d0d0d;
+                border: 1px solid #222;
+            }
             
             /* Fix Product Info (Alinhamento e Escaneabilidade) */
-            .product-info { text-align: left; } 
-            .product-info h1 { font-size: 2.1rem; line-height: 1.2; text-align: center; }
-            .product-category { font-size: 0.75rem; text-align: center; display: inline-block; background: rgba(255,0,128,0.1); padding: 5px 15px; border-radius: 20px; margin-bottom: 15px; width: 100%; }
+            .product-info { text-align: center; } 
+            .product-info h1 { font-size: 1.95rem; line-height: 1.2; text-align: center; letter-spacing: -0.5px; }
+            .product-category { font-size: 0.75rem; text-align: center; display: inline-block; background: rgba(255,0,128,0.1); padding: 5px 15px; border-radius: 20px; margin-bottom: 15px; width: auto; }
             .product-rating { justify-content: center; margin-bottom: 25px; }
             
-            /* Fix Features List (Alinhado à esquerda) */
-            .product-features li { justify-content: flex-start; text-align: left; font-size: 0.95rem; align-items: flex-start; }
-            .product-features i { margin-top: 4px; }
+            /* Fix Features List (Visual "Pill" para ser premium) */
+            .product-features { display: flex; flex-direction: column; gap: 10px; }
+            .product-features li { 
+                justify-content: flex-start; 
+                text-align: left; 
+                font-size: 0.9rem; 
+                align-items: center; 
+                background: rgba(255,255,255,0.03); 
+                border: 1px solid rgba(255,255,255,0.05); 
+                padding: 12px 15px; 
+                border-radius: 12px; 
+                margin: 0;
+            }
+            .product-features i { margin-top: 0; }
             
             /* Fix Price Box */
-            .product-price-box { padding: 20px; text-align: center; border-radius: 12px; }
+            .product-price-box { padding: 25px 20px; text-align: center; border-radius: 16px; margin-top: 20px; }
             .price-current { font-size: 2.8rem; justify-content: center; }
             
-            .btn-buy-huge { font-size: 1.1rem; padding: 16px; }
+            .btn-buy-huge { font-size: 1.1rem; padding: 18px; border-radius: 14px; }
             .btn-tutorial { font-size: 0.9rem; padding: 14px; text-align: center; }
             
             .delivery-info { flex-direction: column; text-align: center; gap: 10px; }
@@ -359,11 +399,12 @@
             .payment-methods { justify-content: center; }
             .footer-links a { justify-content: center; }
             
-            /* Ajustes para o Sticky CTA Mobile */
+            /* Ajustes para o Sticky CTA Mobile e ZAP */
             .sticky-cta-mobile { display: block; padding: 10px 15px; }
             .sticky-btn { padding: 14px; font-size: 1.05rem; }
+            
             .float-zap { bottom: 85px; width: 55px; height: 55px; font-size: 28px; transition: 0.3s; }
-            .wa-widget { width: calc(100% - 30px); left: 15px; right: 15px; bottom: 85px; max-height: 75vh; }
+            .wa-widget { width: calc(100% - 30px); left: 15px; right: auto; bottom: 85px; max-height: 75vh; }
         }
     </style>
 </head>
@@ -409,7 +450,7 @@
                 <div class="product-badge" style="background: #ff0080; color: #fff;">30<br>DIAS</div>
                 <img src="/img/hero-tv.png" alt="Recarga UniTV Oficial Plano Mensal VIP rodando na Smart TV 4K e no celular" fetchpriority="high" decoding="async">
                 
-                <!-- Micro Reviews embaixo da imagem -->
+                <!-- Micro Reviews embaixo da imagem (Corrigido para o Mobile Snap) -->
                 <div class="reviews-compact">
                     <div class="review-card">
                         <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
