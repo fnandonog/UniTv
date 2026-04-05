@@ -17,7 +17,6 @@ QTD_POSTS_POR_VEZ = 3
 PASTA_BLOG = "blog"
 HISTORICO_ARQUIVO = "historico_temas_blog.txt"
 
-# Filtros desativados para não barrar palavras do nicho de TV Box
 SAFETY_SETTINGS = {
     HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
     HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE,
@@ -26,7 +25,7 @@ SAFETY_SETTINGS = {
 }
 
 # ==========================================
-# 2. TEMPLATES BLINDADOS (EXATAMENTE SEU SITE)
+# 2. TEMPLATES (CSS BLINDADO + SEU FOOTER E CHATBOT)
 # ==========================================
 
 TEMPLATE_TOPO = """<!DOCTYPE html>
@@ -39,12 +38,7 @@ TEMPLATE_TOPO = """<!DOCTYPE html>
     <meta name="theme-color" content="#1a0525">
     
     <link rel="canonical" href="https://unitvsite.com.br/" />
-    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-    <meta property="og:locale" content="pt_BR" />
-    <meta property="og:type" content="article" />
-    <meta property="og:title" content="{titulo}" />
-    <meta property="og:description" content="{meta_desc}" />
-    <meta property="og:site_name" content="UniTV Oficial Revenda" />
+    <meta name="robots" content="index, follow" />
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -53,9 +47,8 @@ TEMPLATE_TOPO = """<!DOCTYPE html>
     <link rel="icon" href="../../img/logo-unitv.png" type="image/png">
 
     <style>
-        /* --- ESTILOS ORIGINAIS DO SEU SITE --- */
+        /* --- GERAL --- */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        
         :root {
             --bg-body: #050505;
             --bg-card: #0f0f0f;
@@ -63,67 +56,55 @@ TEMPLATE_TOPO = """<!DOCTYPE html>
             --gradiente-texto: linear-gradient(90deg, #ff8c00, #ff0080, #7928ca);
             --borda-sutil: 1px solid rgba(255, 255, 255, 0.08);
             --verde-zap: #25D366;
-            --wa-header: #075e54; --wa-bg: #e5ddd5; --wa-msg-user: #dcf8c6;
+            --wa-header: #075e54; --wa-bg: #e5ddd5;
             --cor-destaque: #ff0080;
+            --cor-secundaria: #00ff88;
         }
+        html, body { background-color: var(--bg-body); color: #f0f0f0; overflow-x: hidden; width: 100%; line-height: 1.6; }
 
-        html, body { 
-            background-color: var(--bg-body); 
-            color: #f0f0f0; 
-            overflow-x: hidden; 
-            width: 100%;
-            max-width: 100vw;
-            line-height: 1.6;
-            scroll-behavior: smooth;
-        }
-
-        /* --- BARRAS DE TOPO --- */
+        /* --- HEADER DO SEU SITE --- */
         .promo-bar { background: linear-gradient(90deg, #1a0b2e, #2d0b1e); color: #e0e0e0; text-align: center; padding: 8px 10px; font-size: 0.85rem; font-weight: 500; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .brand-alert { background: rgba(255, 0, 128, 0.05); border-bottom: 1px solid rgba(255, 0, 128, 0.1); color: #ffb3d9; text-align: center; padding: 8px 10px; font-size: 0.75rem; font-weight: 600; letter-spacing: 1px; display: flex; justify-content: center; align-items: center; gap: 10px; }
-        .brand-alert strong { color: #fff; text-decoration: underline; }
-
-        /* --- HEADER --- */
-        header { display: flex; justify-content: space-between; align-items: center; padding: 10px 5%; position: sticky; top: 0; width: 100%; background: rgba(5, 5, 5, 0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); z-index: 1000; border-bottom: var(--borda-sutil); height: 70px; }
+        .brand-alert { background: rgba(255, 0, 128, 0.05); border-bottom: 1px solid rgba(255, 0, 128, 0.1); color: #ffb3d9; text-align: center; padding: 8px 10px; font-size: 0.75rem; font-weight: 600; display: flex; justify-content: center; gap: 10px; }
+        
+        header { display: flex; justify-content: space-between; align-items: center; padding: 10px 5%; position: sticky; top: 0; width: 100%; background: rgba(5, 5, 5, 0.95); backdrop-filter: blur(12px); z-index: 1000; border-bottom: var(--borda-sutil); height: 70px; }
         .logo img { height: 36px; filter: brightness(1.1); transition: 0.3s; }
-        .logo img:hover { transform: scale(1.05); }
         nav ul { display: flex; list-style: none; gap: 25px; }
         nav a { color: #bbb; text-decoration: none; font-size: 0.85rem; font-weight: 500; text-transform: uppercase; transition: 0.3s; }
         nav a:hover, nav a.active { color: white; color: var(--cor-destaque); }
-        .header-actions { display: flex; align-items: center; gap: 15px; }
         .btn-header { background: rgba(255, 255, 255, 0.1); color: white; padding: 8px 20px; border-radius: 6px; text-decoration: none; font-size: 0.8rem; font-weight: 600; border: 1px solid rgba(255,255,255,0.1); transition: 0.3s;}
         .btn-header:hover { background: #fff; color: #000; }
-        .menu-toggle { display: none; color: white; font-size: 1.6rem; cursor: pointer; outline: none; }
 
-        /* ======================================================== */
-        /* --- ESTILOS ISOLADOS PARA O ARTIGO (MUITO IMPORTANTE) ---*/
-        /* ======================================================== */
-        .post-container { max-width: 800px; margin: 40px auto 80px; padding: 0 20px; }
+        /* ======================================================= */
+        /* --- ESTILOS EXCLUSIVOS E BLINDADOS DO ARTIGO --- */
+        /* ======================================================= */
+        .leitura-vip { max-width: 800px; margin: 40px auto 80px; padding: 0 20px; }
         
-        .post-header { margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .post-title { font-size: clamp(1.8rem, 5vw, 2.5rem) !important; font-weight: 800 !important; line-height: 1.3 !important; margin-bottom: 15px !important; color: #fff !important; text-align: left !important; }
-        .text-gradient { background: var(--gradiente-texto); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        
-        .post-meta { color: #888; font-size: 0.9rem; font-weight: 500; display: flex; align-items: center; gap: 15px; flex-wrap: wrap; }
-        .post-meta i { color: var(--cor-destaque); }
+        .leitura-vip .post-header { text-align: center; margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .leitura-vip h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; line-height: 1.2; margin-bottom: 15px; color: #fff; text-align: left; }
+        .leitura-vip .meta { color: #888; font-size: 0.9rem; font-weight: 500; display: flex; gap: 15px; flex-wrap: wrap; }
+        .leitura-vip .meta i { color: var(--cor-destaque); }
 
-        .post-content { font-size: 1.1rem; color: #ccc; line-height: 1.8; }
-        .post-content h2 { color: #fff; font-size: 1.8rem; margin: 50px 0 20px; font-weight: 700; border-left: 4px solid var(--cor-destaque); padding-left: 15px; line-height: 1.3;}
-        .post-content h3 { color: #fff; font-size: 1.4rem; margin: 40px 0 15px; font-weight: 600; }
-        .post-content p { margin-bottom: 20px; }
-        .post-content img { width: 100%; border-radius: 12px; margin: 30px 0; object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .post-content ul, .post-content ol { margin: 0 0 25px 25px; }
-        .post-content li { margin-bottom: 10px; }
-        .post-content a { color: var(--cor-destaque); text-decoration: none; font-weight: 600; }
-        .post-content a:hover { text-decoration: underline; }
+        .leitura-vip .conteudo { font-size: 1.1rem; color: #ccc; line-height: 1.8; }
+        .leitura-vip .conteudo h2 { color: #fff; font-size: 1.8rem; margin: 50px 0 20px; font-weight: 700; border-left: 4px solid var(--cor-destaque); padding-left: 15px; line-height: 1.3;}
+        .leitura-vip .conteudo h3 { color: var(--cor-secundaria); font-size: 1.4rem; margin: 40px 0 15px; font-weight: 600; }
+        .leitura-vip .conteudo p { margin-bottom: 20px; }
+        .leitura-vip .conteudo img { width: 100%; border-radius: 12px; margin: 30px 0; object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 1px solid #222; }
+        .leitura-vip .conteudo ul { margin: 0 0 25px 25px; }
+        .leitura-vip .conteudo li { margin-bottom: 10px; }
+        .leitura-vip .conteudo strong { color: #fff; }
         
-        .post-content .tech-box { background: var(--bg-card); border: 1px solid rgba(255,255,255,0.05); border-left: 4px solid #00ff88; padding: 25px; margin: 35px 0; border-radius: 8px; }
-        .post-content .tech-box h4 { color: #00ff88; margin-bottom: 10px; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px; }
-        .post-content .tech-box p { margin-bottom: 0; font-size: 1rem; color: #ddd; }
+        .leitura-vip .tech-box { background: var(--bg-card); border: 1px solid rgba(255,255,255,0.05); border-left: 4px solid var(--cor-secundaria); padding: 25px; margin: 35px 0; border-radius: 8px; }
+        .leitura-vip .tech-box h4 { color: var(--cor-secundaria); margin-bottom: 10px; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px; }
+        .leitura-vip .tech-box p { margin-bottom: 0; font-size: 1rem; color: #ddd; }
         
-        .post-content blockquote { background: rgba(255, 0, 128, 0.05); font-style: italic; color: #eee; border-left: 4px solid var(--cor-destaque); padding: 20px 30px; margin: 30px 0; font-size: 1.15rem; border-radius: 0 12px 12px 0; }
-        /* ======================================================== */
+        .leitura-vip blockquote { background: rgba(255, 0, 128, 0.05); font-style: italic; color: #eee; border-left: 4px solid var(--cor-destaque); padding: 20px 30px; margin: 30px 0; font-size: 1.15rem; border-radius: 0 12px 12px 0; }
 
-        /* --- FOOTER & WHATSAPP (COPIADO DA SUA HOME) --- */
+        .leitura-vip .cta-banner { background: linear-gradient(160deg, #180a1f 0%, #050505 100%); border: 1px solid var(--cor-destaque); padding: 40px; border-radius: 20px; text-align: center; margin-top: 60px; box-shadow: 0 0 40px rgba(255, 0, 128, 0.15); }
+        .leitura-vip .cta-banner h3 { color: #fff; font-size: 1.8rem; margin-bottom: 15px; font-weight: 800; }
+        .leitura-vip .btn-cta { background: var(--gradiente-premium); color: white; padding: 18px 45px; border-radius: 50px; text-decoration: none; font-weight: 800; display: inline-block; margin-top: 20px; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
+        .leitura-vip .btn-cta:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(221, 36, 118, 0.4); }
+
+        /* --- O SEU FOOTER OFICIAL EXATO --- */
         footer { background: #050505; border-top: 1px solid #1a1a1a; padding: 80px 20px 40px; color: #777; font-size: 0.9rem; }
         .footer-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 50px; }
         .footer-logo { margin-bottom: 20px; filter: brightness(1.2); height: 40px; }
@@ -138,40 +119,22 @@ TEMPLATE_TOPO = """<!DOCTYPE html>
         .legal-links a { color: #888; text-decoration: none; }
         .legal-links a:hover { color: #fff; text-decoration: underline; }
 
-        .wa-widget { position: fixed; bottom: 90px; right: 25px; width: 350px; background: var(--wa-bg); border-radius: 16px; z-index: 9999; box-shadow: 0 15px 35px rgba(0,0,0,0.4); display: flex; flex-direction: column; overflow: hidden; transform: scale(0); transform-origin: bottom right; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        /* --- O SEU CHATBOT OFICIAL EXATO --- */
+        .wa-widget { position: fixed; bottom: 85px; right: 20px; width: 340px; background: #e5ddd5; border-radius: 12px; z-index: 9999; transform: scale(0); transform-origin: bottom right; transition: 0.3s ease; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         .wa-widget.active { transform: scale(1); }
-        .wa-header { background: var(--wa-header); color: white; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; }
-        .wa-profile { display: flex; align-items: center; gap: 12px; }
-        .wa-profile img { width: 42px; height: 42px; border-radius: 50%; background: #fff; padding: 2px; }
-        .wa-info { display: flex; flex-direction: column; }
-        .wa-name { font-weight: 600; font-size: 1rem; }
-        .wa-status { font-size: 0.75rem; color: #cfd8dc; display: flex; align-items: center; gap: 5px;}
-        .wa-status::before { content:''; display:inline-block; width:8px; height:8px; background:#00ff88; border-radius:50%; }
-        .wa-close { background: none; border: none; color: white; font-size: 1.8rem; cursor: pointer; transition: 0.3s; outline: none; }
-        .wa-close:hover { color: #ffcccc; transform: rotate(90deg); }
-        .wa-chat-body { height: 380px; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png'); background-size: contain; }
-        .wa-msg { max-width: 85%; padding: 10px 15px; border-radius: 12px; font-size: 0.9rem; position: relative; box-shadow: 0 2px 5px rgba(0,0,0,0.1); line-height: 1.4; color: #333; }
-        .wa-msg-bot { background: white; align-self: flex-start; border-top-left-radius: 0; }
-        .wa-msg-user { background: var(--wa-msg-user); align-self: flex-end; border-top-right-radius: 0; }
-        .wa-options { padding: 15px; background: #f0f0f0; border-top: 1px solid #ddd; display: flex; flex-direction: column; gap: 10px; }
-        .wa-options button { background: white; border: 1px solid #ccc; padding: 12px; border-radius: 25px; font-size: 0.9rem; color: #075e54; font-weight: 600; cursor: pointer; text-align: center; width: 100%; transition: 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .wa-options button:hover { background: #075e54; color: white; border-color: #075e54; }
-        .wa-input-fake { background: #f0f0f0; padding: 12px 20px; display: flex; align-items: center; gap: 15px; border-top: 1px solid #ddd; }
-        .wa-input-box { background: white; flex: 1; padding: 10px 20px; border-radius: 25px; color: #999; font-size: 0.9rem; border: 1px solid #ccc; }
-        .typing span { height: 8px; width: 8px; background: #bbb; display: inline-block; border-radius: 50%; margin-right: 3px; animation: waTyping 1s infinite; }
-        @keyframes waTyping { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
-        
-        .float-zap { position: fixed; bottom: 25px; right: 25px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; z-index: 10000; box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4); cursor: pointer; transition: 0.3s; }
-        .float-zap:hover { transform: scale(1.1); }
+        .wa-header { background: #075e54; color: white; padding: 12px 15px; display: flex; align-items: center; justify-content: space-between; }
+        .wa-chat-body { height: 350px; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png'); background-size: contain; }
+        .wa-msg { max-width: 85%; padding: 8px 12px; border-radius: 8px; font-size: 0.88rem; box-shadow: 0 1px 1px rgba(0,0,0,0.15); color: #333; background: white; }
+        .float-zap { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; width: 65px; height: 65px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; z-index: 10000; cursor: pointer; box-shadow: 0 10px 30px rgba(37,211,102,0.4); }
 
         @media (max-width: 768px) {
             header { height: 65px; padding: 10px 20px; }
             .logo img { height: 28px; }
             nav, .header-actions { display: none; }
-            .post-title { font-size: 1.8rem !important; }
+            .leitura-vip h1 { font-size: 1.8rem; }
             .footer-container { grid-template-columns: 1fr; text-align: center; }
             .payment-methods, .footer-links a, .legal-links { justify-content: center; }
-            .wa-widget { width: calc(100% - 40px); left: 20px; right: 20px; bottom: 95px; max-height: 75vh; }
+            .wa-widget { width: calc(100% - 40px); left: 20px; right: 20px; bottom: 95px; }
         }
     </style>
 </head>
@@ -188,7 +151,7 @@ TEMPLATE_TOPO = """<!DOCTYPE html>
         <div class="logo">
             <a href="../../index.html"><img src="../../img/logo-unitv.png" alt="Logo UniTV Oficial"></a>
         </div>
-        <nav id="nav-menu">
+        <nav>
             <ul>
                 <li><a href="../../index.html">Início</a></li>
                 <li><a href="../../index.html#comprar">Planos</a></li>
@@ -201,25 +164,25 @@ TEMPLATE_TOPO = """<!DOCTYPE html>
         </div>
     </header>
 
-    <main class="post-container">
-        <header class="post-header">
-            <h1 class="post-title">{titulo}</h1>
-            <div class="post-meta">
+    <main class="leitura-vip">
+        <div class="post-header">
+            <h1>{titulo}</h1>
+            <div class="meta">
                 <span><i class="fa-solid fa-calendar"></i> {data_atual}</span>
                 <span><i class="fa-solid fa-microchip"></i> Redação Tech UniTV</span>
             </div>
-        </header>
+        </div>
         
-        <article class="post-content">
+        <div class="conteudo">
 """
 
 TEMPLATE_RODAPE = """
-        </article>
+        </div>
         
-        <div style="background: linear-gradient(160deg, #180a1f 0%, #050505 100%); border: 1px solid var(--cor-destaque); padding: 40px; border-radius: 20px; text-align: center; margin-top: 60px; box-shadow: 0 0 40px rgba(255, 0, 128, 0.15);">
-            <h3 style="color:#fff; font-size:1.8rem; margin-bottom:15px; font-weight:800;">Pare de passar raiva com travamentos!</h3>
+        <div class="cta-banner">
+            <h3>Pare de passar raiva com travamentos!</h3>
             <p style="color: #bbb; margin-bottom: 20px;">Aproveite o máximo do 4K na sua TV Box. Garanta sua recarga UniTV Oficial com entrega imediata via Pix e suporte humanizado.</p>
-            <a href="../../index.html#comprar" style="background: var(--gradiente-premium); color: white; padding: 18px 45px; border-radius: 50px; text-decoration: none; font-weight: 800; display: inline-block; text-transform: uppercase; letter-spacing: 1px;"><i class="fa-solid fa-bolt"></i> VER PLANOS OFICIAIS</a>
+            <a href="../../index.html#comprar" class="btn-cta"><i class="fa-solid fa-bolt"></i> VER PLANOS OFICIAIS</a>
         </div>
     </main>
 
@@ -270,31 +233,18 @@ TEMPLATE_RODAPE = """
 
     <div id="chat-widget" class="wa-widget">
         <div class="wa-header">
-            <div class="wa-profile">
-                <img src="../../img/logo-unitv.png" alt="Atendente Virtual UniTV" loading="lazy">
-                <div class="wa-info">
-                    <span class="wa-name">Atendimento VIP</span>
-                    <span id="wa-status" class="wa-status">Online</span>
-                </div>
-            </div>
-            <button onclick="toggleChat()" class="wa-close" aria-label="Fechar janela de chat"><i class="fa-solid fa-times"></i></button>
+            <span style="font-weight: 800;">Suporte Blog VIP</span>
+            <button onclick="toggleChat()" style="background:none; border:none; color:white; font-size:1.5rem; cursor:pointer;">×</button>
         </div>
-        <div id="chat-content" class="wa-chat-body">
-            <div class="wa-msg wa-msg-bot">Olá! 👋 Bem-vindo ao suporte oficial UniTV. Sou o atendente virtual focado em vendas e instalação. <span class="wa-time">agora</span></div>
-            <div class="wa-msg wa-msg-bot">Sobre o que deseja falar? <span class="wa-time">agora</span></div>
+        <div class="wa-chat-body" id="chat-content">
+            <div class="wa-msg" style="align-self: flex-start; border-top-left-radius: 0;">Olá! 👋 Vi que você está lendo nossos guias de otimização. Quer saber como liberar o sistema VIP completo sem travas na sua Box?</div>
         </div>
-        <div id="typing-indicator" class="wa-msg wa-msg-bot typing" style="display: none;"><span></span><span></span><span></span></div>
-        <div id="wa-options" class="wa-options">
-            <button onclick="window.open('../../index.html#comprar', '_self')">Ver planos disponíveis</button>
-            <button onclick="window.open('https://wa.me/5519981765840', '_blank')">Falar com Humano</button>
-        </div>
-        <div class="wa-input-fake">
-            <div class="wa-input-box">Selecione uma opção...</div>
-            <i class="fa-solid fa-paper-plane" style="color: #075e54; font-size: 1.2rem;"></i>
+        <div style="padding: 10px; background: #f0f0f0;">
+            <button onclick="window.open('https://wa.me/5519981765840?text=Vi o post no blog e quero testar o VIP 4K', '_blank')" style="width: 100%; background: #25d366; color: white; border: none; padding: 12px; border-radius: 12px; font-weight: 800; cursor: pointer;">FALAR COM ESPECIALISTA</button>
         </div>
     </div>
 
-    <div class="float-zap" onclick="toggleChat()" aria-label="Abrir conversa no WhatsApp" role="button" tabindex="0"><i class="fa-brands fa-whatsapp"></i></div>
+    <div class="float-zap" onclick="toggleChat()"><i class="fa-brands fa-whatsapp"></i></div>
 
     <script>
         function toggleChat() { 
@@ -306,11 +256,10 @@ TEMPLATE_RODAPE = """
 """
 
 # ==========================================
-# 3. INTELIGÊNCIA DA IA E GERADOR DE URLS CURTOS
+# 3. LÓGICA E GERAÇÃO DE TEXTO
 # ==========================================
 def carregar_historico():
-    if not os.path.exists(HISTORICO_ARQUIVO):
-        return []
+    if not os.path.exists(HISTORICO_ARQUIVO): return []
     with open(HISTORICO_ARQUIVO, 'r', encoding='utf-8') as f:
         return [linha.strip() for linha in f.readlines()]
 
@@ -318,73 +267,61 @@ def salvar_historico(tema):
     with open(HISTORICO_ARQUIVO, 'a', encoding='utf-8') as f:
         f.write(f"{tema}\n")
 
-# CORREÇÃO CRÍTICA DO SLUG: Nomes curtos e sem acentos
 def criar_slug(texto):
     texto_sem_acento = unicodedata.normalize('NFKD', texto).encode('ascii', 'ignore').decode('utf-8')
     slug = re.sub(r'[^a-z0-9]+', '-', texto_sem_acento.lower()).strip('-')
-    # Corta em 45 caracteres para evitar bug no servidor
-    return slug[:45].strip('-')
+    return slug[:45].strip('-') # Corta a URL para não dar erro 404 de tamanho
 
 def gerar_temas(historico):
-    print("🧠 Gerando temas impactantes e CURTOS...")
+    print("🧠 Gerando temas impactantes e CURTOS (Max 8 palavras)...")
     prompt = f"""
     Crie {QTD_POSTS_POR_VEZ} títulos de artigos persuasivos sobre TV Box, IPTV e otimização.
-    MUITO IMPORTANTE: Os títulos devem ser CURTOS (máximo de 8 palavras).
-    Exemplo de estilo: "Como Acabar Com Travamentos na Sua TV Box".
+    MUITO IMPORTANTE: Os títulos devem ser BEM CURTOS (máximo de 8 palavras).
+    Exemplo: "Otimizar TV Box Android Para Rodar Liso".
     NÃO repita estes temas: {', '.join(historico[-30:])}
     Retorne APENAS os títulos, um por linha.
     """
     try:
         resposta = model.generate_content(prompt, safety_settings=SAFETY_SETTINGS)
         return [t.strip() for t in resposta.text.split('\n') if t.strip()][:QTD_POSTS_POR_VEZ]
-    except Exception as e:
-        # Título de emergência caso a IA falhe
-        return ["Otimizacao de Rede TV Box", "Como Melhorar o Sinal 4K", "Fim do Lag no Streaming"]
+    except Exception:
+        return ["Guia Definitivo TV Box 4K", "Otimizando a Internet Para Streaming", "Adeus Lag Na Sua TV Box"]
 
 def escrever_artigo(tema):
-    print(f"✍️ Escrevendo artigo formatado para: {tema}")
+    print(f"✍️ Escrevendo conteúdo: {tema}")
     prompt_redator = f"""
-    Escreva um artigo de blog técnico e persuasivo (800+ palavras) sobre: "{tema}".
+    Escreva um artigo técnico (800+ palavras) sobre: "{tema}".
     
-    REGRA OBRIGATÓRIA DE HTML (NÃO QUEBRE O LAYOUT):
-    1. NÃO coloque a tag <h1>.
-    2. Use <h2> para subtítulos principais.
+    REGRA DE FORMATAÇÃO OBRIGATÓRIA:
+    1. NÃO coloque tag <h1>.
+    2. Use <h2> para subtítulos e <p> para o texto.
     3. Crie 2 blocos de destaque copiando exatamente este HTML:
-       <div class="tech-box"><h4>Dica de Ouro</h4><p>escreva uma dica forte aqui.</p></div>
+       <div class="tech-box"><h4>Dica de Ouro</h4><p>escreva a dica aqui.</p></div>
     4. Adicione imagens dinâmicas usando: 
-       <img src="https://picsum.photos/seed/{tema.replace(' ', '')}X/800/400" alt="Tecnologia"> (mude o X para 1, 2 e 3).
-    5. Use blocos <blockquote> para citações importantes.
-    6. Traga dados de performance. Fale sobre DNS e otimização de rede.
-    7. Termine oferecendo a Recarga UniTV Oficial como solução premium.
+       <img src="https://picsum.photos/seed/{tema.replace(' ', '')}X/800/400" alt="Ilustração"> (mude X para 1, 2 e 3).
+    5. Traga dicas de DNS e otimização de rede.
+    6. Termine sugerindo assinar a Recarga UniTV.
     """
-    
     try:
-        resposta_artigo = model.generate_content(prompt_redator, safety_settings=SAFETY_SETTINGS)
-        if not resposta_artigo.parts:
-            print("⚠️ Aviso: Filtro bloqueou o texto principal. Tentando versão segura...")
-            prompt_seguro = f"Escreva um guia educativo sobre redes de internet focado em {tema}. Retorne em HTML simples."
-            resposta_artigo = model.generate_content(prompt_seguro, safety_settings=SAFETY_SETTINGS)
-            
-        artigo_html = resposta_artigo.text.replace("```html", "").replace("```", "").strip()
+        resposta = model.generate_content(prompt_redator, safety_settings=SAFETY_SETTINGS)
+        if not resposta.parts:
+            prompt_seguro = f"Escreva um texto educativo sobre redes de internet com o tema {tema}. Retorne em HTML."
+            resposta = model.generate_content(prompt_seguro, safety_settings=SAFETY_SETTINGS)
+        artigo = resposta.text.replace("```html", "").replace("```", "").strip()
+        desc = model.generate_content(f"Meta description SEO (150 carac): {tema}", safety_settings=SAFETY_SETTINGS).text.strip()
+        return artigo, desc
     except Exception as e:
-        raise Exception(f"Erro na IA ao gerar artigo: {e}")
-    
-    prompt_meta = f"Crie uma meta description (max 150 caracteres) para: {tema}."
-    meta_desc = model.generate_content(prompt_meta, safety_settings=SAFETY_SETTINGS).text.strip()
-    
-    return artigo_html, meta_desc
+        raise Exception(f"Erro na IA: {e}")
 
 # ==========================================
-# 4. INJETOR CORRIGIDO (SEM SUBSTITUIR VAZIO)
+# 4. INJETOR NA VITRINE DO BLOG
 # ==========================================
 def atualizar_pagina_principal_do_blog(titulo, slug, meta_desc):
-    caminho_index = os.path.join(PASTA_BLOG, "index.html")
-    
+    caminho = os.path.join(PASTA_BLOG, "index.html")
     try:
-        with open(caminho_index, "r", encoding="utf-8") as f:
-            html = f.read()
+        with open(caminho, "r", encoding="utf-8") as f: html = f.read()
 
-        novo_card = f"""
+        card = f"""
         <a href="{slug}/index.html" class="post-card reveal active" style="text-decoration:none;">
             <div class="post-thumb" style="border-radius:10px; overflow:hidden; margin-bottom:15px;">
                 <img src="https://picsum.photos/seed/{slug}/800/600" alt="{titulo}" style="width:100%; display:block; transition:0.3s;">
@@ -398,22 +335,17 @@ def atualizar_pagina_principal_do_blog(titulo, slug, meta_desc):
         </a>
         """
 
-        # Agora a substituição é super segura!
         if "" in html:
-            html = html.replace("", novo_card)
-            with open(caminho_index, "w", encoding="utf-8") as f:
-                f.write(html)
-            print(f"🔗 Artigo '{titulo}' linkado com sucesso na vitrine!")
-        else:
-            print("⚠️ ERRO: A tag sumiu do blog/index.html")
-
-    except FileNotFoundError:
-        print(f"⚠️ O arquivo {caminho_index} não existe ainda.")
+            html = html.replace("", card)
+            with open(caminho, "w", encoding="utf-8") as f: f.write(html)
+            print(f"🔗 Injetado com sucesso na vitrine!")
+        else: print("⚠️ ERRO: A tag não foi encontrada na capa do blog.")
+    except FileNotFoundError: print(f"⚠️ Capa do blog não encontrada.")
 
 # ==========================================
-# EXECUTOR
+# EXECUTOR FINAL
 # ==========================================
-print("🚀 MÁQUINA DE SEO CYBERPUNK INICIADA (V-MASTER)")
+print("🚀 MÁQUINA DE SEO CYBERPUNK (VERSÃO MASTER)")
 historico = carregar_historico()
 temas = gerar_temas(historico)
 
@@ -421,38 +353,22 @@ for tema in temas:
     slug = criar_slug(tema)
     pasta_artigo = os.path.join(PASTA_BLOG, slug)
     
-    if os.path.exists(pasta_artigo):
-        print(f"⏩ Pulando '{tema}', a pasta já existe.")
-        continue
-        
+    if os.path.exists(pasta_artigo): continue
     os.makedirs(pasta_artigo, exist_ok=True)
-    caminho_arquivo = os.path.join(pasta_artigo, "index.html")
     
     try:
-        conteudo_html, meta_desc = escrever_artigo(tema)
-        data_formatada = datetime.now().strftime("%d de %B de %Y")
+        corpo, meta = escrever_artigo(tema)
+        html_final = TEMPLATE_TOPO.replace("{titulo}", tema).replace("{meta_desc}", meta).replace("{data_atual}", datetime.now().strftime("%d/%m/%Y"))
+        html_final += corpo + TEMPLATE_RODAPE
         
-        # Monta a página inteira blindada
-        pagina_final = TEMPLATE_TOPO.replace("{titulo}", tema).replace("{meta_desc}", meta_desc).replace("{data_atual}", data_formatada)
-        pagina_final += conteudo_html
-        pagina_final += TEMPLATE_RODAPE
-        
-        with open(caminho_arquivo, "w", encoding="utf-8") as f:
-            f.write(pagina_final)
-        
-        atualizar_pagina_principal_do_blog(tema, slug, meta_desc)
+        with open(os.path.join(pasta_artigo, "index.html"), "w", encoding="utf-8") as f: f.write(html_final)
+        atualizar_pagina_principal_do_blog(tema, slug, meta)
         salvar_historico(tema)
-        
-        print("⏳ Aguardando a IA respirar para evitar bloqueios...")
         time.sleep(8) 
-    except Exception as e:
-        print(f"❌ Erro grave ao gerar {tema}: {e}")
+    except Exception as e: print(f"❌ Erro: {e}")
 
-print("\n📦 Fazendo o Push Automático para o GitHub...")
-try:
-    subprocess.run(["git", "add", "."], check=True)
-    subprocess.run(["git", "commit", "-m", f"Auto-post V-Master: {datetime.now().strftime('%Y-%m-%d %H:%M')}"], check=True)
-    subprocess.run(["git", "push"], check=True)
-    print("✅ DEPLOY CONCLUÍDO! O site está no ar e com visual premium.")
-except Exception as e:
-    print("⚠️ Erro no Git Push. Faça o 'git pull' antes de tentar rodar novamente se o GitHub recusar o envio.")
+print("\n📦 Fazendo o Push...")
+subprocess.run(["git", "add", "."])
+subprocess.run(["git", "commit", "-m", f"Auto-post V-Master: {datetime.now().strftime('%Y-%m-%d %H:%M')}"])
+subprocess.run(["git", "push"])
+print("✅ DEPLOY CONCLUÍDO! Layout blindado.")
