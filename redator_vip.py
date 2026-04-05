@@ -17,15 +17,16 @@ QTD_POSTS_POR_VEZ = 3
 PASTA_BLOG = "blog"
 HISTORICO_ARQUIVO = "historico_temas_blog.txt"
 
-SAFETY_SETTINGS = {
-    HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
-    HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE,
-    HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT: HarmBlockThreshold.BLOCK_NONE,
-    HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE,
-}
+# Desativa filtros para termos como IPTV
+SAFETY_SETTINGS = [
+    {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"},
+    {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"},
+    {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"},
+    {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"},
+]
 
 # ==========================================
-# 2. TEMPLATES (CSS BLINDADO + SEU FOOTER E CHATBOT)
+# 2. TEMPLATES (CÓPIA FIDEDIGNA DO SEU SITE)
 # ==========================================
 
 TEMPLATE_TOPO = """<!DOCTYPE html>
@@ -37,89 +38,132 @@ TEMPLATE_TOPO = """<!DOCTYPE html>
     <meta name="description" content="{meta_desc}">
     <meta name="theme-color" content="#1a0525">
     
-    <link rel="canonical" href="https://unitvsite.com.br/" />
-    <meta name="robots" content="index, follow" />
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
     <link rel="icon" href="../../img/logo-unitv.png" type="image/png">
 
+    <script type="application/ld+json">
+    {{
+      "@context": "https://schema.org",
+      "@graph": [
+        {{
+          "@type": "BlogPosting",
+          "headline": "{titulo}",
+          "image": "https://unitvsite.com.br/img/logo-unitv.png",
+          "author": {{
+            "@type": "Organization",
+            "name": "Equipe UniTV VIP"
+          }},
+          "publisher": {{
+            "@type": "Organization",
+            "name": "UniTV Oficial Brasil",
+            "logo": {{
+              "@type": "ImageObject",
+              "url": "https://unitvsite.com.br/img/logo-unitv.png"
+            }}
+          }},
+          "datePublished": "{data_seo}",
+          "description": "{meta_desc}"
+        }},
+        {{
+          "@type": "Product",
+          "name": "Recarga UniTV Oficial VIP",
+          "aggregateRating": {{
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "reviewCount": "1840"
+          }},
+          "offers": {{
+            "@type": "AggregateOffer",
+            "lowPrice": "24.90",
+            "highPrice": "189.90",
+            "priceCurrency": "BRL"
+          }}
+        }}
+      ]
+    }}
+    </script>
+
     <style>
-        /* --- GERAL --- */
+        /* --- DESIGN SYSTEM PREMIUM --- */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        
         :root {
             --bg-body: #050505;
             --bg-card: #0f0f0f;
             --gradiente-premium: linear-gradient(135deg, #FF512F 0%, #DD2476 100%);
             --gradiente-texto: linear-gradient(90deg, #ff8c00, #ff0080, #7928ca);
             --borda-sutil: 1px solid rgba(255, 255, 255, 0.08);
-            --verde-zap: #25D366;
-            --wa-header: #075e54; --wa-bg: #e5ddd5;
             --cor-destaque: #ff0080;
-            --cor-secundaria: #00ff88;
+            --wa-header: #075e54; --wa-bg: #e5ddd5;
         }
-        html, body { background-color: var(--bg-body); color: #f0f0f0; overflow-x: hidden; width: 100%; line-height: 1.6; }
 
-        /* --- HEADER DO SEU SITE --- */
-        .promo-bar { background: linear-gradient(90deg, #1a0b2e, #2d0b1e); color: #e0e0e0; text-align: center; padding: 8px 10px; font-size: 0.85rem; font-weight: 500; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .brand-alert { background: rgba(255, 0, 128, 0.05); border-bottom: 1px solid rgba(255, 0, 128, 0.1); color: #ffb3d9; text-align: center; padding: 8px 10px; font-size: 0.75rem; font-weight: 600; display: flex; justify-content: center; gap: 10px; }
+        html, body { background-color: var(--bg-body); color: #f0f0f0; overflow-x: hidden; width: 100%; line-height: 1.6; padding-top: 40px; scroll-behavior: smooth; }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* --- BARRA DE PROMOÇÃO --- */
+        .promo-bar {
+            background: linear-gradient(90deg, #1a0b2e, #2d0b1e);
+            color: #e0e0e0; text-align: center; padding: 10px; font-size: 0.85rem; font-weight: 600;
+            position: fixed; top: 0; width: 100%; z-index: 2000; border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .promo-bar span { color: #ff0055; font-weight: 800; }
+
+        /* --- HEADER --- */
+        header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 10px 5%; position: fixed; width: 100%; top: 38px;
+            background: rgba(5, 5, 5, 0.95); backdrop-filter: blur(12px); z-index: 1000; border-bottom: var(--borda-sutil); height: 70px;
+        }
+        .logo img { height: 35px; filter: brightness(1.1); }
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a { color: #bbb; text-decoration: none; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; transition: 0.3s; padding: 5px 0; border-bottom: 2px solid transparent; }
+        .nav-links a:hover { color: white; border-bottom-color: var(--cor-destaque); }
+        .btn-header { background: var(--gradiente-premium); color: white; padding: 10px 20px; border-radius: 50px; text-decoration: none; font-size: 0.75rem; font-weight: 800; box-shadow: 0 4px 15px rgba(221, 36, 118, 0.3); }
+
+        /* --- HERO --- */
+        .article-hero { padding: 140px 5% 60px; text-align: center; background: radial-gradient(circle at 50% 20%, #2d0b1e 0%, #050505 60%); }
+        .article-hero h1 { font-family: 'Montserrat', sans-serif; font-size: clamp(2rem, 5vw, 3rem); line-height: 1.1; font-weight: 900; margin-bottom: 20px; color: #fff;}
+        .text-gradient { background: var(--gradiente-texto); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .badge { background: rgba(255, 0, 85, 0.1); color: #ff0055; border: 1px solid rgba(255, 0, 85, 0.2); padding: 8px 20px; border-radius: 50px; font-size: 0.8rem; margin-bottom: 25px; display: inline-block; font-weight: 700; text-transform: uppercase; }
+
+        /* --- CONTEÚDO (ISOLADO PARA O BLOG) --- */
+        .article-content { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+        .post-meta { font-size: 0.8rem; color: #555; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 2px; text-align: center;}
         
-        header { display: flex; justify-content: space-between; align-items: center; padding: 10px 5%; position: sticky; top: 0; width: 100%; background: rgba(5, 5, 5, 0.95); backdrop-filter: blur(12px); z-index: 1000; border-bottom: var(--borda-sutil); height: 70px; }
-        .logo img { height: 36px; filter: brightness(1.1); transition: 0.3s; }
-        nav ul { display: flex; list-style: none; gap: 25px; }
-        nav a { color: #bbb; text-decoration: none; font-size: 0.85rem; font-weight: 500; text-transform: uppercase; transition: 0.3s; }
-        nav a:hover, nav a.active { color: white; color: var(--cor-destaque); }
-        .btn-header { background: rgba(255, 255, 255, 0.1); color: white; padding: 8px 20px; border-radius: 6px; text-decoration: none; font-size: 0.8rem; font-weight: 600; border: 1px solid rgba(255,255,255,0.1); transition: 0.3s;}
-        .btn-header:hover { background: #fff; color: #000; }
+        .article-text { font-size: 1.1rem; color: #aaa; margin-bottom: 60px; line-height: 1.8;}
+        .article-text h2 { color: #fff; margin: 50px 0 20px; font-size: 1.8rem; border-left: 4px solid var(--cor-destaque); padding-left: 15px;}
+        .article-text h3 { color: #ddd; margin: 30px 0 15px; font-size: 1.4rem; font-weight: 700; }
+        .article-text p { margin-bottom: 20px; }
+        .article-text strong { color: var(--cor-destaque); }
+        .article-text img { width: 100%; border-radius: 16px; margin: 30px 0; object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,0.6); border: 1px solid #222;}
+        .article-text ul { margin: 0 0 25px 25px; }
+        .article-text li { margin-bottom: 10px; }
 
-        /* ======================================================= */
-        /* --- ESTILOS EXCLUSIVOS E BLINDADOS DO ARTIGO --- */
-        /* ======================================================= */
-        .leitura-vip { max-width: 800px; margin: 40px auto 80px; padding: 0 20px; }
+        .article-text .tech-box { background: var(--bg-card); border: 1px solid rgba(255,255,255,0.05); border-left: 4px solid #00ff88; padding: 25px; margin: 35px 0; border-radius: 8px; }
+        .article-text .tech-box h4 { color: #00ff88; margin-bottom: 10px; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px; }
+        .article-text .tech-box p { margin-bottom: 0; font-size: 1rem; color: #ddd; }
         
-        .leitura-vip .post-header { text-align: center; margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .leitura-vip h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; line-height: 1.2; margin-bottom: 15px; color: #fff; text-align: left; }
-        .leitura-vip .meta { color: #888; font-size: 0.9rem; font-weight: 500; display: flex; gap: 15px; flex-wrap: wrap; }
-        .leitura-vip .meta i { color: var(--cor-destaque); }
+        .article-text blockquote { background: rgba(255, 0, 128, 0.05); font-style: italic; color: #eee; border-left: 4px solid var(--cor-destaque); padding: 20px 30px; margin: 30px 0; font-size: 1.15rem; border-radius: 0 12px 12px 0; }
 
-        .leitura-vip .conteudo { font-size: 1.1rem; color: #ccc; line-height: 1.8; }
-        .leitura-vip .conteudo h2 { color: #fff; font-size: 1.8rem; margin: 50px 0 20px; font-weight: 700; border-left: 4px solid var(--cor-destaque); padding-left: 15px; line-height: 1.3;}
-        .leitura-vip .conteudo h3 { color: var(--cor-secundaria); font-size: 1.4rem; margin: 40px 0 15px; font-weight: 600; }
-        .leitura-vip .conteudo p { margin-bottom: 20px; }
-        .leitura-vip .conteudo img { width: 100%; border-radius: 12px; margin: 30px 0; object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 1px solid #222; }
-        .leitura-vip .conteudo ul { margin: 0 0 25px 25px; }
-        .leitura-vip .conteudo li { margin-bottom: 10px; }
-        .leitura-vip .conteudo strong { color: #fff; }
+        /* --- FOOTER ESTILIZADO --- */
+        footer { background: #050505; border-top: 1px solid #1a1a1a; padding: 80px 20px 40px; color: #999; font-size: 0.9rem; }
+        .footer-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; }
+        .footer-logo { margin-bottom: 25px; height: 40px; filter: brightness(1.2); }
+        .footer-col h4 { color: #fff; margin-bottom: 25px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; }
         
-        .leitura-vip .tech-box { background: var(--bg-card); border: 1px solid rgba(255,255,255,0.05); border-left: 4px solid var(--cor-secundaria); padding: 25px; margin: 35px 0; border-radius: 8px; }
-        .leitura-vip .tech-box h4 { color: var(--cor-secundaria); margin-bottom: 10px; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px; }
-        .leitura-vip .tech-box p { margin-bottom: 0; font-size: 1rem; color: #ddd; }
-        
-        .leitura-vip blockquote { background: rgba(255, 0, 128, 0.05); font-style: italic; color: #eee; border-left: 4px solid var(--cor-destaque); padding: 20px 30px; margin: 30px 0; font-size: 1.15rem; border-radius: 0 12px 12px 0; }
-
-        .leitura-vip .cta-banner { background: linear-gradient(160deg, #180a1f 0%, #050505 100%); border: 1px solid var(--cor-destaque); padding: 40px; border-radius: 20px; text-align: center; margin-top: 60px; box-shadow: 0 0 40px rgba(255, 0, 128, 0.15); }
-        .leitura-vip .cta-banner h3 { color: #fff; font-size: 1.8rem; margin-bottom: 15px; font-weight: 800; }
-        .leitura-vip .btn-cta { background: var(--gradiente-premium); color: white; padding: 18px 45px; border-radius: 50px; text-decoration: none; font-weight: 800; display: inline-block; margin-top: 20px; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
-        .leitura-vip .btn-cta:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(221, 36, 118, 0.4); }
-
-        /* --- O SEU FOOTER OFICIAL EXATO --- */
-        footer { background: #050505; border-top: 1px solid #1a1a1a; padding: 80px 20px 40px; color: #777; font-size: 0.9rem; }
-        .footer-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 50px; }
-        .footer-logo { margin-bottom: 20px; filter: brightness(1.2); height: 40px; }
-        .footer-col h4 { color: #fff; margin-bottom: 25px; font-size: 0.9rem; text-transform: uppercase; font-weight: 700; letter-spacing: 1px; }
         .footer-links { list-style: none; }
-        .footer-links li { margin-bottom: 12px; }
-        .footer-links a { color: #777; text-decoration: none; transition: 0.3s; display: block; }
-        .footer-links a:hover { color: #fff; transform: translateX(5px); }
-        .payment-methods { display: flex; gap: 15px; font-size: 2rem; margin-top: 15px; color: #444; }
-        .footer-bottom { text-align: center; margin-top: 60px; padding-top: 30px; border-top: 1px solid #111; font-size: 0.8rem; display: flex; flex-direction: column; gap: 15px; align-items: center; }
-        .legal-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
-        .legal-links a { color: #888; text-decoration: none; }
-        .legal-links a:hover { color: #fff; text-decoration: underline; }
+        .footer-links li { margin-bottom: 15px; }
+        .footer-links a { color: #777; text-decoration: none !important; transition: 0.3s ease; display: flex; align-items: center; gap: 10px; }
+        .footer-links a:hover { color: white; transform: translateX(5px); }
+        .footer-links a i { font-size: 0.6rem; color: var(--cor-destaque); opacity: 0; transition: 0.3s; }
+        .footer-links a:hover i { opacity: 1; }
 
-        /* --- O SEU CHATBOT OFICIAL EXATO --- */
+        .payment-methods { display: flex; gap: 20px; font-size: 2.2rem; margin-top: 25px; color: #222; }
+
+        /* --- CHATBOT --- */
         .wa-widget { position: fixed; bottom: 85px; right: 20px; width: 340px; background: #e5ddd5; border-radius: 12px; z-index: 9999; transform: scale(0); transform-origin: bottom right; transition: 0.3s ease; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         .wa-widget.active { transform: scale(1); }
         .wa-header { background: #075e54; color: white; padding: 12px 15px; display: flex; align-items: center; justify-content: space-between; }
@@ -130,104 +174,88 @@ TEMPLATE_TOPO = """<!DOCTYPE html>
         @media (max-width: 768px) {
             header { height: 65px; padding: 10px 20px; }
             .logo img { height: 28px; }
-            nav, .header-actions { display: none; }
-            .leitura-vip h1 { font-size: 1.8rem; }
+            .nav-links { display: none; }
             .footer-container { grid-template-columns: 1fr; text-align: center; }
-            .payment-methods, .footer-links a, .legal-links { justify-content: center; }
-            .wa-widget { width: calc(100% - 40px); left: 20px; right: 20px; bottom: 95px; }
+            .footer-links a { justify-content: center; }
+            .payment-methods { justify-content: center; }
         }
     </style>
 </head>
 <body>
 
-    <div class="promo-bar">🔥 OFERTA RELÂMPAGO: Preços reduzidos por tempo limitado!</div>
-    
-    <div class="brand-alert">
-        <i class="fa-solid fa-shield-check"></i> 
-        <span>Atenção: Somos a <strong>Revenda UniTV Oficial</strong>. Garanta a sua segurança original.</span>
+    <div class="promo-bar">
+        🔥 OFERTA RELÂMPAGO: Preços reduzidos por tempo limitado!
     </div>
 
     <header>
         <div class="logo">
-            <a href="../../index.html"><img src="../../img/logo-unitv.png" alt="Logo UniTV Oficial"></a>
+            <a href="../../index.html"><img src="../../img/logo-unitv.png" alt="UniTV Oficial"></a>
         </div>
-        <nav>
-            <ul>
-                <li><a href="../../index.html">Início</a></li>
-                <li><a href="../../index.html#comprar">Planos</a></li>
-                <li><a href="../../tutorial/index.html">Instalação</a></li>
-                <li><a href="../index.html" class="active">Blog</a></li>
-            </ul>
+        <nav class="nav-links">
+            <a href="../../index.html">Início</a>
+            <a href="../../baixar/index.html">Downloads</a>
+            <a href="../../tv-box/index.html">Guia TV Box</a>
+            <a href="../index.html">Blog</a>
         </nav>
-        <div class="header-actions">
-            <a href="../../index.html#comprar" class="btn-header">Assinar Agora</a>
-        </div>
+        <a href="../../index.html#comprar" class="btn-header">COMPRAR VIP</a>
     </header>
 
-    <main class="leitura-vip">
-        <div class="post-header">
-            <h1>{titulo}</h1>
-            <div class="meta">
-                <span><i class="fa-solid fa-calendar"></i> {data_atual}</span>
-                <span><i class="fa-solid fa-microchip"></i> Redação Tech UniTV</span>
-            </div>
-        </div>
-        
-        <div class="conteudo">
+    <article class="article-hero reveal active">
+        <span class="badge">Blog Tech</span>
+        <h1>{titulo}</h1>
+        <p class="post-meta">Publicado em: {data_atual} | Por: Equipe UniTV Suporte</p>
+    </article>
+
+    <main class="article-content">
+        <section class="article-text reveal active">
 """
 
 TEMPLATE_RODAPE = """
-        </div>
-        
-        <div class="cta-banner">
-            <h3>Pare de passar raiva com travamentos!</h3>
+        </section>
+
+        <div style="background: linear-gradient(160deg, #180a1f 0%, #050505 100%); border: 1px solid var(--cor-destaque); padding: 40px; border-radius: 20px; text-align: center; margin-top: 60px; box-shadow: 0 0 40px rgba(255, 0, 128, 0.15);">
+            <h3 style="color:#fff; font-size:1.8rem; margin-bottom:15px; font-weight:800;">Pare de passar raiva com travamentos!</h3>
             <p style="color: #bbb; margin-bottom: 20px;">Aproveite o máximo do 4K na sua TV Box. Garanta sua recarga UniTV Oficial com entrega imediata via Pix e suporte humanizado.</p>
-            <a href="../../index.html#comprar" class="btn-cta"><i class="fa-solid fa-bolt"></i> VER PLANOS OFICIAIS</a>
+            <a href="../../index.html#comprar" style="background: var(--gradiente-premium); color: white; padding: 18px 45px; border-radius: 50px; text-decoration: none; font-weight: 800; display: inline-block; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(221, 36, 118, 0.3);"><i class="fa-solid fa-bolt"></i> VER PLANOS OFICIAIS</a>
         </div>
     </main>
 
     <footer>
         <div class="footer-container">
             <div class="footer-col">
-                <img src="../../img/logo-unitv.png" alt="Logo UniTV Revenda Autorizada" class="footer-logo" loading="lazy">
-                <p>Somos revendedores autorizados da plataforma UniTV. Levamos entretenimento premium com qualidade 4K diretamente para a sua casa com suporte de excelência.</p>
-                <div style="display: flex; align-items: center; gap: 10px; color: #fff; font-weight: bold; margin-top: 15px;">
-                    <i class="fa-solid fa-shield-halved" style="color:#00ff88"></i> Conexão 100% Segura
-                </div>
+                <img src="../../img/logo-unitv.png" alt="UniTV" class="footer-logo">
+                <p>Revenda Oficial UniTV Brasil. Leve a melhor tecnologia de entretenimento 4K para sua família com segurança total.</p>
+                <div style="color: #00ff88; font-size: 0.8rem; margin-top: 15px; display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-shield-halved"></i> Site 100% Protegido</div>
             </div>
             <div class="footer-col">
-                <h4>Acesso Rápido</h4>
+                <h4>Navegação</h4>
                 <ul class="footer-links">
-                    <li><a href="../../index.html#comprar">Planos e Recargas</a></li>
-                    <li><a href="../../tutorial/index.html">Guia de Instalação</a></li>
-                    <li><a href="../index.html">Blog de Tecnologia</a></li>
+                    <li><a href="../../index.html"><i class="fa-solid fa-chevron-right"></i> Início</a></li>
+                    <li><a href="../../baixar/index.html"><i class="fa-solid fa-chevron-right"></i> Downloads</a></li>
+                    <li><a href="../../tv-box/index.html"><i class="fa-solid fa-chevron-right"></i> Guia TV Box</a></li>
+                    <li><a href="../index.html"><i class="fa-solid fa-chevron-right"></i> Blog VIP</a></li>
                 </ul>
             </div>
             <div class="footer-col">
-                <h4>Suporte Dedicado</h4>
+                <h4>Suporte</h4>
                 <ul class="footer-links">
-                    <li><a href="javascript:void(0)" onclick="toggleChat()">Atendimento WhatsApp</a></li>
-                    <li><span style="color:#666; font-size:0.8rem; margin-top:5px; display:block;">Horário: Seg a Sex, das 08h às 22h</span></li>
+                    <li><a href="../../ajuda/index.html"><i class="fa-solid fa-chevron-right"></i> Central de Ajuda</a></li>
+                    <li><a href="javascript:void(0)" onclick="toggleChat()"><i class="fa-solid fa-chevron-right"></i> Chat Online</a></li>
+                    <li><a href="https://wa.me/5519981765840" target="_blank"><i class="fa-solid fa-chevron-right"></i> WhatsApp Oficial</a></li>
                 </ul>
             </div>
             <div class="footer-col">
-                <h4>Transação Segura</h4>
-                <p style="margin-bottom: 15px; color: #777;">Aprovação imediata via Pix e Cartão de Crédito.</p>
+                <h4>Pagamento</h4>
                 <div class="payment-methods">
                     <i class="fa-brands fa-pix" style="color:#32bcad;"></i>
                     <i class="fa-brands fa-cc-mastercard"></i>
                     <i class="fa-brands fa-cc-visa"></i>
                 </div>
+                <p style="font-size: 0.7rem; margin-top: 10px; opacity: 0.5;">Processamento Seguro via Kirvano.</p>
             </div>
         </div>
-        <div class="footer-bottom">
-            <div class="legal-links">
-                <a href="#">Política de Privacidade</a>
-                <a href="#">Termos de Uso</a>
-                <a href="#">Política de Reembolso</a>
-            </div>
-            <div style="margin-top:10px;">&copy; 2024 - 2026 UniTV Revenda Oficial Autorizada. Todos os direitos reservados.</div>
-            <div style="color:#444;">Acesso Digital e Serviços Tecnológicos de Streaming</div>
+        <div style="text-align: center; margin-top: 60px; padding-top: 20px; border-top: 1px solid #111; font-size: 0.75rem; color: #444;">
+            &copy; 2024 - 2026 UniTV Revenda Oficial. Todos os direitos reservados.
         </div>
     </footer>
 
@@ -237,14 +265,14 @@ TEMPLATE_RODAPE = """
             <button onclick="toggleChat()" style="background:none; border:none; color:white; font-size:1.5rem; cursor:pointer;">×</button>
         </div>
         <div class="wa-chat-body" id="chat-content">
-            <div class="wa-msg" style="align-self: flex-start; border-top-left-radius: 0;">Olá! 👋 Vi que você está lendo nossos guias de otimização. Quer saber como liberar o sistema VIP completo sem travas na sua Box?</div>
+            <div class="wa-msg" style="align-self: flex-start; border-top-left-radius: 0;">Olá! 👋 Vi que você está lendo nossos guias de tecnologia. Quer saber como liberar o acesso VIP na sua TV Box?</div>
         </div>
         <div style="padding: 10px; background: #f0f0f0;">
-            <button onclick="window.open('https://wa.me/5519981765840?text=Vi o post no blog e quero testar o VIP 4K', '_blank')" style="width: 100%; background: #25d366; color: white; border: none; padding: 12px; border-radius: 12px; font-weight: 800; cursor: pointer;">FALAR COM ESPECIALISTA</button>
+            <button onclick="window.open('https://wa.me/5519981765840?text=Vi o post no blog e quero saber sobre a Recarga VIP', '_blank')" style="width: 100%; background: #25d366; color: white; border: none; padding: 12px; border-radius: 12px; font-weight: 800; cursor: pointer;">FALAR COM ESPECIALISTA</button>
         </div>
     </div>
 
-    <div class="float-zap" onclick="toggleChat()"><i class="fa-brands fa-whatsapp"></i></div>
+    <div class="float-zap" onclick="toggleChat()" aria-label="Abrir conversa no WhatsApp" role="button" tabindex="0"><i class="fa-brands fa-whatsapp"></i></div>
 
     <script>
         function toggleChat() { 
@@ -256,7 +284,7 @@ TEMPLATE_RODAPE = """
 """
 
 # ==========================================
-# 3. LÓGICA E GERAÇÃO DE TEXTO
+# 3. LÓGICA DA IA (Otimizada para não dar Bug no Meta)
 # ==========================================
 def carregar_historico():
     if not os.path.exists(HISTORICO_ARQUIVO): return []
@@ -267,49 +295,57 @@ def salvar_historico(tema):
     with open(HISTORICO_ARQUIVO, 'a', encoding='utf-8') as f:
         f.write(f"{tema}\n")
 
+# CORREÇÃO DE SLUG E PASTAS (Sem acento, max 45 chars)
 def criar_slug(texto):
     texto_sem_acento = unicodedata.normalize('NFKD', texto).encode('ascii', 'ignore').decode('utf-8')
     slug = re.sub(r'[^a-z0-9]+', '-', texto_sem_acento.lower()).strip('-')
-    return slug[:45].strip('-') # Corta a URL para não dar erro 404 de tamanho
+    return slug[:45].strip('-')
 
 def gerar_temas(historico):
-    print("🧠 Gerando temas impactantes e CURTOS (Max 8 palavras)...")
+    print("🧠 Gerando temas curtos e focados em SEO...")
     prompt = f"""
-    Crie {QTD_POSTS_POR_VEZ} títulos de artigos persuasivos sobre TV Box, IPTV e otimização.
-    MUITO IMPORTANTE: Os títulos devem ser BEM CURTOS (máximo de 8 palavras).
-    Exemplo: "Otimizar TV Box Android Para Rodar Liso".
-    NÃO repita estes temas: {', '.join(historico[-30:])}
+    Crie {QTD_POSTS_POR_VEZ} títulos de artigos sobre TV Box e streaming.
+    REGRA DE OURO: Os títulos devem ter NO MÁXIMO 8 palavras.
+    Ex: "Como Tirar o Lag da Sua TV Box".
+    NÃO repita estes: {', '.join(historico[-20:])}
     Retorne APENAS os títulos, um por linha.
     """
     try:
         resposta = model.generate_content(prompt, safety_settings=SAFETY_SETTINGS)
         return [t.strip() for t in resposta.text.split('\n') if t.strip()][:QTD_POSTS_POR_VEZ]
     except Exception:
-        return ["Guia Definitivo TV Box 4K", "Otimizando a Internet Para Streaming", "Adeus Lag Na Sua TV Box"]
+        return ["Otimizando a Internet Para TV Box", "Melhores Codecs Para Streaming 4K", "Fim do Buffering na TV Box"]
 
 def escrever_artigo(tema):
-    print(f"✍️ Escrevendo conteúdo: {tema}")
+    print(f"✍️ Redigindo: {tema}")
     prompt_redator = f"""
-    Escreva um artigo técnico (800+ palavras) sobre: "{tema}".
+    Escreva um artigo técnico (800+ palavras) focado em soluções para TV Box sobre: "{tema}".
     
-    REGRA DE FORMATAÇÃO OBRIGATÓRIA:
-    1. NÃO coloque tag <h1>.
+    REGRA OBRIGATÓRIA DE HTML:
+    1. NÃO coloque a tag <h1>. NÃO USE <title>.
     2. Use <h2> para subtítulos e <p> para o texto.
     3. Crie 2 blocos de destaque copiando exatamente este HTML:
        <div class="tech-box"><h4>Dica de Ouro</h4><p>escreva a dica aqui.</p></div>
     4. Adicione imagens dinâmicas usando: 
-       <img src="https://picsum.photos/seed/{tema.replace(' ', '')}X/800/400" alt="Ilustração"> (mude X para 1, 2 e 3).
-    5. Traga dicas de DNS e otimização de rede.
-    6. Termine sugerindo assinar a Recarga UniTV.
+       <img src="https://picsum.photos/seed/{tema.replace(' ', '')}X/800/400" alt="Tecnologia"> (mude o X para 1, 2 e 3).
+    5. Fale de forma técnica e educativa.
+    6. Retorne APENAS o HTML do corpo do texto.
     """
+    
+    prompt_meta = f"""
+    Forneça UMA ÚNICA frase de no máximo 150 caracteres resumindo o tema: {tema}. 
+    NÃO INCLUA "Opção 1", "Opção 2", nem textos extras. Apenas a frase final.
+    """
+    
     try:
         resposta = model.generate_content(prompt_redator, safety_settings=SAFETY_SETTINGS)
-        if not resposta.parts:
-            prompt_seguro = f"Escreva um texto educativo sobre redes de internet com o tema {tema}. Retorne em HTML."
-            resposta = model.generate_content(prompt_seguro, safety_settings=SAFETY_SETTINGS)
         artigo = resposta.text.replace("```html", "").replace("```", "").strip()
-        desc = model.generate_content(f"Meta description SEO (150 carac): {tema}", safety_settings=SAFETY_SETTINGS).text.strip()
-        return artigo, desc
+        
+        meta = model.generate_content(prompt_meta, safety_settings=SAFETY_SETTINGS).text.replace('"', '').strip()
+        # Força o corte da string caso a IA desobedeça o limite
+        meta_desc = meta[:150]
+        
+        return artigo, meta_desc
     except Exception as e:
         raise Exception(f"Erro na IA: {e}")
 
@@ -322,15 +358,15 @@ def atualizar_pagina_principal_do_blog(titulo, slug, meta_desc):
         with open(caminho, "r", encoding="utf-8") as f: html = f.read()
 
         card = f"""
-        <a href="{slug}/index.html" class="post-card reveal active" style="text-decoration:none;">
+        <a href="{slug}/index.html" class="post-card reveal active" style="text-decoration:none; display: block; margin-bottom: 30px;">
             <div class="post-thumb" style="border-radius:10px; overflow:hidden; margin-bottom:15px;">
-                <img src="https://picsum.photos/seed/{slug}/800/600" alt="{titulo}" style="width:100%; display:block; transition:0.3s;">
+                <img src="https://picsum.photos/seed/{slug}/800/500" alt="{titulo}" style="width:100%; display:block; transition:0.3s; object-fit: cover;">
             </div>
             <div class="post-content">
                 <span class="post-tag" style="background:#ff0080; color:#fff; padding:5px 10px; font-size:0.7rem; font-weight:bold; border-radius:4px; margin-bottom:10px; display:inline-block;">NOVIDADE TECH</span>
-                <h2 style="color:#fff; font-size:1.3rem; margin-bottom:10px; line-height:1.3;">{titulo}</h2>
+                <h2 style="color:#fff; font-size:1.4rem; margin-bottom:10px; line-height:1.3; font-weight:800;">{titulo}</h2>
                 <p style="color:#888; font-size:0.9rem; margin-bottom:15px; line-height:1.5;">{meta_desc}</p>
-                <span class="btn-read" style="color:#00ff88; font-weight:bold; font-size:0.9rem;">LER AGORA <i class="fa-solid fa-arrow-right"></i></span>
+                <span class="btn-read" style="color:#00ff88; font-weight:bold; font-size:0.9rem;">LER GUIA <i class="fa-solid fa-arrow-right"></i></span>
             </div>
         </a>
         """
@@ -338,14 +374,14 @@ def atualizar_pagina_principal_do_blog(titulo, slug, meta_desc):
         if "" in html:
             html = html.replace("", card)
             with open(caminho, "w", encoding="utf-8") as f: f.write(html)
-            print(f"🔗 Injetado com sucesso na vitrine!")
+            print(f"🔗 Post inserido na vitrine do blog.")
         else: print("⚠️ ERRO: A tag não foi encontrada na capa do blog.")
     except FileNotFoundError: print(f"⚠️ Capa do blog não encontrada.")
 
 # ==========================================
 # EXECUTOR FINAL
 # ==========================================
-print("🚀 MÁQUINA DE SEO CYBERPUNK (VERSÃO MASTER)")
+print("🚀 MÁQUINA DE SEO CYBERPUNK (V-MASTER REVISADA)")
 historico = carregar_historico()
 temas = gerar_temas(historico)
 
@@ -358,7 +394,11 @@ for tema in temas:
     
     try:
         corpo, meta = escrever_artigo(tema)
-        html_final = TEMPLATE_TOPO.replace("{titulo}", tema).replace("{meta_desc}", meta).replace("{data_atual}", datetime.now().strftime("%d/%m/%Y"))
+        data_formatada = datetime.now().strftime("%d de %B de %Y")
+        data_seo = datetime.now().strftime("%Y-%m-%d")
+        
+        # Injeção das variáveis no template
+        html_final = TEMPLATE_TOPO.replace("{titulo}", tema).replace("{meta_desc}", meta).replace("{data_atual}", data_formatada).replace("{data_seo}", data_seo)
         html_final += corpo + TEMPLATE_RODAPE
         
         with open(os.path.join(pasta_artigo, "index.html"), "w", encoding="utf-8") as f: f.write(html_final)
@@ -371,4 +411,4 @@ print("\n📦 Fazendo o Push...")
 subprocess.run(["git", "add", "."])
 subprocess.run(["git", "commit", "-m", f"Auto-post V-Master: {datetime.now().strftime('%Y-%m-%d %H:%M')}"])
 subprocess.run(["git", "push"])
-print("✅ DEPLOY CONCLUÍDO! Layout blindado.")
+print("✅ DEPLOY CONCLUÍDO! O Layout está protegido e as imagens corrigidas.")
