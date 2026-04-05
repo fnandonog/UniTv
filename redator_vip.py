@@ -3,21 +3,22 @@ import os
 import re
 import time
 import subprocess
+import unicodedata
 from datetime import datetime
 from google.generativeai.types import HarmCategory, HarmBlockThreshold
 
 # ==========================================
-# 1. CONFIGURAÇÕES DA MÁQUINA (UPGRADE PRO)
+# 1. CONFIGURAÇÕES DA MÁQUINA (GEMINI PRO 2.5)
 # ==========================================
 genai.configure(api_key="AIzaSyCmT5HHUpHsXbtN68h6bpkRIzFpjIy2RGs")
-# Modelo de raciocínio profundo para copywriting e estruturação HTML Rica
-model = genai.GenerativeModel('gemini-2.5-flash')
+# O Modelo PRO de Elite que confirmamos estar ativo na sua chave
+model = genai.GenerativeModel('gemini-2.5-pro')
 
 QTD_POSTS_POR_VEZ = 3 
 PASTA_BLOG = "blog"
 HISTORICO_ARQUIVO = "historico_temas_blog.txt"
 
-# Desligando os filtros de segurança para o Google não bloquear palavras como "IPTV" e "TV Box"
+# Blindagem contra falsos-positivos do Google (IPTV, TV Box)
 SAFETY_SETTINGS = {
     HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
     HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE,
@@ -26,9 +27,8 @@ SAFETY_SETTINGS = {
 }
 
 # ==========================================
-# 2. TEMPLATES BLINDADOS (EXATAMENTE SEU SITE)
+# 2. TEMPLATES BLINDADOS (IDENTIDADE UNITV)
 # ==========================================
-# Aqui está 100% do seu CSS, Footer, Chatbot e a estética Cyberpunk.
 
 TEMPLATE_TOPO = """<!DOCTYPE html>
 <html lang="pt-br">
@@ -39,6 +39,13 @@ TEMPLATE_TOPO = """<!DOCTYPE html>
     <meta name="description" content="{meta_desc}">
     <meta name="theme-color" content="#1a0525">
     
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="{titulo}" />
+    <meta property="og:description" content="{meta_desc}" />
+    <meta property="og:site_name" content="UniTV Oficial Revenda" />
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -48,6 +55,7 @@ TEMPLATE_TOPO = """<!DOCTYPE html>
     <style>
         /* --- ESTILOS ORIGINAIS DO SEU SITE --- */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        
         :root {
             --bg-body: #050505;
             --bg-card: #0f0f0f;
@@ -57,7 +65,7 @@ TEMPLATE_TOPO = """<!DOCTYPE html>
             --verde-zap: #25D366;
             --wa-header: #075e54; --wa-bg: #e5ddd5; --wa-msg-user: #dcf8c6;
             --cor-destaque: #ff0080;
-            --cor-secundaria: #00d4ff;
+            --cor-secundaria: #00ff88;
         }
 
         html, body { background-color: var(--bg-body); color: #f0f0f0; overflow-x: hidden; width: 100%; line-height: 1.6; scroll-behavior: smooth; }
@@ -74,7 +82,7 @@ TEMPLATE_TOPO = """<!DOCTYPE html>
         .btn-header { background: rgba(255, 255, 255, 0.1); color: white; padding: 8px 20px; border-radius: 6px; text-decoration: none; font-size: 0.8rem; font-weight: 600; border: 1px solid rgba(255,255,255,0.1); transition: 0.3s;}
         .btn-header:hover { background: #fff; color: #000; }
 
-        /* --- ESTILOS DE LEITURA (CYBERPUNK / TECH) --- */
+        /* --- ESTILOS DE LEITURA (CYBERPUNK / TECH) BLINDADOS --- */
         .article-container { max-width: 900px; margin: 60px auto 100px; padding: 0 20px; }
         
         .article-header { text-align: center; margin-bottom: 50px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 30px; }
@@ -102,7 +110,7 @@ TEMPLATE_TOPO = """<!DOCTYPE html>
         .btn-cta-blog { background: var(--gradiente-premium); color: white; padding: 18px 45px; border-radius: 50px; text-decoration: none; font-weight: 800; display: inline-flex; align-items: center; gap: 10px; margin-top: 20px; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
         .btn-cta-blog:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(221, 36, 118, 0.4); }
 
-        /* --- FOOTER & WIDGETS --- */
+        /* --- FOOTER & WIDGETS (IDÊNTICOS A HOME) --- */
         footer { background: #050505; border-top: 1px solid #1a1a1a; padding: 80px 20px 40px; color: #777; font-size: 0.9rem; }
         .footer-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 50px; }
         .footer-logo { margin-bottom: 20px; filter: brightness(1.2); height: 40px; }
@@ -113,7 +121,10 @@ TEMPLATE_TOPO = """<!DOCTYPE html>
         .footer-links a:hover { color: #fff; transform: translateX(5px); }
         .payment-methods { display: flex; gap: 15px; font-size: 2rem; margin-top: 15px; color: #444; }
         .footer-bottom { text-align: center; margin-top: 60px; padding-top: 30px; border-top: 1px solid #111; font-size: 0.8rem; display: flex; flex-direction: column; gap: 15px; align-items: center; }
-        
+        .legal-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+        .legal-links a { color: #888; text-decoration: none; }
+        .legal-links a:hover { color: #fff; text-decoration: underline; }
+
         .wa-widget { position: fixed; bottom: 90px; right: 25px; width: 350px; background: var(--wa-bg); border-radius: 16px; z-index: 9999; box-shadow: 0 15px 35px rgba(0,0,0,0.4); display: flex; flex-direction: column; overflow: hidden; transform: scale(0); transform-origin: bottom right; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .wa-widget.active { transform: scale(1); }
         .wa-header { background: var(--wa-header); color: white; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; }
@@ -145,6 +156,7 @@ TEMPLATE_TOPO = """<!DOCTYPE html>
             .article-header h1 { font-size: 2.2rem; }
             .footer-container { grid-template-columns: 1fr; text-align: center; }
             .payment-methods, .footer-links a { justify-content: center; }
+            .legal-links { flex-direction: column; gap: 10px; }
         }
     </style>
 </head>
@@ -156,7 +168,7 @@ TEMPLATE_TOPO = """<!DOCTYPE html>
     
     <div class="brand-alert">
         <i class="fa-solid fa-shield-check"></i> 
-        <span>Atenção: Somos a <strong>Revenda UniTV Oficial</strong> e NÃO a UnitvNet. Garanta a sua segurança original.</span>
+        <span>Atenção: Somos a <strong>Revenda UniTV Oficial</strong>. Garanta a sua segurança.</span>
     </div>
 
     <header>
@@ -233,7 +245,12 @@ TEMPLATE_RODAPE = """
             </div>
         </div>
         <div class="footer-bottom">
-            <div>&copy; 2024 - 2026 UniTV Revenda Oficial Autorizada. Todos os direitos reservados.</div>
+            <div class="legal-links">
+                <a href="#">Política de Privacidade</a>
+                <a href="#">Termos de Uso</a>
+                <a href="#">Política de Reembolso</a>
+            </div>
+            <div style="margin-top:10px;">&copy; 2024 - 2026 UniTV Revenda Oficial Autorizada. Todos os direitos reservados.</div>
             <div style="color:#444;">Acesso Digital e Serviços Tecnológicos de Streaming</div>
         </div>
     </footer>
@@ -250,11 +267,11 @@ TEMPLATE_RODAPE = """
             <button onclick="toggleChat()" class="wa-close" aria-label="Fechar janela de chat"><i class="fa-solid fa-times"></i></button>
         </div>
         <div id="chat-content" class="wa-chat-body">
-            <div class="wa-msg wa-msg-bot">Olá! 👋 Bem-vindo ao suporte oficial UniTV. Como posso te ajudar hoje?</div>
+            <div class="wa-msg wa-msg-bot">Olá! 👋 Bem-vindo ao suporte oficial UniTV. Sou o atendente virtual focado em vendas e instalação. <span class="wa-time">agora</span></div>
         </div>
         <div id="wa-options" class="wa-options">
             <button onclick="window.open('../../index.html#comprar', '_self')">Ver planos disponíveis</button>
-            <button onclick="window.open('https://wa.me/5519981765840', '_blank')">Falar com Suporte Humano</button>
+            <button onclick="window.open('https://wa.me/5519981765840', '_blank')">Falar com Especialista</button>
         </div>
         <div class="wa-input-fake">
             <div class="wa-input-box">Selecione uma opção...</div>
@@ -262,17 +279,19 @@ TEMPLATE_RODAPE = """
         </div>
     </div>
 
-    <div class="float-zap" onclick="toggleChat()"><i class="fa-brands fa-whatsapp"></i></div>
+    <div class="float-zap" onclick="toggleChat()" aria-label="Abrir conversa no WhatsApp" role="button" tabindex="0"><i class="fa-brands fa-whatsapp"></i></div>
 
     <script>
-        function toggleChat() { document.getElementById('chat-widget').classList.toggle('active'); }
+        function toggleChat() { 
+            document.getElementById('chat-widget').classList.toggle('active'); 
+        }
     </script>
 </body>
 </html>
 """
 
 # ==========================================
-# 3. A INTELIGÊNCIA DA IA (COPYWRITING AVANÇADO)
+# 3. INTELIGÊNCIA DA IA E GERADOR DE URLS
 # ==========================================
 def carregar_historico():
     if not os.path.exists(HISTORICO_ARQUIVO):
@@ -284,11 +303,19 @@ def salvar_historico(tema):
     with open(HISTORICO_ARQUIVO, 'a', encoding='utf-8') as f:
         f.write(f"{tema}\n")
 
+# ESSA FUNÇÃO RESOLVE O ERRO DE PÁGINA NÃO ENCONTRADA (404 no Servidor)
+def criar_slug(texto):
+    # Remove acentos (ex: Otimização -> Otimizacao)
+    texto_sem_acento = unicodedata.normalize('NFKD', texto).encode('ascii', 'ignore').decode('utf-8')
+    # Transforma em minúsculo e troca tudo que não for letra ou número por um traço
+    slug = re.sub(r'[^a-z0-9]+', '-', texto_sem_acento.lower()).strip('-')
+    return slug
+
 def gerar_temas(historico):
     print("🧠 Procurando temas que engajam e vendem...")
     prompt = f"""
     Crie {QTD_POSTS_POR_VEZ} títulos de artigos altamente persuasivos e técnicos para um blog focado em TV Box, IPTV, Streaming e tecnologia Android.
-    Os títulos devem focar na solução de problemas (ex: eliminar travamentos, setups de otimização 4K, segredos de sistema).
+    Os títulos devem focar na solução de problemas reais (eliminar travamentos, setups de otimização 4K).
     NÃO repita estes temas: {', '.join(historico[-30:])}
     Retorne APENAS os títulos, um por linha.
     """
@@ -323,9 +350,6 @@ def escrever_artigo(tema):
     
     return artigo_html, meta_desc
 
-def criar_slug(texto):
-    return re.sub(r'[^a-z0-9]+', '-', texto.lower()).strip('-')
-
 # ==========================================
 # 4. INJETOR NA TELA INICIAL DO BLOG
 # ==========================================
@@ -338,20 +362,20 @@ def atualizar_pagina_principal_do_blog(titulo, slug, meta_desc):
 
         # O Design EXATO do card do seu Grid Cyberpunk
         novo_card = f"""
-        <a href="{slug}/index.html" class="post-card reveal active">
-            <div class="post-thumb">
-                <img src="https://picsum.photos/seed/{slug}/800/600" alt="{titulo}">
+        <a href="{slug}/index.html" class="post-card reveal active" style="text-decoration:none;">
+            <div class="post-thumb" style="border-radius:10px; overflow:hidden; margin-bottom:15px;">
+                <img src="https://picsum.photos/seed/{slug}/800/600" alt="{titulo}" style="width:100%; display:block; transition:0.3s;">
             </div>
             <div class="post-content">
-                <span class="post-tag">NOVIDADE TECH</span>
-                <h2>{titulo}</h2>
-                <p>{meta_desc}</p>
-                <span class="btn-read">LER AGORA <i class="fa-solid fa-arrow-right"></i></span>
+                <span class="post-tag" style="background:#ff0080; color:#fff; padding:5px 10px; font-size:0.7rem; font-weight:bold; border-radius:4px; margin-bottom:10px; display:inline-block;">NOVIDADE TECH</span>
+                <h2 style="color:#fff; font-size:1.3rem; margin-bottom:10px; line-height:1.3;">{titulo}</h2>
+                <p style="color:#888; font-size:0.9rem; margin-bottom:15px; line-height:1.5;">{meta_desc}</p>
+                <span class="btn-read" style="color:#00ff88; font-weight:bold; font-size:0.9rem;">LER AGORA <i class="fa-solid fa-arrow-right"></i></span>
             </div>
         </a>
         """
 
-        # Corrige o bug do replace vazio e mantém a âncora para os próximos posts!
+        # Corrige o bug do replace: Injeta o card E recria a âncora para o próximo post
         if "" in html:
             html = html.replace("", novo_card)
         else:
@@ -366,7 +390,7 @@ def atualizar_pagina_principal_do_blog(titulo, slug, meta_desc):
 # ==========================================
 # EXECUTOR
 # ==========================================
-print("🚀 MÁQUINA DE SEO CYBERPUNK INICIADA COM GEMINI PRO E FILTROS DESLIGADOS")
+print("🚀 MÁQUINA DE SEO CYBERPUNK INICIADA (GEMINI 2.5 PRO)")
 historico = carregar_historico()
 temas = gerar_temas(historico)
 
@@ -385,7 +409,7 @@ for tema in temas:
         conteudo_html, meta_desc = escrever_artigo(tema)
         data_formatada = datetime.now().strftime("%d de %B de %Y")
         
-        # Substituição limpa usando replace (preserva as chaves do CSS original)
+        # Monta a página inteira blindada
         pagina_final = TEMPLATE_TOPO.replace("{titulo}", tema).replace("{meta_desc}", meta_desc).replace("{data_atual}", data_formatada)
         pagina_final += conteudo_html
         pagina_final += TEMPLATE_RODAPE
@@ -396,9 +420,8 @@ for tema in temas:
         atualizar_pagina_principal_do_blog(tema, slug, meta_desc)
         salvar_historico(tema)
         
-        # Pausa maior devido ao modelo PRO e para evitar Rate Limit
         print("⏳ Aguardando a IA respirar...")
-        time.sleep(10) 
+        time.sleep(8) 
     except Exception as e:
         print(f"❌ Erro ao gerar {tema}: {e}")
 
