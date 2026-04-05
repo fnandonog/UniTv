@@ -11,7 +11,7 @@ from google.generativeai.types import HarmCategory, HarmBlockThreshold
 # ==========================================
 genai.configure(api_key="AIzaSyCmT5HHUpHsXbtN68h6bpkRIzFpjIy2RGs")
 # Modelo de raciocínio profundo para copywriting e estruturação HTML Rica
-model = genai.GenerativeModel('gemini-1.5-pro')
+model = genai.GenerativeModel('gemini-pro')
 
 QTD_POSTS_POR_VEZ = 3 
 PASTA_BLOG = "blog"
