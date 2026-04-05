@@ -8,17 +8,16 @@ from datetime import datetime
 from google.generativeai.types import HarmCategory, HarmBlockThreshold
 
 # ==========================================
-# 1. CONFIGURAÇÕES DA MÁQUINA (GEMINI PRO 2.5)
+# 1. CONFIGURAÇÕES DA MÁQUINA (GEMINI 2.5 PRO)
 # ==========================================
 genai.configure(api_key="AIzaSyCmT5HHUpHsXbtN68h6bpkRIzFpjIy2RGs")
-# O Modelo PRO de Elite que confirmamos estar ativo na sua chave
 model = genai.GenerativeModel('gemini-2.5-pro')
 
 QTD_POSTS_POR_VEZ = 3 
 PASTA_BLOG = "blog"
 HISTORICO_ARQUIVO = "historico_temas_blog.txt"
 
-# Blindagem contra falsos-positivos do Google (IPTV, TV Box)
+# Filtros desativados para não barrar palavras do nicho de TV Box
 SAFETY_SETTINGS = {
     HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
     HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE,
@@ -27,7 +26,7 @@ SAFETY_SETTINGS = {
 }
 
 # ==========================================
-# 2. TEMPLATES BLINDADOS (IDENTIDADE UNITV)
+# 2. TEMPLATES BLINDADOS (EXATAMENTE SEU SITE)
 # ==========================================
 
 TEMPLATE_TOPO = """<!DOCTYPE html>
@@ -39,6 +38,7 @@ TEMPLATE_TOPO = """<!DOCTYPE html>
     <meta name="description" content="{meta_desc}">
     <meta name="theme-color" content="#1a0525">
     
+    <link rel="canonical" href="https://unitvsite.com.br/" />
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <meta property="og:locale" content="pt_BR" />
     <meta property="og:type" content="article" />
@@ -65,52 +65,65 @@ TEMPLATE_TOPO = """<!DOCTYPE html>
             --verde-zap: #25D366;
             --wa-header: #075e54; --wa-bg: #e5ddd5; --wa-msg-user: #dcf8c6;
             --cor-destaque: #ff0080;
-            --cor-secundaria: #00ff88;
         }
 
-        html, body { background-color: var(--bg-body); color: #f0f0f0; overflow-x: hidden; width: 100%; line-height: 1.6; scroll-behavior: smooth; }
+        html, body { 
+            background-color: var(--bg-body); 
+            color: #f0f0f0; 
+            overflow-x: hidden; 
+            width: 100%;
+            max-width: 100vw;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
 
+        /* --- BARRAS DE TOPO --- */
         .promo-bar { background: linear-gradient(90deg, #1a0b2e, #2d0b1e); color: #e0e0e0; text-align: center; padding: 8px 10px; font-size: 0.85rem; font-weight: 500; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .brand-alert { background: rgba(255, 0, 128, 0.05); border-bottom: 1px solid rgba(255, 0, 128, 0.1); color: #ffb3d9; text-align: center; padding: 8px 10px; font-size: 0.75rem; font-weight: 600; letter-spacing: 1px; display: flex; justify-content: center; align-items: center; gap: 10px; }
+        .brand-alert strong { color: #fff; text-decoration: underline; }
 
+        /* --- HEADER --- */
         header { display: flex; justify-content: space-between; align-items: center; padding: 10px 5%; position: sticky; top: 0; width: 100%; background: rgba(5, 5, 5, 0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); z-index: 1000; border-bottom: var(--borda-sutil); height: 70px; }
         .logo img { height: 36px; filter: brightness(1.1); transition: 0.3s; }
+        .logo img:hover { transform: scale(1.05); }
         nav ul { display: flex; list-style: none; gap: 25px; }
         nav a { color: #bbb; text-decoration: none; font-size: 0.85rem; font-weight: 500; text-transform: uppercase; transition: 0.3s; }
-        nav a:hover, nav a.active { color: var(--cor-destaque); }
+        nav a:hover, nav a.active { color: white; color: var(--cor-destaque); }
         .header-actions { display: flex; align-items: center; gap: 15px; }
         .btn-header { background: rgba(255, 255, 255, 0.1); color: white; padding: 8px 20px; border-radius: 6px; text-decoration: none; font-size: 0.8rem; font-weight: 600; border: 1px solid rgba(255,255,255,0.1); transition: 0.3s;}
         .btn-header:hover { background: #fff; color: #000; }
+        .menu-toggle { display: none; color: white; font-size: 1.6rem; cursor: pointer; outline: none; }
 
-        /* --- ESTILOS DE LEITURA (CYBERPUNK / TECH) BLINDADOS --- */
-        .article-container { max-width: 900px; margin: 60px auto 100px; padding: 0 20px; }
+        /* ======================================================== */
+        /* --- ESTILOS ISOLADOS PARA O ARTIGO (MUITO IMPORTANTE) ---*/
+        /* ======================================================== */
+        .post-container { max-width: 800px; margin: 40px auto 80px; padding: 0 20px; }
         
-        .article-header { text-align: center; margin-bottom: 50px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 30px; }
-        .article-header h1 { font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 800; line-height: 1.2; margin-bottom: 20px; background: var(--gradiente-texto); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .article-meta { display: flex; justify-content: center; gap: 20px; color: #888; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
-        .article-meta i { color: var(--cor-destaque); }
+        .post-header { margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .post-title { font-size: clamp(1.8rem, 5vw, 2.5rem) !important; font-weight: 800 !important; line-height: 1.3 !important; margin-bottom: 15px !important; color: #fff !important; text-align: left !important; }
+        .text-gradient { background: var(--gradiente-texto); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        .post-meta { color: #888; font-size: 0.9rem; font-weight: 500; display: flex; align-items: center; gap: 15px; flex-wrap: wrap; }
+        .post-meta i { color: var(--cor-destaque); }
 
-        .article-content { font-size: 1.15rem; color: #ccc; line-height: 1.8; }
-        .article-content h2 { color: #fff; font-size: 2rem; margin: 60px 0 25px; font-weight: 700; border-left: 5px solid var(--cor-destaque); padding-left: 15px; letter-spacing: -0.5px; }
-        .article-content h3 { color: var(--cor-secundaria); font-size: 1.4rem; margin: 40px 0 15px; font-weight: 600; }
-        .article-content p { margin-bottom: 25px; }
-        .article-content img { width: 100%; border-radius: 16px; margin: 35px 0; border: 1px solid rgba(255, 0, 128, 0.15); box-shadow: 0 15px 40px rgba(0,0,0,0.5); object-fit: cover; }
-        .article-content ul, .article-content ol { margin: 0 0 30px 30px; }
-        .article-content li { margin-bottom: 12px; }
-        .article-content strong { color: #fff; font-weight: 700; }
+        .post-content { font-size: 1.1rem; color: #ccc; line-height: 1.8; }
+        .post-content h2 { color: #fff; font-size: 1.8rem; margin: 50px 0 20px; font-weight: 700; border-left: 4px solid var(--cor-destaque); padding-left: 15px; line-height: 1.3;}
+        .post-content h3 { color: #fff; font-size: 1.4rem; margin: 40px 0 15px; font-weight: 600; }
+        .post-content p { margin-bottom: 20px; }
+        .post-content img { width: 100%; border-radius: 12px; margin: 30px 0; object-fit: cover; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .post-content ul, .post-content ol { margin: 0 0 25px 25px; }
+        .post-content li { margin-bottom: 10px; }
+        .post-content a { color: var(--cor-destaque); text-decoration: none; font-weight: 600; }
+        .post-content a:hover { text-decoration: underline; }
         
-        /* Caixas de Destaque Cyberpunk */
-        .article-content blockquote { background: rgba(255, 0, 128, 0.05); border-left: 4px solid var(--cor-destaque); padding: 25px 30px; margin: 40px 0; font-style: italic; color: #eee; border-radius: 0 12px 12px 0; font-size: 1.2rem; }
-        .article-content .tech-box { background: #0a0a0a; border: 1px solid #222; border-radius: 12px; padding: 30px; margin: 40px 0; border-top: 3px solid var(--cor-secundaria); box-shadow: 0 10px 30px rgba(0, 212, 255, 0.05); }
-        .article-content .tech-box h4 { color: #fff; margin-bottom: 15px; font-size: 1.3rem; }
+        .post-content .tech-box { background: var(--bg-card); border: 1px solid rgba(255,255,255,0.05); border-left: 4px solid #00ff88; padding: 25px; margin: 35px 0; border-radius: 8px; }
+        .post-content .tech-box h4 { color: #00ff88; margin-bottom: 10px; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px; }
+        .post-content .tech-box p { margin-bottom: 0; font-size: 1rem; color: #ddd; }
         
-        /* Banner de Conversão no Final do Post */
-        .cta-banner-blog { background: linear-gradient(160deg, #180a1f 0%, #050505 100%); border: 1px solid var(--cor-destaque); padding: 40px; border-radius: 20px; text-align: center; margin-top: 60px; box-shadow: 0 0 40px rgba(255, 0, 128, 0.15); }
-        .cta-banner-blog h3 { color: #fff; font-size: 1.8rem; margin-bottom: 15px; font-weight: 800; }
-        .btn-cta-blog { background: var(--gradiente-premium); color: white; padding: 18px 45px; border-radius: 50px; text-decoration: none; font-weight: 800; display: inline-flex; align-items: center; gap: 10px; margin-top: 20px; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
-        .btn-cta-blog:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(221, 36, 118, 0.4); }
+        .post-content blockquote { background: rgba(255, 0, 128, 0.05); font-style: italic; color: #eee; border-left: 4px solid var(--cor-destaque); padding: 20px 30px; margin: 30px 0; font-size: 1.15rem; border-radius: 0 12px 12px 0; }
+        /* ======================================================== */
 
-        /* --- FOOTER & WIDGETS (IDÊNTICOS A HOME) --- */
+        /* --- FOOTER & WHATSAPP (COPIADO DA SUA HOME) --- */
         footer { background: #050505; border-top: 1px solid #1a1a1a; padding: 80px 20px 40px; color: #777; font-size: 0.9rem; }
         .footer-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 50px; }
         .footer-logo { margin-bottom: 20px; filter: brightness(1.2); height: 40px; }
@@ -141,10 +154,12 @@ TEMPLATE_TOPO = """<!DOCTYPE html>
         .wa-msg-bot { background: white; align-self: flex-start; border-top-left-radius: 0; }
         .wa-msg-user { background: var(--wa-msg-user); align-self: flex-end; border-top-right-radius: 0; }
         .wa-options { padding: 15px; background: #f0f0f0; border-top: 1px solid #ddd; display: flex; flex-direction: column; gap: 10px; }
-        .wa-options button { background: white; border: 1px solid #ccc; padding: 12px; border-radius: 25px; font-size: 0.9rem; color: #075e54; font-weight: 600; cursor: pointer; text-align: center; width: 100%; transition: 0.3s; }
+        .wa-options button { background: white; border: 1px solid #ccc; padding: 12px; border-radius: 25px; font-size: 0.9rem; color: #075e54; font-weight: 600; cursor: pointer; text-align: center; width: 100%; transition: 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
         .wa-options button:hover { background: #075e54; color: white; border-color: #075e54; }
         .wa-input-fake { background: #f0f0f0; padding: 12px 20px; display: flex; align-items: center; gap: 15px; border-top: 1px solid #ddd; }
         .wa-input-box { background: white; flex: 1; padding: 10px 20px; border-radius: 25px; color: #999; font-size: 0.9rem; border: 1px solid #ccc; }
+        .typing span { height: 8px; width: 8px; background: #bbb; display: inline-block; border-radius: 50%; margin-right: 3px; animation: waTyping 1s infinite; }
+        @keyframes waTyping { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
         
         .float-zap { position: fixed; bottom: 25px; right: 25px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; z-index: 10000; box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4); cursor: pointer; transition: 0.3s; }
         .float-zap:hover { transform: scale(1.1); }
@@ -153,27 +168,25 @@ TEMPLATE_TOPO = """<!DOCTYPE html>
             header { height: 65px; padding: 10px 20px; }
             .logo img { height: 28px; }
             nav, .header-actions { display: none; }
-            .article-header h1 { font-size: 2.2rem; }
+            .post-title { font-size: 1.8rem !important; }
             .footer-container { grid-template-columns: 1fr; text-align: center; }
-            .payment-methods, .footer-links a { justify-content: center; }
-            .legal-links { flex-direction: column; gap: 10px; }
+            .payment-methods, .footer-links a, .legal-links { justify-content: center; }
+            .wa-widget { width: calc(100% - 40px); left: 20px; right: 20px; bottom: 95px; max-height: 75vh; }
         }
     </style>
 </head>
 <body>
 
-    <div class="promo-bar">
-        🔥 OFERTA RELÂMPAGO: Preços reduzidos por tempo limitado!
-    </div>
+    <div class="promo-bar">🔥 OFERTA RELÂMPAGO: Preços reduzidos por tempo limitado!</div>
     
     <div class="brand-alert">
         <i class="fa-solid fa-shield-check"></i> 
-        <span>Atenção: Somos a <strong>Revenda UniTV Oficial</strong>. Garanta a sua segurança.</span>
+        <span>Atenção: Somos a <strong>Revenda UniTV Oficial</strong>. Garanta a sua segurança original.</span>
     </div>
 
     <header>
         <div class="logo">
-            <a href="../../index.html"><img src="../../img/logo-unitv.png" alt="Logo UniTV Oficial Revenda Autorizada"></a>
+            <a href="../../index.html"><img src="../../img/logo-unitv.png" alt="Logo UniTV Oficial"></a>
         </div>
         <nav id="nav-menu">
             <ul>
@@ -188,25 +201,25 @@ TEMPLATE_TOPO = """<!DOCTYPE html>
         </div>
     </header>
 
-    <main class="article-container">
-        <header class="article-header">
-            <h1>{titulo}</h1>
-            <div class="article-meta">
+    <main class="post-container">
+        <header class="post-header">
+            <h1 class="post-title">{titulo}</h1>
+            <div class="post-meta">
                 <span><i class="fa-solid fa-calendar"></i> {data_atual}</span>
                 <span><i class="fa-solid fa-microchip"></i> Redação Tech UniTV</span>
             </div>
         </header>
         
-        <article class="article-content">
+        <article class="post-content">
 """
 
 TEMPLATE_RODAPE = """
         </article>
         
-        <div class="cta-banner-blog">
-            <h3>Pare de passar raiva com travamentos!</h3>
+        <div style="background: linear-gradient(160deg, #180a1f 0%, #050505 100%); border: 1px solid var(--cor-destaque); padding: 40px; border-radius: 20px; text-align: center; margin-top: 60px; box-shadow: 0 0 40px rgba(255, 0, 128, 0.15);">
+            <h3 style="color:#fff; font-size:1.8rem; margin-bottom:15px; font-weight:800;">Pare de passar raiva com travamentos!</h3>
             <p style="color: #bbb; margin-bottom: 20px;">Aproveite o máximo do 4K na sua TV Box. Garanta sua recarga UniTV Oficial com entrega imediata via Pix e suporte humanizado.</p>
-            <a href="../../index.html#comprar" class="btn-cta-blog"><i class="fa-solid fa-bolt"></i> VER PLANOS OFICIAIS</a>
+            <a href="../../index.html#comprar" style="background: var(--gradiente-premium); color: white; padding: 18px 45px; border-radius: 50px; text-decoration: none; font-weight: 800; display: inline-block; text-transform: uppercase; letter-spacing: 1px;"><i class="fa-solid fa-bolt"></i> VER PLANOS OFICIAIS</a>
         </div>
     </main>
 
@@ -214,7 +227,7 @@ TEMPLATE_RODAPE = """
         <div class="footer-container">
             <div class="footer-col">
                 <img src="../../img/logo-unitv.png" alt="Logo UniTV Revenda Autorizada" class="footer-logo" loading="lazy">
-                <p class="footer-desc">Somos revendedores autorizados da plataforma UniTV. Levamos entretenimento premium com qualidade 4K diretamente para a sua casa com suporte de excelência.</p>
+                <p>Somos revendedores autorizados da plataforma UniTV. Levamos entretenimento premium com qualidade 4K diretamente para a sua casa com suporte de excelência.</p>
                 <div style="display: flex; align-items: center; gap: 10px; color: #fff; font-weight: bold; margin-top: 15px;">
                     <i class="fa-solid fa-shield-halved" style="color:#00ff88"></i> Conexão 100% Segura
                 </div>
@@ -268,10 +281,12 @@ TEMPLATE_RODAPE = """
         </div>
         <div id="chat-content" class="wa-chat-body">
             <div class="wa-msg wa-msg-bot">Olá! 👋 Bem-vindo ao suporte oficial UniTV. Sou o atendente virtual focado em vendas e instalação. <span class="wa-time">agora</span></div>
+            <div class="wa-msg wa-msg-bot">Sobre o que deseja falar? <span class="wa-time">agora</span></div>
         </div>
+        <div id="typing-indicator" class="wa-msg wa-msg-bot typing" style="display: none;"><span></span><span></span><span></span></div>
         <div id="wa-options" class="wa-options">
             <button onclick="window.open('../../index.html#comprar', '_self')">Ver planos disponíveis</button>
-            <button onclick="window.open('https://wa.me/5519981765840', '_blank')">Falar com Especialista</button>
+            <button onclick="window.open('https://wa.me/5519981765840', '_blank')">Falar com Humano</button>
         </div>
         <div class="wa-input-fake">
             <div class="wa-input-box">Selecione uma opção...</div>
@@ -291,7 +306,7 @@ TEMPLATE_RODAPE = """
 """
 
 # ==========================================
-# 3. INTELIGÊNCIA DA IA E GERADOR DE URLS
+# 3. INTELIGÊNCIA DA IA E GERADOR DE URLS CURTOS
 # ==========================================
 def carregar_historico():
     if not os.path.exists(HISTORICO_ARQUIVO):
@@ -303,55 +318,64 @@ def salvar_historico(tema):
     with open(HISTORICO_ARQUIVO, 'a', encoding='utf-8') as f:
         f.write(f"{tema}\n")
 
-# ESSA FUNÇÃO RESOLVE O ERRO DE PÁGINA NÃO ENCONTRADA (404 no Servidor)
+# CORREÇÃO CRÍTICA DO SLUG: Nomes curtos e sem acentos
 def criar_slug(texto):
-    # Remove acentos (ex: Otimização -> Otimizacao)
     texto_sem_acento = unicodedata.normalize('NFKD', texto).encode('ascii', 'ignore').decode('utf-8')
-    # Transforma em minúsculo e troca tudo que não for letra ou número por um traço
     slug = re.sub(r'[^a-z0-9]+', '-', texto_sem_acento.lower()).strip('-')
-    return slug
+    # Corta em 45 caracteres para evitar bug no servidor
+    return slug[:45].strip('-')
 
 def gerar_temas(historico):
-    print("🧠 Procurando temas que engajam e vendem...")
+    print("🧠 Gerando temas impactantes e CURTOS...")
     prompt = f"""
-    Crie {QTD_POSTS_POR_VEZ} títulos de artigos altamente persuasivos e técnicos para um blog focado em TV Box, IPTV, Streaming e tecnologia Android.
-    Os títulos devem focar na solução de problemas reais (eliminar travamentos, setups de otimização 4K).
+    Crie {QTD_POSTS_POR_VEZ} títulos de artigos persuasivos sobre TV Box, IPTV e otimização.
+    MUITO IMPORTANTE: Os títulos devem ser CURTOS (máximo de 8 palavras).
+    Exemplo de estilo: "Como Acabar Com Travamentos na Sua TV Box".
     NÃO repita estes temas: {', '.join(historico[-30:])}
     Retorne APENAS os títulos, um por linha.
     """
-    resposta = model.generate_content(prompt, safety_settings=SAFETY_SETTINGS)
-    return [t.strip() for t in resposta.text.split('\n') if t.strip()][:QTD_POSTS_POR_VEZ]
+    try:
+        resposta = model.generate_content(prompt, safety_settings=SAFETY_SETTINGS)
+        return [t.strip() for t in resposta.text.split('\n') if t.strip()][:QTD_POSTS_POR_VEZ]
+    except Exception as e:
+        # Título de emergência caso a IA falhe
+        return ["Otimizacao de Rede TV Box", "Como Melhorar o Sinal 4K", "Fim do Lag no Streaming"]
 
 def escrever_artigo(tema):
-    print(f"✍️ Estruturando conteúdo visual rico para: {tema}")
+    print(f"✍️ Escrevendo artigo formatado para: {tema}")
     prompt_redator = f"""
-    Aja como o melhor Copywriter e Especialista em SEO de Tecnologia. Escreva um artigo colossal (1200+ palavras) altamente persuasivo sobre: "{tema}".
+    Escreva um artigo de blog técnico e persuasivo (800+ palavras) sobre: "{tema}".
     
-    REGRA DE FORMATAÇÃO HTML OBRIGATÓRIA (RETORNE APENAS O HTML):
-    1. NÃO use a tag <h1>.
-    2. Use várias tags <h2> para os tópicos principais e <h3> para sub-tópicos.
-    3. Quebre as paredes de texto! Crie exatamente 2 blocos de destaque usando esta div:
-       <div class="tech-box"><h4>Dica de Ouro</h4><p>Seu texto forte aqui.</p></div>
-    4. Adicione exatamente 3 imagens dinâmicas ao longo do texto usando: 
-       <img src="https://picsum.photos/seed/{tema.replace(' ', '')}X/800/400" alt="Ilustração de TV Box e Tecnologia"> (Troque o X por 1, 2 e 3 para não repetir a imagem).
-    5. Use blocos <blockquote> para destacar frases fortes ou dados importantes.
-    6. Traga dados fictícios plausíveis e impressionantes (ex: "Especialistas afirmam que 85% dos engasgos...").
-    7. Termine conectando o problema com a solução definitiva: Assinar a Recarga UniTV Oficial.
+    REGRA OBRIGATÓRIA DE HTML (NÃO QUEBRE O LAYOUT):
+    1. NÃO coloque a tag <h1>.
+    2. Use <h2> para subtítulos principais.
+    3. Crie 2 blocos de destaque copiando exatamente este HTML:
+       <div class="tech-box"><h4>Dica de Ouro</h4><p>escreva uma dica forte aqui.</p></div>
+    4. Adicione imagens dinâmicas usando: 
+       <img src="https://picsum.photos/seed/{tema.replace(' ', '')}X/800/400" alt="Tecnologia"> (mude o X para 1, 2 e 3).
+    5. Use blocos <blockquote> para citações importantes.
+    6. Traga dados de performance. Fale sobre DNS e otimização de rede.
+    7. Termine oferecendo a Recarga UniTV Oficial como solução premium.
     """
     
     try:
         resposta_artigo = model.generate_content(prompt_redator, safety_settings=SAFETY_SETTINGS)
+        if not resposta_artigo.parts:
+            print("⚠️ Aviso: Filtro bloqueou o texto principal. Tentando versão segura...")
+            prompt_seguro = f"Escreva um guia educativo sobre redes de internet focado em {tema}. Retorne em HTML simples."
+            resposta_artigo = model.generate_content(prompt_seguro, safety_settings=SAFETY_SETTINGS)
+            
         artigo_html = resposta_artigo.text.replace("```html", "").replace("```", "").strip()
     except Exception as e:
         raise Exception(f"Erro na IA ao gerar artigo: {e}")
     
-    prompt_meta = f"Crie uma meta description para SEO (max 150 caracteres) focada na palavra-chave de: {tema}. Retorne apenas a frase."
+    prompt_meta = f"Crie uma meta description (max 150 caracteres) para: {tema}."
     meta_desc = model.generate_content(prompt_meta, safety_settings=SAFETY_SETTINGS).text.strip()
     
     return artigo_html, meta_desc
 
 # ==========================================
-# 4. INJETOR NA TELA INICIAL DO BLOG
+# 4. INJETOR CORRIGIDO (SEM SUBSTITUIR VAZIO)
 # ==========================================
 def atualizar_pagina_principal_do_blog(titulo, slug, meta_desc):
     caminho_index = os.path.join(PASTA_BLOG, "index.html")
@@ -360,7 +384,6 @@ def atualizar_pagina_principal_do_blog(titulo, slug, meta_desc):
         with open(caminho_index, "r", encoding="utf-8") as f:
             html = f.read()
 
-        # O Design EXATO do card do seu Grid Cyberpunk
         novo_card = f"""
         <a href="{slug}/index.html" class="post-card reveal active" style="text-decoration:none;">
             <div class="post-thumb" style="border-radius:10px; overflow:hidden; margin-bottom:15px;">
@@ -375,22 +398,22 @@ def atualizar_pagina_principal_do_blog(titulo, slug, meta_desc):
         </a>
         """
 
-        # Corrige o bug do replace: Injeta o card E recria a âncora para o próximo post
+        # Agora a substituição é super segura!
         if "" in html:
             html = html.replace("", novo_card)
+            with open(caminho_index, "w", encoding="utf-8") as f:
+                f.write(html)
+            print(f"🔗 Artigo '{titulo}' linkado com sucesso na vitrine!")
         else:
-            print("⚠️ ERRO: A tag não foi encontrada no arquivo blog/index.html")
+            print("⚠️ ERRO: A tag sumiu do blog/index.html")
 
-        with open(caminho_index, "w", encoding="utf-8") as f:
-            f.write(html)
-        print(f"🔗 Artigo '{titulo}' linkado na vitrine do blog!")
     except FileNotFoundError:
         print(f"⚠️ O arquivo {caminho_index} não existe ainda.")
 
 # ==========================================
 # EXECUTOR
 # ==========================================
-print("🚀 MÁQUINA DE SEO CYBERPUNK INICIADA (GEMINI 2.5 PRO)")
+print("🚀 MÁQUINA DE SEO CYBERPUNK INICIADA (V-MASTER)")
 historico = carregar_historico()
 temas = gerar_temas(historico)
 
@@ -399,7 +422,7 @@ for tema in temas:
     pasta_artigo = os.path.join(PASTA_BLOG, slug)
     
     if os.path.exists(pasta_artigo):
-        print(f"⏩ Pulando '{tema}', já existe.")
+        print(f"⏩ Pulando '{tema}', a pasta já existe.")
         continue
         
     os.makedirs(pasta_artigo, exist_ok=True)
@@ -420,16 +443,16 @@ for tema in temas:
         atualizar_pagina_principal_do_blog(tema, slug, meta_desc)
         salvar_historico(tema)
         
-        print("⏳ Aguardando a IA respirar...")
+        print("⏳ Aguardando a IA respirar para evitar bloqueios...")
         time.sleep(8) 
     except Exception as e:
-        print(f"❌ Erro ao gerar {tema}: {e}")
+        print(f"❌ Erro grave ao gerar {tema}: {e}")
 
 print("\n📦 Fazendo o Push Automático para o GitHub...")
 try:
     subprocess.run(["git", "add", "."], check=True)
-    subprocess.run(["git", "commit", "-m", f"Auto-post Pro Master: {datetime.now().strftime('%Y-%m-%d %H:%M')}"], check=True)
+    subprocess.run(["git", "commit", "-m", f"Auto-post V-Master: {datetime.now().strftime('%Y-%m-%d %H:%M')}"], check=True)
     subprocess.run(["git", "push"], check=True)
     print("✅ DEPLOY CONCLUÍDO! O site está no ar e com visual premium.")
 except Exception as e:
-    print("⚠️ Erro no Git Push. Faça o git pull antes de tentar rodar novamente se o GitHub recusar o envio.")
+    print("⚠️ Erro no Git Push. Faça o 'git pull' antes de tentar rodar novamente se o GitHub recusar o envio.")
