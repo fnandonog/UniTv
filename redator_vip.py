@@ -1,29 +1,33 @@
-import google.generativeai as genai
+from google import genai # [MUDANÇA] SDK Novo
 import os
 import re
 import time
 import subprocess
 import unicodedata
 from datetime import datetime
-from google.generativeai.types import HarmCategory, HarmBlockThreshold
+from google.genai import types # [MUDANÇA] SDK Novo
 
 # ==========================================
 # 1. CONFIGURAÇÕES DA MÁQUINA (GEMINI 2.5 PRO)
 # ==========================================
-genai.configure(api_key="AIzaSyCmT5HHUpHsXbtN68h6bpkRIzFpjIy2RGs")
-model = genai.GenerativeModel('gemini-2.5-pro')
+# [MUDANÇA] Instanciação do cliente no SDK Novo
+client = genai.Client(api_key="AIzaSyCmT5HHUpHsXbtN68h6bpkRIzFpjIy2RGs")
+MODEL_ID = 'gemini-2.5-pro'
 
 QTD_POSTS_POR_VEZ = 3 
 PASTA_BLOG = "blog"
 HISTORICO_ARQUIVO = "historico_temas_blog.txt"
 
 # Filtros desativados
-SAFETY_SETTINGS = [
-    {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"},
-    {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"},
-    {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE"},
-    {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE"},
-]
+# [MUDANÇA] Formatação dos filtros exigida pelo SDK Novo
+CONFIGURACAO_GERAL = types.GenerateContentConfig(
+    safety_settings=[
+        types.SafetySetting(category=types.HarmCategory.HARM_CATEGORY_HATE_SPEECH, threshold=types.HarmBlockThreshold.BLOCK_NONE),
+        types.SafetySetting(category=types.HarmCategory.HARM_CATEGORY_HARASSMENT, threshold=types.HarmBlockThreshold.BLOCK_NONE),
+        types.SafetySetting(category=types.HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT, threshold=types.HarmBlockThreshold.BLOCK_NONE),
+        types.SafetySetting(category=types.HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT, threshold=types.HarmBlockThreshold.BLOCK_NONE),
+    ]
+)
 
 # ==========================================
 # 2. TEMPLATES BASE (CÓPIA DO SEU DESIGN)
@@ -308,7 +312,8 @@ def gerar_temas(historico):
     Retorne APENAS os títulos, um por linha.
     """
     try:
-        resposta = model.generate_content(prompt, safety_settings=SAFETY_SETTINGS)
+        # [MUDANÇA] Sintaxe de chamada do SDK Novo
+        resposta = client.models.generate_content(model=MODEL_ID, contents=prompt, config=CONFIGURACAO_GERAL)
         return [t.strip() for t in resposta.text.split('\n') if t.strip()][:QTD_POSTS_POR_VEZ]
     except Exception:
         return ["Otimizando a Internet Para TV Box", "Melhores Dicas Para Streaming 4K", "Fim do Buffering na TV Box"]
@@ -334,11 +339,13 @@ def escrever_artigo(tema):
     
     try:
         # Pede o Artigo
-        res_artigo = model.generate_content(prompt_redator, safety_settings=SAFETY_SETTINGS)
+        # [MUDANÇA] Sintaxe de chamada do SDK Novo
+        res_artigo = client.models.generate_content(model=MODEL_ID, contents=prompt_redator, config=CONFIGURACAO_GERAL)
         artigo = res_artigo.text.replace("```html", "").replace("```", "").strip()
         
         # Pede a Meta Description limpa e a força a ter 150 chars
-        res_meta = model.generate_content(prompt_meta, safety_settings=SAFETY_SETTINGS)
+        # [MUDANÇA] Sintaxe de chamada do SDK Novo
+        res_meta = client.models.generate_content(model=MODEL_ID, contents=prompt_meta, config=CONFIGURACAO_GERAL)
         meta_desc = res_meta.text.replace('"', '').replace('Opção 1:', '').strip()
         meta_desc = (meta_desc[:147] + '...') if len(meta_desc) > 150 else meta_desc
         
@@ -368,6 +375,7 @@ def atualizar_pagina_principal_do_blog(titulo, slug, meta_desc):
         </a>
         """
 
+        # [CORREÇÃO] A âncora tinha sumido no seu copia e cola. Restaurei para evitar que a página inteira quebre.
         if "" in html:
             html = html.replace("", card)
             with open(caminho, "w", encoding="utf-8") as f: f.write(html)
