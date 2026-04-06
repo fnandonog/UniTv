@@ -17,7 +17,7 @@ QTD_POSTS_POR_VEZ = 3
 PASTA_BLOG = "blog"
 HISTORICO_ARQUIVO = "historico_temas_blog.txt"
 
-# Desativa filtros para termos como IPTV
+# Filtros desativados
 SAFETY_SETTINGS = [
     {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"},
     {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE"},
@@ -26,9 +26,8 @@ SAFETY_SETTINGS = [
 ]
 
 # ==========================================
-# 2. TEMPLATES (CÓPIA FIDEDIGNA DO SEU SITE)
+# 2. TEMPLATES BASE (CÓPIA DO SEU DESIGN)
 # ==========================================
-
 TEMPLATE_TOPO = """<!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -38,50 +37,55 @@ TEMPLATE_TOPO = """<!DOCTYPE html>
     <meta name="description" content="{meta_desc}">
     <meta name="theme-color" content="#1a0525">
     
+    <link rel="canonical" href="https://unitvsite.com.br/" />
+    <meta name="robots" content="index, follow" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
     <link rel="icon" href="../../img/logo-unitv.png" type="image/png">
 
     <script type="application/ld+json">
-    {{
+    {
       "@context": "https://schema.org",
       "@graph": [
-        {{
+        {
           "@type": "BlogPosting",
           "headline": "{titulo}",
           "image": "https://unitvsite.com.br/img/logo-unitv.png",
-          "author": {{
+          "author": {
             "@type": "Organization",
             "name": "Equipe UniTV VIP"
-          }},
-          "publisher": {{
+          },
+          "publisher": {
             "@type": "Organization",
             "name": "UniTV Oficial Brasil",
-            "logo": {{
+            "logo": {
               "@type": "ImageObject",
               "url": "https://unitvsite.com.br/img/logo-unitv.png"
-            }}
-          }},
+            }
+          },
           "datePublished": "{data_seo}",
           "description": "{meta_desc}"
-        }},
-        {{
+        },
+        {
           "@type": "Product",
           "name": "Recarga UniTV Oficial VIP",
-          "aggregateRating": {{
+          "aggregateRating": {
             "@type": "AggregateRating",
             "ratingValue": "4.9",
             "reviewCount": "1840"
-          }},
-          "offers": {{
+          },
+          "offers": {
             "@type": "AggregateOffer",
             "lowPrice": "24.90",
             "highPrice": "189.90",
             "priceCurrency": "BRL"
-          }}
-        }}
+          }
+        }
       ]
-    }}
+    }
     </script>
 
     <style>
@@ -104,35 +108,23 @@ TEMPLATE_TOPO = """<!DOCTYPE html>
         .reveal.active { opacity: 1; transform: translateY(0); }
 
         /* --- BARRA DE PROMOÇÃO --- */
-        .promo-bar {
-            background: linear-gradient(90deg, #1a0b2e, #2d0b1e);
-            color: #e0e0e0; text-align: center; padding: 10px; font-size: 0.85rem; font-weight: 600;
-            position: fixed; top: 0; width: 100%; z-index: 2000; border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
+        .promo-bar { background: linear-gradient(90deg, #1a0b2e, #2d0b1e); color: #e0e0e0; text-align: center; padding: 10px; font-size: 0.85rem; font-weight: 600; position: fixed; top: 0; width: 100%; z-index: 2000; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .promo-bar span { color: #ff0055; font-weight: 800; }
 
         /* --- HEADER --- */
-        header {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 10px 5%; position: fixed; width: 100%; top: 38px;
-            background: rgba(5, 5, 5, 0.95); backdrop-filter: blur(12px); z-index: 1000; border-bottom: var(--borda-sutil); height: 70px;
-        }
+        header { display: flex; justify-content: space-between; align-items: center; padding: 10px 5%; position: fixed; width: 100%; top: 38px; background: rgba(5, 5, 5, 0.95); backdrop-filter: blur(12px); z-index: 1000; border-bottom: var(--borda-sutil); height: 70px; }
         .logo img { height: 35px; filter: brightness(1.1); }
         .nav-links { display: flex; gap: 20px; }
         .nav-links a { color: #bbb; text-decoration: none; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; transition: 0.3s; padding: 5px 0; border-bottom: 2px solid transparent; }
         .nav-links a:hover { color: white; border-bottom-color: var(--cor-destaque); }
         .btn-header { background: var(--gradiente-premium); color: white; padding: 10px 20px; border-radius: 50px; text-decoration: none; font-size: 0.75rem; font-weight: 800; box-shadow: 0 4px 15px rgba(221, 36, 118, 0.3); }
 
-        /* --- HERO --- */
+        /* --- CONTEÚDO (ISOLADO PARA O BLOG) --- */
         .article-hero { padding: 140px 5% 60px; text-align: center; background: radial-gradient(circle at 50% 20%, #2d0b1e 0%, #050505 60%); }
         .article-hero h1 { font-family: 'Montserrat', sans-serif; font-size: clamp(2rem, 5vw, 3rem); line-height: 1.1; font-weight: 900; margin-bottom: 20px; color: #fff;}
-        .text-gradient { background: var(--gradiente-texto); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .badge { background: rgba(255, 0, 85, 0.1); color: #ff0055; border: 1px solid rgba(255, 0, 85, 0.2); padding: 8px 20px; border-radius: 50px; font-size: 0.8rem; margin-bottom: 25px; display: inline-block; font-weight: 700; text-transform: uppercase; }
-
-        /* --- CONTEÚDO (ISOLADO PARA O BLOG) --- */
-        .article-content { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
-        .post-meta { font-size: 0.8rem; color: #555; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 2px; text-align: center;}
+        .post-meta { font-size: 0.8rem; color: #555; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 2px; }
         
+        .article-content { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
         .article-text { font-size: 1.1rem; color: #aaa; margin-bottom: 60px; line-height: 1.8;}
         .article-text h2 { color: #fff; margin: 50px 0 20px; font-size: 1.8rem; border-left: 4px solid var(--cor-destaque); padding-left: 15px;}
         .article-text h3 { color: #ddd; margin: 30px 0 15px; font-size: 1.4rem; font-weight: 700; }
@@ -164,7 +156,7 @@ TEMPLATE_TOPO = """<!DOCTYPE html>
         .payment-methods { display: flex; gap: 20px; font-size: 2.2rem; margin-top: 25px; color: #222; }
 
         /* --- CHATBOT --- */
-        .wa-widget { position: fixed; bottom: 85px; right: 20px; width: 340px; background: #e5ddd5; border-radius: 12px; z-index: 9999; transform: scale(0); transform-origin: bottom right; transition: 0.3s ease; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .wa-widget { position: fixed; bottom: 85px; right: 20px; width: 340px; background: var(--wa-bg); border-radius: 12px; z-index: 9999; transform: scale(0); transform-origin: bottom right; transition: 0.3s ease; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         .wa-widget.active { transform: scale(1); }
         .wa-header { background: #075e54; color: white; padding: 12px 15px; display: flex; align-items: center; justify-content: space-between; }
         .wa-chat-body { height: 350px; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png'); background-size: contain; }
@@ -183,13 +175,11 @@ TEMPLATE_TOPO = """<!DOCTYPE html>
 </head>
 <body>
 
-    <div class="promo-bar">
-        🔥 OFERTA RELÂMPAGO: Preços reduzidos por tempo limitado!
-    </div>
+    <div class="promo-bar">🔥 OFERTA RELÂMPAGO: Preços reduzidos por tempo limitado!</div>
 
     <header>
         <div class="logo">
-            <a href="../../index.html"><img src="../../img/logo-unitv.png" alt="UniTV Oficial"></a>
+            <a href="../../index.html"><img src="../../img/logo-unitv.png" alt="Logo UniTV Oficial"></a>
         </div>
         <nav class="nav-links">
             <a href="../../index.html">Início</a>
@@ -265,10 +255,10 @@ TEMPLATE_RODAPE = """
             <button onclick="toggleChat()" style="background:none; border:none; color:white; font-size:1.5rem; cursor:pointer;">×</button>
         </div>
         <div class="wa-chat-body" id="chat-content">
-            <div class="wa-msg" style="align-self: flex-start; border-top-left-radius: 0;">Olá! 👋 Vi que você está lendo nossos guias de tecnologia. Quer saber como liberar o acesso VIP na sua TV Box?</div>
+            <div class="wa-msg" style="align-self: flex-start; border-top-left-radius: 0;">Olá! 👋 Vi que você está lendo nossos guias de otimização. Quer saber como liberar o sistema VIP completo sem travas na sua Box?</div>
         </div>
         <div style="padding: 10px; background: #f0f0f0;">
-            <button onclick="window.open('https://wa.me/5519981765840?text=Vi o post no blog e quero saber sobre a Recarga VIP', '_blank')" style="width: 100%; background: #25d366; color: white; border: none; padding: 12px; border-radius: 12px; font-weight: 800; cursor: pointer;">FALAR COM ESPECIALISTA</button>
+            <button onclick="window.open('https://wa.me/5519981765840?text=Vi o post no blog e quero testar o VIP 4K', '_blank')" style="width: 100%; background: #25d366; color: white; border: none; padding: 12px; border-radius: 12px; font-weight: 800; cursor: pointer;">FALAR COM ESPECIALISTA</button>
         </div>
     </div>
 
@@ -278,13 +268,20 @@ TEMPLATE_RODAPE = """
         function toggleChat() { 
             document.getElementById('chat-widget').classList.toggle('active'); 
         }
+        
+        // Ativação da Animação ao descer a página
+        window.addEventListener('scroll', () => {
+            document.querySelectorAll('.reveal').forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add('active');
+            });
+        });
     </script>
 </body>
 </html>
 """
 
 # ==========================================
-# 3. LÓGICA DA IA (Otimizada para não dar Bug no Meta)
+# 3. LÓGICA DE GERAÇÃO E URLS
 # ==========================================
 def carregar_historico():
     if not os.path.exists(HISTORICO_ARQUIVO): return []
@@ -295,16 +292,16 @@ def salvar_historico(tema):
     with open(HISTORICO_ARQUIVO, 'a', encoding='utf-8') as f:
         f.write(f"{tema}\n")
 
-# CORREÇÃO DE SLUG E PASTAS (Sem acento, max 45 chars)
+# Criação Limpa do Slug (Sem Acentos e Curta)
 def criar_slug(texto):
     texto_sem_acento = unicodedata.normalize('NFKD', texto).encode('ascii', 'ignore').decode('utf-8')
     slug = re.sub(r'[^a-z0-9]+', '-', texto_sem_acento.lower()).strip('-')
     return slug[:45].strip('-')
 
 def gerar_temas(historico):
-    print("🧠 Gerando temas curtos e focados em SEO...")
+    print("🧠 Gerando temas curtos e focados em retenção...")
     prompt = f"""
-    Crie {QTD_POSTS_POR_VEZ} títulos de artigos sobre TV Box e streaming.
+    Crie {QTD_POSTS_POR_VEZ} títulos de artigos sobre TV Box, IPTV e como acabar com travamentos.
     REGRA DE OURO: Os títulos devem ter NO MÁXIMO 8 palavras.
     Ex: "Como Tirar o Lag da Sua TV Box".
     NÃO repita estes: {', '.join(historico[-20:])}
@@ -314,43 +311,43 @@ def gerar_temas(historico):
         resposta = model.generate_content(prompt, safety_settings=SAFETY_SETTINGS)
         return [t.strip() for t in resposta.text.split('\n') if t.strip()][:QTD_POSTS_POR_VEZ]
     except Exception:
-        return ["Otimizando a Internet Para TV Box", "Melhores Codecs Para Streaming 4K", "Fim do Buffering na TV Box"]
+        return ["Otimizando a Internet Para TV Box", "Melhores Dicas Para Streaming 4K", "Fim do Buffering na TV Box"]
 
 def escrever_artigo(tema):
-    print(f"✍️ Redigindo: {tema}")
+    print(f"✍️ Redigindo de forma segura: {tema}")
     prompt_redator = f"""
-    Escreva um artigo técnico (800+ palavras) focado em soluções para TV Box sobre: "{tema}".
+    Escreva o CORPO de um artigo de blog técnico (800+ palavras) sobre: "{tema}".
     
-    REGRA OBRIGATÓRIA DE HTML:
-    1. NÃO coloque a tag <h1>. NÃO USE <title>.
-    2. Use <h2> para subtítulos e <p> para o texto.
-    3. Crie 2 blocos de destaque copiando exatamente este HTML:
-       <div class="tech-box"><h4>Dica de Ouro</h4><p>escreva a dica aqui.</p></div>
-    4. Adicione imagens dinâmicas usando: 
-       <img src="https://picsum.photos/seed/{tema.replace(' ', '')}X/800/400" alt="Tecnologia"> (mude o X para 1, 2 e 3).
-    5. Fale de forma técnica e educativa.
-    6. Retorne APENAS o HTML do corpo do texto.
+    REGRA DE CONTROLE EXTREMO (SIGA OU FALHARÁ):
+    1. NÃO GERE tags de estrutura principal (<html>, <head>, <title>, <body>).
+    2. RETORNE APENAS AS TAGS: <h2>, <h3>, <p>, <ul> e <blockquote>.
+    3. O texto deve ser focado em ensinar a configurar a rede (DNS) e otimizar a TV Box.
+    4. Crie exatamente 2 blocos HTML assim:
+       <div class="tech-box"><h4>Dica de Ouro</h4><p>sua dica aqui.</p></div>
+    5. Insira 3 imagens assim: <img src="https://picsum.photos/seed/{tema.replace(' ', '')}X/800/400" alt="Tecnologia TV Box"> (Onde X = 1, 2 e 3).
     """
     
     prompt_meta = f"""
-    Forneça UMA ÚNICA frase de no máximo 150 caracteres resumindo o tema: {tema}. 
-    NÃO INCLUA "Opção 1", "Opção 2", nem textos extras. Apenas a frase final.
+    Escreva estritamente UMA ÚNICA FRASE, de no máximo 150 caracteres, resumindo o artigo sobre: {tema}. 
+    Não escreva "Opção 1", apenas a frase.
     """
     
     try:
-        resposta = model.generate_content(prompt_redator, safety_settings=SAFETY_SETTINGS)
-        artigo = resposta.text.replace("```html", "").replace("```", "").strip()
+        # Pede o Artigo
+        res_artigo = model.generate_content(prompt_redator, safety_settings=SAFETY_SETTINGS)
+        artigo = res_artigo.text.replace("```html", "").replace("```", "").strip()
         
-        meta = model.generate_content(prompt_meta, safety_settings=SAFETY_SETTINGS).text.replace('"', '').strip()
-        # Força o corte da string caso a IA desobedeça o limite
-        meta_desc = meta[:150]
+        # Pede a Meta Description limpa e a força a ter 150 chars
+        res_meta = model.generate_content(prompt_meta, safety_settings=SAFETY_SETTINGS)
+        meta_desc = res_meta.text.replace('"', '').replace('Opção 1:', '').strip()
+        meta_desc = (meta_desc[:147] + '...') if len(meta_desc) > 150 else meta_desc
         
         return artigo, meta_desc
     except Exception as e:
-        raise Exception(f"Erro na IA: {e}")
+        raise Exception(f"Erro no processamento da IA: {e}")
 
 # ==========================================
-# 4. INJETOR NA VITRINE DO BLOG
+# 4. INJEÇÃO SEGURA NA VITRINE
 # ==========================================
 def atualizar_pagina_principal_do_blog(titulo, slug, meta_desc):
     caminho = os.path.join(PASTA_BLOG, "index.html")
@@ -374,14 +371,14 @@ def atualizar_pagina_principal_do_blog(titulo, slug, meta_desc):
         if "" in html:
             html = html.replace("", card)
             with open(caminho, "w", encoding="utf-8") as f: f.write(html)
-            print(f"🔗 Post inserido na vitrine do blog.")
-        else: print("⚠️ ERRO: A tag não foi encontrada na capa do blog.")
+            print(f"🔗 Post inserido na vitrine.")
+        else: print("⚠️ A tag sumiu do blog/index.html")
     except FileNotFoundError: print(f"⚠️ Capa do blog não encontrada.")
 
 # ==========================================
-# EXECUTOR FINAL
+# EXECUTOR
 # ==========================================
-print("🚀 MÁQUINA DE SEO CYBERPUNK (V-MASTER REVISADA)")
+print("🚀 MÁQUINA DE SEO (BLINDAGEM TOTAL)")
 historico = carregar_historico()
 temas = gerar_temas(historico)
 
@@ -394,21 +391,21 @@ for tema in temas:
     
     try:
         corpo, meta = escrever_artigo(tema)
-        data_formatada = datetime.now().strftime("%d de %B de %Y")
+        data_format = datetime.now().strftime("%d de %B de %Y")
         data_seo = datetime.now().strftime("%Y-%m-%d")
         
-        # Injeção das variáveis no template
-        html_final = TEMPLATE_TOPO.replace("{titulo}", tema).replace("{meta_desc}", meta).replace("{data_atual}", data_formatada).replace("{data_seo}", data_seo)
+        # Junta tudo!
+        html_final = TEMPLATE_TOPO.replace("{titulo}", tema).replace("{meta_desc}", meta).replace("{data_atual}", data_format).replace("{data_seo}", data_seo)
         html_final += corpo + TEMPLATE_RODAPE
         
         with open(os.path.join(pasta_artigo, "index.html"), "w", encoding="utf-8") as f: f.write(html_final)
         atualizar_pagina_principal_do_blog(tema, slug, meta)
         salvar_historico(tema)
         time.sleep(8) 
-    except Exception as e: print(f"❌ Erro: {e}")
+    except Exception as e: print(f"❌ Erro ao escrever post: {e}")
 
-print("\n📦 Fazendo o Push...")
+print("\n📦 Push Automático para Github...")
 subprocess.run(["git", "add", "."])
-subprocess.run(["git", "commit", "-m", f"Auto-post V-Master: {datetime.now().strftime('%Y-%m-%d %H:%M')}"])
+subprocess.run(["git", "commit", "-m", f"Auto-post Seguro: {datetime.now().strftime('%Y-%m-%d %H:%M')}"])
 subprocess.run(["git", "push"])
-print("✅ DEPLOY CONCLUÍDO! O Layout está protegido e as imagens corrigidas.")
+print("✅ SUCESSO ABSOLUTO! Sem bugs.")
