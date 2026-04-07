@@ -30,8 +30,7 @@ CONFIG_GERAL = types.GenerateContentConfig(
 )
 
 # ==========================================
-# 2. TEMPLATE GIGANTE DA RESENHA VIP
-# Usando placeholders [VARIAVEL] para evitar bugs com as chaves do CSS/JS
+# 2. TEMPLATE GIGANTE DA RESENHA VIP (COM FIX DE IMAGENS)
 # ==========================================
 TEMPLATE_RESENHA = """<!DOCTYPE html>
 <html lang="pt-br">
@@ -41,6 +40,8 @@ TEMPLATE_RESENHA = """<!DOCTYPE html>
     <title>[TITULO] | Resenha Completa e Onde Assistir | UniTV Oficial</title>
     <meta name="description" content="Descubra os bastidores, elenco e análise do filme [TITULO]. Assista agora mesmo em 4K nativo na sua TV Box com a UniTV.">
     <meta name="theme-color" content="#050505">
+    
+    <meta name="referrer" content="no-referrer">
     
     <link rel="canonical" href="https://unitvsite.com.br/cinema/" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -60,8 +61,8 @@ TEMPLATE_RESENHA = """<!DOCTYPE html>
         .nav-links { display: flex; gap: 25px; list-style: none; } .nav-links a { color: #bbb; text-decoration: none; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; transition: 0.3s; } .nav-links a:hover { color: #fff; } 
         .btn-header { background: var(--gradiente-premium); color: white; padding: 10px 25px; border-radius: 50px; text-decoration: none; font-size: 0.75rem; font-weight: 800; box-shadow: 0 4px 15px rgba(221, 36, 118, 0.3); transition: 0.3s; }
 
-        /* HERO FILME */
-        .movie-hero { height: 75vh; width: 100%; background: url('[BACKDROP_PRINCIPAL]') center top / cover no-repeat; position: relative; margin-top: 38px; }
+        /* HERO FILME (Fundo alterado para inline) */
+        .movie-hero { height: 75vh; width: 100%; position: relative; margin-top: 38px; }
         .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, var(--bg-body) 0%, rgba(5,5,5,0.8) 50%, rgba(5,5,5,0.3) 100%); display: flex; align-items: flex-end; padding: 0 5% 50px; }
         .btn-voltar { position: absolute; top: 30px; left: 5%; background: rgba(0,0,0,0.5); color: #fff; padding: 10px 20px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 0.9rem; border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(5px); z-index: 10; transition: 0.3s; } .btn-voltar:hover { background: var(--neon-laranja); border-color: var(--neon-laranja); }
         
@@ -146,7 +147,7 @@ TEMPLATE_RESENHA = """<!DOCTYPE html>
         <a href="../../index.html#comprar" class="btn-header"><i class="fa-solid fa-crown"></i> ASSINAR VIP</a>
     </header>
 
-    <div class="movie-hero">
+    <div class="movie-hero" style="background: url('[BACKDROP_PRINCIPAL]') center top / cover no-repeat;">
         <div class="hero-overlay">
             <a href="../index.html" class="btn-voltar"><i class="fa-solid fa-arrow-left"></i> Voltar ao Catálogo</a>
             <div class="hero-info">
@@ -344,7 +345,7 @@ TEMPLATE_RESENHA = """<!DOCTYPE html>
 </html>"""
 
 # ==========================================
-# 3. LÓGICA TMDB E GEMINI (BEM MAIS COMPLETA)
+# 3. LÓGICA TMDB E GEMINI
 # ==========================================
 def carregar_historico():
     if not os.path.exists(HISTORICO_CINE): return []
@@ -364,8 +365,8 @@ def buscar_filmes_em_alta():
     return []
 
 def buscar_detalhes_do_filme(movie_id):
-    # Faz uma segunda requisição para sugar todas as infos extras (Elenco, Diretor, Generos, Imagens extras)
-    url = f"https://api.themoviedb.org/3/movie/{movie_id}?api_key={TMDB_KEY}&language=pt-BR&append_to_response=credits,images"
+    # O PULO DO GATO: &include_image_language=pt,en,null obriga o TMDB a entregar imagens mesmo sem tag BR
+    url = f"https://api.themoviedb.org/3/movie/{movie_id}?api_key={TMDB_KEY}&language=pt-BR&append_to_response=credits,images&include_image_language=pt,en,null"
     res = requests.get(url)
     if res.status_code == 200:
         return res.json()
@@ -476,7 +477,7 @@ for filme in filmes:
         cast = detalhes['credits'].get('cast', [])[:3]
         if cast: elenco_html = "".join([f"<div>{ator['name']}</div>" for ator in cast])
 
-    # Pegando uma SEGUNDA imagem de fundo (backdrop) para o meio do texto se existir
+    # Pegando Fundo Secundário
     bg_principal = f"[https://image.tmdb.org/t/p/original](https://image.tmdb.org/t/p/original){filme['backdrop_path']}"
     bg_secundario = bg_principal
     if 'images' in detalhes and 'backdrops' in detalhes['images']:
@@ -487,7 +488,7 @@ for filme in filmes:
     
     corpo_resenha = escrever_resenha_gemini(detalhes)
     
-    # Usando o replace ao invés do format para proteger chaves de CSS/JS do Footer
+    # Usando o replace para injetar sem quebrar o CSS
     html_final = TEMPLATE_RESENHA
     html_final = html_final.replace("[TITULO]", titulo)
     html_final = html_final.replace("[BACKDROP_PRINCIPAL]", bg_principal)
