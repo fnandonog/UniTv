@@ -408,9 +408,16 @@ for tema in temas:
     except Exception as e: print(f"❌ Erro ao processar post: {e}")
 
 print("\n📦 Sincronizando com GitHub...")
+# 1. Prepara os arquivos novos
 subprocess.run(["git", "add", "."])
+
+# 2. Cria o pacote do post
 subprocess.run(["git", "commit", "-m", f"Auto-post: {datetime.now().strftime('%d/%m %H:%M')}"])
-# [CORREÇÃO] Pull rebase antes do push para evitar o erro "rejected"
+
+# 3. [O SEGREDO] Baixa o que você mudou no site do GitHub antes de enviar
 subprocess.run(["git", "pull", "origin", "main", "--rebase"])
+
+# 4. Envia tudo limpo
 subprocess.run(["git", "push", "origin", "main"])
-print("✅ SUCESSO ABSOLUTO! Robô blindado e site no ar.")
+
+print("✅ SUCESSO! O robô sincronizou e postou.")
