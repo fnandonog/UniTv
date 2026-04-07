@@ -15,7 +15,7 @@ GEMINI_KEY = "AIzaSyCmT5HHUpHsXbtN68h6bpkRIzFpjIy2RGs"
 TMDB_KEY = "9cb2f018163da4a3f89d718ee6be8677"
 MODEL_ID = 'gemini-2.0-flash' 
 
-QTD_FILMES_POR_VEZ = 3 # Coloquei 3 para você testar bem
+QTD_FILMES_POR_VEZ = 3
 PASTA_CINEMA = "cinema"
 HISTORICO_CINE = "historico_cinema.txt"
 
@@ -30,7 +30,7 @@ CONFIG_GERAL = types.GenerateContentConfig(
 )
 
 # ==========================================
-# 2. TEMPLATE GIGANTE DA RESENHA VIP (COM BYPASS DE IMAGEM)
+# 2. TEMPLATE GIGANTE DA RESENHA VIP
 # ==========================================
 TEMPLATE_RESENHA = """<!DOCTYPE html>
 <html lang="pt-br">
@@ -402,7 +402,7 @@ def injetar_card_na_vitrine(filme, slug):
     titulo = filme['title']
     nota = round(filme['vote_average'], 1)
     ano = filme['release_date'][:4] if 'release_date' in filme else "2024"
-    poster_url = f"[https://media.themoviedb.org/t/p/w500](https://media.themoviedb.org/t/p/w500){filme['poster_path']}"
+    poster_url = f"[https://image.tmdb.org/t/p/w500](https://image.tmdb.org/t/p/w500){filme['poster_path']}"
     
     card = f"""
         <a href="{slug}/index.html" class="movie-card reveal active">
@@ -465,14 +465,14 @@ for filme in filmes:
         cast = detalhes['credits'].get('cast', [])[:3]
         if cast: elenco_html = "".join([f"<div>{ator['name']}</div>" for ator in cast])
 
-    # BYPASS DOMINIO OFICIAL TMDB
-    bg_principal = f"[https://media.themoviedb.org/t/p/original](https://media.themoviedb.org/t/p/original){filme['backdrop_path']}"
+    # Voltando para o link oficial da API do TMDB que funciona
+    bg_principal = f"[https://image.tmdb.org/t/p/original](https://image.tmdb.org/t/p/original){filme['backdrop_path']}"
     bg_secundario = bg_principal
     if 'images' in detalhes and 'backdrops' in detalhes['images']:
         bgs = [b['file_path'] for b in detalhes['images']['backdrops'] if b['file_path'] != filme['backdrop_path']]
-        if bgs: bg_secundario = f"[https://media.themoviedb.org/t/p/w1280](https://media.themoviedb.org/t/p/w1280){bgs[0]}"
+        if bgs: bg_secundario = f"[https://image.tmdb.org/t/p/w1280](https://image.tmdb.org/t/p/w1280){bgs[0]}"
 
-    poster_principal = f"[https://media.themoviedb.org/t/p/w500](https://media.themoviedb.org/t/p/w500){filme['poster_path']}"
+    poster_principal = f"[https://image.tmdb.org/t/p/w500](https://image.tmdb.org/t/p/w500){filme['poster_path']}"
     
     corpo_resenha = escrever_resenha_gemini(detalhes)
     
