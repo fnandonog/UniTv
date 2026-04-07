@@ -12,41 +12,94 @@
     <link rel="icon" href="../img/logo-unitv.png" type="image/png">
 
     <style>
+        /* --- DESIGN SYSTEM CYBERPUNK --- */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         :root { --bg-body: #050505; --bg-card: #0a0a0a; --neon-azul: #00f3ff; --neon-laranja: #ff7300; --gradiente-cyber: linear-gradient(135deg, #ff7300 0%, #dd2476 100%); --borda-sutil: 1px solid rgba(255, 255, 255, 0.08); }
         html, body { background-color: var(--bg-body); color: #f0f0f0; overflow-x: hidden; width: 100%; line-height: 1.6; scroll-behavior: smooth; }
         ::-webkit-scrollbar { width: 10px; } ::-webkit-scrollbar-track { background: var(--bg-body); } ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; } ::-webkit-scrollbar-thumb:hover { background: var(--neon-laranja); }
         .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); } .reveal.active { opacity: 1; transform: translateY(0); }
+        
+        /* --- HEADER E PROMO --- */
         .promo-bar { background: linear-gradient(90deg, #1a0b2e, #2d0b1e); color: #e0e0e0; text-align: center; padding: 10px; font-size: 0.85rem; font-weight: 600; position: fixed; top: 0; width: 100%; z-index: 2000; border-bottom: 1px solid rgba(255,255,255,0.05); } .promo-bar span { color: #ff0055; font-weight: 800; }
         header { display: flex; justify-content: space-between; align-items: center; padding: 10px 5%; position: fixed; width: 100%; top: 38px; background: rgba(5, 5, 5, 0.85); backdrop-filter: blur(15px); z-index: 1000; border-bottom: var(--borda-sutil); height: 75px; transition: 0.4s; }
-        header.scrolled { top: 0; height: 70px; background: rgba(5, 5, 5, 0.98); }
+        header.scrolled { top: 0; height: 70px; background: rgba(5, 5, 5, 0.98); border-bottom: 1px solid rgba(0, 243, 255, 0.2); }
         .logo img { height: 40px; filter: brightness(1.2); transition: 0.3s; }
         .nav-links { display: flex; gap: 25px; }
         .nav-links a { color: #bbb; text-decoration: none; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; transition: 0.3s; position: relative; }
         .nav-links a:hover { color: #fff; } .nav-links a.active { color: var(--neon-laranja); text-shadow: 0 0 10px rgba(255, 115, 0, 0.4); }
-        .btn-header { background: var(--gradiente-cyber); color: white; padding: 10px 25px; border-radius: 50px; text-decoration: none; font-size: 0.75rem; font-weight: 800; box-shadow: 0 4px 15px rgba(255, 115, 0, 0.3); transition: 0.3s; } .btn-header:hover { transform: scale(1.05); }
-        .hero-cinema { height: 95vh; min-height: 600px; position: relative; display: flex; align-items: center; padding: 0 5%; overflow: hidden; margin-top: 38px; }
+        .btn-header { background: var(--gradiente-cyber); color: white; padding: 10px 25px; border-radius: 50px; text-decoration: none; font-size: 0.75rem; font-weight: 800; box-shadow: 0 4px 15px rgba(255, 115, 0, 0.3); transition: 0.3s; } .btn-header:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(0, 243, 255, 0.4); }
+
+        /* --- HERO --- */
+        .hero-cinema { height: 85vh; min-height: 600px; position: relative; display: flex; align-items: center; padding: 0 5%; overflow: hidden; margin-top: 38px; border-bottom: 2px solid #111; }
         .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('https://image.tmdb.org/t/p/original/8rpDcsfLJypbO6vtecsmEZz40Z.jpg'); background-size: cover; background-position: center top; z-index: 1; transition: transform 10s linear; } .hero-cinema:hover .hero-bg { transform: scale(1.05); }
-        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, rgba(5,5,5,1) 0%, rgba(5,5,5,0.8) 40%, rgba(5,5,5,0.2) 100%), linear-gradient(0deg, rgba(5,5,5,1) 0%, rgba(5,5,5,0) 30%); z-index: 2; }
+        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, rgba(5,5,5,1) 0%, rgba(5,5,5,0.9) 40%, rgba(5,5,5,0.3) 100%), linear-gradient(0deg, rgba(5,5,5,1) 0%, rgba(5,5,5,0) 30%); z-index: 2; }
         .hero-content { position: relative; z-index: 3; max-width: 800px; padding-top: 50px; }
         .hero-badge { display: inline-block; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(5px); color: #fff; padding: 5px 15px; border-radius: 50px; font-size: 0.75rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; } .hero-badge i { color: var(--neon-laranja); margin-right: 5px; }
         .hero-title { font-family: 'Montserrat', sans-serif; font-size: clamp(3rem, 6vw, 5.5rem); font-weight: 900; line-height: 1; text-transform: uppercase; color: #fff; margin-bottom: 20px; text-shadow: 2px 2px 20px rgba(0,0,0,0.8); }
-        .hero-meta { display: flex; gap: 20px; align-items: center; margin-bottom: 20px; font-size: 0.95rem; color: #ccc; font-weight: 600; } .hero-rating { color: #ffcc00; display: flex; align-items: center; gap: 5px; } .hero-4k { border: 1px solid #fff; padding: 2px 6px; border-radius: 4px; font-size: 0.7rem; font-weight: 800; }
+        .hero-meta { display: flex; gap: 20px; align-items: center; margin-bottom: 20px; font-size: 0.95rem; color: #ccc; font-weight: 600; } .hero-rating { color: #ffcc00; display: flex; align-items: center; gap: 5px; } .hero-4k { border: 1px solid var(--neon-azul); color: var(--neon-azul); padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 800; text-shadow: 0 0 10px rgba(0,243,255,0.5); }
         .hero-desc { font-size: 1.1rem; color: #ddd; margin-bottom: 35px; max-width: 600px; }
-        .hero-buttons { display: flex; gap: 15px; } .btn-play-main { background: #fff; color: #000; padding: 15px 35px; border-radius: 8px; font-weight: 800; font-size: 1.1rem; text-decoration: none; display: flex; align-items: center; gap: 10px; transition: 0.3s; } .btn-play-main:hover { transform: scale(1.05); } .btn-info { background: rgba(109, 109, 110, 0.7); color: white; padding: 15px 35px; border-radius: 8px; font-weight: 800; font-size: 1.1rem; text-decoration: none; display: flex; align-items: center; gap: 10px; backdrop-filter: blur(5px); transition: 0.3s; } .btn-info:hover { transform: scale(1.05); }
-        .section-header { padding: 80px 5% 20px; display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid rgba(255,255,255,0.05); margin-bottom: 40px; } .section-header h2 { font-size: 2rem; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 15px; } .section-header h2::before { content: ''; width: 6px; height: 30px; background: var(--gradiente-cyber); border-radius: 10px; }
-        .movie-catalog { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; padding: 0 5% 100px; max-width: 1600px; margin: 0 auto; }
-        .movie-card { position: relative; border-radius: 12px; overflow: hidden; cursor: pointer; aspect-ratio: 2 / 3; transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); background: #111; text-decoration: none; display: block; }
+        .hero-buttons { display: flex; gap: 15px; } .btn-play-main { background: #fff; color: #000; padding: 15px 35px; border-radius: 8px; font-weight: 800; font-size: 1.1rem; text-decoration: none; display: flex; align-items: center; gap: 10px; transition: 0.3s; } .btn-play-main:hover { transform: scale(1.05); } .btn-info { background: rgba(109, 109, 110, 0.5); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 15px 35px; border-radius: 8px; font-weight: 800; font-size: 1.1rem; text-decoration: none; display: flex; align-items: center; gap: 10px; backdrop-filter: blur(5px); transition: 0.3s; } .btn-info:hover { background: rgba(109, 109, 110, 0.8); transform: scale(1.05); }
+
+        /* --- BARRA DE BUSCA E CATEGORIAS --- */
+        .tools-section { max-width: 1600px; margin: 40px auto 0; padding: 0 5%; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px; }
+        .search-box { position: relative; flex: 1; min-width: 300px; max-width: 500px; }
+        .search-box input { width: 100%; background: #111; border: 1px solid rgba(0, 243, 255, 0.3); padding: 15px 20px 15px 50px; border-radius: 50px; color: #fff; font-size: 0.95rem; font-weight: 600; outline: none; transition: 0.3s; box-shadow: 0 0 10px rgba(0, 243, 255, 0.05); }
+        .search-box input:focus { border-color: var(--neon-azul); box-shadow: 0 0 20px rgba(0, 243, 255, 0.2); background: #1a1a1a; }
+        .search-box i { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: var(--neon-azul); font-size: 1.2rem; }
+        
+        .cat-tags { display: flex; gap: 10px; flex-wrap: wrap; }
+        .cat-tag { background: transparent; border: 1px solid #333; color: #aaa; padding: 8px 20px; border-radius: 50px; font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; }
+        .cat-tag:hover { border-color: var(--neon-laranja); color: #fff; box-shadow: 0 0 15px rgba(255, 115, 0, 0.2); }
+
+        /* --- CATALOGO E CARDS --- */
+        .section-header { padding: 60px 5% 20px; display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 30px; } .section-header h2 { font-size: 2rem; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 15px; } .section-header h2::before { content: ''; width: 6px; height: 30px; background: var(--gradiente-cyber); border-radius: 10px; }
+        
+        .movie-catalog { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 25px; padding: 0 5% 80px; max-width: 1600px; margin: 0 auto; }
+        .movie-card { position: relative; border-radius: 12px; overflow: hidden; cursor: pointer; aspect-ratio: 2 / 3; transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); background: #111; text-decoration: none; display: block; border: 1px solid rgba(255,255,255,0.02); }
         .movie-poster { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
-        .movie-overlay { position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(0deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 40%, rgba(0,0,0,0) 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 20px; opacity: 0; transition: 0.4s; }
-        .movie-card:hover { transform: scale(1.05) translateY(-10px); z-index: 10; box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 20px rgba(255, 115, 0, 0.2); border: 1px solid rgba(255, 115, 0, 0.5); } .movie-card:hover .movie-overlay { opacity: 1; } .movie-card:hover .movie-poster { filter: brightness(0.6); }
-        .movie-rating-badge { position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); color: #ffcc00; font-weight: 800; font-size: 0.8rem; padding: 5px 10px; border-radius: 8px; border: 1px solid rgba(255,204,0,0.3); display: flex; align-items: center; gap: 5px; opacity: 0; transition: 0.4s; transform: translateY(-10px); } .movie-card:hover .movie-rating-badge { opacity: 1; transform: translateY(0); }
-        .movie-info-title { color: #fff; font-size: 1.2rem; font-weight: 800; line-height: 1.2; margin-bottom: 8px; transform: translateY(20px); transition: 0.4s; } .movie-info-meta { color: #aaa; font-size: 0.75rem; font-weight: 600; display: flex; gap: 10px; margin-bottom: 15px; transform: translateY(20px); transition: 0.4s; transition-delay: 0.05s; } .movie-info-meta span { background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px; color: var(--neon-azul); }
-        .btn-read-review { background: var(--gradiente-cyber); color: white; text-align: center; padding: 10px; border-radius: 8px; font-weight: 800; font-size: 0.8rem; width: 100%; transform: translateY(20px); opacity: 0; transition: 0.4s; transition-delay: 0.1s; }
+        .movie-overlay { position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(0deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.8) 40%, rgba(0,0,0,0) 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 25px 20px; opacity: 0; transition: 0.4s; }
+        .movie-card:hover { transform: scale(1.05) translateY(-10px); z-index: 10; box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 20px rgba(0, 243, 255, 0.2); border-color: var(--neon-azul); } .movie-card:hover .movie-overlay { opacity: 1; } .movie-card:hover .movie-poster { filter: brightness(0.5); }
+        .movie-rating-badge { position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); color: #ffcc00; font-weight: 900; font-size: 0.85rem; padding: 6px 12px; border-radius: 8px; border: 1px solid rgba(255,204,0,0.4); display: flex; align-items: center; gap: 5px; opacity: 0; transition: 0.4s; transform: translateY(-10px); box-shadow: 0 5px 15px rgba(0,0,0,0.5); } .movie-card:hover .movie-rating-badge { opacity: 1; transform: translateY(0); }
+        .movie-info-title { color: #fff; font-size: 1.3rem; font-weight: 800; line-height: 1.2; margin-bottom: 8px; transform: translateY(20px); transition: 0.4s; text-shadow: 0 2px 5px rgba(0,0,0,0.8); } .movie-info-meta { color: #bbb; font-size: 0.8rem; font-weight: 600; display: flex; gap: 10px; margin-bottom: 15px; transform: translateY(20px); transition: 0.4s; transition-delay: 0.05s; } .movie-info-meta span { background: rgba(255,255,255,0.1); padding: 3px 8px; border-radius: 4px; color: var(--neon-laranja); border: 1px solid rgba(255,115,0,0.2); }
+        .btn-read-review { background: var(--gradiente-cyber); color: white; text-align: center; padding: 12px; border-radius: 8px; font-weight: 800; font-size: 0.85rem; width: 100%; transform: translateY(20px); opacity: 0; transition: 0.4s; transition-delay: 0.1s; letter-spacing: 1px; }
         .movie-card:hover .movie-info-title, .movie-card:hover .movie-info-meta, .movie-card:hover .btn-read-review { transform: translateY(0); opacity: 1; }
-        footer { background: #020202; border-top: 1px solid #1a1a1a; padding: 80px 5% 40px; color: #999; font-size: 0.9rem; } .footer-container { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; } .footer-logo { margin-bottom: 25px; height: 45px; filter: brightness(1.2); } .footer-col h4 { color: #fff; margin-bottom: 25px; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; } .footer-links { list-style: none; } .footer-links li { margin-bottom: 15px; } .footer-links a { color: #666; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 12px; } .footer-links a:hover { color: #fff; transform: translateX(10px); }
-        .payment-methods { display: flex; gap: 20px; font-size: 2.2rem; margin-top: 25px; color: #222; }
-        @media (max-width: 768px) { header { padding: 10px 20px; } .nav-links { display: none; } .hero-title { font-size: 2.8rem; } .movie-catalog { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); padding: 0 20px 80px; gap: 15px; } .footer-container { grid-template-columns: 1fr; text-align: center; } .hero-buttons { flex-direction: column; } }
+
+        /* --- BANNER INFORMATIVO VIP --- */
+        .info-banner { max-width: 1600px; margin: 0 auto 80px; padding: 0 5%; }
+        .info-box { background: linear-gradient(45deg, #0a0a0a, #111); border: 1px solid #222; border-radius: 20px; padding: 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position: relative; overflow: hidden; }
+        .info-box::before { content: ''; position: absolute; top: 0; left: 0; width: 5px; height: 100%; background: var(--gradiente-cyber); }
+        .info-text h3 { font-size: 1.8rem; font-weight: 900; color: #fff; margin-bottom: 10px; } .info-text h3 span { color: var(--neon-azul); }
+        .info-text p { color: #aaa; font-size: 1rem; max-width: 600px; }
+        .info-stats { display: flex; gap: 30px; }
+        .stat-item { text-align: center; } .stat-item i { font-size: 2rem; color: var(--neon-laranja); margin-bottom: 10px; } .stat-item h4 { color: #fff; font-size: 1.5rem; font-weight: 900; } .stat-item p { color: #666; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; }
+
+        /* --- FOOTER PREMIUM --- */
+        footer { background: #020202; border-top: 1px solid #1a1a1a; padding: 80px 5% 40px; color: #999; font-size: 0.9rem; position: relative; }
+        .footer-container { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 50px; }
+        .footer-brand .footer-logo { height: 45px; filter: brightness(1.2); margin-bottom: 20px; }
+        .footer-brand p { margin-bottom: 25px; line-height: 1.8; color: #777; }
+        .social-links { display: flex; gap: 15px; } .social-links a { width: 40px; height: 40px; border-radius: 50%; background: #111; display: flex; align-items: center; justify-content: center; color: #fff; text-decoration: none; transition: 0.3s; border: 1px solid #222; } .social-links a:hover { background: var(--neon-azul); color: #000; box-shadow: 0 0 15px rgba(0, 243, 255, 0.5); transform: translateY(-5px); }
+        
+        .footer-col h4 { color: #fff; margin-bottom: 25px; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; position: relative; padding-bottom: 10px; display: inline-block; }
+        .footer-col h4::after { content: ''; position: absolute; bottom: 0; left: 0; width: 30px; height: 3px; background: var(--neon-laranja); border-radius: 5px; }
+        .footer-links { list-style: none; } .footer-links li { margin-bottom: 15px; } .footer-links a { color: #888; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 10px; font-weight: 500; } .footer-links a:hover { color: var(--neon-azul); transform: translateX(8px); }
+        
+        .newsletter-box { background: #0a0a0a; border: 1px solid #222; padding: 20px; border-radius: 12px; }
+        .newsletter-box p { font-size: 0.85rem; color: #aaa; margin-bottom: 15px; }
+        .input-group { display: flex; gap: 10px; } .input-group input { width: 100%; padding: 12px; background: #050505; border: 1px solid #333; border-radius: 6px; color: white; outline: none; transition: 0.3s; } .input-group input:focus { border-color: var(--neon-laranja); } .input-group button { background: var(--gradiente-cyber); border: none; color: white; padding: 0 20px; border-radius: 6px; cursor: pointer; font-weight: 800; transition: 0.3s; } .input-group button:hover { opacity: 0.9; }
+        
+        .trust-badges { display: flex; gap: 15px; margin-top: 30px; align-items: center; } .trust-badges i { font-size: 2.2rem; color: #444; transition: 0.3s; } .trust-badges i:hover { color: #fff; }
+        .ssl-badge { display: flex; align-items: center; gap: 8px; color: #00e676; font-size: 0.8rem; font-weight: 700; border: 1px solid rgba(0, 230, 118, 0.3); padding: 5px 10px; border-radius: 6px; background: rgba(0, 230, 118, 0.05); }
+
+        .footer-bottom { text-align: center; margin-top: 60px; padding-top: 25px; border-top: 1px solid #111; font-size: 0.8rem; color: #555; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+        .footer-bottom strong { color: #777; }
+
+        /* VAZIO ESTADO (BUSCA) */
+        .no-results { display: none; grid-column: 1 / -1; text-align: center; padding: 50px; color: #666; font-size: 1.2rem; font-weight: 600; }
+        .no-results i { font-size: 3rem; color: #333; margin-bottom: 15px; display: block; }
+
+        @media (max-width: 900px) { .footer-container { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 768px) { header { padding: 10px 20px; } .nav-links { display: none; } .hero-title { font-size: 2.5rem; } .movie-catalog { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); padding: 0 20px 80px; gap: 15px; } .footer-container { grid-template-columns: 1fr; text-align: center; } .footer-col h4::after { left: 50%; transform: translateX(-50%); } .social-links, .trust-badges { justify-content: center; } .info-box { flex-direction: column; text-align: center; padding: 30px 20px; } .info-stats { justify-content: center; } .tools-section { flex-direction: column; align-items: stretch; } .search-box { max-width: 100%; } .cat-tags { justify-content: center; } }
     </style>
 </head>
 <body>
@@ -55,14 +108,19 @@
 
     <header id="main-header">
         <div class="logo"><a href="../index.html"><img src="../img/logo-unitv.png" alt="UniTV Oficial"></a></div>
-        <nav class="nav-links"><a href="../index.html">Início</a><a href="../baixar/index.html">Downloads</a><a href="../blog/index.html">Blog Tech</a><a href="index.html" class="active">Cinema</a></nav>
-        <a href="../index.html#comprar" class="btn-header">ASSINAR VIP 4K</a>
+        <nav class="nav-links">
+            <a href="../index.html">Início</a>
+            <a href="../baixar/index.html">Downloads</a>
+            <a href="../blog/index.html">Blog Tech</a>
+            <a href="index.html" class="active">Cinema VIP</a>
+        </nav>
+        <a href="../index.html#comprar" class="btn-header"><i class="fa-solid fa-crown"></i> ASSINAR VIP</a>
     </header>
 
     <section class="hero-cinema">
         <div class="hero-bg"></div><div class="hero-overlay"></div>
         <div class="hero-content reveal active">
-            <div class="hero-badge"><i class="fa-solid fa-fire"></i> Em Alta na UniTV</div>
+            <div class="hero-badge"><i class="fa-solid fa-fire"></i> Lançamento UniTV</div>
             <h1 class="hero-title">Godzilla x Kong:<br>O Novo Império</h1>
             <div class="hero-meta"><div class="hero-rating"><i class="fa-solid fa-star"></i> 8.7</div><span>2024</span><span class="hero-4k">4K UHD</span><span>Ação • Ficção</span></div>
             <p class="hero-desc">O épico confronto continua! Assista agora mesmo sem travamentos na sua TV Box. Descubra os bastidores e os segredos dessa superprodução na nossa resenha exclusiva.</p>
@@ -73,12 +131,25 @@
         </div>
     </section>
 
-    <div id="catalogo" class="section-header reveal">
-        <h2>Lançamentos & Resenhas</h2>
+    <div class="tools-section reveal">
+        <div class="search-box">
+            <i class="fa-solid fa-search"></i>
+            <input type="text" id="searchMovies" placeholder="Buscar resenha de filme (ex: Ação, Drama...)">
+        </div>
+        <div class="cat-tags">
+            <div class="cat-tag">Ação Extrema</div>
+            <div class="cat-tag">Terror</div>
+            <div class="cat-tag">Ficção Sci-Fi</div>
+            <div class="cat-tag">Comédia</div>
+        </div>
     </div>
 
-    <main class="movie-catalog">
+    <div id="catalogo" class="section-header reveal">
+        <h2>Catálogo de Resenhas VIP</h2>
+    </div>
 
+    <main class="movie-catalog" id="movieCatalog">
+        
         <a href="um-amor-de-mentiras/index.html" class="movie-card reveal active">
             <img src="https://image.tmdb.org/t/p/w500/hXNn25hE2SH2kHMPVOLjqDISSxf.jpg" alt="Um Amor de Mentiras" class="movie-poster">
             <div class="movie-rating-badge"><i class="fa-solid fa-star"></i> 6.6</div>
@@ -91,7 +162,6 @@
                 <div class="btn-read-review">LER RESENHA VIP</div>
             </div>
         </a>
-    
 
         <a href="casamento-sangrento-a-viuva/index.html" class="movie-card reveal active">
             <img src="https://image.tmdb.org/t/p/w500/l08o8b3NAPxDzJca9ZF0fdQvbaz.jpg" alt="Casamento Sangrento: A Viúva" class="movie-poster">
@@ -105,7 +175,6 @@
                 <div class="btn-read-review">LER RESENHA VIP</div>
             </div>
         </a>
-    
 
         <a href="um-cabra-bom-de-bola/index.html" class="movie-card reveal active">
             <img src="https://image.tmdb.org/t/p/w500/x0SRTrltSJi1iQiIAUpyvkxnr41.jpg" alt="Um Cabra Bom de Bola" class="movie-poster">
@@ -119,7 +188,6 @@
                 <div class="btn-read-review">LER RESENHA VIP</div>
             </div>
         </a>
-    
 
         <a href="inteligencia-humana/index.html" class="movie-card reveal active">
             <img src="https://image.tmdb.org/t/p/w500/zmv8yxTmswmMZk7mUktzY9wWXcO.jpg" alt="Inteligência Humana" class="movie-poster">
@@ -133,26 +201,126 @@
                 <div class="btn-read-review">LER RESENHA VIP</div>
             </div>
         </a>
-    
+        
+        <div class="no-results" id="noResults">
+            <i class="fa-solid fa-film"></i>
+            Nenhum filme encontrado com esse nome.
+        </div>
     </main>
+
+    <div class="info-banner reveal">
+        <div class="info-box">
+            <div class="info-text">
+                <h3>Por que assistir em <span>4K VIP?</span></h3>
+                <p>Nossos servidores dedicados garantem que você assista aos maiores lançamentos de Hollywood com a qualidade máxima de imagem, sem travamentos irritantes no final de semana.</p>
+            </div>
+            <div class="info-stats">
+                <div class="stat-item">
+                    <i class="fa-solid fa-server"></i>
+                    <h4>P2P</h4>
+                    <p>Anti-Travamento</p>
+                </div>
+                <div class="stat-item">
+                    <i class="fa-solid fa-tv"></i>
+                    <h4>UHD</h4>
+                    <p>Resolução Máxima</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <footer>
         <div class="footer-container">
-            <div class="footer-col"><img src="../img/logo-unitv.png" alt="UniTV" class="footer-logo"><p>Revenda Autorizada UniTV Brasil. O melhor do cinema, esportes e canais ao vivo com segurança total.</p></div>
-            <div class="footer-col"><h4>Acesso Rápido</h4><ul class="footer-links"><li><a href="../index.html">Home Page</a></li><li><a href="../blog/index.html">Blog & Tutoriais</a></li></ul></div>
-            <div class="footer-col"><h4>Atendimento</h4><ul class="footer-links"><li><a href="../ajuda/index.html">Central de Ajuda</a></li><li><a href="https://wa.me/5519981765840" target="_blank">WhatsApp Especializado</a></li></ul></div>
-            <div class="footer-col"><h4>Compra Segura</h4><div class="payment-methods"><i class="fa-brands fa-pix" style="color:#32bcad;"></i><i class="fa-brands fa-cc-mastercard"></i></div></div>
+            <div class="footer-col footer-brand">
+                <img src="../img/logo-unitv.png" alt="UniTV Oficial" class="footer-logo">
+                <p>O maior e mais estável portal de entretenimento P2P do Brasil. Filmes, séries e canais ao vivo com a qualidade que sua família merece.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-telegram"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>Navegação VIP</h4>
+                <ul class="footer-links">
+                    <li><a href="../index.html"><i class="fa-solid fa-angle-right"></i> Home Page Oficial</a></li>
+                    <li><a href="../baixar/index.html"><i class="fa-solid fa-angle-right"></i> Baixar Aplicativo App</a></li>
+                    <li><a href="../blog/index.html"><i class="fa-solid fa-angle-right"></i> Blog & Soluções Tech</a></li>
+                    <li><a href="../index.html#comprar"><i class="fa-solid fa-angle-right"></i> Renovar Minha Assinatura</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Atendimento</h4>
+                <ul class="footer-links">
+                    <li><a href="../ajuda/index.html"><i class="fa-solid fa-angle-right"></i> Central de Dúvidas</a></li>
+                    <li><a href="https://wa.me/5519981765840" target="_blank"><i class="fa-solid fa-angle-right"></i> Suporte Especializado (WhatsApp)</a></li>
+                    <li><a href="#"><i class="fa-solid fa-angle-right"></i> Relatar Problema (Ticket)</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Alerta de Lançamentos</h4>
+                <div class="newsletter-box">
+                    <p>Receba as novidades do catálogo direto no seu e-mail ou WhatsApp.</p>
+                    <div class="input-group">
+                        <input type="email" placeholder="Seu melhor e-mail...">
+                        <button><i class="fa-solid fa-paper-plane"></i></button>
+                    </div>
+                </div>
+                
+                <div class="trust-badges">
+                    <div class="ssl-badge"><i class="fa-solid fa-lock"></i> Site 100% Seguro</div>
+                    <i class="fa-brands fa-pix" style="color: #32bcad;" title="Pagamento via Pix"></i>
+                    <i class="fa-brands fa-cc-mastercard" title="Mastercard"></i>
+                </div>
+            </div>
         </div>
-        <div style="text-align: center; margin-top: 60px; padding-top: 20px; border-top: 1px solid #111; font-size: 0.75rem; color: #444;">&copy; 2026 UniTV Revenda Oficial. CNPJ: 00.000.000/0001-00. Todos os direitos reservados.</div>
+
+        <div class="footer-bottom">
+            <span>&copy; 2026 <strong>UniTV Revenda Oficial</strong>. CNPJ: 00.000.000/0001-00.</span>
+            <span>Este site não hospeda arquivos de mídia. Somos revendedores oficiais de licenças de software P2P.</span>
+        </div>
     </footer>
 
     <script>
+        // Animação do Header e Scroll
         window.addEventListener('scroll', () => {
             const header = document.getElementById('main-header');
             if (window.scrollY > 50) { header.classList.add('scrolled'); } else { header.classList.remove('scrolled'); }
             document.querySelectorAll('.reveal').forEach(el => { if (el.getBoundingClientRect().top < window.innerHeight - 50) { el.classList.add('active'); } });
         });
         setTimeout(() => { document.querySelectorAll('.reveal').forEach(el => { if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('active'); }); }, 300);
+
+        // LÓGICA DE BUSCA DE FILMES NA PÁGINA
+        document.getElementById('searchMovies').addEventListener('input', function(e) {
+            let term = e.target.value.toLowerCase();
+            let cards = document.querySelectorAll('.movie-card');
+            let hasResults = false;
+
+            cards.forEach(card => {
+                let title = card.querySelector('.movie-info-title').innerText.toLowerCase();
+                if(title.includes(term)) {
+                    card.style.display = 'block';
+                    hasResults = true;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Mostra aviso se não achar nada
+            document.getElementById('noResults').style.display = hasResults || term === '' ? 'none' : 'block';
+        });
+
+        // Clique nas tags de categoria envia texto para a busca
+        document.querySelectorAll('.cat-tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                let searchInput = document.getElementById('searchMovies');
+                searchInput.value = this.innerText;
+                searchInput.dispatchEvent(new Event('input')); // Dispara o evento de busca
+            });
+        });
     </script>
 </body>
 </html>
