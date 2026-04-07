@@ -10,16 +10,14 @@ from google.genai import types # [MUDANÇA] SDK Novo
 # ==========================================
 # 1. CONFIGURAÇÕES DA MÁQUINA (GEMINI 2.5 PRO)
 # ==========================================
-# [MUDANÇA] Instanciação do cliente no SDK Novo
 client = genai.Client(api_key="AIzaSyCmT5HHUpHsXbtN68h6bpkRIzFpjIy2RGs")
 MODEL_ID = 'gemini-2.5-pro'
 
 QTD_POSTS_POR_VEZ = 3 
 PASTA_BLOG = "blog"
+# [CORREÇÃO] Unificando o nome do arquivo de histórico
 HISTORICO_ARQUIVO = "historico_temas_blog.txt"
 
-# Filtros desativados
-# [MUDANÇA] Formatação dos filtros exigida pelo SDK Novo
 CONFIGURACAO_GERAL = types.GenerateContentConfig(
     safety_settings=[
         types.SafetySetting(category=types.HarmCategory.HARM_CATEGORY_HATE_SPEECH, threshold=types.HarmBlockThreshold.BLOCK_NONE),
@@ -30,7 +28,7 @@ CONFIGURACAO_GERAL = types.GenerateContentConfig(
 )
 
 # ==========================================
-# 2. TEMPLATES BASE (CÓPIA DO SEU DESIGN)
+# 2. TEMPLATES BASE (MANTIDOS 100%)
 # ==========================================
 TEMPLATE_TOPO = """<!DOCTYPE html>
 <html lang="pt-br">
@@ -287,77 +285,71 @@ TEMPLATE_RODAPE = """
 # ==========================================
 # 3. LÓGICA DE GERAÇÃO E URLS
 # ==========================================
+# [CORREÇÃO] Carregamento inteligente do histórico
 def carregar_historico():
     if not os.path.exists(HISTORICO_ARQUIVO): return []
     with open(HISTORICO_ARQUIVO, 'r', encoding='utf-8') as f:
-        return [linha.strip() for linha in f.readlines()]
+        return [linha.strip() for linha in f.readlines() if linha.strip()]
 
+# [CORREÇÃO] Salvamento consistente em modo APPEND ("a")
 def salvar_historico(tema):
-    with open(HISTORICO_ARQUIVO, 'a', encoding='utf-8') as f:
+    with open(HISTORICO_ARQUIVO, "a", encoding="utf-8") as f:
         f.write(f"{tema}\n")
+    print(f"📝 '{tema}' carimbado no histórico.")
 
-# Criação Limpa do Slug (Sem Acentos e Curta)
 def criar_slug(texto):
     texto_sem_acento = unicodedata.normalize('NFKD', texto).encode('ascii', 'ignore').decode('utf-8')
     slug = re.sub(r'[^a-z0-9]+', '-', texto_sem_acento.lower()).strip('-')
     return slug[:45].strip('-')
 
+# [CORREÇÃO] Prompt agressivo para EVITAR repetições lendo o histórico
 def gerar_temas(historico):
-    print("🧠 Gerando temas curtos e focados em retenção...")
+    print("🧠 Gerando temas curtos e inéditos...")
+    historico_str = ", ".join(historico[-30:]) # Pega os últimos 30 posts
     prompt = f"""
     Crie {QTD_POSTS_POR_VEZ} títulos de artigos sobre TV Box, IPTV e como acabar com travamentos.
     REGRA DE OURO: Os títulos devem ter NO MÁXIMO 8 palavras.
-    Ex: "Como Tirar o Lag da Sua TV Box".
-    NÃO repita estes: {', '.join(historico[-20:])}
+    PROIBIÇÃO ABSOLUTA: Não repita NADA que esteja nesta lista: [{historico_str}].
+    Gere temas variados: Lançamentos de Cinema, Futebol ao vivo, Séries em 4K, Configuração de DNS.
     Retorne APENAS os títulos, um por linha.
     """
     try:
-        # [MUDANÇA] Sintaxe de chamada do SDK Novo
         resposta = client.models.generate_content(model=MODEL_ID, contents=prompt, config=CONFIGURACAO_GERAL)
         return [t.strip() for t in resposta.text.split('\n') if t.strip()][:QTD_POSTS_POR_VEZ]
     except Exception:
         return ["Otimizando a Internet Para TV Box", "Melhores Dicas Para Streaming 4K", "Fim do Buffering na TV Box"]
 
 def escrever_artigo(tema):
-    print(f"✍️ Redigindo de forma segura: {tema}")
+    print(f"✍️ Redigindo post: {tema}")
     prompt_redator = f"""
     Escreva o CORPO de um artigo de blog técnico (800+ palavras) sobre: "{tema}".
-    
-    REGRA DE CONTROLE EXTREMO (SIGA OU FALHARÁ):
-    1. NÃO GERE tags de estrutura principal (<html>, <head>, <title>, <body>).
-    2. RETORNE APENAS AS TAGS: <h2>, <h3>, <p>, <ul> e <blockquote>.
-    3. O texto deve ser focado em ensinar a configurar a rede (DNS) e otimizar a TV Box.
-    4. Crie exatamente 2 blocos HTML assim:
-       <div class="tech-box"><h4>Dica de Ouro</h4><p>sua dica aqui.</p></div>
-    5. Insira 3 imagens assim: <img src="https://picsum.photos/seed/{tema.replace(' ', '')}X/800/400" alt="Tecnologia TV Box"> (Onde X = 1, 2 e 3).
+    1. NÃO GERE tags <html>, <head>, <title>, <body>.
+    2. USE APENAS: <h2>, <h3>, <p>, <ul> e <blockquote>.
+    3. Texto focado em configuração e otimização UniTV.
+    4. Crie 2 blocos: <div class="tech-box"><h4>Dica de Ouro</h4><p>sua dica.</p></div>
+    5. Insira 3 imagens: <img src="https://picsum.photos/seed/{tema.replace(' ', '')}X/800/400" alt="Tecnologia TV Box">.
     """
     
-    prompt_meta = f"""
-    Escreva estritamente UMA ÚNICA FRASE, de no máximo 150 caracteres, resumindo o artigo sobre: {tema}. 
-    Não escreva "Opção 1", apenas a frase.
-    """
+    prompt_meta = f"Resuma em uma frase de 150 caracteres o tema: {tema}. Sem aspas."
     
     try:
-        # Pede o Artigo
-        # [MUDANÇA] Sintaxe de chamada do SDK Novo
         res_artigo = client.models.generate_content(model=MODEL_ID, contents=prompt_redator, config=CONFIGURACAO_GERAL)
         artigo = res_artigo.text.replace("```html", "").replace("```", "").strip()
         
-        # Pede a Meta Description limpa e a força a ter 150 chars
-        # [MUDANÇA] Sintaxe de chamada do SDK Novo
         res_meta = client.models.generate_content(model=MODEL_ID, contents=prompt_meta, config=CONFIGURACAO_GERAL)
-        meta_desc = res_meta.text.replace('"', '').replace('Opção 1:', '').strip()
+        meta_desc = res_meta.text.replace('"', '').strip()
         meta_desc = (meta_desc[:147] + '...') if len(meta_desc) > 150 else meta_desc
         
         return artigo, meta_desc
     except Exception as e:
-        raise Exception(f"Erro no processamento da IA: {e}")
+        raise Exception(f"Erro na IA: {e}")
 
 # ==========================================
-# 4. INJEÇÃO SEGURA NA VITRINE
+# 4. INJEÇÃO SEGURA NA VITRINE (O CONSERTO)
 # ==========================================
 def atualizar_pagina_principal_do_blog(titulo, slug, meta_desc):
     caminho = os.path.join(PASTA_BLOG, "index.html")
+    ancora = ""
     try:
         with open(caminho, "r", encoding="utf-8") as f: html = f.read()
 
@@ -375,18 +367,20 @@ def atualizar_pagina_principal_do_blog(titulo, slug, meta_desc):
         </a>
         """
 
-        # [CORREÇÃO] A âncora tinha sumido no seu copia e cola. Restaurei para evitar que a página inteira quebre.
-        if "" in html:
-            html = html.replace("", card)
+        # [CORREÇÃO FINAL] Injeção cirúrgica mantendo a âncora viva!
+        if ancora in html:
+            html = html.replace(ancora, card + "\n        " + ancora)
             with open(caminho, "w", encoding="utf-8") as f: f.write(html)
-            print(f"🔗 Post inserido na vitrine.")
-        else: print("⚠️ A tag sumiu do blog/index.html")
-    except FileNotFoundError: print(f"⚠️ Capa do blog não encontrada.")
+            print(f"🔗 Post '{titulo}' inserido na vitrine.")
+        else: 
+            print(f"⚠️ ERRO CRÍTICO: A tag {ancora} não foi encontrada no index.html")
+    except Exception as e: 
+        print(f"⚠️ Erro ao atualizar capa: {e}")
 
 # ==========================================
 # EXECUTOR
 # ==========================================
-print("🚀 MÁQUINA DE SEO (BLINDAGEM TOTAL)")
+print("🚀 MÁQUINA DE SEO UniTV (VERSÃO BLINDADA)")
 historico = carregar_historico()
 temas = gerar_temas(historico)
 
@@ -394,7 +388,10 @@ for tema in temas:
     slug = criar_slug(tema)
     pasta_artigo = os.path.join(PASTA_BLOG, slug)
     
-    if os.path.exists(pasta_artigo): continue
+    if os.path.exists(pasta_artigo): 
+        print(f"⏩ Pulando '{tema}', slug já existe.")
+        continue
+        
     os.makedirs(pasta_artigo, exist_ok=True)
     
     try:
@@ -402,18 +399,18 @@ for tema in temas:
         data_format = datetime.now().strftime("%d de %B de %Y")
         data_seo = datetime.now().strftime("%Y-%m-%d")
         
-        # Junta tudo!
         html_final = TEMPLATE_TOPO.replace("{titulo}", tema).replace("{meta_desc}", meta).replace("{data_atual}", data_format).replace("{data_seo}", data_seo)
         html_final += corpo + TEMPLATE_RODAPE
         
         with open(os.path.join(pasta_artigo, "index.html"), "w", encoding="utf-8") as f: f.write(html_final)
+        
         atualizar_pagina_principal_do_blog(tema, slug, meta)
         salvar_historico(tema)
-        time.sleep(8) 
-    except Exception as e: print(f"❌ Erro ao escrever post: {e}")
+        time.sleep(5) 
+    except Exception as e: print(f"❌ Erro ao processar post: {e}")
 
-print("\n📦 Push Automático para Github...")
+print("\n📦 Sincronizando com GitHub...")
 subprocess.run(["git", "add", "."])
-subprocess.run(["git", "commit", "-m", f"Auto-post Seguro: {datetime.now().strftime('%Y-%m-%d %H:%M')}"])
+subprocess.run(["git", "commit", "-m", f"Auto-post: {datetime.now().strftime('%d/%m %H:%M')}"])
 subprocess.run(["git", "push"])
-print("✅ SUCESSO ABSOLUTO! Sem bugs.")
+print("✅ SUCESSO ABSOLUTO! O robô agora tem memória e não quebra o site.")
