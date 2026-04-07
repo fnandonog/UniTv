@@ -31,6 +31,7 @@ CONFIG_GERAL = types.GenerateContentConfig(
 
 # ==========================================
 # 2. TEMPLATE GIGANTE DA RESENHA VIP
+# Corrigido para usar tags <img> oficiais e não falhar o carregamento
 # ==========================================
 TEMPLATE_RESENHA = """<!DOCTYPE html>
 <html lang="pt-br">
@@ -58,11 +59,13 @@ TEMPLATE_RESENHA = """<!DOCTYPE html>
         .nav-links { display: flex; gap: 25px; list-style: none; } .nav-links a { color: #bbb; text-decoration: none; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; transition: 0.3s; } .nav-links a:hover { color: #fff; } 
         .btn-header { background: var(--gradiente-premium); color: white; padding: 10px 25px; border-radius: 50px; text-decoration: none; font-size: 0.75rem; font-weight: 800; box-shadow: 0 4px 15px rgba(221, 36, 118, 0.3); transition: 0.3s; }
 
-        .movie-hero { height: 75vh; width: 100%; position: relative; margin-top: 38px; }
-        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, var(--bg-body) 0%, rgba(5,5,5,0.8) 50%, rgba(5,5,5,0.3) 100%); display: flex; align-items: flex-end; padding: 0 5% 50px; }
+        /* HERO FILME BLINDADO COM IMG TAG */
+        .movie-hero { height: 75vh; width: 100%; position: relative; margin-top: 38px; overflow: hidden; background: #000; }
+        .hero-bg-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; filter: brightness(0.6); }
+        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, var(--bg-body) 0%, rgba(5,5,5,0.6) 50%, rgba(5,5,5,0.1) 100%); display: flex; align-items: flex-end; padding: 0 5% 50px; z-index: 2; }
         .btn-voltar { position: absolute; top: 30px; left: 5%; background: rgba(0,0,0,0.5); color: #fff; padding: 10px 20px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 0.9rem; border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(5px); z-index: 10; transition: 0.3s; } .btn-voltar:hover { background: var(--neon-laranja); border-color: var(--neon-laranja); }
         
-        .hero-info { max-width: 1000px; display: flex; gap: 40px; align-items: flex-end; }
+        .hero-info { max-width: 1000px; display: flex; gap: 40px; align-items: flex-end; position: relative; z-index: 3; }
         .hero-poster { width: 220px; border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.1); }
         .hero-text h1 { font-family: 'Montserrat', sans-serif; font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1; color: #fff; text-transform: uppercase; font-weight: 900; margin-bottom: 15px; text-shadow: 2px 2px 20px rgba(0,0,0,0.8); }
         .hero-tags { display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 20px; }
@@ -75,7 +78,7 @@ TEMPLATE_RESENHA = """<!DOCTYPE html>
         .main-article h2 { color: #fff; margin: 40px 0 20px; font-size: 2rem; font-weight: 800; border-bottom: 2px solid rgba(255, 115, 0, 0.3); padding-bottom: 10px; display: inline-block; }
         .main-article p { margin-bottom: 25px; }
         .main-article blockquote { background: rgba(255, 115, 0, 0.05); border-left: 4px solid var(--neon-laranja); padding: 25px; margin: 30px 0; font-size: 1.2rem; font-style: italic; border-radius: 0 12px 12px 0; color: #eee; }
-        .mid-backdrop { width: 100%; border-radius: 16px; margin: 30px 0; border: 1px solid #222; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .mid-backdrop { width: 100%; border-radius: 16px; margin: 30px 0; border: 1px solid #222; box-shadow: 0 10px 30px rgba(0,0,0,0.5); object-fit: cover; }
 
         .sidebar { background: #0a0a0a; border: 1px solid #1a1a1a; padding: 30px; border-radius: 16px; position: sticky; top: 130px; }
         .sidebar h3 { color: #fff; font-size: 1.3rem; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #222; }
@@ -138,7 +141,8 @@ TEMPLATE_RESENHA = """<!DOCTYPE html>
         <a href="../../index.html#comprar" class="btn-header"><i class="fa-solid fa-crown"></i> ASSINAR VIP</a>
     </header>
 
-    <div class="movie-hero" style="background: url('[BACKDROP_PRINCIPAL]') center top / cover no-repeat;">
+    <div class="movie-hero">
+        <img src="[BACKDROP_PRINCIPAL]" class="hero-bg-img" alt="Fundo">
         <div class="hero-overlay">
             <a href="../index.html" class="btn-voltar"><i class="fa-solid fa-arrow-left"></i> Voltar ao Catálogo</a>
             <div class="hero-info">
@@ -355,7 +359,7 @@ def buscar_filmes_em_alta():
     return []
 
 def buscar_detalhes_do_filme(movie_id):
-    url = f"https://api.themoviedb.org/3/movie/{movie_id}?api_key={TMDB_KEY}&language=pt-BR&append_to_response=credits,images&include_image_language=pt,en,null"
+    url = f"https://api.themoviedb.org/3/movie/{movie_id}?api_key={TMDB_KEY}&language=pt-BR&append_to_response=credits,images"
     res = requests.get(url)
     if res.status_code == 200:
         return res.json()
@@ -400,9 +404,7 @@ def injetar_card_na_vitrine(filme, slug):
     titulo = filme['title']
     nota = round(filme['vote_average'], 1)
     ano = filme['release_date'][:4] if 'release_date' in filme else "2024"
-    
-    # O SEGREDO DO BYPASS DAS OPERADORAS BRASILEIRAS (PROXY CDN wsrv.nl)
-    poster_url = f"[https://wsrv.nl/?url=image.tmdb.org/t/p/w500](https://wsrv.nl/?url=image.tmdb.org/t/p/w500){filme['poster_path']}"
+    poster_url = f"[https://image.tmdb.org/t/p/w500](https://image.tmdb.org/t/p/w500){filme['poster_path']}"
     
     card = f"""
         <a href="{slug}/index.html" class="movie-card reveal active">
@@ -465,14 +467,14 @@ for filme in filmes:
         cast = detalhes['credits'].get('cast', [])[:3]
         if cast: elenco_html = "".join([f"<div>{ator['name']}</div>" for ator in cast])
 
-    # O SEGREDO DO BYPASS DAS OPERADORAS BRASILEIRAS APLICADO NAS PÁGINAS INTERNAS
-    bg_principal = f"[https://wsrv.nl/?url=image.tmdb.org/t/p/original](https://wsrv.nl/?url=image.tmdb.org/t/p/original){filme['backdrop_path']}"
+    # LINKS ORIGINAIS REATIVADOS SEM CSS INLINE
+    bg_principal = f"[https://image.tmdb.org/t/p/original](https://image.tmdb.org/t/p/original){filme['backdrop_path']}"
     bg_secundario = bg_principal
     if 'images' in detalhes and 'backdrops' in detalhes['images']:
         bgs = [b['file_path'] for b in detalhes['images']['backdrops'] if b['file_path'] != filme['backdrop_path']]
-        if bgs: bg_secundario = f"[https://wsrv.nl/?url=image.tmdb.org/t/p/w1280](https://wsrv.nl/?url=image.tmdb.org/t/p/w1280){bgs[0]}"
+        if bgs: bg_secundario = f"[https://image.tmdb.org/t/p/w1280](https://image.tmdb.org/t/p/w1280){bgs[0]}"
 
-    poster_principal = f"[https://wsrv.nl/?url=image.tmdb.org/t/p/w500](https://wsrv.nl/?url=image.tmdb.org/t/p/w500){filme['poster_path']}"
+    poster_principal = f"[https://image.tmdb.org/t/p/w500](https://image.tmdb.org/t/p/w500){filme['poster_path']}"
     
     corpo_resenha = escrever_resenha_gemini(detalhes)
     
