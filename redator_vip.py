@@ -1,22 +1,20 @@
-from google import genai # [MUDANÇA] SDK Novo
+from google import genai
 import os
 import re
 import time
 import subprocess
 import unicodedata
 from datetime import datetime
-from google.genai import types # [MUDANÇA] SDK Novo
+from google.genai import types
 
 # ==========================================
 # 1. CONFIGURAÇÕES DA MÁQUINA (CORRIGIDO)
 # ==========================================
 client = genai.Client(api_key="AIzaSyCmT5HHUpHsXbtN68h6bpkRIzFpjIy2RGs")
-# [AJUSTE] gemini-2.5-pro não existe. Usando o 2.0-flash que é o mais rápido e atual.
 MODEL_ID = 'gemini-2.0-flash' 
 
 QTD_POSTS_POR_VEZ = 3 
 PASTA_BLOG = "blog"
-# [CORREÇÃO] Unificando o nome do arquivo de histórico
 HISTORICO_ARQUIVO = "historico_temas_blog.txt"
 
 CONFIGURACAO_GERAL = types.GenerateContentConfig(
@@ -292,7 +290,6 @@ def carregar_historico():
         return [linha.strip() for linha in f.readlines() if linha.strip()]
 
 def salvar_historico(tema):
-    # [CORREÇÃO] Modo "a" (append) para garantir que ele salve linha por linha sem apagar nada
     with open(HISTORICO_ARQUIVO, "a", encoding="utf-8") as f:
         f.write(f"{tema}\n")
     print(f"📝 '{tema}' carimbado no histórico.")
@@ -321,14 +318,18 @@ def gerar_temas(historico):
 
 def escrever_artigo(tema):
     print(f"✍️ Redigindo post: {tema}")
+    
+    # [CORREÇÃO] API de imagens que gera arte com sua estética Cyberpunk/Tech
+    url_tema = tema.replace(' ', '%20')
     prompt_redator = f"""
     Escreva o CORPO de um artigo técnico (800+ palavras) sobre: "{tema}".
     1. NÃO use tags estruturais (html, head, body).
     2. USE APENAS: <h2>, <h3>, <p>, <ul> e <blockquote>.
     3. Foco em UniTV e TV Box.
     4. Crie 2 blocos: <div class="tech-box"><h4>Dica</h4><p>conteúdo.</p></div>
-    5. 3 imagens: <img src="https://picsum.photos/seed/{tema.replace(' ', '')}X/800/400" alt="Post">.
+    5. 3 imagens: <img src="https://image.pollinations.ai/prompt/cyberpunk%20tech%20dark%20background%20vibrant%20blue%20orange%20neon%20futuristic%20{url_tema}%20scene%20X?width=800&height=400&nologo=true" alt="Post">.
     """
+    
     prompt_meta = f"Resuma em 150 caracteres o tema: {tema}."
     
     try:
@@ -346,15 +347,18 @@ def escrever_artigo(tema):
 # ==========================================
 def atualizar_pagina_principal_do_blog(titulo, slug, meta_desc):
     caminho = os.path.join(PASTA_BLOG, "index.html")
-    # [CORREÇÃO] Âncora restaurada para evitar o loop infinito
+    # [CORREÇÃO] Âncora ajustada
     ancora = ""
+    
     try:
         with open(caminho, "r", encoding="utf-8") as f: html = f.read()
 
+        # [CORREÇÃO] Imagem da vitrine (card) gerada pela mesma API, puxando a estética
+        url_slug = slug.replace('-', '%20')
         card = f"""
         <a href="{slug}/index.html" class="post-card reveal active" style="text-decoration:none; display: block; margin-bottom: 30px;">
             <div class="post-thumb" style="border-radius:10px; overflow:hidden; margin-bottom:15px;">
-                <img src="https://picsum.photos/seed/{slug}/800/500" alt="{titulo}" style="width:100%; display:block; transition:0.3s; object-fit: cover;">
+                <img src="https://image.pollinations.ai/prompt/cyberpunk%20tech%20dark%20background%20vibrant%20blue%20orange%20neon%20futuristic%20{url_slug}?width=800&height=500&nologo=true" alt="{titulo}" style="width:100%; display:block; transition:0.3s; object-fit: cover;">
             </div>
             <div class="post-content">
                 <span class="post-tag" style="background:#ff0080; color:#fff; padding:5px 10px; font-size:0.7rem; font-weight:bold; border-radius:4px; margin-bottom:10px; display:inline-block;">NOVIDADE TECH</span>
@@ -366,7 +370,6 @@ def atualizar_pagina_principal_do_blog(titulo, slug, meta_desc):
         """
 
         if ancora in html:
-            # [CORREÇÃO] Injeção cirúrgica recolocando a âncora no final para o próximo post
             html = html.replace(ancora, card + "\n        " + ancora)
             with open(caminho, "w", encoding="utf-8") as f: f.write(html)
             print(f"🔗 Post '{titulo}' na vitrine.")
@@ -408,16 +411,8 @@ for tema in temas:
     except Exception as e: print(f"❌ Erro ao processar post: {e}")
 
 print("\n📦 Sincronizando com GitHub...")
-# 1. Prepara os arquivos novos
 subprocess.run(["git", "add", "."])
-
-# 2. Cria o pacote do post
 subprocess.run(["git", "commit", "-m", f"Auto-post: {datetime.now().strftime('%d/%m %H:%M')}"])
-
-# 3. [O SEGREDO] Baixa o que você mudou no site do GitHub antes de enviar
 subprocess.run(["git", "pull", "origin", "main", "--rebase"])
-
-# 4. Envia tudo limpo
 subprocess.run(["git", "push", "origin", "main"])
-
 print("✅ SUCESSO! O robô sincronizou e postou.")
