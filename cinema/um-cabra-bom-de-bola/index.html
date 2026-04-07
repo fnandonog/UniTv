@@ -2,92 +2,83 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Um Cabra Bom de Bola | Resenha Cinema VIP UniTV</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Um Cabra Bom de Bola | Resenha VIP UniTV</title>
+    <meta name="description" content="Análise do filme Um Cabra Bom de Bola. Assista em 4K na UniTV.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="icon" href="../../img/logo-unitv.png" type="image/png">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { background-color: #050505; color: #fff; overflow-x: hidden; }
-        
-        .hero-backdrop { width: 100%; height: 65vh; background: url('https://image.tmdb.org/t/p/original/tq3h43fZy0H80vzf47MAY7R9Mxo.jpg') center top / cover no-repeat; position: relative; border-bottom: 1px solid rgba(255,115,0,0.2); }
-        .hero-overlay { position: absolute; bottom: 0; width: 100%; height: 100%; background: linear-gradient(to top, #050505 5%, rgba(5,5,5,0.8) 40%, transparent 100%); }
-        
-        .nav-voltar { position: absolute; top: 30px; left: 5%; z-index: 20; }
-        .nav-voltar a { color: #fff; text-decoration: none; font-weight: 800; background: rgba(0,0,0,0.5); padding: 10px 20px; border-radius: 50px; backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.1); transition: 0.3s; }
-        .nav-voltar a:hover { background: #ff7300; border-color: #ff7300; }
-
-        .content { max-width: 900px; margin: -150px auto 50px; position: relative; z-index: 10; padding: 0 20px; }
-        h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; line-height: 1.1; margin-bottom: 15px; text-transform: uppercase; text-shadow: 2px 2px 20px rgba(0,0,0,0.8); }
-        
-        .meta-tags { display: flex; gap: 15px; align-items: center; margin-bottom: 40px; flex-wrap: wrap; }
-        .meta-tags span { background: rgba(255,255,255,0.1); padding: 5px 12px; border-radius: 6px; font-size: 0.85rem; font-weight: 700; border: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(5px); }
-        .meta-tags .nota { color: #ffcc00; border-color: rgba(255,204,0,0.3); }
-        .meta-tags .qualidade { background: linear-gradient(135deg, #ff7300, #dd2476); color: white; border: none; }
-
-        .resenha-body { font-size: 1.15rem; line-height: 1.8; color: #ccc; background: #0a0a0a; padding: 40px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
-        .resenha-body h2 { color: #00f3ff; margin: 40px 0 20px; font-size: 1.8rem; font-weight: 800; border-bottom: 1px solid rgba(0, 243, 255, 0.2); padding-bottom: 10px; }
-        .resenha-body p { margin-bottom: 25px; }
-        .resenha-body blockquote { border-left: 4px solid #ff7300; background: rgba(255, 115, 0, 0.05); padding: 20px; margin: 30px 0; font-style: italic; color: #fff; font-weight: 600; border-radius: 0 10px 10px 0; }
-
-        .cta-box { text-align: center; margin-top: 60px; padding: 40px; border-radius: 20px; background: radial-gradient(circle at center, #2d0b1e 0%, #050505 100%); border: 1px solid #dd2476; }
-        .cta-box h3 { font-size: 1.8rem; margin-bottom: 15px; color: #fff; }
-        .btn-assinar { display: inline-block; background: linear-gradient(135deg, #ff7300, #dd2476); color: white; padding: 15px 40px; border-radius: 50px; font-weight: 800; text-decoration: none; text-transform: uppercase; margin-top: 20px; transition: 0.3s; }
-        .btn-assinar:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(221, 36, 118, 0.4); }
+        body { background: #050505; color: #f0f0f0; }
+        header { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; background: rgba(5,5,5,0.9); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #111; }
+        .logo img { height: 35px; }
+        .movie-hero { width: 100%; height: 60vh; position: relative; overflow: hidden; }
+        .hero-img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.5); }
+        .hero-overlay { position: absolute; bottom: 0; left: 0; width: 100%; padding: 50px 5%; background: linear-gradient(to top, #050505, transparent); }
+        .content { max-width: 1200px; margin: 40px auto; padding: 0 20px; display: grid; grid-template-columns: 1fr 300px; gap: 40px; }
+        .main-text h2 { color: #ff0080; margin: 30px 0 15px; border-left: 4px solid #ff0080; padding-left: 15px; }
+        .main-text p { font-size: 1.1rem; color: #bbb; line-height: 1.8; margin-bottom: 20px; }
+        .sidebar { background: #0a0a0a; padding: 25px; border-radius: 15px; height: fit-content; border: 1px solid #1a1a1a; }
+        .sidebar h3 { font-size: 1.2rem; margin-bottom: 15px; color: #fff; }
+        .ficha-item { margin-bottom: 15px; font-size: 0.9rem; }
+        .ficha-item span { color: #666; display: block; text-transform: uppercase; font-weight: 700; }
+        .btn-cta { display: block; background: linear-gradient(135deg, #FF512F 0%, #DD2476 100%); color: #fff; text-align: center; padding: 15px; border-radius: 10px; text-decoration: none; font-weight: 800; margin-top: 20px; }
+        footer { background: #000; padding: 60px 5%; text-align: center; border-top: 1px solid #111; color: #444; font-size: 0.8rem; }
     </style>
 </head>
 <body>
+    <header>
+        <div class="logo"><a href="../../index.html"><img src="../../img/logo-unitv.png"></a></div>
+        <a href="../../index.html#comprar" style="color:#fff; text-decoration:none; font-weight:700;">ASSINAR VIP</a>
+    </header>
 
-    <div class="hero-backdrop"><div class="hero-overlay"></div></div>
-    
-    <div class="nav-voltar">
-        <a href="../index.html"><i class="fa-solid fa-arrow-left"></i> Catálogo</a>
+    <div class="movie-hero">
+        <img src="https://image.pollinations.ai/prompt/cinematic%20scene%20from%20movie%20Um%20Cabra%20Bom%20de%20Bola%20ultra%20detailed%204k?width=1280&height=720&nologo=true" class="hero-img">
+        <div class="hero-overlay">
+            <h1 style="font-size: clamp(2rem, 5vw, 4rem); font-weight: 900;">Um Cabra Bom de Bola</h1>
+            <p style="color: #00ff88; font-weight: 700;">⭐ 7.9 | 2026 | 4K ULTRA HD</p>
+        </div>
     </div>
 
     <div class="content">
-        <h1>Um Cabra Bom de Bola</h1>
-        <div class="meta-tags">
-            <span class="nota"><i class="fa-solid fa-star"></i> 7.9</span>
-            <span>2026</span>
-            <span class="qualidade">4K HDR</span>
-            <span>Resenha VIP</span>
-        </div>
-        
-        <div class="resenha-body">
-            <h2>Um Cabra Bom de Bola: Uma Surpresa Hilária e Emocionante no Berrobol!</h2>
+        <main class="main-text">
+            <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resenha: Um Cabra Bom de Bola - UniTV</title>
+</head>
+<body>
 
-<p>Preparem os baldes de pipoca e afiem os cascos, porque "Um Cabra Bom de Bola" chegou para chutar a mesmice do cinema! A animação, que à primeira vista parece um conto bobinho sobre superação, entrega muito mais do que o esperado. Acompanhamos a jornada improvável de Bode, uma cabra interiorana com um sonho audacioso: jogar berrobol profissional. Berrobol, para quem não conhece, é uma espécie de futebol americano turbinado com esteroides e temperado com wrestling – um esporte de contato total dominado por rinocerontes bombados, guepardos supersônicos e crocodilos estrategistas. Bode, com sua aparência nada ameaçadora, precisa provar que tamanho não é documento e que a paixão, a persistência e um bom par de chifres podem vencer qualquer obstáculo.</p>
+    <h2>Um Cabra Bom de Bola: A Ascensão de um Ídolo em 4K!</h2>
 
-<p>A trama, embora siga a fórmula clássica do "underdog", é recheada de reviravoltas inesperadas, personagens cativantes e um humor inteligente que agrada tanto crianças quanto adultos. A animação é vibrante e expressiva, dando vida a um universo animal rico em detalhes e referências culturais. O roteiro, esperto e bem construído, equilibra momentos de comédia pastelão com cenas de profunda emoção, explorando temas como autoaceitação, trabalho em equipe e a importância de nunca desistir dos seus sonhos.</p>
+    <p>Prepare a pipoca e ajuste as configurações da sua TV! "Um Cabra Bom de Bola" chegou para balançar as redes e emocionar os corações, e te garanto, você não vai querer perder essa jornada épica. O filme narra a história inspiradora de Zé, um jovem humilde do sertão nordestino, com um talento nato para o futebol.  A trama tece uma tapeçaria rica em cultura local, mostrando os desafios e as paixões que moldam a vida de Zé enquanto ele luta para realizar seu sonho de se tornar um jogador profissional.</p>
 
-<p>Bode, o protagonista, é um personagem adorável e inspirador. Sua ingenuidade e otimismo contagiam a todos, e sua determinação em enfrentar os desafios nos faz torcer por ele a cada berro e cabeçada. Os personagens secundários, cada um com suas próprias peculiaridades e motivações, complementam a narrativa e enriquecem o universo do berrobol. Destaque para a veterana Dona Cabrita, mentora de Bode e ex-campeã de berrobol, que rouba a cena com seu sarcasmo e sabedoria.</p>
+    <p>Esqueça os clichês batidos! O filme vai além da mera narrativa esportiva.  Ele mergulha nas relações familiares de Zé, em seus laços de amizade, e em seu amor pela terra natal.  A direção de arte é impecável, capturando a beleza árida e a vivacidade da cultura nordestina com uma autenticidade que te transporta diretamente para o coração do sertão.  As atuações são de tirar o chapéu, com o elenco entregando performances carregadas de emoção e realismo.</p>
 
-<h2>Nos Bastidores</h2>
+    <blockquote>
+        "Um Cabra Bom de Bola não é apenas um filme sobre futebol; é uma ode à perseverança, à esperança e à força do espírito humano."
+    </blockquote>
 
-<p>A produção de "Um Cabra Bom de Bola" foi repleta de desafios e curiosidades:</p>
+    <p>Mas é na experiência visual que "Um Cabra Bom de Bola" atinge o seu auge.  <strong>Assistir em 4K é simplesmente obrigatório!</strong> A riqueza de detalhes da paisagem, a textura da poeira levantada pelas chuteiras, o brilho intenso do sol... Tudo ganha uma nova dimensão.  As cenas das partidas de futebol são particularmente impressionantes, com a nitidez da imagem permitindo que você sinta cada lance, cada drible, cada gol como se estivesse presente no estádio.  A paleta de cores vibrante e a cinematografia impecável tornam cada frame uma obra de arte.</p>
 
-<p>1. Para dar maior realismo aos movimentos dos animais no berrobol, os animadores passaram semanas observando atletas profissionais de rugby e MMA, estudando seus golpes e estratégias.</p>
+    <p>Se você busca um filme inspirador, emocionante e visualmente deslumbrante, "Um Cabra Bom de Bola" é a escolha certa.  Prepare-se para torcer, vibrar e se emocionar com essa história que celebra a força do talento e a beleza da cultura brasileira.  Corre para garantir o seu ingresso e não perca a chance de vivenciar essa experiência cinematográfica em 4K!</p>
 
-<p>2. O ator que dubla Bode, João Cabral, revelou em entrevistas que se inspirou no seu próprio cachorro, um buldogue francês chamado Napoleão, para dar voz ao personagem. Segundo ele, Napoleão tem a mesma energia e otimismo contagiante de Bode.</p>
-
-<h2>Por que assistir na UniTV?</h2>
-
-<p>A experiência de assistir "Um Cabra Bom de Bola" na UniTV eleva a animação a um novo patamar. A fotografia vibrante e os efeitos visuais impressionantes foram meticulosamente criados para serem apreciados em resolução 4K, com cores mais ricas e detalhes mais nítidos. A tecnologia de streaming da UniTV garante uma reprodução fluida e sem travamentos, mesmo nas cenas de ação mais frenéticas e explosivas do berrobol.</p>
-
-<p>Os desenvolvedores da UniTV otimizaram a plataforma para lidar com as complexas texturas e os efeitos de iluminação presentes no filme, garantindo uma experiência visual imersiva e sem interrupções. Cada pelo, cada gota de suor, cada explosão de poeira no campo de berrobol ganham vida de forma espetacular na tela da sua TV.</p>
-
-<blockquote>A grande sacada de "Um Cabra Bom de Bola" é sua capacidade de equilibrar humor e emoção, entregando uma mensagem inspiradora de forma leve e divertida.</blockquote>
-
-<p>Em resumo, "Um Cabra Bom de Bola" é uma animação imperdível que diverte, emociona e inspira. Prepare-se para dar boas gargalhadas, se emocionar com a jornada de Bode e se apaixonar pelo universo peculiar e hilário do berrobol. Corra para a UniTV e desfrute dessa experiência cinematográfica em toda a sua glória 4K!</p>
-        </div>
-
-        <div class="cta-box">
-            <h3>Disponível agora no app UniTV</h3>
-            <p style="color:#aaa;">Assista a este e milhares de outros filmes em 4K real, sem travamentos.</p>
-            <a href="../../index.html#comprar" class="btn-assinar">LIBERAR ACESSO VIP</a>
-        </div>
+</body>
+</html>
+            <img src="https://image.pollinations.ai/prompt/cinematic%20scene%20from%20movie%20Um%20Cabra%20Bom%20de%20Bola%20ultra%20detailed%204k?width=1280&height=720&nologo=true" style="width:100%; border-radius:15px; margin:30px 0;">
+        </main>
+        <aside class="sidebar">
+            <h3>Ficha Técnica</h3>
+            <div class="ficha-item"><span>Direção</span><strong>Equipe UniTV</strong></div>
+            <div class="ficha-item"><span>Gênero</span><strong>Animação</strong></div>
+            <div class="ficha-item"><span>Duração</span><strong>100 min</strong></div>
+            <a href="../../index.html#comprar" class="btn-cta">ASSISTIR NA UNITV</a>
+        </aside>
     </div>
 
+    <footer>&copy; 2026 UniTV Oficial - Revenda Autorizada</footer>
 </body>
 </html>

@@ -2,87 +2,87 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cara de Um, Focinho de Outro | Resenha Cinema VIP UniTV</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Cara de Um, Focinho de Outro | Resenha VIP UniTV</title>
+    <meta name="description" content="Análise do filme Cara de Um, Focinho de Outro. Assista em 4K na UniTV.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="icon" href="../../img/logo-unitv.png" type="image/png">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { background-color: #050505; color: #fff; overflow-x: hidden; }
-        
-        .hero-backdrop { width: 100%; height: 65vh; background: url('https://image.tmdb.org/t/p/original/u53UYu5XG2hNgWGvs3xGhAVzypl.jpg') center top / cover no-repeat; position: relative; border-bottom: 1px solid rgba(255,115,0,0.2); }
-        .hero-overlay { position: absolute; bottom: 0; width: 100%; height: 100%; background: linear-gradient(to top, #050505 5%, rgba(5,5,5,0.8) 40%, transparent 100%); }
-        
-        .nav-voltar { position: absolute; top: 30px; left: 5%; z-index: 20; }
-        .nav-voltar a { color: #fff; text-decoration: none; font-weight: 800; background: rgba(0,0,0,0.5); padding: 10px 20px; border-radius: 50px; backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.1); transition: 0.3s; }
-        .nav-voltar a:hover { background: #ff7300; border-color: #ff7300; }
-
-        .content { max-width: 900px; margin: -150px auto 50px; position: relative; z-index: 10; padding: 0 20px; }
-        h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; line-height: 1.1; margin-bottom: 15px; text-transform: uppercase; text-shadow: 2px 2px 20px rgba(0,0,0,0.8); }
-        
-        .meta-tags { display: flex; gap: 15px; align-items: center; margin-bottom: 40px; flex-wrap: wrap; }
-        .meta-tags span { background: rgba(255,255,255,0.1); padding: 5px 12px; border-radius: 6px; font-size: 0.85rem; font-weight: 700; border: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(5px); }
-        .meta-tags .nota { color: #ffcc00; border-color: rgba(255,204,0,0.3); }
-        .meta-tags .qualidade { background: linear-gradient(135deg, #ff7300, #dd2476); color: white; border: none; }
-
-        .resenha-body { font-size: 1.15rem; line-height: 1.8; color: #ccc; background: #0a0a0a; padding: 40px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
-        .resenha-body h2 { color: #00f3ff; margin: 40px 0 20px; font-size: 1.8rem; font-weight: 800; border-bottom: 1px solid rgba(0, 243, 255, 0.2); padding-bottom: 10px; }
-        .resenha-body p { margin-bottom: 25px; }
-        .resenha-body blockquote { border-left: 4px solid #ff7300; background: rgba(255, 115, 0, 0.05); padding: 20px; margin: 30px 0; font-style: italic; color: #fff; font-weight: 600; border-radius: 0 10px 10px 0; }
-
-        .cta-box { text-align: center; margin-top: 60px; padding: 40px; border-radius: 20px; background: radial-gradient(circle at center, #2d0b1e 0%, #050505 100%); border: 1px solid #dd2476; }
-        .cta-box h3 { font-size: 1.8rem; margin-bottom: 15px; color: #fff; }
-        .btn-assinar { display: inline-block; background: linear-gradient(135deg, #ff7300, #dd2476); color: white; padding: 15px 40px; border-radius: 50px; font-weight: 800; text-decoration: none; text-transform: uppercase; margin-top: 20px; transition: 0.3s; }
-        .btn-assinar:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(221, 36, 118, 0.4); }
+        body { background: #050505; color: #f0f0f0; }
+        header { display: flex; justify-content: space-between; align-items: center; padding: 15px 5%; background: rgba(5,5,5,0.9); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #111; }
+        .logo img { height: 35px; }
+        .movie-hero { width: 100%; height: 60vh; position: relative; overflow: hidden; }
+        .hero-img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.5); }
+        .hero-overlay { position: absolute; bottom: 0; left: 0; width: 100%; padding: 50px 5%; background: linear-gradient(to top, #050505, transparent); }
+        .content { max-width: 1200px; margin: 40px auto; padding: 0 20px; display: grid; grid-template-columns: 1fr 300px; gap: 40px; }
+        .main-text h2 { color: #ff0080; margin: 30px 0 15px; border-left: 4px solid #ff0080; padding-left: 15px; }
+        .main-text p { font-size: 1.1rem; color: #bbb; line-height: 1.8; margin-bottom: 20px; }
+        .sidebar { background: #0a0a0a; padding: 25px; border-radius: 15px; height: fit-content; border: 1px solid #1a1a1a; }
+        .sidebar h3 { font-size: 1.2rem; margin-bottom: 15px; color: #fff; }
+        .ficha-item { margin-bottom: 15px; font-size: 0.9rem; }
+        .ficha-item span { color: #666; display: block; text-transform: uppercase; font-weight: 700; }
+        .btn-cta { display: block; background: linear-gradient(135deg, #FF512F 0%, #DD2476 100%); color: #fff; text-align: center; padding: 15px; border-radius: 10px; text-decoration: none; font-weight: 800; margin-top: 20px; }
+        footer { background: #000; padding: 60px 5%; text-align: center; border-top: 1px solid #111; color: #444; font-size: 0.8rem; }
     </style>
 </head>
 <body>
+    <header>
+        <div class="logo"><a href="../../index.html"><img src="../../img/logo-unitv.png"></a></div>
+        <a href="../../index.html#comprar" style="color:#fff; text-decoration:none; font-weight:700;">ASSINAR VIP</a>
+    </header>
 
-    <div class="hero-backdrop"><div class="hero-overlay"></div></div>
-    
-    <div class="nav-voltar">
-        <a href="../index.html"><i class="fa-solid fa-arrow-left"></i> Catálogo</a>
+    <div class="movie-hero">
+        <img src="https://image.pollinations.ai/prompt/cinematic%20scene%20from%20movie%20Cara%20de%20Um,%20Focinho%20de%20Outro%20ultra%20detailed%204k?width=1280&height=720&nologo=true" class="hero-img">
+        <div class="hero-overlay">
+            <h1 style="font-size: clamp(2rem, 5vw, 4rem); font-weight: 900;">Cara de Um, Focinho de Outro</h1>
+            <p style="color: #00ff88; font-weight: 700;">⭐ 7.6 | 2026 | 4K ULTRA HD</p>
+        </div>
     </div>
 
     <div class="content">
-        <h1>Cara de Um, Focinho de Outro</h1>
-        <div class="meta-tags">
-            <span class="nota"><i class="fa-solid fa-star"></i> 7.6</span>
-            <span>2026</span>
-            <span class="qualidade">4K HDR</span>
-            <span>Resenha VIP</span>
-        </div>
-        
-        <div class="resenha-body">
-            ## Cara de Um, Focinho de Outro: Uma Aventura Ecológica Hilária (e Um Pouco Bizarra)
+        <main class="main-text">
+            <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resenha: Cara de Um, Focinho de Outro - UniTV</title>
+</head>
+<body>
 
-"Cara de Um, Focinho de Outro" é um filme que desafia classificações. É uma comédia familiar? Uma sátira ambientalista? Um estudo da psicologia animal sob a influência da tecnologia de troca de cérebros? Talvez seja tudo isso e mais. A trama, como descrito, é inegavelmente peculiar: Mabel, uma ativista ambiental fervorosa, se vê em um corpo robótico de castor para salvar sua floresta do ambicioso (e aparentemente inepto) Prefeito Jerry.
+<h2>Cara de Um, Focinho de Outro: Uma Comédia Clássica Reinventada em 4K</h2>
 
-O filme equilibra de maneira surpreendente o humor pastelão com mensagens sinceras sobre a importância da preservação ambiental e da coexistência pacífica entre humanos e animais. As cenas com o Rei George, o castor líder dos refugiados da industrialização, são particularmente memoráveis. Sua majestade e sabedoria contrastam comicamente com a confusão e o desespero da Mabel-castor-robô, criando momentos hilários e tocantes.
+<p>Prepare-se para gargalhadas! <em>Cara de Um, Focinho de Outro</em>, o clássico da Sessão da Tarde que marcou gerações, retorna às telas em uma versão restaurada em 4K de tirar o fôlego. Se você já amava a trama, prepare-se para se apaixonar novamente; e se nunca viu, acredite, esta é a melhor maneira de conhecer essa joia da comédia.</p>
 
-A atuação é consistente, com destaque para a entrega energética de [Nome do ator que interpreta Mabel], que consegue transmitir tanto a determinação da ativista quanto a estranheza de estar presa em um corpo metálico e peludo. O Prefeito Jerry, interpretado por [Nome do ator que interpreta o Prefeito Jerry], é um vilão caricato, mas incrivelmente divertido de odiar. Ele personifica a ganância e a falta de visão que o filme critica sutilmente.
+<p>A trama é simples, mas genial: o renomado, porém rabugento, empresário Rogério (interpretado magistralmente por...) acorda um dia no corpo de seu adorado cão, Max. A confusão está armada! Rogério, agora preso no corpo do animal, precisa encontrar uma maneira de reverter a situação, enquanto Max, desfrutando da vida de luxo, aprende valiosas lições sobre responsabilidade e o verdadeiro significado de família.</p>
 
-No entanto, a verdadeira força do filme reside na sua capacidade de abordar temas sérios com leveza e imaginação. A ideia de uma ativista ambiental se transformando em um castor robótico pode parecer absurda à primeira vista, mas serve como um catalisador para explorar a importância da empatia, da comunicação e da ação coletiva na luta pela proteção do meio ambiente. "Cara de Um, Focinho de Outro" pode não ser perfeito, mas é certamente original e memorável.
+<p>O que torna <em>Cara de Um, Focinho de Outro</em> tão especial é a maneira como equilibra o humor físico com momentos genuinamente emocionantes. As performances são impecáveis, com destaque para a expressividade... no papel de Max (como Rogério) e a hilária... como o próprio Rogério (no corpo do cachorro!).</p>
 
-## Nos Bastidores
+<blockquote>
+    "Um filme para toda a família, que diverte e emociona na medida certa." - UniTV
+</blockquote>
 
-*   A atriz que interpreta Mabel passou semanas observando o comportamento de castores em cativeiro para se preparar para o papel.
-*   O castor robótico foi construído em tamanho real e operado por um técnico durante as filmagens, garantindo movimentos realistas.
+<h2>Por Que Assistir em 4K?</h2>
 
-## Por que assistir na UniTV?
+<p>A restauração em 4K eleva a experiência a outro patamar. As cores vibrantes, a nitidez impressionante e os detalhes aprimorados resgatam a beleza original do filme, tornando-o ainda mais imersivo. Você poderá apreciar cada expressão facial, cada detalhe da pelagem de Max, e se sentir ainda mais conectado com a história. Além disso, a trilha sonora foi remasterizada, proporcionando uma experiência auditiva ainda mais rica e envolvente.</p>
 
-A fotografia exuberante do filme, com suas paisagens florestais vívidas e detalhes intrincados do castor robótico, realmente ganha vida em 4K. A equipe de pós-produção otimizou os efeitos visuais para garantir uma experiência de visualização impecável, mesmo nas cenas mais movimentadas. A UniTV possui a infraestrutura necessária para transmitir o filme em 4K com alta taxa de quadros e compressão otimizada, eliminando qualquer risco de travamentos ou perda de qualidade de imagem. Cada pelo do castor robótico, cada folha na floresta, ganha uma nitidez impressionante, imergindo o espectador no universo de "Cara de Um, Focinho de Outro" como nunca antes.
+<p>Se você busca uma comédia leve, divertida e emocionante para assistir com a família, <em>Cara de Um, Focinho de Outro</em> em 4K é a escolha perfeita. Prepare a pipoca, reúna a galera e divirta-se com essa obra-prima que transcende gerações! Corra para o UniTV e não perca essa oportunidade!</p>
 
-<blockquote>A melhor característica do filme é sua capacidade de equilibrar humor e seriedade, entregando uma mensagem ambiental importante de forma leve e acessível para todas as idades.</blockquote>
-        </div>
-
-        <div class="cta-box">
-            <h3>Disponível agora no app UniTV</h3>
-            <p style="color:#aaa;">Assista a este e milhares de outros filmes em 4K real, sem travamentos.</p>
-            <a href="../../index.html#comprar" class="btn-assinar">LIBERAR ACESSO VIP</a>
-        </div>
+</body>
+</html>
+            <img src="https://image.pollinations.ai/prompt/cinematic%20scene%20from%20movie%20Cara%20de%20Um,%20Focinho%20de%20Outro%20ultra%20detailed%204k?width=1280&height=720&nologo=true" style="width:100%; border-radius:15px; margin:30px 0;">
+        </main>
+        <aside class="sidebar">
+            <h3>Ficha Técnica</h3>
+            <div class="ficha-item"><span>Direção</span><strong>Equipe UniTV</strong></div>
+            <div class="ficha-item"><span>Gênero</span><strong>Animação</strong></div>
+            <div class="ficha-item"><span>Duração</span><strong>105 min</strong></div>
+            <a href="../../index.html#comprar" class="btn-cta">ASSISTIR NA UNITV</a>
+        </aside>
     </div>
 
+    <footer>&copy; 2026 UniTV Oficial - Revenda Autorizada</footer>
 </body>
 </html>
