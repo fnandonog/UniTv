@@ -179,13 +179,18 @@ def injetar_card_na_vitrine(filme, slug):
         with open(caminho, "r", encoding="utf-8") as f_in, open(caminho_temp, "w", encoding="utf-8") as f_out:
             for linha in f_in:
                 if ancora in linha:
-                    f_out.write(card + "\n        " + ancora + "\n")
-                    modificado = True
+                    if not modificado:
+                        # Achou a primeira âncora válida: Injeta o filme
+                        f_out.write(card + "\n        " + ancora + "\n")
+                        modificado = True
+                    else:
+                        # Achou âncora repetida (bug antigo): Ignora e deleta o lixo
+                        pass
                 else:
                     f_out.write(linha)
         
         if modificado:
-            os.replace(caminho_temp, caminho) # Substitui de forma segura
+            os.replace(caminho_temp, caminho) 
             print(f"🔗 Pôster de '{titulo}' colado na vitrine.")
         else:
             if os.path.exists(caminho_temp): os.remove(caminho_temp)
