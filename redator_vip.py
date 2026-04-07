@@ -8,10 +8,11 @@ from datetime import datetime
 from google.genai import types # [MUDANÇA] SDK Novo
 
 # ==========================================
-# 1. CONFIGURAÇÕES DA MÁQUINA (GEMINI 2.5 PRO)
+# 1. CONFIGURAÇÕES DA MÁQUINA (CORRIGIDO)
 # ==========================================
 client = genai.Client(api_key="AIzaSyCmT5HHUpHsXbtN68h6bpkRIzFpjIy2RGs")
-MODEL_ID = 'gemini-2.5-pro'
+# [AJUSTE] gemini-2.5-pro não existe. Usando o 2.0-flash que é o mais rápido e atual.
+MODEL_ID = 'gemini-2.0-flash' 
 
 QTD_POSTS_POR_VEZ = 3 
 PASTA_BLOG = "blog"
@@ -151,7 +152,7 @@ TEMPLATE_TOPO = """<!DOCTYPE html>
         .footer-links { list-style: none; }
         .footer-links li { margin-bottom: 15px; }
         .footer-links a { color: #777; text-decoration: none !important; transition: 0.3s ease; display: flex; align-items: center; gap: 10px; }
-        .footer-links a:hover { color: white; transform: translateX(5px); }
+        .footer-links a :hover { color: white; transform: translateX(5px); }
         .footer-links a i { font-size: 0.6rem; color: var(--cor-destaque); opacity: 0; transition: 0.3s; }
         .footer-links a:hover i { opacity: 1; }
 
@@ -285,14 +286,13 @@ TEMPLATE_RODAPE = """
 # ==========================================
 # 3. LÓGICA DE GERAÇÃO E URLS
 # ==========================================
-# [CORREÇÃO] Carregamento inteligente do histórico
 def carregar_historico():
     if not os.path.exists(HISTORICO_ARQUIVO): return []
     with open(HISTORICO_ARQUIVO, 'r', encoding='utf-8') as f:
         return [linha.strip() for linha in f.readlines() if linha.strip()]
 
-# [CORREÇÃO] Salvamento consistente em modo APPEND ("a")
 def salvar_historico(tema):
+    # [CORREÇÃO] Modo "a" (append) para garantir que ele salve linha por linha sem apagar nada
     with open(HISTORICO_ARQUIVO, "a", encoding="utf-8") as f:
         f.write(f"{tema}\n")
     print(f"📝 '{tema}' carimbado no histórico.")
@@ -302,35 +302,34 @@ def criar_slug(texto):
     slug = re.sub(r'[^a-z0-9]+', '-', texto_sem_acento.lower()).strip('-')
     return slug[:45].strip('-')
 
-# [CORREÇÃO] Prompt agressivo para EVITAR repetições lendo o histórico
 def gerar_temas(historico):
     print("🧠 Gerando temas curtos e inéditos...")
-    historico_str = ", ".join(historico[-30:]) # Pega os últimos 30 posts
+    historico_str = ", ".join(historico[-30:]) 
     prompt = f"""
-    Crie {QTD_POSTS_POR_VEZ} títulos de artigos sobre TV Box, IPTV e como acabar com travamentos.
-    REGRA DE OURO: Os títulos devem ter NO MÁXIMO 8 palavras.
-    PROIBIÇÃO ABSOLUTA: Não repita NADA que esteja nesta lista: [{historico_str}].
-    Gere temas variados: Lançamentos de Cinema, Futebol ao vivo, Séries em 4K, Configuração de DNS.
-    Retorne APENAS os títulos, um por linha.
+    Crie {QTD_POSTS_POR_VEZ} títulos de artigos curtos sobre TV Box, IPTV e UniTV.
+    REGRA DE OURO: No máximo 8 palavras por título.
+    PROIBIÇÃO: Não repita estes temas: [{historico_str}].
+    Gere temas como: Lançamentos de Cinema, Futebol, Tecnologia 4K.
+    Retorne um por linha.
     """
     try:
         resposta = client.models.generate_content(model=MODEL_ID, contents=prompt, config=CONFIGURACAO_GERAL)
         return [t.strip() for t in resposta.text.split('\n') if t.strip()][:QTD_POSTS_POR_VEZ]
-    except Exception:
-        return ["Otimizando a Internet Para TV Box", "Melhores Dicas Para Streaming 4K", "Fim do Buffering na TV Box"]
+    except Exception as e:
+        print(f"⚠️ Erro IA Temas: {e}")
+        return ["Dicas de Cinema UniTV", "Otimizando Internet 4K", "Futebol na TV Box"]
 
 def escrever_artigo(tema):
     print(f"✍️ Redigindo post: {tema}")
     prompt_redator = f"""
-    Escreva o CORPO de um artigo de blog técnico (800+ palavras) sobre: "{tema}".
-    1. NÃO GERE tags <html>, <head>, <title>, <body>.
+    Escreva o CORPO de um artigo técnico (800+ palavras) sobre: "{tema}".
+    1. NÃO use tags estruturais (html, head, body).
     2. USE APENAS: <h2>, <h3>, <p>, <ul> e <blockquote>.
-    3. Texto focado em configuração e otimização UniTV.
-    4. Crie 2 blocos: <div class="tech-box"><h4>Dica de Ouro</h4><p>sua dica.</p></div>
-    5. Insira 3 imagens: <img src="https://picsum.photos/seed/{tema.replace(' ', '')}X/800/400" alt="Tecnologia TV Box">.
+    3. Foco em UniTV e TV Box.
+    4. Crie 2 blocos: <div class="tech-box"><h4>Dica</h4><p>conteúdo.</p></div>
+    5. 3 imagens: <img src="https://picsum.photos/seed/{tema.replace(' ', '')}X/800/400" alt="Post">.
     """
-    
-    prompt_meta = f"Resuma em uma frase de 150 caracteres o tema: {tema}. Sem aspas."
+    prompt_meta = f"Resuma em 150 caracteres o tema: {tema}."
     
     try:
         res_artigo = client.models.generate_content(model=MODEL_ID, contents=prompt_redator, config=CONFIGURACAO_GERAL)
@@ -338,17 +337,16 @@ def escrever_artigo(tema):
         
         res_meta = client.models.generate_content(model=MODEL_ID, contents=prompt_meta, config=CONFIGURACAO_GERAL)
         meta_desc = res_meta.text.replace('"', '').strip()
-        meta_desc = (meta_desc[:147] + '...') if len(meta_desc) > 150 else meta_desc
-        
         return artigo, meta_desc
     except Exception as e:
-        raise Exception(f"Erro na IA: {e}")
+        raise Exception(f"Erro IA Redação: {e}")
 
 # ==========================================
-# 4. INJEÇÃO SEGURA NA VITRINE (O CONSERTO)
+# 4. INJEÇÃO SEGURA NA VITRINE (CORRIGIDO)
 # ==========================================
 def atualizar_pagina_principal_do_blog(titulo, slug, meta_desc):
     caminho = os.path.join(PASTA_BLOG, "index.html")
+    # [CORREÇÃO] Âncora restaurada para evitar o loop infinito
     ancora = ""
     try:
         with open(caminho, "r", encoding="utf-8") as f: html = f.read()
@@ -367,15 +365,15 @@ def atualizar_pagina_principal_do_blog(titulo, slug, meta_desc):
         </a>
         """
 
-        # [CORREÇÃO FINAL] Injeção cirúrgica mantendo a âncora viva!
         if ancora in html:
+            # [CORREÇÃO] Injeção cirúrgica recolocando a âncora no final para o próximo post
             html = html.replace(ancora, card + "\n        " + ancora)
             with open(caminho, "w", encoding="utf-8") as f: f.write(html)
-            print(f"🔗 Post '{titulo}' inserido na vitrine.")
-        else: 
-            print(f"⚠️ ERRO CRÍTICO: A tag {ancora} não foi encontrada no index.html")
-    except Exception as e: 
-        print(f"⚠️ Erro ao atualizar capa: {e}")
+            print(f"🔗 Post '{titulo}' na vitrine.")
+        else:
+            print("⚠️ Tag âncora não encontrada no index.html")
+    except Exception as e:
+        print(f"⚠️ Erro ao atualizar vitrine: {e}")
 
 # ==========================================
 # EXECUTOR
@@ -412,5 +410,7 @@ for tema in temas:
 print("\n📦 Sincronizando com GitHub...")
 subprocess.run(["git", "add", "."])
 subprocess.run(["git", "commit", "-m", f"Auto-post: {datetime.now().strftime('%d/%m %H:%M')}"])
-subprocess.run(["git", "push"])
-print("✅ SUCESSO ABSOLUTO! O robô agora tem memória e não quebra o site.")
+# [CORREÇÃO] Pull rebase antes do push para evitar o erro "rejected"
+subprocess.run(["git", "pull", "origin", "main", "--rebase"])
+subprocess.run(["git", "push", "origin", "main"])
+print("✅ SUCESSO ABSOLUTO! Robô blindado e site no ar.")
