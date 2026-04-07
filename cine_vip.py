@@ -150,8 +150,7 @@ def escrever_resenha_gemini(filme):
 
 def injetar_card_na_vitrine(filme, slug):
     caminho = os.path.join(PASTA_CINEMA, "index.html")
-    caminho_temp = os.path.join(PASTA_CINEMA, "index_temp.html")
-    ancora = ""
+    alvo = '<main class="movie-catalog">'
     
     titulo = filme['title']
     nota = round(filme['vote_average'], 1)
@@ -173,31 +172,21 @@ def injetar_card_na_vitrine(filme, slug):
         </a>
     """
     
-    # === TÁTICA ZERO RAM (Lê linha por linha) ===
     try:
-        modificado = False
-        with open(caminho, "r", encoding="utf-8") as f_in, open(caminho_temp, "w", encoding="utf-8") as f_out:
-            for linha in f_in:
-                if ancora in linha:
-                    if not modificado:
-                        # Achou a primeira âncora válida: Injeta o filme
-                        f_out.write(card + "\n        " + ancora + "\n")
-                        modificado = True
-                    else:
-                        # Achou âncora repetida (bug antigo): Ignora e deleta o lixo
-                        pass
-                else:
-                    f_out.write(linha)
-        
-        if modificado:
-            os.replace(caminho_temp, caminho) 
+        with open(caminho, "r", encoding="utf-8") as f:
+            html = f.read()
+            
+        if alvo in html:
+            # Injeta o novo card logo após a abertura da tag <main>
+            html = html.replace(alvo, alvo + "\n" + card)
+            
+            with open(caminho, "w", encoding="utf-8") as f:
+                f.write(html)
             print(f"🔗 Pôster de '{titulo}' colado na vitrine.")
         else:
-            if os.path.exists(caminho_temp): os.remove(caminho_temp)
-            print("⚠️ Tag âncora não encontrada no index.html")
+            print("⚠️ Tag <main class='movie-catalog'> não encontrada no index.html")
     except Exception as e:
         print(f"⚠️ Erro ao salvar vitrine: {e}")
-
 # ==========================================
 # EXECUTOR DO CINEMA
 # ==========================================
