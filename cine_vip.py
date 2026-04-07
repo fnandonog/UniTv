@@ -15,7 +15,7 @@ GEMINI_KEY = "AIzaSyCmT5HHUpHsXbtN68h6bpkRIzFpjIy2RGs"
 TMDB_KEY = "9cb2f018163da4a3f89d718ee6be8677"
 MODEL_ID = 'gemini-2.0-flash' 
 
-QTD_FILMES_POR_VEZ = 2
+QTD_FILMES_POR_VEZ = 3 # Coloquei 3 para você testar bem
 PASTA_CINEMA = "cinema"
 HISTORICO_CINE = "historico_cinema.txt"
 
@@ -30,7 +30,7 @@ CONFIG_GERAL = types.GenerateContentConfig(
 )
 
 # ==========================================
-# 2. TEMPLATE GIGANTE DA RESENHA VIP (COM FIX DE IMAGENS)
+# 2. TEMPLATE GIGANTE DA RESENHA VIP (COM BYPASS DE IMAGEM)
 # ==========================================
 TEMPLATE_RESENHA = """<!DOCTYPE html>
 <html lang="pt-br">
@@ -49,7 +49,6 @@ TEMPLATE_RESENHA = """<!DOCTYPE html>
     <link rel="icon" href="../../img/logo-unitv.png" type="image/png">
 
     <style>
-        /* DESIGN SYSTEM E HEADER */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         :root { --bg-body: #050505; --bg-card: #0a0a0a; --neon-azul: #00f3ff; --neon-laranja: #ff7300; --gradiente-premium: linear-gradient(135deg, #FF512F 0%, #DD2476 100%); --borda-sutil: 1px solid rgba(255, 255, 255, 0.08); --wa-header: #075e54; --wa-bg: #e5ddd5; --wa-msg-user: #dcf8c6; }
         html, body { background-color: var(--bg-body); color: #f0f0f0; overflow-x: hidden; scroll-behavior: smooth; }
@@ -61,7 +60,6 @@ TEMPLATE_RESENHA = """<!DOCTYPE html>
         .nav-links { display: flex; gap: 25px; list-style: none; } .nav-links a { color: #bbb; text-decoration: none; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; transition: 0.3s; } .nav-links a:hover { color: #fff; } 
         .btn-header { background: var(--gradiente-premium); color: white; padding: 10px 25px; border-radius: 50px; text-decoration: none; font-size: 0.75rem; font-weight: 800; box-shadow: 0 4px 15px rgba(221, 36, 118, 0.3); transition: 0.3s; }
 
-        /* HERO FILME (Fundo alterado para inline) */
         .movie-hero { height: 75vh; width: 100%; position: relative; margin-top: 38px; }
         .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, var(--bg-body) 0%, rgba(5,5,5,0.8) 50%, rgba(5,5,5,0.3) 100%); display: flex; align-items: flex-end; padding: 0 5% 50px; }
         .btn-voltar { position: absolute; top: 30px; left: 5%; background: rgba(0,0,0,0.5); color: #fff; padding: 10px 20px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 0.9rem; border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(5px); z-index: 10; transition: 0.3s; } .btn-voltar:hover { background: var(--neon-laranja); border-color: var(--neon-laranja); }
@@ -74,16 +72,13 @@ TEMPLATE_RESENHA = """<!DOCTYPE html>
         .hero-tags .nota { color: #ffcc00; border-color: rgba(255,204,0,0.4); background: rgba(0,0,0,0.6); }
         .hero-tags .quatrok { background: var(--gradiente-premium); color: #fff; border: none; }
 
-        /* CONTEÚDO PRINCIPAL (GRID) */
         .content-wrapper { max-width: 1400px; margin: 50px auto; padding: 0 5%; display: grid; grid-template-columns: 1fr 350px; gap: 60px; align-items: start; }
-        
         .main-article { font-size: 1.15rem; line-height: 1.8; color: #ccc; }
         .main-article h2 { color: #fff; margin: 40px 0 20px; font-size: 2rem; font-weight: 800; border-bottom: 2px solid rgba(255, 115, 0, 0.3); padding-bottom: 10px; display: inline-block; }
         .main-article p { margin-bottom: 25px; }
         .main-article blockquote { background: rgba(255, 115, 0, 0.05); border-left: 4px solid var(--neon-laranja); padding: 25px; margin: 30px 0; font-size: 1.2rem; font-style: italic; border-radius: 0 12px 12px 0; color: #eee; }
         .mid-backdrop { width: 100%; border-radius: 16px; margin: 30px 0; border: 1px solid #222; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
 
-        /* SIDEBAR (FICHA TÉCNICA) */
         .sidebar { background: #0a0a0a; border: 1px solid #1a1a1a; padding: 30px; border-radius: 16px; position: sticky; top: 130px; }
         .sidebar h3 { color: #fff; font-size: 1.3rem; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #222; }
         .ficha-item { margin-bottom: 20px; }
@@ -92,7 +87,6 @@ TEMPLATE_RESENHA = """<!DOCTYPE html>
         .ficha-item .elenco-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 5px; }
         .ficha-item .elenco-tags div { background: #151515; padding: 5px 10px; border-radius: 4px; font-size: 0.85rem; border: 1px solid #222; color: #bbb; }
 
-        /* SESSÃO CTA: O QUE É A UNITV */
         .about-unitv { padding: 100px 5%; background: radial-gradient(circle at right bottom, #1a0525 0%, #050505 60%); border-top: 1px solid #111; margin-top: 50px; }
         .about-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 60px; max-width: 1300px; margin: 0 auto; }
         .about-text h2 { font-size: 2.8rem; font-weight: 900; line-height: 1.1; margin-bottom: 20px; color: #fff; } .about-text h2 span { background: var(--gradiente-premium); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
@@ -101,7 +95,6 @@ TEMPLATE_RESENHA = """<!DOCTYPE html>
         .btn-cta-about { background: var(--gradiente-premium); color: white; padding: 18px 45px; border-radius: 50px; font-size: 1.1rem; font-weight: 800; text-decoration: none; display: inline-flex; align-items: center; gap: 12px; transition: 0.4s; box-shadow: 0 10px 30px -5px rgba(221, 36, 118, 0.4); text-transform: uppercase; letter-spacing: 1px; } .btn-cta-about:hover { transform: translateY(-5px); box-shadow: 0 15px 35px -5px rgba(221, 36, 118, 0.6); }
         .about-img img { width: 100%; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.8)); transform: perspective(1000px) rotateY(-15deg); transition: 0.5s; } .about-grid:hover .about-img img { transform: perspective(1000px) rotateY(0deg); }
 
-        /* FOOTER & CHATBOT COPIADOS EXATAMENTE */
         footer { background: #050505; border-top: 1px solid #1a1a1a; padding: 80px 20px 40px; color: #777; font-size: 0.9rem; }
         .footer-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 50px; }
         .footer-logo { margin-bottom: 20px; filter: brightness(1.2); height: 40px; }
@@ -287,7 +280,6 @@ TEMPLATE_RESENHA = """<!DOCTYPE html>
             if (window.scrollY > 50) { header.classList.add('scrolled'); } else { header.classList.remove('scrolled'); }
         });
 
-        // Chatbot VIP
         function toggleChat() { document.getElementById('chat-widget').classList.toggle('active'); }
         function showTyping(callback) {
             const status = document.getElementById('wa-status'), typing = document.getElementById('typing-indicator'), content = document.getElementById('chat-content');
@@ -365,7 +357,6 @@ def buscar_filmes_em_alta():
     return []
 
 def buscar_detalhes_do_filme(movie_id):
-    # O PULO DO GATO: &include_image_language=pt,en,null obriga o TMDB a entregar imagens mesmo sem tag BR
     url = f"https://api.themoviedb.org/3/movie/{movie_id}?api_key={TMDB_KEY}&language=pt-BR&append_to_response=credits,images&include_image_language=pt,en,null"
     res = requests.get(url)
     if res.status_code == 200:
@@ -411,7 +402,7 @@ def injetar_card_na_vitrine(filme, slug):
     titulo = filme['title']
     nota = round(filme['vote_average'], 1)
     ano = filme['release_date'][:4] if 'release_date' in filme else "2024"
-    poster_url = f"[https://image.tmdb.org/t/p/w500](https://image.tmdb.org/t/p/w500){filme['poster_path']}"
+    poster_url = f"[https://media.themoviedb.org/t/p/w500](https://media.themoviedb.org/t/p/w500){filme['poster_path']}"
     
     card = f"""
         <a href="{slug}/index.html" class="movie-card reveal active">
@@ -453,20 +444,17 @@ for filme in filmes:
     if slug in historico or not filme.get('poster_path') or not filme.get('backdrop_path'):
         continue
         
-    # EXTRAINDO TUDO DA API
     detalhes = buscar_detalhes_do_filme(filme['id'])
     if not detalhes: continue
 
     pasta_filme = os.path.join(PASTA_CINEMA, slug)
     os.makedirs(pasta_filme, exist_ok=True)
     
-    # Tratamento de Variáveis Ricas
     nota_str = str(round(filme['vote_average'], 1))
     ano_str = filme['release_date'][:4] if 'release_date' in filme else "Lançamento"
     duracao_str = formatar_tempo(detalhes.get('runtime', 0))
     generos_str = ", ".join([g['name'] for g in detalhes.get('genres', [])][:3])
     
-    # Pegando Diretor e Top 3 Atores do TMDB
     diretor_str = "Desconhecido"
     elenco_html = "<div>Desconhecido</div>"
     if 'credits' in detalhes:
@@ -477,18 +465,17 @@ for filme in filmes:
         cast = detalhes['credits'].get('cast', [])[:3]
         if cast: elenco_html = "".join([f"<div>{ator['name']}</div>" for ator in cast])
 
-    # Pegando Fundo Secundário
-    bg_principal = f"[https://image.tmdb.org/t/p/original](https://image.tmdb.org/t/p/original){filme['backdrop_path']}"
+    # BYPASS DOMINIO OFICIAL TMDB
+    bg_principal = f"[https://media.themoviedb.org/t/p/original](https://media.themoviedb.org/t/p/original){filme['backdrop_path']}"
     bg_secundario = bg_principal
     if 'images' in detalhes and 'backdrops' in detalhes['images']:
         bgs = [b['file_path'] for b in detalhes['images']['backdrops'] if b['file_path'] != filme['backdrop_path']]
-        if bgs: bg_secundario = f"[https://image.tmdb.org/t/p/w1280](https://image.tmdb.org/t/p/w1280){bgs[0]}"
+        if bgs: bg_secundario = f"[https://media.themoviedb.org/t/p/w1280](https://media.themoviedb.org/t/p/w1280){bgs[0]}"
 
-    poster_principal = f"[https://image.tmdb.org/t/p/w500](https://image.tmdb.org/t/p/w500){filme['poster_path']}"
+    poster_principal = f"[https://media.themoviedb.org/t/p/w500](https://media.themoviedb.org/t/p/w500){filme['poster_path']}"
     
     corpo_resenha = escrever_resenha_gemini(detalhes)
     
-    # Usando o replace para injetar sem quebrar o CSS
     html_final = TEMPLATE_RESENHA
     html_final = html_final.replace("[TITULO]", titulo)
     html_final = html_final.replace("[BACKDROP_PRINCIPAL]", bg_principal)
