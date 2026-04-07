@@ -7,15 +7,12 @@
     <meta name="description" content="Descubra os bastidores, elenco e análise do filme O Atirador: Sem Nação. Assista agora mesmo em 4K nativo na sua TV Box com a UniTV.">
     <meta name="theme-color" content="#050505">
     
-    <meta name="referrer" content="no-referrer">
-    
     <link rel="canonical" href="https://unitvsite.com.br/cinema/" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
     <link rel="icon" href="../../img/logo-unitv.png" type="image/png">
 
     <style>
-        /* DESIGN SYSTEM E HEADER */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         :root { --bg-body: #050505; --bg-card: #0a0a0a; --neon-azul: #00f3ff; --neon-laranja: #ff7300; --gradiente-premium: linear-gradient(135deg, #FF512F 0%, #DD2476 100%); --borda-sutil: 1px solid rgba(255, 255, 255, 0.08); --wa-header: #075e54; --wa-bg: #e5ddd5; --wa-msg-user: #dcf8c6; }
         html, body { background-color: var(--bg-body); color: #f0f0f0; overflow-x: hidden; scroll-behavior: smooth; }
@@ -27,38 +24,36 @@
         .nav-links { display: flex; gap: 25px; list-style: none; } .nav-links a { color: #bbb; text-decoration: none; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; transition: 0.3s; } .nav-links a:hover { color: #fff; } 
         .btn-header { background: var(--gradiente-premium); color: white; padding: 10px 25px; border-radius: 50px; text-decoration: none; font-size: 0.75rem; font-weight: 800; box-shadow: 0 4px 15px rgba(221, 36, 118, 0.3); transition: 0.3s; }
 
-        /* HERO FILME (Fundo alterado para inline) */
-        .movie-hero { height: 75vh; width: 100%; position: relative; margin-top: 38px; }
-        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, var(--bg-body) 0%, rgba(5,5,5,0.8) 50%, rgba(5,5,5,0.3) 100%); display: flex; align-items: flex-end; padding: 0 5% 50px; }
-        .btn-voltar { position: absolute; top: 30px; left: 5%; background: rgba(0,0,0,0.5); color: #fff; padding: 10px 20px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 0.9rem; border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(5px); z-index: 10; transition: 0.3s; } .btn-voltar:hover { background: var(--neon-laranja); border-color: var(--neon-laranja); }
+        .movie-hero { width: 100%; height: 75vh; position: relative; overflow: hidden; margin-top: 38px; background: #000; }
+        .hero-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4); z-index: 1; }
+        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, var(--bg-body) 0%, transparent 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 0 5% 50px; z-index: 2; }
         
-        .hero-info { max-width: 1000px; display: flex; gap: 40px; align-items: flex-end; }
-        .hero-poster { width: 220px; border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.1); }
-        .hero-text h1 { font-family: 'Montserrat', sans-serif; font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1; color: #fff; text-transform: uppercase; font-weight: 900; margin-bottom: 15px; text-shadow: 2px 2px 20px rgba(0,0,0,0.8); }
-        .hero-tags { display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 20px; }
-        .hero-tags span { background: rgba(255,255,255,0.1); padding: 5px 12px; border-radius: 6px; font-size: 0.85rem; font-weight: 700; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(5px); }
+        .btn-voltar { align-self: flex-start; background: rgba(0,0,0,0.5); color: #fff; padding: 10px 20px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 0.9rem; border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(5px); transition: 0.3s; margin-bottom: auto; margin-top: 20px; } .btn-voltar:hover { background: var(--neon-laranja); border-color: var(--neon-laranja); }
+        
+        .hero-text h1 { font-family: 'Montserrat', sans-serif; font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1.1; color: #fff; text-transform: uppercase; font-weight: 900; margin-bottom: 15px; text-shadow: 2px 2px 20px rgba(0,0,0,0.8); max-width: 1000px; }
+        .hero-tags { display: flex; gap: 15px; flex-wrap: wrap; }
+        .hero-tags span { background: rgba(255,255,255,0.1); padding: 6px 15px; border-radius: 6px; font-size: 0.9rem; font-weight: 700; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(5px); }
         .hero-tags .nota { color: #ffcc00; border-color: rgba(255,204,0,0.4); background: rgba(0,0,0,0.6); }
         .hero-tags .quatrok { background: var(--gradiente-premium); color: #fff; border: none; }
 
-        /* CONTEÚDO PRINCIPAL (GRID) */
         .content-wrapper { max-width: 1400px; margin: 50px auto; padding: 0 5%; display: grid; grid-template-columns: 1fr 350px; gap: 60px; align-items: start; }
-        
         .main-article { font-size: 1.15rem; line-height: 1.8; color: #ccc; }
-        .main-article h2 { color: #fff; margin: 40px 0 20px; font-size: 2rem; font-weight: 800; border-bottom: 2px solid rgba(255, 115, 0, 0.3); padding-bottom: 10px; display: inline-block; }
+        .main-article h2 { color: #fff; margin: 40px 0 20px; font-size: 1.8rem; font-weight: 800; border-left: 4px solid #ff0080; padding-left: 15px; }
         .main-article p { margin-bottom: 25px; }
         .main-article blockquote { background: rgba(255, 115, 0, 0.05); border-left: 4px solid var(--neon-laranja); padding: 25px; margin: 30px 0; font-size: 1.2rem; font-style: italic; border-radius: 0 12px 12px 0; color: #eee; }
-        .mid-backdrop { width: 100%; border-radius: 16px; margin: 30px 0; border: 1px solid #222; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .mid-backdrop { width: 100%; border-radius: 16px; margin: 30px 0; border: 1px solid #222; box-shadow: 0 10px 30px rgba(0,0,0,0.5); object-fit: cover; }
 
-        /* SIDEBAR (FICHA TÉCNICA) */
         .sidebar { background: #0a0a0a; border: 1px solid #1a1a1a; padding: 30px; border-radius: 16px; position: sticky; top: 130px; }
         .sidebar h3 { color: #fff; font-size: 1.3rem; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #222; }
         .ficha-item { margin-bottom: 20px; }
         .ficha-item span { display: block; font-size: 0.8rem; color: #777; text-transform: uppercase; font-weight: 700; margin-bottom: 5px; }
         .ficha-item strong { display: block; color: #ddd; font-size: 1rem; }
         .ficha-item .elenco-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 5px; }
-        .ficha-item .elenco-tags div { background: #151515; padding: 5px 10px; border-radius: 4px; font-size: 0.85rem; border: 1px solid #222; color: #bbb; }
+        .ficha-item .elenco-tags div { background: #151515; padding: 6px 12px; border-radius: 4px; font-size: 0.85rem; border: 1px solid #222; color: #bbb; font-weight: 600; }
 
-        /* SESSÃO CTA: O QUE É A UNITV */
+        .btn-cta { display: block; background: var(--gradiente-premium); color: #fff; text-align: center; padding: 18px; border-radius: 10px; text-decoration: none; font-weight: 800; margin-top: 30px; box-shadow: 0 10px 20px rgba(221, 36, 118, 0.3); transition: 0.3s; }
+        .btn-cta:hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(221, 36, 118, 0.5); }
+
         .about-unitv { padding: 100px 5%; background: radial-gradient(circle at right bottom, #1a0525 0%, #050505 60%); border-top: 1px solid #111; margin-top: 50px; }
         .about-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 60px; max-width: 1300px; margin: 0 auto; }
         .about-text h2 { font-size: 2.8rem; font-weight: 900; line-height: 1.1; margin-bottom: 20px; color: #fff; } .about-text h2 span { background: var(--gradiente-premium); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
@@ -67,7 +62,6 @@
         .btn-cta-about { background: var(--gradiente-premium); color: white; padding: 18px 45px; border-radius: 50px; font-size: 1.1rem; font-weight: 800; text-decoration: none; display: inline-flex; align-items: center; gap: 12px; transition: 0.4s; box-shadow: 0 10px 30px -5px rgba(221, 36, 118, 0.4); text-transform: uppercase; letter-spacing: 1px; } .btn-cta-about:hover { transform: translateY(-5px); box-shadow: 0 15px 35px -5px rgba(221, 36, 118, 0.6); }
         .about-img img { width: 100%; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.8)); transform: perspective(1000px) rotateY(-15deg); transition: 0.5s; } .about-grid:hover .about-img img { transform: perspective(1000px) rotateY(0deg); }
 
-        /* FOOTER & CHATBOT COPIADOS EXATAMENTE */
         footer { background: #050505; border-top: 1px solid #1a1a1a; padding: 80px 20px 40px; color: #777; font-size: 0.9rem; }
         .footer-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 50px; }
         .footer-logo { margin-bottom: 20px; filter: brightness(1.2); height: 40px; }
@@ -94,7 +88,7 @@
         .typing span { height: 8px; width: 8px; background: #bbb; display: inline-block; border-radius: 50%; margin-right: 3px; animation: waTyping 1s infinite; } @keyframes waTyping { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
         .float-zap { position: fixed; bottom: 25px; right: 25px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; z-index: 10000; box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4); cursor: pointer; transition: 0.3s; } .float-zap:hover { transform: scale(1.1); }
 
-        @media (max-width: 992px) { .content-wrapper { grid-template-columns: 1fr; } .hero-info { flex-direction: column; align-items: center; text-align: center; } .hero-tags { justify-content: center; } .about-grid { grid-template-columns: 1fr; text-align: center; } .about-features li { justify-content: center; } }
+        @media (max-width: 992px) { .content-wrapper { grid-template-columns: 1fr; } .about-grid { grid-template-columns: 1fr; text-align: center; } .about-features li { justify-content: center; } }
         @media (max-width: 768px) { header { padding: 10px 20px; } .nav-links { display: none; } .hero-text h1 { font-size: 2.2rem; } .footer-container { grid-template-columns: 1fr; text-align: center; } .footer-links a { justify-content: center; } .payment-methods { justify-content: center; } .wa-widget { width: calc(100% - 40px); left: 20px; right: 20px; bottom: 95px; max-height: 75vh; } }
     </style>
 </head>
@@ -113,19 +107,17 @@
         <a href="../../index.html#comprar" class="btn-header"><i class="fa-solid fa-crown"></i> ASSINAR VIP</a>
     </header>
 
-    <div class="movie-hero" style="background: url('[https://image.tmdb.org/t/p/original](https://image.tmdb.org/t/p/original)/9mgKDddLVQouKpXcb4ul1tUwUO9.jpg') center top / cover no-repeat;">
+    <div class="movie-hero">
+        <img src="https://image.pollinations.ai/prompt/cinematic%20scene%20from%20movie%20O%20Atirador:%20Sem%20Nação%20ultra%20detailed%204k?width=1280&height=720&nologo=true" class="hero-img" alt="Fundo">
         <div class="hero-overlay">
             <a href="../index.html" class="btn-voltar"><i class="fa-solid fa-arrow-left"></i> Voltar ao Catálogo</a>
-            <div class="hero-info">
-                <img src="[https://image.tmdb.org/t/p/w500](https://image.tmdb.org/t/p/w500)/gGhjs14pomQA6N8parCw5Bl3qoh.jpg" alt="O Atirador: Sem Nação" class="hero-poster">
-                <div class="hero-text">
-                    <h1>O Atirador: Sem Nação</h1>
-                    <div class="hero-tags">
-                        <span class="nota"><i class="fa-solid fa-star"></i> 9.5</span>
-                        <span>2026</span>
-                        <span>1h 35m</span>
-                        <span class="quatrok">4K UHD</span>
-                    </div>
+            <div class="hero-text">
+                <h1>O Atirador: Sem Nação</h1>
+                <div class="hero-tags">
+                    <span class="nota"><i class="fa-solid fa-star"></i> 9.5</span>
+                    <span>2026</span>
+                    <span>95 min</span>
+                    <span class="quatrok">4K UHD</span>
                 </div>
             </div>
         </div>
@@ -133,37 +125,33 @@
 
     <div class="content-wrapper">
         <main class="main-article">
-            <html>
+            <!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-<title>Resenha: O Atirador: Sem Nação - UniTV VIP</title>
+  <meta charset="UTF-8">
+  <title>Resenha: O Atirador: Sem Nação - Um Show de Ação em 4K</title>
 </head>
 <body>
 
-<h1>"O Atirador: Sem Nação": Um Resgate Impossível em Qualidade UniTV VIP</h1>
+  <h2>O Atirador: Sem Nação - Um Tiro Preciso no Seu Sofá!</h2>
 
-<p>Preparem-se para uma dose cavalar de adrenalina! "O Atirador: Sem Nação" nos lança diretamente no inferno de uma missão de resgate implacável, onde Brandon Beckett e seu pai, o lendário atirador, se veem caçados por um exército de mercenários implacáveis. A trama, tecida com reviravoltas e explosões que desafiam a física, acompanha a dupla em sua luta desesperada pela sobrevivência, enquanto tentam libertar um alvo de alto valor das garras de seus captores.</p>
+  <p>Prepare-se para uma dose cavalar de adrenalina com <em>O Atirador: Sem Nação</em>! Este filme de ação, que acompanha a saga de James Reece (Chris Pratt), um ex-Navy SEAL em busca de vingança após uma emboscada que dizimou sua equipe, te prende do início ao fim. A trama, tecida com conspirações governamentais, reviravoltas inesperadas e sequências de ação de tirar o fôlego, garante uma experiência cinematográfica imersiva e visceral.</p>
 
-<h2>A Trama</h2>
+  <p>Reece, dado como morto, emerge das sombras como um fantasma sedento por justiça. Ele rastreia os responsáveis pela traição, desmantelando um complexo esquema de corrupção que chega aos mais altos escalões do poder. A narrativa, embora centrada na vingança, explora temas como lealdade, sacrifício e a fragilidade da confiança em um mundo onde nada é o que parece.</p>
 
-<p>A narrativa de "O Atirador: Sem Nação" é um turbilhão de ação do começo ao fim. A história nos apresenta a um cenário geopolítico complexo, onde alianças são frágeis e a traição espreita em cada esquina. Brandon, buscando provar seu valor, se vê confrontado com a experiência e a sagacidade de seu pai, em uma dinâmica que oscila entre o respeito e a rivalidade. A missão de resgate, que parecia simples à primeira vista, logo se revela uma armadilha mortal, expondo segredos obscuros e colocando a vida de ambos em risco constante. Acompanhamos a jornada da dupla enquanto eles desvendam a conspiração por trás da captura, enfrentando inimigos cada vez mais poderosos e utilizando cada grama de sua habilidade para sobreviver.</p>
+  <blockquote>
+    <p>"O Atirador: Sem Nação' é um thriller de ação implacável que não poupa o espectador. Chris Pratt entrega uma performance convincente como um lobo solitário em busca de redenção, e as sequências de ação são coreografadas com maestria, elevando o nível de tensão a cada cena."</p>
+  </blockquote>
 
-<h2>Por Trás das Câmeras</h2>
+  <h2>Por Que Assistir em 4K? A Imersão Leva um Novo Nível!</h2>
 
-<p>A produção de "O Atirador: Sem Nação" não poupou esforços para entregar um espetáculo visual impressionante. Os rumores dizem que, para garantir o realismo das cenas de combate, a equipe contratou ex-militares para treinar os atores e coreografar as sequências de ação. Além disso, a explosão principal do filme exigiu meses de planejamento e a utilização de mais de 500 quilos de explosivos controlados, criando um efeito visual devastador que precisava ser perfeito de primeira.</p>
+  <p>Se você é um apreciador de filmes de ação e busca uma experiência visual impecável, assistir <em>O Atirador: Sem Nação</em> em 4K é simplesmente obrigatório. A riqueza de detalhes, desde as texturas das armas e uniformes até as paisagens exuberantes onde a ação se desenrola, ganha vida de forma impressionante. A nitidez da imagem, combinada com a paleta de cores vibrante, te transporta para o centro da ação, fazendo com que você se sinta parte da equipe de Reece.</p>
 
-<h2>Público-Alvo e Análise da Nota (0.0/10)</h2>
-
-<p>A nota de 0.0/10 pode indicar uma recepção inicial extremamente negativa, possivelmente devido a expectativas não atendidas ou falhas na execução da produção. No entanto, "O Atirador: Sem Nação" é um filme feito sob medida para os fãs de ação desenfreada, com tiroteios coreografados, explosões pirotécnicas e uma trama que, apesar de previsível, mantém o ritmo acelerado. Se você busca um filme para desligar o cérebro e se divertir com cenas de ação exageradas, este pode ser o seu filme. Contudo, quem procura profundidade narrativa ou atuações premiadas, provavelmente se decepcionará.</p>
-
-<blockquote>A melhor coisa do filme? Sem dúvida, a química entre pai e filho em meio ao caos. A dinâmica tensa e a cumplicidade forjada no fogo cruzado são os pontos altos que dão um toque de humanidade à ação incessante.</blockquote>
-
-<h2>Por que assistir em 4K na UniTV?</h2>
-
-<p>A experiência de assistir "O Atirador: Sem Nação" na sua UniTV VIP é incomparável. Imagine cada bala, cada explosão, cada detalhe do cenário brutal renderizado em 4K de ultra definição, com cores vibrantes e um nível de detalhes impressionante. Diga adeus aos travamentos e às imagens borradas! A UniTV garante uma transmissão fluida e estável, mesmo nas cenas mais intensas. E o áudio? Prepare-se para ser envolvido por um som cristalino, que te transportará para o centro da ação, com cada tiro e cada explosão ressoando em seus ouvidos. Não perca a chance de vivenciar "O Atirador: Sem Nação" como nunca antes, com a qualidade e a estabilidade que só a UniTV VIP pode oferecer.</p>
+  <p>Prepare sua TV, ajuste o volume e deixe-se envolver pela alta octanagem de <em>O Atirador: Sem Nação</em>. Um filme que, além de entreter, te fará questionar as sombras que se escondem nos corredores do poder. Garantia de uma noite eletrizante!</p>
 
 </body>
 </html>
-            <img src="[https://image.tmdb.org/t/p/w1280](https://image.tmdb.org/t/p/w1280)/4Wot2DQKdDUpZsjtvtVApBz5Hv1.jpg" alt="Cena do Filme" class="mid-backdrop" onerror="this.style.display='none'">
+            <img src="https://image.pollinations.ai/prompt/action%20scene%20from%20movie%20O%20Atirador:%20Sem%20Nação%20cinematic%204k?width=1200&height=600&nologo=true" alt="Cena do Filme" class="mid-backdrop">
         </main>
         
         <aside class="sidebar">
@@ -179,12 +167,10 @@
             <div class="ficha-item">
                 <span>Elenco Principal</span>
                 <div class="elenco-tags">
-                    <div>Chad Michael Collins</div><div>Ryan Robbins</div><div>Tom Berenger</div>
+                    <div>Chad Michael Collins</div><div>Ryan Robbins</div><div>Tom Berenger</div><div>Manuel Rodriguez-Saenz</div>
                 </div>
             </div>
-            <div class="ficha-item" style="margin-top: 30px;">
-                <a href="../../index.html#comprar" style="display: block; text-align: center; background: var(--gradiente-premium); color: #fff; text-decoration: none; padding: 15px; border-radius: 8px; font-weight: 800; font-size: 1rem;"><i class="fa-solid fa-play"></i> LIBERAR ACESSO</a>
-            </div>
+            <a href="../../index.html#comprar" class="btn-cta"><i class="fa-solid fa-play"></i> ASSISTIR NA UNITV</a>
         </aside>
     </div>
 
@@ -282,7 +268,6 @@
             if (window.scrollY > 50) { header.classList.add('scrolled'); } else { header.classList.remove('scrolled'); }
         });
 
-        // Chatbot VIP
         function toggleChat() { document.getElementById('chat-widget').classList.toggle('active'); }
         function showTyping(callback) {
             const status = document.getElementById('wa-status'), typing = document.getElementById('typing-indicator'), content = document.getElementById('chat-content');
