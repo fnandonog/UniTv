@@ -41,8 +41,6 @@ TEMPLATE_RESENHA = """<!DOCTYPE html>
     <meta name="description" content="Descubra os bastidores, elenco e análise do filme [TITULO]. Assista agora mesmo em 4K nativo na sua TV Box com a UniTV.">
     <meta name="theme-color" content="#050505">
     
-    <meta name="referrer" content="no-referrer">
-    
     <link rel="canonical" href="https://unitvsite.com.br/cinema/" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
@@ -402,7 +400,9 @@ def injetar_card_na_vitrine(filme, slug):
     titulo = filme['title']
     nota = round(filme['vote_average'], 1)
     ano = filme['release_date'][:4] if 'release_date' in filme else "2024"
-    poster_url = f"[https://image.tmdb.org/t/p/w500](https://image.tmdb.org/t/p/w500){filme['poster_path']}"
+    
+    # O SEGREDO DO BYPASS DAS OPERADORAS BRASILEIRAS (PROXY CDN wsrv.nl)
+    poster_url = f"[https://wsrv.nl/?url=image.tmdb.org/t/p/w500](https://wsrv.nl/?url=image.tmdb.org/t/p/w500){filme['poster_path']}"
     
     card = f"""
         <a href="{slug}/index.html" class="movie-card reveal active">
@@ -465,14 +465,14 @@ for filme in filmes:
         cast = detalhes['credits'].get('cast', [])[:3]
         if cast: elenco_html = "".join([f"<div>{ator['name']}</div>" for ator in cast])
 
-    # Voltando para o link oficial da API do TMDB que funciona
-    bg_principal = f"[https://image.tmdb.org/t/p/original](https://image.tmdb.org/t/p/original){filme['backdrop_path']}"
+    # O SEGREDO DO BYPASS DAS OPERADORAS BRASILEIRAS APLICADO NAS PÁGINAS INTERNAS
+    bg_principal = f"[https://wsrv.nl/?url=image.tmdb.org/t/p/original](https://wsrv.nl/?url=image.tmdb.org/t/p/original){filme['backdrop_path']}"
     bg_secundario = bg_principal
     if 'images' in detalhes and 'backdrops' in detalhes['images']:
         bgs = [b['file_path'] for b in detalhes['images']['backdrops'] if b['file_path'] != filme['backdrop_path']]
-        if bgs: bg_secundario = f"[https://image.tmdb.org/t/p/w1280](https://image.tmdb.org/t/p/w1280){bgs[0]}"
+        if bgs: bg_secundario = f"[https://wsrv.nl/?url=image.tmdb.org/t/p/w1280](https://wsrv.nl/?url=image.tmdb.org/t/p/w1280){bgs[0]}"
 
-    poster_principal = f"[https://image.tmdb.org/t/p/w500](https://image.tmdb.org/t/p/w500){filme['poster_path']}"
+    poster_principal = f"[https://wsrv.nl/?url=image.tmdb.org/t/p/w500](https://wsrv.nl/?url=image.tmdb.org/t/p/w500){filme['poster_path']}"
     
     corpo_resenha = escrever_resenha_gemini(detalhes)
     
