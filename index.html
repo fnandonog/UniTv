@@ -1,462 +1,164 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Cinema VIP UniTV | Filmes em Alta, Lançamentos e Resenhas</title>
-    <meta name="description" content="Descubra o que assistir hoje. Resenhas exclusivas, bastidores e lançamentos do cinema mundial disponíveis em 4K no catálogo UniTV Oficial.">
-    <meta name="theme-color" content="#050505">
-    
-    <link rel="canonical" href="https://unitvsite.com.br/cinema/" />
-    <meta property="og:title" content="Cinema VIP UniTV | Catálogo de Filmes" />
-    <meta property="og:description" content="O melhor do cinema mundial na sua tela. Descubra os bastidores e assista em 4K." />
-    <meta property="og:image" content="https://unitvsite.com.br/img/logo-unitv.png" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Cinema VIP UniTV | Filmes em Alta, Lançamentos e Resenhas</title>
+    <meta name="description" content="Descubra o que assistir hoje. Resenhas exclusivas, bastidores e lançamentos do cinema mundial disponíveis em 4K no catálogo UniTV Oficial.">
+    <meta name="theme-color" content="#050505">
+    <link rel="canonical" href="https://unitvsite.com.br/cinema/" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+    <link rel="icon" href="../img/logo-unitv.png" type="image/png">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
-    <link rel="icon" href="../img/logo-unitv.png" type="image/png">
-
-    <style>
-        /* --- DESIGN SYSTEM CYBERPUNK --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        :root { 
-            --bg-body: #050505; --bg-card: #0a0a0a; 
-            --neon-azul: #00f3ff; --neon-laranja: #ff7300; 
-            --gradiente-cyber: linear-gradient(135deg, #ff7300 0%, #dd2476 100%); 
-            --gradiente-premium: linear-gradient(135deg, #FF512F 0%, #DD2476 100%);
-            --borda-sutil: 1px solid rgba(255, 255, 255, 0.08); 
-            --cor-destaque: #ff0080;
-            --wa-header: #075e54; --wa-bg: #e5ddd5; --wa-msg-user: #dcf8c6;
-        }
-        
-        html, body { background-color: var(--bg-body); color: #f0f0f0; overflow-x: hidden; width: 100%; line-height: 1.6; scroll-behavior: smooth; }
-        ::-webkit-scrollbar { width: 10px; } ::-webkit-scrollbar-track { background: var(--bg-body); } ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; } ::-webkit-scrollbar-thumb:hover { background: var(--neon-laranja); }
-        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); } .reveal.active { opacity: 1; transform: translateY(0); }
-        
-        /* --- HEADER E PROMO --- */
-        .promo-bar { background: linear-gradient(90deg, #1a0b2e, #2d0b1e); color: #e0e0e0; text-align: center; padding: 10px; font-size: 0.85rem; font-weight: 600; position: fixed; top: 0; width: 100%; z-index: 2000; border-bottom: 1px solid rgba(255,255,255,0.05); } .promo-bar span { color: #ff0055; font-weight: 800; }
-        header { display: flex; justify-content: space-between; align-items: center; padding: 10px 5%; position: fixed; width: 100%; top: 38px; background: rgba(5, 5, 5, 0.85); backdrop-filter: blur(15px); z-index: 1000; border-bottom: var(--borda-sutil); height: 75px; transition: 0.4s; }
-        header.scrolled { top: 0; height: 70px; background: rgba(5, 5, 5, 0.98); border-bottom: 1px solid rgba(0, 243, 255, 0.2); }
-        .logo img { height: 40px; filter: brightness(1.2); transition: 0.3s; }
-        .nav-links { display: flex; gap: 25px; list-style: none; }
-        .nav-links a { color: #bbb; text-decoration: none; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; transition: 0.3s; position: relative; }
-        .nav-links a:hover { color: #fff; } .nav-links a.active { color: var(--neon-laranja); text-shadow: 0 0 10px rgba(255, 115, 0, 0.4); }
-        .btn-header { background: var(--gradiente-cyber); color: white; padding: 10px 25px; border-radius: 50px; text-decoration: none; font-size: 0.75rem; font-weight: 800; box-shadow: 0 4px 15px rgba(255, 115, 0, 0.3); transition: 0.3s; } .btn-header:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(0, 243, 255, 0.4); }
-        .menu-toggle { display: none; color: white; font-size: 1.6rem; cursor: pointer; }
-
-        /* --- HERO CINEMA --- */
-        .hero-cinema { height: 85vh; min-height: 600px; position: relative; display: flex; align-items: center; padding: 0 5%; overflow: hidden; margin-top: 38px; border-bottom: 2px solid #111; }
-        .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('https://image.tmdb.org/t/p/original/8rpDcsfLJypbO6vtecsmEZz40Z.jpg'); background-size: cover; background-position: center top; z-index: 1; transition: transform 10s linear; } .hero-cinema:hover .hero-bg { transform: scale(1.05); }
-        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, rgba(5,5,5,1) 0%, rgba(5,5,5,0.9) 40%, rgba(5,5,5,0.3) 100%), linear-gradient(0deg, rgba(5,5,5,1) 0%, rgba(5,5,5,0) 30%); z-index: 2; }
-        .hero-content { position: relative; z-index: 3; max-width: 800px; padding-top: 50px; }
-        .hero-badge { display: inline-block; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(5px); color: #fff; padding: 5px 15px; border-radius: 50px; font-size: 0.75rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; } .hero-badge i { color: var(--neon-laranja); margin-right: 5px; }
-        .hero-title { font-family: 'Montserrat', sans-serif; font-size: clamp(3rem, 6vw, 5.5rem); font-weight: 900; line-height: 1; text-transform: uppercase; color: #fff; margin-bottom: 20px; text-shadow: 2px 2px 20px rgba(0,0,0,0.8); }
-        .hero-meta { display: flex; gap: 20px; align-items: center; margin-bottom: 20px; font-size: 0.95rem; color: #ccc; font-weight: 600; } .hero-rating { color: #ffcc00; display: flex; align-items: center; gap: 5px; } .hero-4k { border: 1px solid var(--neon-azul); color: var(--neon-azul); padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 800; text-shadow: 0 0 10px rgba(0,243,255,0.5); }
-        .hero-desc { font-size: 1.1rem; color: #ddd; margin-bottom: 35px; max-width: 600px; }
-        .hero-buttons { display: flex; gap: 15px; } .btn-play-main { background: #fff; color: #000; padding: 15px 35px; border-radius: 8px; font-weight: 800; font-size: 1.1rem; text-decoration: none; display: flex; align-items: center; gap: 10px; transition: 0.3s; } .btn-play-main:hover { transform: scale(1.05); } .btn-info { background: rgba(109, 109, 110, 0.5); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 15px 35px; border-radius: 8px; font-weight: 800; font-size: 1.1rem; text-decoration: none; display: flex; align-items: center; gap: 10px; backdrop-filter: blur(5px); transition: 0.3s; } .btn-info:hover { background: rgba(109, 109, 110, 0.8); transform: scale(1.05); }
-
-        /* --- BARRA DE BUSCA E CATEGORIAS --- */
-        .tools-section { max-width: 1600px; margin: 40px auto 0; padding: 0 5%; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px; }
-        .search-box { position: relative; flex: 1; min-width: 300px; max-width: 500px; }
-        .search-box input { width: 100%; background: #111; border: 1px solid rgba(0, 243, 255, 0.3); padding: 15px 20px 15px 50px; border-radius: 50px; color: #fff; font-size: 0.95rem; font-weight: 600; outline: none; transition: 0.3s; box-shadow: 0 0 10px rgba(0, 243, 255, 0.05); }
-        .search-box input:focus { border-color: var(--neon-azul); box-shadow: 0 0 20px rgba(0, 243, 255, 0.2); background: #1a1a1a; }
-        .search-box i { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: var(--neon-azul); font-size: 1.2rem; }
-        .cat-tags { display: flex; gap: 10px; flex-wrap: wrap; }
-        .cat-tag { background: transparent; border: 1px solid #333; color: #aaa; padding: 8px 20px; border-radius: 50px; font-size: 0.8rem; font-weight: 700; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; }
-        .cat-tag:hover { border-color: var(--neon-laranja); color: #fff; box-shadow: 0 0 15px rgba(255, 115, 0, 0.2); }
-
-        /* --- CATALOGO E CARDS --- */
-        .section-header { padding: 60px 5% 20px; display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 30px; } .section-header h2 { font-size: 2rem; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 15px; } .section-header h2::before { content: ''; width: 6px; height: 30px; background: var(--gradiente-cyber); border-radius: 10px; }
-        .movie-catalog { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 25px; padding: 0 5% 80px; max-width: 1600px; margin: 0 auto; }
-        .movie-card { position: relative; border-radius: 12px; overflow: hidden; cursor: pointer; aspect-ratio: 2 / 3; transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); background: #111; text-decoration: none; display: block; border: 1px solid rgba(255,255,255,0.02); }
-        .movie-poster { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
-        .movie-overlay { position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(0deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.8) 40%, rgba(0,0,0,0) 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 25px 20px; opacity: 0; transition: 0.4s; }
-        .movie-card:hover { transform: scale(1.05) translateY(-10px); z-index: 10; box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 20px rgba(0, 243, 255, 0.2); border-color: var(--neon-azul); } .movie-card:hover .movie-overlay { opacity: 1; } .movie-card:hover .movie-poster { filter: brightness(0.5); }
-        .movie-rating-badge { position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); color: #ffcc00; font-weight: 900; font-size: 0.85rem; padding: 6px 12px; border-radius: 8px; border: 1px solid rgba(255,204,0,0.4); display: flex; align-items: center; gap: 5px; opacity: 0; transition: 0.4s; transform: translateY(-10px); box-shadow: 0 5px 15px rgba(0,0,0,0.5); } .movie-card:hover .movie-rating-badge { opacity: 1; transform: translateY(0); }
-        .movie-info-title { color: #fff; font-size: 1.3rem; font-weight: 800; line-height: 1.2; margin-bottom: 8px; transform: translateY(20px); transition: 0.4s; text-shadow: 0 2px 5px rgba(0,0,0,0.8); } .movie-info-meta { color: #bbb; font-size: 0.8rem; font-weight: 600; display: flex; gap: 10px; margin-bottom: 15px; transform: translateY(20px); transition: 0.4s; transition-delay: 0.05s; } .movie-info-meta span { background: rgba(255,255,255,0.1); padding: 3px 8px; border-radius: 4px; color: var(--neon-laranja); border: 1px solid rgba(255,115,0,0.2); }
-        .btn-read-review { background: var(--gradiente-cyber); color: white; text-align: center; padding: 12px; border-radius: 8px; font-weight: 800; font-size: 0.85rem; width: 100%; transform: translateY(20px); opacity: 0; transition: 0.4s; transition-delay: 0.1s; letter-spacing: 1px; }
-        .movie-card:hover .movie-info-title, .movie-card:hover .movie-info-meta, .movie-card:hover .btn-read-review { transform: translateY(0); opacity: 1; }
-        .no-results { display: none; grid-column: 1 / -1; text-align: center; padding: 50px; color: #666; font-size: 1.2rem; font-weight: 600; } .no-results i { font-size: 3rem; color: #333; margin-bottom: 15px; display: block; }
-
-        /* --- SESSÃO CTA (O QUE É A UNITV) --- */
-        .about-unitv { padding: 100px 5%; background: radial-gradient(circle at right bottom, #1a0525 0%, #050505 60%); border-top: 1px solid #111; }
-        .about-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 60px; max-width: 1300px; margin: 0 auto; }
-        .about-text h2 { font-size: 2.8rem; font-weight: 900; line-height: 1.1; margin-bottom: 20px; color: #fff; }
-        .about-text h2 span { background: var(--gradiente-premium); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .about-text p { color: #aaa; font-size: 1.1rem; line-height: 1.7; margin-bottom: 30px; }
-        .about-features { list-style: none; margin-bottom: 40px; }
-        .about-features li { display: flex; align-items: center; gap: 15px; color: #ddd; font-size: 1.05rem; font-weight: 600; margin-bottom: 15px; }
-        .about-features i { color: #00ff88; font-size: 1.3rem; }
-        .btn-cta-about { background: var(--gradiente-premium); color: white; padding: 18px 45px; border-radius: 50px; font-size: 1.1rem; font-weight: 800; text-decoration: none; display: inline-flex; align-items: center; gap: 12px; transition: 0.4s; box-shadow: 0 10px 30px -5px rgba(221, 36, 118, 0.4); text-transform: uppercase; letter-spacing: 1px; }
-        .btn-cta-about:hover { transform: translateY(-5px); box-shadow: 0 15px 35px -5px rgba(221, 36, 118, 0.6); }
-        .about-img img { width: 100%; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.8)); transform: perspective(1000px) rotateY(-15deg); transition: 0.5s; }
-        .about-grid:hover .about-img img { transform: perspective(1000px) rotateY(0deg); }
-
-        /* --- FOOTER HOMEPAGE --- */
-        footer { background: #050505; border-top: 1px solid #1a1a1a; padding: 80px 20px 40px; color: #777; font-size: 0.9rem; }
-        .footer-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 50px; }
-        .footer-logo { margin-bottom: 20px; filter: brightness(1.2); height: 40px; }
-        .footer-col h4 { color: #fff; margin-bottom: 25px; font-size: 0.9rem; text-transform: uppercase; font-weight: 700; letter-spacing: 1px; }
-        .footer-links { list-style: none; } .footer-links li { margin-bottom: 12px; }
-        .footer-links a { color: #777; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 8px; }
-        .footer-links a:hover { color: #fff; transform: translateX(5px); }
-        .payment-methods { display: flex; gap: 15px; font-size: 2rem; margin-top: 15px; color: #444; }
-        .footer-bottom { text-align: center; margin-top: 60px; padding-top: 30px; border-top: 1px solid #111; font-size: 0.8rem; display: flex; flex-direction: column; gap: 15px; align-items: center; }
-        .legal-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; } .legal-links a { color: #888; text-decoration: none; } .legal-links a:hover { color: #fff; text-decoration: underline; }
-
-        /* --- WHATSAPP WIDGET & MODAL (DA HOMEPAGE) --- */
-        .wa-widget { position: fixed; bottom: 90px; right: 25px; width: 350px; background: var(--wa-bg); border-radius: 16px; z-index: 9999; box-shadow: 0 15px 35px rgba(0,0,0,0.4); display: flex; flex-direction: column; overflow: hidden; transform: scale(0); transform-origin: bottom right; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .wa-widget.active { transform: scale(1); }
-        .wa-header { background: var(--wa-header); color: white; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; }
-        .wa-profile { display: flex; align-items: center; gap: 12px; } .wa-profile img { width: 42px; height: 42px; border-radius: 50%; background: #fff; padding: 2px; }
-        .wa-info { display: flex; flex-direction: column; } .wa-name { font-weight: 600; font-size: 1rem; } .wa-status { font-size: 0.75rem; color: #cfd8dc; display: flex; align-items: center; gap: 5px;} .wa-status::before { content:''; display:inline-block; width:8px; height:8px; background:#00ff88; border-radius:50%; }
-        .wa-close { background: none; border: none; color: white; font-size: 1.8rem; cursor: pointer; transition: 0.3s; outline: none; } .wa-close:hover { color: #ffcccc; transform: rotate(90deg); }
-        .wa-chat-body { height: 380px; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png'); background-size: contain; }
-        .wa-msg { max-width: 85%; padding: 10px 15px; border-radius: 12px; font-size: 0.9rem; position: relative; box-shadow: 0 2px 5px rgba(0,0,0,0.1); line-height: 1.4; color: #333; }
-        .wa-msg-bot { background: white; align-self: flex-start; border-top-left-radius: 0; } .wa-msg-user { background: var(--wa-msg-user); align-self: flex-end; border-top-right-radius: 0; }
-        .wa-time { font-size: 0.65rem; color: #999; display: block; text-align: right; margin-top: 5px; }
-        .wa-options { padding: 15px; background: #f0f0f0; border-top: 1px solid #ddd; display: flex; flex-direction: column; gap: 10px; }
-        .wa-options button { background: white; border: 1px solid #ccc; padding: 12px; border-radius: 25px; font-size: 0.9rem; color: #075e54; font-weight: 600; cursor: pointer; text-align: center; width: 100%; transition: 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.05); } .wa-options button:hover { background: #075e54; color: white; border-color: #075e54; }
-        .wa-input-fake { background: #f0f0f0; padding: 12px 20px; display: flex; align-items: center; gap: 15px; border-top: 1px solid #ddd; } .wa-input-box { background: white; flex: 1; padding: 10px 20px; border-radius: 25px; color: #999; font-size: 0.9rem; border: 1px solid #ccc; }
-        .typing span { height: 8px; width: 8px; background: #bbb; display: inline-block; border-radius: 50%; margin-right: 3px; animation: waTyping 1s infinite; } @keyframes waTyping { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
-        .float-zap { position: fixed; bottom: 25px; right: 25px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; z-index: 10000; box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4); cursor: pointer; transition: 0.3s; } .float-zap:hover { transform: scale(1.1); }
-
-        /* Modal AVISO TV */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); backdrop-filter: blur(8px); display: flex; justify-content: center; align-items: center; z-index: 100000; opacity: 0; visibility: hidden; transition: 0.3s ease; } .modal-overlay.active { opacity: 1; visibility: visible; }
-        .modal-content { background: #111; border: 1px solid #333; border-radius: 20px; width: 90%; max-width: 500px; padding: 40px; text-align: center; transform: translateY(30px); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.8); } .modal-overlay.active .modal-content { transform: translateY(0); }
-        .btn-close-modal-x { position: absolute; top: 15px; right: 15px; background: rgba(255,255,255,0.05); border: none; color: #888; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; cursor: pointer; transition: 0.3s; outline: none; } .btn-close-modal-x:hover { background: rgba(255,0,85,0.8); color: white; transform: rotate(90deg); }
-        .modal-header i { color: #ffcc00; font-size: 3.5rem; margin-bottom: 20px; text-shadow: 0 0 20px rgba(255, 204, 0, 0.3); } .modal-header h3 { color: #fff; font-size: 1.6rem; font-weight: 800; margin-bottom: 20px; line-height: 1.2;}
-        .modal-body p { color: #ccc; font-size: 1rem; margin-bottom: 15px; line-height: 1.6; }
-        .alert-box { background: rgba(255, 0, 85, 0.1); border-left: 4px solid #ff0055; padding: 15px 20px; margin-bottom: 25px; text-align: left; border-radius: 0 8px 8px 0; } .alert-box p { color: #ff8888; font-size: 0.95rem; font-weight: 600; margin: 0; }
-        .modal-actions { display: flex; flex-direction: column; gap: 15px; margin-top: 30px; }
-        .btn-modal-buy { background: #25d366; color: #000; border: none; padding: 16px; font-weight: 800; font-size: 1rem; border-radius: 12px; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 10px; text-transform: uppercase; text-decoration: none; } .btn-modal-buy:hover { background: #1ebd5b; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3); }
-        .btn-modal-support { background: #222; color: #fff; border: 1px solid #444; padding: 16px; font-weight: 600; font-size: 0.95rem; border-radius: 12px; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.3s; } .btn-modal-support:hover { background: #333; border-color: #666; }
-
-        /* --- RESPONSIVIDADE --- */
-        @media (max-width: 992px) { .about-grid { grid-template-columns: 1fr; text-align: center; } .about-features li { justify-content: center; } }
-        @media (max-width: 768px) { 
-            header { padding: 10px 20px; } 
-            /* Lógica do Menu Mobile Otimizada */
-            .menu-toggle { display: block; }
-            .nav-links { position: absolute; top: 70px; left: -100%; width: 100%; height: calc(100vh - 70px); background: rgba(10, 10, 10, 0.98); backdrop-filter: blur(15px); border-top: 1px solid #222; transition: 0.4s ease-in-out; padding: 30px 20px; flex-direction: column; z-index: 999; }
-            .nav-links.active { left: 0; }
-            .nav-links a { font-size: 1.3rem; display: block; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-weight: 600; }
-            .header-actions .btn-header { display: none; }
-
-            .hero-title { font-size: 2.8rem; } .movie-catalog { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); padding: 0 20px 80px; gap: 15px; } .footer-container { grid-template-columns: 1fr; text-align: center; } .hero-buttons { flex-direction: column; } .tools-section { flex-direction: column; align-items: stretch; } .search-box { max-width: 100%; } .cat-tags { justify-content: center; } .wa-widget { width: calc(100% - 40px); left: 20px; right: 20px; bottom: 95px; max-height: 75vh; }
-        }
-    </style>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        :root { --bg-body: #050505; --bg-card: #0a0a0a; --neon-azul: #00f3ff; --neon-laranja: #ff7300; --gradiente-cyber: linear-gradient(135deg, #ff7300 0%, #dd2476 100%); --borda-sutil: 1px solid rgba(255, 255, 255, 0.08); }
+        html, body { background-color: var(--bg-body); color: #f0f0f0; overflow-x: hidden; width: 100%; line-height: 1.6; scroll-behavior: smooth; }
+        ::-webkit-scrollbar { width: 10px; } ::-webkit-scrollbar-track { background: var(--bg-body); } ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; } ::-webkit-scrollbar-thumb:hover { background: var(--neon-laranja); }
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); } .reveal.active { opacity: 1; transform: translateY(0); }
+        .promo-bar { background: linear-gradient(90deg, #1a0b2e, #2d0b1e); color: #e0e0e0; text-align: center; padding: 10px; font-size: 0.85rem; font-weight: 600; position: fixed; top: 0; width: 100%; z-index: 2000; border-bottom: 1px solid rgba(255,255,255,0.05); } .promo-bar span { color: #ff0055; font-weight: 800; }
+        header { display: flex; justify-content: space-between; align-items: center; padding: 10px 5%; position: fixed; width: 100%; top: 38px; background: rgba(5, 5, 5, 0.85); backdrop-filter: blur(15px); z-index: 1000; border-bottom: var(--borda-sutil); height: 75px; transition: 0.4s; }
+        header.scrolled { top: 0; height: 70px; background: rgba(5, 5, 5, 0.98); }
+        .logo img { height: 40px; filter: brightness(1.2); transition: 0.3s; }
+        .nav-links { display: flex; gap: 25px; }
+        .nav-links a { color: #bbb; text-decoration: none; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; transition: 0.3s; position: relative; }
+        .nav-links a:hover { color: #fff; } .nav-links a.active { color: var(--neon-laranja); text-shadow: 0 0 10px rgba(255, 115, 0, 0.4); }
+        .btn-header { background: var(--gradiente-cyber); color: white; padding: 10px 25px; border-radius: 50px; text-decoration: none; font-size: 0.75rem; font-weight: 800; box-shadow: 0 4px 15px rgba(255, 115, 0, 0.3); transition: 0.3s; } .btn-header:hover { transform: scale(1.05); }
+        .hero-cinema { height: 95vh; min-height: 600px; position: relative; display: flex; align-items: center; padding: 0 5%; overflow: hidden; margin-top: 38px; }
+        .hero-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('https://image.tmdb.org/t/p/original/8rpDcsfLJypbO6vtecsmEZz40Z.jpg'); background-size: cover; background-position: center top; z-index: 1; transition: transform 10s linear; } .hero-cinema:hover .hero-bg { transform: scale(1.05); }
+        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(90deg, rgba(5,5,5,1) 0%, rgba(5,5,5,0.8) 40%, rgba(5,5,5,0.2) 100%), linear-gradient(0deg, rgba(5,5,5,1) 0%, rgba(5,5,5,0) 30%); z-index: 2; }
+        .hero-content { position: relative; z-index: 3; max-width: 800px; padding-top: 50px; }
+        .hero-badge { display: inline-block; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(5px); color: #fff; padding: 5px 15px; border-radius: 50px; font-size: 0.75rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; } .hero-badge i { color: var(--neon-laranja); margin-right: 5px; }
+        .hero-title { font-family: 'Montserrat', sans-serif; font-size: clamp(3rem, 6vw, 5.5rem); font-weight: 900; line-height: 1; text-transform: uppercase; color: #fff; margin-bottom: 20px; text-shadow: 2px 2px 20px rgba(0,0,0,0.8); }
+        .hero-meta { display: flex; gap: 20px; align-items: center; margin-bottom: 20px; font-size: 0.95rem; color: #ccc; font-weight: 600; } .hero-rating { color: #ffcc00; display: flex; align-items: center; gap: 5px; } .hero-4k { border: 1px solid #fff; padding: 2px 6px; border-radius: 4px; font-size: 0.7rem; font-weight: 800; }
+        .hero-desc { font-size: 1.1rem; color: #ddd; margin-bottom: 35px; max-width: 600px; }
+        .hero-buttons { display: flex; gap: 15px; } .btn-play-main { background: #fff; color: #000; padding: 15px 35px; border-radius: 8px; font-weight: 800; font-size: 1.1rem; text-decoration: none; display: flex; align-items: center; gap: 10px; transition: 0.3s; } .btn-play-main:hover { transform: scale(1.05); } .btn-info { background: rgba(109, 109, 110, 0.7); color: white; padding: 15px 35px; border-radius: 8px; font-weight: 800; font-size: 1.1rem; text-decoration: none; display: flex; align-items: center; gap: 10px; backdrop-filter: blur(5px); transition: 0.3s; } .btn-info:hover { transform: scale(1.05); }
+        .section-header { padding: 80px 5% 20px; display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid rgba(255,255,255,0.05); margin-bottom: 40px; } .section-header h2 { font-size: 2rem; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 15px; } .section-header h2::before { content: ''; width: 6px; height: 30px; background: var(--gradiente-cyber); border-radius: 10px; }
+        .movie-catalog { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; padding: 0 5% 100px; max-width: 1600px; margin: 0 auto; }
+        .movie-card { position: relative; border-radius: 12px; overflow: hidden; cursor: pointer; aspect-ratio: 2 / 3; transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); background: #111; text-decoration: none; display: block; }
+        .movie-poster { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .movie-overlay { position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(0deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 40%, rgba(0,0,0,0) 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 20px; opacity: 0; transition: 0.4s; }
+        .movie-card:hover { transform: scale(1.05) translateY(-10px); z-index: 10; box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 20px rgba(255, 115, 0, 0.2); border: 1px solid rgba(255, 115, 0, 0.5); } .movie-card:hover .movie-overlay { opacity: 1; } .movie-card:hover .movie-poster { filter: brightness(0.6); }
+        .movie-rating-badge { position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); color: #ffcc00; font-weight: 800; font-size: 0.8rem; padding: 5px 10px; border-radius: 8px; border: 1px solid rgba(255,204,0,0.3); display: flex; align-items: center; gap: 5px; opacity: 0; transition: 0.4s; transform: translateY(-10px); } .movie-card:hover .movie-rating-badge { opacity: 1; transform: translateY(0); }
+        .movie-info-title { color: #fff; font-size: 1.2rem; font-weight: 800; line-height: 1.2; margin-bottom: 8px; transform: translateY(20px); transition: 0.4s; } .movie-info-meta { color: #aaa; font-size: 0.75rem; font-weight: 600; display: flex; gap: 10px; margin-bottom: 15px; transform: translateY(20px); transition: 0.4s; transition-delay: 0.05s; } .movie-info-meta span { background: rgba(255,255,255,0.1); padding: 2px 6px; border-radius: 4px; color: var(--neon-azul); }
+        .btn-read-review { background: var(--gradiente-cyber); color: white; text-align: center; padding: 10px; border-radius: 8px; font-weight: 800; font-size: 0.8rem; width: 100%; transform: translateY(20px); opacity: 0; transition: 0.4s; transition-delay: 0.1s; }
+        .movie-card:hover .movie-info-title, .movie-card:hover .movie-info-meta, .movie-card:hover .btn-read-review { transform: translateY(0); opacity: 1; }
+        footer { background: #020202; border-top: 1px solid #1a1a1a; padding: 80px 5% 40px; color: #999; font-size: 0.9rem; } .footer-container { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; } .footer-logo { margin-bottom: 25px; height: 45px; filter: brightness(1.2); } .footer-col h4 { color: #fff; margin-bottom: 25px; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; } .footer-links { list-style: none; } .footer-links li { margin-bottom: 15px; } .footer-links a { color: #666; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 12px; } .footer-links a:hover { color: #fff; transform: translateX(10px); }
+        .payment-methods { display: flex; gap: 20px; font-size: 2.2rem; margin-top: 25px; color: #222; }
+        @media (max-width: 768px) { header { padding: 10px 20px; } .nav-links { display: none; } .hero-title { font-size: 2.8rem; } .movie-catalog { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); padding: 0 20px 80px; gap: 15px; } .footer-container { grid-template-columns: 1fr; text-align: center; } .hero-buttons { flex-direction: column; } }
+    </style>
 </head>
 <body>
 
-    <div class="promo-bar">⚡ SINAL LIBERADO: Assista a todos os lançamentos do cinema em 4K. <span>Aproveite o VIP!</span></div>
+    <div class="promo-bar">⚡ SINAL LIBERADO: Assista a todos os lançamentos do cinema em 4K. <span>Aproveite o VIP!</span></div>
 
-    <header id="main-header">
-        <div class="logo"><a href="../index.html"><img src="../img/logo-unitv.png" alt="UniTV Oficial"></a></div>
-        <nav class="nav-links" id="nav-menu">
-            <a href="../index.html">Início</a>
-            <a href="../baixar/index.html">Downloads</a>
-            <a href="../blog/index.html">Blog Tech</a>
-            <a href="index.html" class="active">Cinema VIP</a>
-        </nav>
-        <div class="header-actions" style="display: flex; align-items: center; gap: 15px;">
-            <a href="../index.html#comprar" class="btn-header"><i class="fa-solid fa-crown"></i> ASSINAR VIP</a>
-            <div class="menu-toggle" onclick="toggleMenu()" aria-label="Menu" role="button"><i class="fa-solid fa-bars" id="menu-icon"></i></div>
-        </div>
-    </header>
+    <header id="main-header">
+        <div class="logo"><a href="../index.html"><img src="../img/logo-unitv.png" alt="UniTV Oficial"></a></div>
+        <nav class="nav-links"><a href="../index.html">Início</a><a href="../baixar/index.html">Downloads</a><a href="../blog/index.html">Blog Tech</a><a href="index.html" class="active">Cinema</a></nav>
+        <a href="../index.html#comprar" class="btn-header">ASSINAR VIP 4K</a>
+    </header>
 
-    <section class="hero-cinema">
-        <div class="hero-bg"></div><div class="hero-overlay"></div>
-        <div class="hero-content reveal active">
-            <div class="hero-badge"><i class="fa-solid fa-fire"></i> Lançamento UniTV</div>
-            <h1 class="hero-title">Godzilla x Kong:<br>O Novo Império</h1>
-            <div class="hero-meta"><div class="hero-rating"><i class="fa-solid fa-star"></i> 8.7</div><span>2024</span><span class="hero-4k">4K UHD</span><span>Ação • Ficção</span></div>
-            <p class="hero-desc">O épico confronto continua! Assista agora mesmo sem travamentos na sua TV Box. Descubra os bastidores e os segredos dessa superprodução na nossa resenha exclusiva.</p>
-            <div class="hero-buttons">
-                <a href="#catalogo" class="btn-play-main"><i class="fa-solid fa-play"></i> Explorar Catálogo</a>
-                <a href="../index.html#comprar" class="btn-info"><i class="fa-solid fa-circle-info"></i> Liberar Acesso</a>
-            </div>
-        </div>
-    </section>
+    <section class="hero-cinema">
+        <div class="hero-bg"></div><div class="hero-overlay"></div>
+        <div class="hero-content reveal active">
+            <div class="hero-badge"><i class="fa-solid fa-fire"></i> Em Alta na UniTV</div>
+            <h1 class="hero-title">Godzilla x Kong:<br>O Novo Império</h1>
+            <div class="hero-meta"><div class="hero-rating"><i class="fa-solid fa-star"></i> 8.7</div><span>2024</span><span class="hero-4k">4K UHD</span><span>Ação • Ficção</span></div>
+            <p class="hero-desc">O épico confronto continua! Assista agora mesmo sem travamentos na sua TV Box. Descubra os bastidores e os segredos dessa superprodução na nossa resenha exclusiva.</p>
+            <div class="hero-buttons">
+                <a href="#catalogo" class="btn-play-main"><i class="fa-solid fa-play"></i> Explorar Catálogo</a>
+                <a href="../index.html#comprar" class="btn-info"><i class="fa-solid fa-circle-info"></i> Liberar Acesso</a>
+            </div>
+        </div>
+    </section>
 
-    <div class="tools-section reveal">
-        <div class="search-box">
-            <i class="fa-solid fa-search"></i>
-            <input type="text" id="searchMovies" placeholder="Buscar resenha de filme (ex: Ação, Drama...)">
-        </div>
-        <div class="cat-tags">
-            <div class="cat-tag">Ação Extrema</div>
-            <div class="cat-tag">Terror</div>
-            <div class="cat-tag">Ficção Sci-Fi</div>
-            <div class="cat-tag">Comédia</div>
-        </div>
-    </div>
+    <div id="catalogo" class="section-header reveal">
+        <h2>Lançamentos & Resenhas</h2>
+    </div>
 
-    <div id="catalogo" class="section-header reveal">
-        <h2>Catálogo de Resenhas VIP</h2>
-    </div>
+    <main class="movie-catalog">
 
-    <main class="movie-catalog" id="movieCatalog">
-        
-        <a href="um-amor-de-mentiras/index.html" class="movie-card reveal active">
-            <img src="https://image.tmdb.org/t/p/w500/hXNn25hE2SH2kHMPVOLjqDISSxf.jpg" alt="Um Amor de Mentiras" class="movie-poster">
-            <div class="movie-rating-badge"><i class="fa-solid fa-star"></i> 6.6</div>
-            <div class="movie-overlay">
-                <h3 class="movie-info-title">Um Amor de Mentiras</h3>
-                <div class="movie-info-meta"><span>2026</span><span>Em Alta</span></div>
-                <div class="btn-read-review">LER RESENHA VIP</div>
-            </div>
-        </a>
+        <a href="um-amor-de-mentiras/index.html" class="movie-card reveal active">
+            <img src="https://image.tmdb.org/t/p/w500/hXNn25hE2SH2kHMPVOLjqDISSxf.jpg" alt="Um Amor de Mentiras" class="movie-poster">
+            <div class="movie-rating-badge"><i class="fa-solid fa-star"></i> 6.6</div>
+            <div class="movie-overlay">
+                <h3 class="movie-info-title">Um Amor de Mentiras</h3>
+                <div class="movie-info-meta">
+                    <span>2026</span>
+                    <span>Em Alta</span>
+                </div>
+                <div class="btn-read-review">LER RESENHA VIP</div>
+            </div>
+        </a>
+    
 
-        <a href="casamento-sangrento-a-viuva/index.html" class="movie-card reveal active">
-            <img src="https://image.tmdb.org/t/p/w500/l08o8b3NAPxDzJca9ZF0fdQvbaz.jpg" alt="Casamento Sangrento: A Viúva" class="movie-poster">
-            <div class="movie-rating-badge"><i class="fa-solid fa-star"></i> 7.3</div>
-            <div class="movie-overlay">
-                <h3 class="movie-info-title">Casamento Sangrento: A Viúva</h3>
-                <div class="movie-info-meta"><span>2026</span><span>Em Alta</span></div>
-                <div class="btn-read-review">LER RESENHA VIP</div>
-            </div>
-        </a>
+        <a href="casamento-sangrento-a-viuva/index.html" class="movie-card reveal active">
+            <img src="https://image.tmdb.org/t/p/w500/l08o8b3NAPxDzJca9ZF0fdQvbaz.jpg" alt="Casamento Sangrento: A Viúva" class="movie-poster">
+            <div class="movie-rating-badge"><i class="fa-solid fa-star"></i> 7.3</div>
+            <div class="movie-overlay">
+                <h3 class="movie-info-title">Casamento Sangrento: A Viúva</h3>
+                <div class="movie-info-meta">
+                    <span>2026</span>
+                    <span>Em Alta</span>
+                </div>
+                <div class="btn-read-review">LER RESENHA VIP</div>
+            </div>
+        </a>
+    
 
-        <a href="um-cabra-bom-de-bola/index.html" class="movie-card reveal active">
-            <img src="https://image.tmdb.org/t/p/w500/x0SRTrltSJi1iQiIAUpyvkxnr41.jpg" alt="Um Cabra Bom de Bola" class="movie-poster">
-            <div class="movie-rating-badge"><i class="fa-solid fa-star"></i> 7.9</div>
-            <div class="movie-overlay">
-                <h3 class="movie-info-title">Um Cabra Bom de Bola</h3>
-                <div class="movie-info-meta"><span>2026</span><span>Em Alta</span></div>
-                <div class="btn-read-review">LER RESENHA VIP</div>
-            </div>
-        </a>
+        <a href="um-cabra-bom-de-bola/index.html" class="movie-card reveal active">
+            <img src="https://image.tmdb.org/t/p/w500/x0SRTrltSJi1iQiIAUpyvkxnr41.jpg" alt="Um Cabra Bom de Bola" class="movie-poster">
+            <div class="movie-rating-badge"><i class="fa-solid fa-star"></i> 7.9</div>
+            <div class="movie-overlay">
+                <h3 class="movie-info-title">Um Cabra Bom de Bola</h3>
+                <div class="movie-info-meta">
+                    <span>2026</span>
+                    <span>Em Alta</span>
+                </div>
+                <div class="btn-read-review">LER RESENHA VIP</div>
+            </div>
+        </a>
+    
 
-        <a href="inteligencia-humana/index.html" class="movie-card reveal active">
-            <img src="https://image.tmdb.org/t/p/w500/zmv8yxTmswmMZk7mUktzY9wWXcO.jpg" alt="Inteligência Humana" class="movie-poster">
-            <div class="movie-rating-badge"><i class="fa-solid fa-star"></i> 7.2</div>
-            <div class="movie-overlay">
-                <h3 class="movie-info-title">Inteligência Humana</h3>
-                <div class="movie-info-meta"><span>2026</span><span>Em Alta</span></div>
-                <div class="btn-read-review">LER RESENHA VIP</div>
-            </div>
-        </a>
-        
-        <div class="no-results" id="noResults"><i class="fa-solid fa-film"></i>Nenhum filme encontrado com esse nome.</div>
-    </main>
+        <a href="inteligencia-humana/index.html" class="movie-card reveal active">
+            <img src="https://image.tmdb.org/t/p/w500/zmv8yxTmswmMZk7mUktzY9wWXcO.jpg" alt="Inteligência Humana" class="movie-poster">
+            <div class="movie-rating-badge"><i class="fa-solid fa-star"></i> 7.2</div>
+            <div class="movie-overlay">
+                <h3 class="movie-info-title">Inteligência Humana</h3>
+                <div class="movie-info-meta">
+                    <span>2026</span>
+                    <span>Em Alta</span>
+                </div>
+                <div class="btn-read-review">LER RESENHA VIP</div>
+            </div>
+        </a>
+    
+    </main>
 
-    <section class="about-unitv reveal">
-        <div class="about-grid">
-            <div class="about-text">
-                <h2>Muito mais que apenas <span>Cinema</span></h2>
-                <p>A <strong>UniTV Oficial</strong> é a sua central de entretenimento definitiva. Além de um catálogo VOD colossal atualizado diariamente com os maiores sucessos do cinema, você transforma a sua TV Box ou Smartphone numa verdadeira máquina de diversão.</p>
-                <ul class="about-features">
-                    <li><i class="fa-solid fa-check"></i> <strong>Canais de TV ao Vivo:</strong> Esportes, Notícias e Variedades.</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>Sem Travamentos:</strong> Servidores P2P de altíssima velocidade.</li>
-                    <li><i class="fa-solid fa-check"></i> <strong>Sistema Multi-Telas:</strong> Assista na TV e no Celular simultaneamente.</li>
-                </ul>
-                <a href="../index.html#comprar" class="btn-cta-about"><i class="fa-solid fa-rocket"></i> Conheça os Planos e Assine Agora</a>
-            </div>
-            <div class="about-img">
-                <img src="../img/hero-tv.png" alt="Interface da UniTV Oficial">
-            </div>
-        </div>
-    </section>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col"><img src="../img/logo-unitv.png" alt="UniTV" class="footer-logo"><p>Revenda Autorizada UniTV Brasil. O melhor do cinema, esportes e canais ao vivo com segurança total.</p></div>
+            <div class="footer-col"><h4>Acesso Rápido</h4><ul class="footer-links"><li><a href="../index.html">Home Page</a></li><li><a href="../blog/index.html">Blog & Tutoriais</a></li></ul></div>
+            <div class="footer-col"><h4>Atendimento</h4><ul class="footer-links"><li><a href="../ajuda/index.html">Central de Ajuda</a></li><li><a href="https://wa.me/5519981765840" target="_blank">WhatsApp Especializado</a></li></ul></div>
+            <div class="footer-col"><h4>Compra Segura</h4><div class="payment-methods"><i class="fa-brands fa-pix" style="color:#32bcad;"></i><i class="fa-brands fa-cc-mastercard"></i></div></div>
+        </div>
+        <div style="text-align: center; margin-top: 60px; padding-top: 20px; border-top: 1px solid #111; font-size: 0.75rem; color: #444;">&copy; 2026 UniTV Revenda Oficial. CNPJ: 00.000.000/0001-00. Todos os direitos reservados.</div>
+    </footer>
 
-    <footer>
-        <div class="footer-container">
-            <div class="footer-col">
-                <img src="../img/logo-unitv.png" alt="Logo UniTV Revenda Autorizada" class="footer-logo" loading="lazy">
-                <p class="footer-desc">Somos revendedores autorizados da plataforma UniTV. Levamos entretenimento premium com qualidade 4K diretamente para a sua casa com suporte de excelência.</p>
-                <div style="display: flex; align-items: center; gap: 10px; color: #fff; font-weight: bold; margin-top: 15px;"><i class="fa-solid fa-shield-halved" style="color:#00ff88"></i> Conexão 100% Segura</div>
-            </div>
-            <div class="footer-col">
-                <h4>Acesso Rápido</h4>
-                <ul class="footer-links">
-                    <li><a href="../index.html#comprar"><i class="fa-solid fa-angle-right"></i> Planos e Recargas</a></li>
-                    <li><a href="../tutorial/index.html"><i class="fa-solid fa-angle-right"></i> Guia de Instalação</a></li>
-                    <li><a href="../blog/index.html"><i class="fa-solid fa-angle-right"></i> Blog de Tecnologia</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Suporte Dedicado</h4>
-                <ul class="footer-links">
-                    <li><a href="../ajuda/index.html"><i class="fa-solid fa-angle-right"></i> Central de Ajuda (FAQ)</a></li>
-                    <li><a href="javascript:void(0)" onclick="toggleChat()"><i class="fa-solid fa-angle-right"></i> Atendimento WhatsApp</a></li>
-                    <li><span style="color:#666; font-size:0.8rem; margin-top:5px; display:block;">Horário: Seg a Sex, das 08h às 22h</span></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Transação Segura</h4>
-                <p style="margin-bottom: 15px; color: #777;">Aprovação imediata via Pix e Cartão de Crédito.</p>
-                <div class="payment-methods">
-                    <i class="fa-brands fa-pix" style="color:#32bcad;"></i>
-                    <i class="fa-brands fa-cc-mastercard"></i>
-                    <i class="fa-brands fa-cc-visa"></i>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <div class="legal-links"><a href="#">Política de Privacidade</a><a href="#">Termos de Uso</a><a href="#">Política de Reembolso</a></div>
-            <div>&copy; 2026 UniTV Revenda Oficial Autorizada. Todos os direitos reservados.</div>
-            <div style="color:#444;">Acesso Digital e Serviços Tecnológicos de Streaming</div>
-        </div>
-    </footer>
-
-    <div id="chat-widget" class="wa-widget">
-        <div class="wa-header">
-            <div class="wa-profile">
-                <img src="../img/logo-unitv.png" alt="Atendente Virtual UniTV" loading="lazy">
-                <div class="wa-info">
-                    <span class="wa-name">Atendimento VIP</span>
-                    <span id="wa-status" class="wa-status">Online</span>
-                </div>
-            </div>
-            <button onclick="toggleChat()" class="wa-close" aria-label="Fechar janela de chat"><i class="fa-solid fa-times"></i></button>
-        </div>
-        <div id="chat-content" class="wa-chat-body">
-            <div class="wa-msg wa-msg-bot">Olá! 👋 Bem-vindo ao suporte oficial UniTV. Sou o atendente virtual focado em vendas e instalação. <span class="wa-time">agora</span></div>
-            <div class="wa-msg wa-msg-bot">Sobre o que deseja falar? <span class="wa-time">agora</span></div>
-        </div>
-        <div id="typing-indicator" class="wa-msg wa-msg-bot typing" style="display: none;"><span></span><span></span><span></span></div>
-        <div id="wa-options" class="wa-options">
-            <button onclick="userAction('Quero assinar / ver planos', 'preco')">Ver planos disponíveis</button>
-            <button onclick="userAction('Funciona na minha Smart TV?', 'smart_tv_select')">Minha TV é Samsung/LG</button>
-            <button onclick="userAction('Como instalar o app?', 'pre_download')">Dúvidas sobre Instalação</button>
-            <button onclick="userAction('Comprei e não chegou', 'atraso_codigo')">Comprei e o código não chegou</button>
-        </div>
-        <div class="wa-input-fake">
-            <div class="wa-input-box">Selecione uma opção...</div>
-            <i class="fa-solid fa-paper-plane" style="color: #075e54; font-size: 1.2rem;"></i>
-        </div>
-    </div>
-
-    <div class="float-zap" onclick="toggleChat()" aria-label="Abrir conversa no WhatsApp" role="button" tabindex="0"><i class="fa-brands fa-whatsapp"></i></div>
-
-    <div id="smartTvModal" class="modal-overlay">
-        <div class="modal-content">
-            <button class="btn-close-modal-x" onclick="closeWarningModal()" aria-label="Fechar alerta de Smart TV"><i class="fa-solid fa-xmark"></i></button>
-            <div class="modal-header">
-                <i class="fa-solid fa-triangle-exclamation"></i>
-                <h3>ATENÇÃO ANTES DE CONTINUAR!</h3>
-            </div>
-            <div class="modal-body">
-                <p>O aplicativo <strong>UniTV Oficial</strong> requer sistema <strong>ANDROID</strong> nativo (TV Box, Celular Android, Android TV ou Firestick).</p>
-                <div class="alert-box">
-                    <p>🚫 ELE NÃO RODA diretamente nas Smart TVs LG (WebOS), Samsung (Tizen), Roku ou marcas paralelas.</p>
-                </div>
-                <p style="font-size: 0.9rem; color: #aaa;">A sua TV é Samsung ou LG? <strong>Não efetue o pagamento ainda!</strong> Chame nosso suporte no chat para ativarmos um painel alternativo compatível com a sua marca.</p>
-            </div>
-            <div class="modal-actions">
-                <button class="btn-modal-buy" onclick="proceedToCheckout()"><i class="fa-solid fa-check"></i> MEU APARELHO É ANDROID (Comprar)</button>
-                <a href="javascript:void(0)" onclick="closeWarningModal(); document.getElementById('chat-widget').classList.add('active'); userAction('Minha TV é LG/Samsung', 'smart_tv_solution');" class="btn-modal-support"><i class="fa-solid fa-headset"></i> MINHA TV É LG/SAMSUNG (Ajuda)</a>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // Menu Responsivo
-        function toggleMenu() {
-            const navMenu = document.getElementById('nav-menu');
-            const icon = document.getElementById('menu-icon');
-            navMenu.classList.toggle('active');
-            if(navMenu.classList.contains('active')) {
-                icon.classList.replace('fa-bars', 'fa-xmark');
-            } else {
-                icon.classList.replace('fa-xmark', 'fa-bars');
-            }
-        }
-        document.querySelectorAll('#nav-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                document.getElementById('nav-menu').classList.remove('active');
-                document.getElementById('menu-icon').classList.replace('fa-xmark', 'fa-bars');
-            });
-        });
-
-        // Animações de Scroll
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('main-header');
-            if (window.scrollY > 50) { header.classList.add('scrolled'); } else { header.classList.remove('scrolled'); }
-            document.querySelectorAll('.reveal').forEach(el => { if (el.getBoundingClientRect().top < window.innerHeight - 50) { el.classList.add('active'); } });
-        });
-        setTimeout(() => { document.querySelectorAll('.reveal').forEach(el => { if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('active'); }); }, 300);
-
-        // Barra de Pesquisa
-        document.getElementById('searchMovies').addEventListener('input', function(e) {
-            let term = e.target.value.toLowerCase();
-            let cards = document.querySelectorAll('.movie-card');
-            let hasResults = false;
-            cards.forEach(card => {
-                let title = card.querySelector('.movie-info-title').innerText.toLowerCase();
-                if(title.includes(term)) { card.style.display = 'block'; hasResults = true; } else { card.style.display = 'none'; }
-            });
-            document.getElementById('noResults').style.display = hasResults || term === '' ? 'none' : 'block';
-        });
-        document.querySelectorAll('.cat-tag').forEach(tag => {
-            tag.addEventListener('click', function() {
-                let searchInput = document.getElementById('searchMovies');
-                searchInput.value = this.innerText;
-                searchInput.dispatchEvent(new Event('input'));
-            });
-        });
-
-        // Chatbot VIP
-        function toggleChat() { document.getElementById('chat-widget').classList.toggle('active'); }
-        function showTyping(callback) {
-            const status = document.getElementById('wa-status'), typing = document.getElementById('typing-indicator'), content = document.getElementById('chat-content');
-            status.innerText = "Digitando..."; typing.style.display = "block"; content.appendChild(typing); content.scrollTop = content.scrollHeight;
-            setTimeout(() => { typing.style.display = "none"; status.innerText = "Online"; callback(); }, 1200);
-        }
-        function addMessage(text, side) {
-            const content = document.getElementById('chat-content'), now = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}), checks = side === 'user' ? ' <i class="fa-solid fa-check-double" style="color:#34b7f1; font-size: 0.7rem"></i>' : '';
-            content.innerHTML += `<div class="wa-msg wa-msg-${side}">${text}<span class="wa-time">${now}${checks}</span></div>`;
-            content.scrollTop = content.scrollHeight;
-        }
-        function setOptions(options) {
-            const container = document.getElementById('wa-options'); container.innerHTML = "";
-            options.forEach(opt => { const btn = document.createElement('button'); btn.innerText = opt.label; btn.onclick = () => userAction(opt.label, opt.type); container.appendChild(btn); });
-        }
-        
-        function userAction(text, type) {
-            addMessage(text, 'user'); setOptions([]);
-            showTyping(() => {
-                if(type === 'preco') {
-                    addMessage("<strong>Planos Oficiais Sem Mensalidade:</strong><br><br>💳 <a href='https://pay.kirvano.com/07f96a4e-ecdf-4538-83ca-01e5c35f1425' target='_blank' rel='noopener noreferrer'><strong>PLANO 30 DIAS (R$ 24,90)</strong></a><br>🚀 <a href='https://pay.kirvano.com/0aadf253-f4b6-47dd-8d0a-f5f16714ce98' target='_blank' rel='noopener noreferrer'><strong>ANUAL VIP (R$ 189,90)</strong></a>", 'bot');
-                    setOptions([{label: 'Já fiz o pagamento', type: 'pix_feito'}, {label: 'Quero testar antes', type: 'suporte_humano'}]);
-                } else if(type === 'pix_feito') {
-                    addMessage("Perfeito! Se você pagou via Pix, o código é enviado automaticamente em menos de 1 minuto para o seu WhatsApp e E-mail. Olhe a caixa de SPAM.", 'bot'); 
-                    setOptions([{label: 'Não recebi ainda', type: 'atraso_codigo'}, {label: 'Voltar ao início', type: 'reset'}]);
-                } else if(type === 'atraso_codigo') {
-                    addMessage("Vou te transferir para um especialista da equipe. Tenha o comprovante em mãos.", 'bot');
-                    const btn = document.createElement('button'); btn.innerText = "Falar com Humano"; btn.style.background = "#25d366"; btn.style.color = "white"; btn.onclick = () => window.open("https://wa.me/5519981765840?text=Comprei e meu código não chegou, segue o comprovante:", '_blank', 'noopener,noreferrer'); document.getElementById('wa-options').appendChild(btn);
-                } else if(type === 'smart_tv_select') {
-                    addMessage("Nessas marcas (LG/Samsung) o UniTV não roda direito. Para não travar, instalamos um app parceiro chamado <strong>ULTRA PLAYER</strong>.", 'bot');
-                    setTimeout(() => showTyping(() => { 
-                        addMessage("Vá na loja de apps da sua TV e pesquise por 'Ultra Player'.", 'bot'); 
-                        setOptions([{label: 'Baixei, e agora?', type: 'baixou_ultra'}, {label: 'Não achei', type: 'suporte_humano'}]); 
-                    }), 1500);
-                } else if(type === 'baixou_ultra') {
-                    addMessage("Ótimo. Abra o app, tire foto do código MAC na tela e me envie no WhatsApp humano para eu liberar.", 'bot');
-                    const btn = document.createElement('button'); btn.innerText = "ENVIAR FOTO DO MAC"; btn.style.background = "#25d366"; btn.style.color = "white"; btn.onclick = () => window.open("https://wa.me/5519981765840?text=Baixei o Ultra Player na Smart TV, foto do MAC:", '_blank', 'noopener,noreferrer'); document.getElementById('wa-options').appendChild(btn);
-                } else if(type === 'pre_download') {
-                    addMessage("A instalação é simples! Em TV Box ou Firestick, use o app Downloader e digite o código <strong>867283</strong>.", 'bot'); 
-                    setTimeout(() => showTyping(() => { 
-                        addMessage("Para Android de celular, use nosso link oficial: <a href='http://mkdw.qrdldunitvss.com/download' target='_blank' rel='noopener noreferrer'>Baixar APK Mobile</a>", 'bot'); 
-                        setOptions([{label: 'Instalado. Quero assinar!', type: 'preco'}, {label: 'Deu erro', type: 'suporte_humano'}]); 
-                    }), 1500);
-                } else if(type === 'suporte_humano') {
-                    addMessage("Ok, vou abrir o chat com nosso time humano de suporte técnico.", 'bot');
-                    const btn = document.createElement('button'); btn.innerText = "Conversar no WhatsApp"; btn.style.background = "#25d366"; btn.style.color = "white"; btn.onclick = () => window.open("https://wa.me/5519981765840?text=Preciso de atendimento humano VIP", '_blank', 'noopener,noreferrer'); document.getElementById('wa-options').appendChild(btn);
-                } else if(type === 'reset') {
-                    addMessage("Como mais posso te ajudar a garantir sua diversão?", 'bot'); 
-                    setOptions([{label: 'Ver Planos', type: 'preco'}, {label: 'Instalação', type: 'pre_download'}, {label: 'Atendimento Humano', type: 'suporte_humano'}]);
-                }
-            });
-        }
-
-        // Lógica Modal Smart TV
-        let checkoutUrlToRedirect = '';
-        function openWarningModal(url) { checkoutUrlToRedirect = url; document.getElementById('smartTvModal').classList.add('active'); }
-        function closeWarningModal() { document.getElementById('smartTvModal').classList.remove('active'); }
-        function proceedToCheckout() { if(checkoutUrlToRedirect) { window.open(checkoutUrlToRedirect, '_blank', 'noopener,noreferrer'); closeWarningModal(); } }
-    </script>
+    <script>
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('main-header');
+            if (window.scrollY > 50) { header.classList.add('scrolled'); } else { header.classList.remove('scrolled'); }
+            document.querySelectorAll('.reveal').forEach(el => { if (el.getBoundingClientRect().top < window.innerHeight - 50) { el.classList.add('active'); } });
+        });
+        setTimeout(() => { document.querySelectorAll('.reveal').forEach(el => { if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('active'); }); }, 300);
+    </script>
 </body>
 </html>
+
+
+
+
+Segundamente, adicione mais coisas sobre filmes, muito mais, Deixe essa tela bem completa, com opçao de procurar sobre oq ja escrevemos.
