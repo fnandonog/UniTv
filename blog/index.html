@@ -3,21 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Blog VIP | UniTV Oficial</title>
-    <meta name="description" content="Acompanhe as melhores dicas, tutoriais e novidades para otimizar sua TV Box e aproveitar o máximo do IPTV sem travamentos.">
-    <meta name="theme-color" content="#1a0525">
+    <title>Blog UniTV Oficial 2026 | Dicas, Tutoriais e Lançamentos VIP</title>
+    <meta name="description" content="Acesse o portal oficial UniTV. Confira guias de instalação para Smart TV, otimização 4K, lista de canais, lançamentos de cinema e futebol ao vivo sem delay.">
     
-    <link rel="canonical" href="https://unitvsite.com.br/blog/" />
-    <meta name="robots" content="index, follow" />
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
     <link rel="icon" href="../img/logo-unitv.png" type="image/png">
 
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Blog",
+          "name": "Blog UniTV Oficial",
+          "description": "Artigos sobre cinema, futebol ao vivo e tecnologia de streaming 4K.",
+          "url": "https://unitvsite.com.br/blog/",
+          "publisher": { "@type": "Organization", "name": "UniTV Brasil" }
+        },
+        {
+          "@type": "Product",
+          "name": "Recarga UniTV Oficial - VIP 4K",
+          "image": "https://unitvsite.com.br/img/logo-unitv.png",
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "reviewCount": "3820"
+          }
+        }
+      ]
+    }
+    </script>
+
     <style>
-        /* --- DESIGN SYSTEM PREMIUM ORIGINAL --- */
+        /* --- DESIGN SYSTEM PREMIUM --- */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         
         :root {
@@ -36,129 +55,240 @@
         .reveal.active { opacity: 1; transform: translateY(0); }
 
         /* --- BARRA DE PROMOÇÃO --- */
-        .promo-bar { background: linear-gradient(90deg, #1a0b2e, #2d0b1e); color: #e0e0e0; text-align: center; padding: 10px; font-size: 0.85rem; font-weight: 600; position: fixed; top: 0; width: 100%; z-index: 2000; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .promo-bar {
+            background: linear-gradient(90deg, #1a0b2e, #2d0b1e);
+            color: #e0e0e0; text-align: center; padding: 10px; font-size: 0.85rem; font-weight: 600;
+            position: fixed; top: 0; width: 100%; z-index: 2000; border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
         .promo-bar span { color: #ff0055; font-weight: 800; }
 
-        /* --- HEADER --- */
-        header { display: flex; justify-content: space-between; align-items: center; padding: 10px 5%; position: fixed; width: 100%; top: 38px; background: rgba(5, 5, 5, 0.95); backdrop-filter: blur(12px); z-index: 1000; border-bottom: var(--borda-sutil); height: 70px; }
-        .logo img { height: 35px; filter: brightness(1.1); }
+        /* --- HEADER COM NAVEGAÇÃO --- */
+        header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 10px 5%; position: fixed; width: 100%; top: 38px;
+            background: rgba(5, 5, 5, 0.95); backdrop-filter: blur(15px); z-index: 1000; border-bottom: var(--borda-sutil); height: 75px;
+        }
+        .logo img { height: 40px; filter: brightness(1.2); }
         .nav-links { display: flex; gap: 20px; }
         .nav-links a { color: #bbb; text-decoration: none; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; transition: 0.3s; padding: 5px 0; border-bottom: 2px solid transparent; }
         .nav-links a:hover { color: white; border-bottom-color: var(--cor-destaque); }
-        .btn-header { background: var(--gradiente-premium); color: white; padding: 10px 20px; border-radius: 50px; text-decoration: none; font-size: 0.75rem; font-weight: 800; box-shadow: 0 4px 15px rgba(221, 36, 118, 0.3); }
+        .btn-header { background: var(--gradiente-premium); color: white; padding: 10px 22px; border-radius: 50px; text-decoration: none; font-size: 0.75rem; font-weight: 800; box-shadow: 0 4px 15px rgba(221, 36, 118, 0.3); }
 
-        /* --- HERO DO BLOG --- */
-        .blog-header { text-align: center; padding: 120px 20px 20px; background: radial-gradient(circle at 50% 20%, #2d0b1e 0%, #050505 60%); }
-        .blog-header h1 { font-family: 'Montserrat', sans-serif; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; color: #fff; margin-bottom: 10px; }
-        .blog-header p { color: #888; font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+        /* --- HERO BLOG --- */
+        .hero { padding: 160px 5% 80px; background: radial-gradient(circle at 50% 30%, #2d0b1e 0%, #050505 70%); text-align: center; }
+        h1 { font-family: 'Montserrat', sans-serif; font-size: clamp(2.2rem, 8vw, 4.5rem); line-height: 1; font-weight: 900; margin-bottom: 25px; letter-spacing: -2px; }
+        .text-gradient { background: var(--gradiente-texto); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-sub { color: #aaa; font-size: 1.3rem; max-width: 800px; margin: 0 auto 40px; }
 
-        /* --- GRADE DE POSTS (NOVO DESIGN DOS CARDS) --- */
-        .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 40px auto 100px;
-            padding: 0 20px;
-        }
+        /* --- GRID DE MATÉRIAS (QUADRADOS) --- */
+        .blog-container { max-width: 1200px; margin: 0 auto; padding: 60px 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
+        .post-card { background: var(--bg-card); border-radius: 24px; border: var(--borda-sutil); overflow: hidden; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; display: flex; flex-direction: column; cursor: pointer; text-decoration: none; }
+        .post-card:hover { transform: translateY(-12px); border-color: var(--cor-destaque); box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
+        .post-thumb { width: 100%; height: 220px; background: #111; overflow: hidden; position: relative; }
+        .post-thumb img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s; }
+        .post-card:hover .post-thumb img { transform: scale(1.1); }
+        .post-content { padding: 30px; flex-grow: 1; }
+        .post-tag { background: rgba(255, 0, 85, 0.1); color: #ff0055; font-size: 0.65rem; font-weight: 800; padding: 6px 15px; border-radius: 50px; text-transform: uppercase; margin-bottom: 15px; display: inline-block; }
+        .post-content h2 { font-size: 1.4rem; margin-bottom: 15px; color: #fff; font-weight: 800; line-height: 1.2; }
+        .post-content p { color: #777; font-size: 0.9rem; margin-bottom: 25px; line-height: 1.6; }
+        .btn-read { color: var(--cor-destaque); text-decoration: none; font-weight: 800; font-size: 0.85rem; display: flex; align-items: center; gap: 10px; text-transform: uppercase; margin-top: auto; }
 
-        .post-card {
-            background: #0f0f0f;
-            border-radius: 12px;
-            overflow: hidden;
-            text-decoration: none;
-            display: flex;
-            flex-direction: column;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .post-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(255, 0, 128, 0.15);
-            border-color: rgba(255, 0, 128, 0.3);
-        }
-        .post-thumb img { width: 100%; height: 200px; object-fit: cover; }
-        .post-content { padding: 25px; display: flex; flex-direction: column; flex-grow: 1; }
-        .post-tag { background: rgba(255, 0, 128, 0.1); color: #ff0080; padding: 5px 12px; border-radius: 20px; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; align-self: flex-start; margin-bottom: 15px; letter-spacing: 1px; }
-        .post-title { color: #fff; font-size: 1.3rem; margin-bottom: 15px; line-height: 1.3; font-weight: 800; }
-        .post-desc { color: #888; font-size: 0.9rem; margin-bottom: 25px; line-height: 1.6; flex-grow: 1; }
-        .btn-read { color: #ff0080; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-top: auto; display: flex; align-items: center; gap: 5px; }
-        .btn-read i { transition: transform 0.3s; }
-        .post-card:hover .btn-read i { transform: translateX(5px); }
+        /* --- PRICING SECTION AGRESSIVA --- */
+        .pricing-section { background: #020202; padding: 120px 5%; text-align: center; border-top: 1px solid #111; }
+        .pricing-grid { display: flex; justify-content: center; align-items: center; gap: 40px; max-width: 1100px; margin: 60px auto 0; flex-wrap: wrap; }
+        .price-card { background: #0a0a0a; border: 1px solid #222; border-radius: 30px; padding: 60px 40px; width: 100%; max-width: 360px; position: relative; transition: 0.4s; }
+        .price-card.destaque { background: linear-gradient(160deg, #180a1f 0%, #050505 100%); border: 2px solid var(--cor-destaque); box-shadow: 0 0 60px rgba(255, 0, 128, 0.2); transform: scale(1.1); z-index: 10; }
+        .price-val { font-size: 3.8rem; font-weight: 900; color: white; line-height: 1; margin: 20px 0; letter-spacing: -3px; }
+        .price-header { border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 25px; margin-bottom: 25px; }
+        .price-title { color: #888; font-size: 1rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; }
+        .destaque .price-title { color: var(--cor-destaque); }
+        .features-list { list-style: none; margin: 30px 0; text-align: left; }
+        .features-list li { margin-bottom: 15px; display: flex; align-items: center; gap: 12px; color: #ccc; font-size: 1rem; }
+        .features-list i { color: #00ff88; }
+        .btn-price { display: block; background: var(--gradiente-premium); color: white; padding: 22px; border-radius: 15px; text-decoration: none; font-weight: 900; text-transform: uppercase; letter-spacing: 1.5px; transition: 0.3s; box-shadow: 0 4px 15px rgba(221, 36, 118, 0.3); }
+        .btn-price:hover { transform: translateY(-5px); filter: brightness(1.2); }
+        .price-card:not(.destaque) .btn-price { background: #1a1a1a; border: 1px solid #333; }
+        .economy-tag { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--gradiente-premium); color: white; font-weight: 800; font-size: 0.75rem; padding: 8px 20px; border-radius: 30px; white-space: nowrap; box-shadow: 0 5px 15px rgba(221, 36, 118, 0.4); }
 
-        /* --- FOOTER ORIGINAL --- */
+        /* --- FOOTER ESTILIZADO --- */
         footer { background: #050505; border-top: 1px solid #1a1a1a; padding: 80px 20px 40px; color: #999; font-size: 0.9rem; }
         .footer-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; }
-        .footer-logo { margin-bottom: 25px; height: 40px; filter: brightness(1.2); }
-        .footer-col h4 { color: #fff; margin-bottom: 25px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; }
-        
+        .footer-logo { margin-bottom: 25px; height: 45px; filter: brightness(1.2); }
+        .footer-col h4 { color: #fff; margin-bottom: 25px; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; }
         .footer-links { list-style: none; }
         .footer-links li { margin-bottom: 15px; }
-        .footer-links a { color: #777; text-decoration: none !important; transition: 0.3s ease; display: flex; align-items: center; gap: 10px; }
-        .footer-links a:hover { color: white; transform: translateX(5px); }
-        .footer-links a i { font-size: 0.6rem; color: var(--cor-destaque); opacity: 0; transition: 0.3s; }
-        .footer-links a:hover i { opacity: 1; }
-
+        .footer-links a { color: #666; text-decoration: none; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; align-items: center; gap: 12px; }
+        .footer-links a:hover { color: #fff; transform: translateX(10px); }
+        .footer-links a i { font-size: 0.7rem; color: var(--cor-destaque); opacity: 0.5; transition: 0.3s; }
+        .footer-links a:hover i { opacity: 1; transform: scale(1.2); }
         .payment-methods { display: flex; gap: 20px; font-size: 2.2rem; margin-top: 25px; color: #222; }
 
-        /* --- CHATBOT ORIGINAL --- */
-        .wa-widget { position: fixed; bottom: 85px; right: 20px; width: 340px; background: var(--wa-bg); border-radius: 12px; z-index: 9999; transform: scale(0); transform-origin: bottom right; transition: 0.3s ease; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        /* --- MODAL --- */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 100000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(15px); }
+        .modal-content { background: #0a0a0a; border: 1px solid #333; border-radius: 24px; width: 90%; max-width: 500px; padding: 50px 40px; text-align: center; position: relative; }
+        .modal-close-x { position: absolute; top: 20px; right: 20px; background: none; border: none; color: #444; font-size: 2rem; cursor: pointer; transition: 0.3s; line-height: 1; }
+        .modal-close-x:hover { color: #fff; transform: rotate(90deg); }
+        .btn-modal-buy { background: #25d366; color: #000; border: none; padding: 18px; width: 100%; border-radius: 12px; font-weight: 900; font-size: 1.1rem; cursor: pointer; margin-top: 20px; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3); }
+
+        /* --- CHATBOT --- */
+        .wa-widget { position: fixed; bottom: 85px; right: 20px; width: 340px; background: var(--wa-bg); border-radius: 15px; z-index: 9999; transform: scale(0); transform-origin: bottom right; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 15px 50px rgba(0,0,0,0.7); }
         .wa-widget.active { transform: scale(1); }
-        .wa-header { background: #075e54; color: white; padding: 12px 15px; display: flex; align-items: center; justify-content: space-between; }
-        .wa-chat-body { height: 350px; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png'); background-size: contain; }
-        .wa-msg { max-width: 85%; padding: 8px 12px; border-radius: 8px; font-size: 0.88rem; box-shadow: 0 1px 1px rgba(0,0,0,0.15); color: #333; background: white; }
-        .float-zap { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; width: 65px; height: 65px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; z-index: 10000; cursor: pointer; box-shadow: 0 10px 30px rgba(37,211,102,0.4); }
+        .wa-header { background: var(--wa-header); color: white; padding: 12px 15px; display: flex; align-items: center; justify-content: space-between; }
+        .wa-profile { display: flex; align-items: center; gap: 10px; }
+        .wa-profile img { width: 38px; height: 38px; border-radius: 50%; background: #eee; }
+        .wa-chat-body { height: 380px; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png'); background-size: contain; }
+        .wa-msg { max-width: 85%; padding: 12px 16px; border-radius: 12px; font-size: 0.88rem; box-shadow: 0 1px 1px rgba(0,0,0,0.1); color: #333; background: white; border-top-left-radius: 0; align-self: flex-start; }
+        .wa-options { padding: 12px; background: #f0f0f0; border-top: 1px solid #ddd; display: flex; flex-direction: column; gap: 8px; }
+        .wa-options button { background: white; border: 1px solid #ddd; padding: 10px; border-radius: 20px; font-size: 0.85rem; color: #075e54; font-weight: 600; cursor: pointer; }
+        .float-zap { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; width: 65px; height: 65px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; z-index: 10000; cursor: pointer; box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4); }
 
         @media (max-width: 768px) {
-            header { height: 65px; padding: 10px 20px; }
-            .logo img { height: 28px; }
-            .nav-links { display: none; }
+            h1 { font-size: 2.8rem; }
+            header nav { display: none; }
+            .pricing-grid { flex-direction: column; align-items: center; }
+            .price-card.destaque { transform: scale(1); }
             .footer-container { grid-template-columns: 1fr; text-align: center; }
             .footer-links a { justify-content: center; }
-            .payment-methods { justify-content: center; }
         }
     </style>
 </head>
 <body>
 
-    <div class="promo-bar">🔥 OFERTA RELÂMPAGO: Preços reduzidos por tempo limitado!</div>
+    <div class="promo-bar">
+        ⚡ PORTAL VIP: Conteúdos exclusivos para assinantes UniTV 2026. <span>04:59:00</span>
+    </div>
 
     <header>
         <div class="logo">
-            <a href="../index.html"><img src="../img/logo-unitv.png" alt="Logo UniTV Oficial"></a>
+            <a href="../index.html"><img src="../img/logo-unitv.png" alt="UniTV Oficial"></a>
         </div>
         <nav class="nav-links">
             <a href="../index.html">Início</a>
             <a href="../baixar/index.html">Downloads</a>
             <a href="../tv-box/index.html">Guia TV Box</a>
-            <a href="index.html">Blog</a>
+            <a href="../confiavel/index.html">É Confiável?</a>
         </nav>
-        <a href="../index.html#comprar" class="btn-header">COMPRAR VIP</a>
+        <a href="#comprar" class="btn-header">ADQUIRIR VIP</a>
     </header>
 
-    <div class="blog-header">
-        <h1>PORTAL DE DICAS VIP</h1>
-        <p>Tutoriais, novidades e otimizações para sua TV Box voar sem travamentos.</p>
-    </div>
+    <section class="hero reveal">
+        <h1>O Seu Portal de <br><span class="text-gradient">Entretenimento VIP</span></h1>
+        <p class="hero-sub">Guias completos, lançamentos do cinema e as últimas novidades da tecnologia de streaming que você só encontra no UniTV Oficial.</p>
+    </section>
 
-    <main class="blog-grid">
-        <a href="#" class="post-card reveal active">
+    <main class="blog-container">
+        <a href="revolucao-unitv-2026/index.html" class="post-card reveal">
             <div class="post-thumb">
-                <img src="https://picsum.photos/seed/unitvexemplo/800/500" alt="Exemplo UniTV">
+                <img src="https://images.unsplash.com/photo-1593784991095-a205069470b6?auto=format&fit=crop&w=800&q=80" alt="Revolução 4K">
             </div>
             <div class="post-content">
-                <span class="post-tag">PERFORMANCE</span>
-                <h3 class="post-title">Manual VIP: Como rodar UniTV sem travamentos</h3>
-                <p class="post-desc">Configurações técnicas avançadas para extrair o máximo de fluidez do seu 4K real no Android. Acabe com o delay hoje mesmo.</p>
+                <span class="post-tag">Tecnologia</span>
+                <h2>UniTV VIP 2026: A Nova Era do Streaming 4K</h2>
+                <p>Saiba por que o UniTV Oficial unificou o melhor do cinema e esportes em uma única experiência sem travamentos...</p>
+                <span class="btn-read">LER AGORA <i class="fa-solid fa-arrow-right"></i></span>
+            </div>
+        </a>
+
+        <a href="top-10-filmes-2026/index.html" class="post-card reveal">
+            <div class="post-thumb">
+                <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=800&q=80" alt="Melhores Filmes">
+            </div>
+            <div class="post-content">
+                <span class="post-tag">Cinema</span>
+                <h2>Top 10 Filmes para Assistir em 4K no UniTV</h2>
+                <p>Preparamos a lista definitiva do que maratonar agora no catálogo VOD com imagem ultra realista...</p>
+                <span class="btn-read">LER AGORA <i class="fa-solid fa-arrow-right"></i></span>
+            </div>
+        </a>
+
+        <a href="unitv-na-smart-tv/index.html" class="post-card reveal">
+            <div class="post-thumb">
+                <img src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f?auto=format&fit=crop&w=800&q=80" alt="Smart TV">
+            </div>
+            <div class="post-content">
+                <span class="post-tag">Tutoriais</span>
+                <h2>Como usar UniTV na Smart TV LG e Samsung</h2>
+                <p>Sua TV não é Android? Veja as únicas formas seguras de rodar nosso sinal em TVs LG e Samsung...</p>
+                <span class="btn-read">LER AGORA <i class="fa-solid fa-arrow-right"></i></span>
+            </div>
+        </a>
+
+        <a href="futebol-ao-vivo/index.html" class="post-card reveal">
+            <div class="post-thumb">
+                <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=800&q=80" alt="Futebol">
+            </div>
+            <div class="post-content">
+                <span class="post-tag">Esportes</span>
+                <h2>Futebol Hoje: Como assistir sem delay no UniTV</h2>
+                <p>Cansado de ouvir o gol no vizinho antes? Entenda como nossos servidores eliminam o atraso no Premiere...</p>
+                <span class="btn-read">LER AGORA <i class="fa-solid fa-arrow-right"></i></span>
+            </div>
+        </a>
+
+        <a href="guia-infantil-unitv/index.html" class="post-card reveal">
+            <div class="post-thumb">
+                <img src="https://images.unsplash.com/photo-1533709752211-118fcaf03312?auto=format&fit=crop&w=800&q=80" alt="Kids">
+            </div>
+            <div class="post-content">
+                <span class="post-tag">Família</span>
+                <h2>Guia UniTV Kids: Diversão e Controle Parental</h2>
+                <p>Transforme sua sala em um cinema infantil seguro. Saiba como bloquear canais e categorias por senha...</p>
+                <span class="btn-read">LER AGORA <i class="fa-solid fa-arrow-right"></i></span>
+            </div>
+        </a>
+
+        <a href="otimizar-unitv-4k/index.html" class="post-card reveal">
+            <div class="post-thumb">
+                <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80" alt="Performance">
+            </div>
+            <div class="post-content">
+                <span class="post-tag">Performance</span>
+                <h2>Manual VIP: Como rodar UniTV sem travamentos</h2>
+                <p>Configurações técnicas avançadas para extrair o máximo de fluidez do seu 4K real no Android...</p>
                 <span class="btn-read">LER AGORA <i class="fa-solid fa-arrow-right"></i></span>
             </div>
         </a>
     </main>
 
+    <section id="comprar" class="pricing-section reveal">
+        <h2 style="font-size: 2.8rem; font-weight: 900; color: #fff;">Garanta seu Acesso VIP Agora</h2>
+        <div class="pricing-grid">
+            <div class="price-card">
+                <div class="price-header">
+                    <h3 class="price-title">Recarga Mensal</h3>
+                    <div class="price-val">R$ 24,90</div>
+                    <p class="price-period">30 Dias de Acesso Total</p>
+                </div>
+                <ul class="features-list">
+                    <li><i class="fa-solid fa-check"></i> Liberação Automática</li>
+                    <li><i class="fa-solid fa-check"></i> 2 Telas VIP</li>
+                    <li><i class="fa-solid fa-check"></i> Suporte Especializado</li>
+                </ul>
+                <a href="javascript:void(0)" onclick="openWarningModal('https://pay.kirvano.com/07f96a4e-ecdf-4538-83ca-01e5c35f1425')" class="btn-price">COMPRAR MENSAL</a>
+            </div>
+
+            <div class="price-card destaque">
+                <div class="economy-tag">🔥 MELHOR CUSTO BENEÍCIO - ECONOMIZE R$ 100</div>
+                <div class="price-header">
+                    <h3 class="price-title" style="color: var(--cor-destaque);">Anual VIP Premium</h3>
+                    <div class="price-val">R$ 189,90</div>
+                    <p class="price-period">365 Dias / Melhor Valor</p>
+                </div>
+                <ul class="features-list">
+                    <li><i class="fa-solid fa-star" style="color: #ffcc00"></i> Acesso VIP Ouro</li>
+                    <li><i class="fa-solid fa-check"></i> Garantia Anti-Travamento</li>
+                    <li><i class="fa-solid fa-check"></i> 2 Telas em 4K Real</li>
+                    <li><i class="fa-solid fa-check"></i> Atualizações Prioritárias</li>
+                </ul>
+                <a href="javascript:void(0)" onclick="openWarningModal('https://pay.kirvano.com/0aadf253-f4b6-47dd-8d0a-f5f16714ce98')" class="btn-price">PEGAR PROMOÇÃO</a>
+            </div>
+        </div>
+    </section>
+
     <footer>
         <div class="footer-container">
             <div class="footer-col">
-                <img src="../img/logo-unitv.png" alt="UniTV" class="footer-logo">
+                <img src="https://unitvsite.com.br/img/logo-unitv.png" alt="UniTV" class="footer-logo">
                 <p>Revenda Autorizada UniTV Brasil. Entretenimento de elite com segurança total para sua família.</p>
                 <div style="color: #00ff88; font-size: 0.8rem; margin-top: 15px; display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-shield-halved"></i> Site 100% Protegido</div>
             </div>
@@ -168,7 +298,7 @@
                     <li><a href="../index.html"><i class="fa-solid fa-chevron-right"></i> Home Page</a></li>
                     <li><a href="../baixar/index.html"><i class="fa-solid fa-chevron-right"></i> Downloads</a></li>
                     <li><a href="../tv-box/index.html"><i class="fa-solid fa-chevron-right"></i> Guia TV Box</a></li>
-                    <li><a href="../index.html#confiavel"><i class="fa-solid fa-chevron-right"></i> É Confiável?</a></li>
+                    <li><a href="../confiavel/index.html"><i class="fa-solid fa-chevron-right"></i> É Confiável?</a></li>
                 </ul>
             </div>
             <div class="footer-col">
@@ -186,39 +316,97 @@
                     <i class="fa-brands fa-cc-mastercard"></i>
                     <i class="fa-brands fa-cc-visa"></i>
                 </div>
-                <p style="font-size: 0.7rem; margin-top: 10px; opacity: 0.5;">Processamento Seguro via Kirvano Pay.</p>
+                <p style="font-size: 0.7rem; margin-top: 10px;">Processamento via Kirvano Pay.</p>
             </div>
         </div>
         <div style="text-align: center; margin-top: 60px; padding-top: 20px; border-top: 1px solid #111; font-size: 0.75rem; color: #444;">
-            &copy; 2024 - 2026 UniTV Revenda Oficial. CNPJ: 00.000.000/0001-00. Todos os direitos reservados.
+            &copy; 2024 UniTV Revenda Oficial. CNPJ: 00.000.000/0001-00
         </div>
     </footer>
 
-    <div id="chat-widget" class="wa-widget">
-        <div class="wa-header">
-            <span style="font-weight: 800;">Suporte Blog VIP</span>
-            <button onclick="toggleChat()" style="background:none; border:none; color:white; font-size:1.5rem; cursor:pointer;">×</button>
-        </div>
-        <div class="wa-chat-body" id="chat-content">
-            <div class="wa-msg" style="align-self: flex-start; border-top-left-radius: 0;">Olá! 👋 Vi que você está navegando no nosso blog. Precisa de ajuda para configurar sua TV Box ou ativar seu VIP?</div>
-        </div>
-        <div style="padding: 10px; background: #f0f0f0;">
-            <button onclick="window.open('https://wa.me/5519981765840?text=Vim do blog e preciso de suporte com a UniTV', '_blank')" style="width: 100%; background: #25d366; color: white; border: none; padding: 12px; border-radius: 12px; font-weight: 800; cursor: pointer;">FALAR COM ESPECIALISTA</button>
+    <div id="smartTvModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close-x" onclick="closeWarningModal()">×</button>
+            <i class="fa-solid fa-triangle-exclamation" style="color: #ffcc00; font-size: 3.5rem; margin-bottom: 20px;"></i>
+            <h3 style="color: #fff; font-size: 1.5rem; margin-bottom: 15px; font-weight: 900;">APP SÓ PARA ANDROID!</h3>
+            <p style="color: #888; font-size: 0.95rem;">O UniTV VIP funciona exclusivamente em dispositivos <strong>ANDROID</strong>.</p>
+            <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; text-align: left; margin: 20px 0;">
+                <p style="color: #fff; font-weight: 700;">Sua TV é LG ou Samsung?</p>
+                <p style="font-size: 0.8rem; color: #aaa; margin-top: 5px;">Se for, este app não funciona nela. Use uma TV Box ou chame o suporte para indicação de apps para Smart TV.</p>
+            </div>
+            <button class="btn-modal-buy" onclick="proceedToCheckout()">MEU APARELHO É ANDROID</button>
         </div>
     </div>
 
-    <div class="float-zap" onclick="toggleChat()" aria-label="Abrir conversa no WhatsApp" role="button" tabindex="0"><i class="fa-brands fa-whatsapp"></i></div>
+    <div id="chat-widget" class="wa-widget">
+        <div class="wa-header">
+            <div class="wa-profile">
+                <img src="../img/logo-unitv.png" alt="UniTV">
+                <div class="wa-info">
+                    <span class="wa-name">Suporte UniTV</span>
+                    <span class="wa-status">Online</span>
+                </div>
+            </div>
+            <button onclick="toggleChat()" class="wa-close">×</button>
+        </div>
+        <div id="chat-content" class="wa-chat-body">
+            <div class="wa-msg wa-msg-bot">Olá! 👋 Sou o especialista de vendas UniTV. Como posso te ajudar hoje?</div>
+        </div>
+        <div id="wa-options" class="wa-options">
+            <button onclick="userAction('Qual o valor?', 'preco')">Qual o valor?</button>
+            <button onclick="userAction('Smart TV?', 'smart_tv_select')">Funciona na Smart TV?</button>
+            <button onclick="userAction('Como baixar?', 'pre_download')">Como baixar?</button>
+        </div>
+        <div class="wa-input-fake" style="background:#f0f0f0; padding:10px 15px; display:flex; align-items:center; gap:10px; border-top:1px solid #ddd;">
+            <div style="background:white; flex:1; padding:8px 15px; border-radius:20px; color:#999; font-size:0.85rem;">Escreva uma mensagem...</div>
+            <i class="fa-solid fa-paper-plane" style="color: #075e54;"></i>
+        </div>
+    </div>
+
+    <div class="float-zap" onclick="toggleChat()"><i class="fa-brands fa-whatsapp"></i></div>
 
     <script>
-        function toggleChat() { 
-            document.getElementById('chat-widget').classList.toggle('active'); 
+        // Timer Regressivo
+        function startTimer(duration, display) {
+            var timer = duration, hours, minutes, seconds;
+            setInterval(function () {
+                hours = Math.floor(timer / 3600);
+                minutes = Math.floor((timer % 3600) / 60);
+                seconds = Math.floor(timer % 60);
+                display.textContent = (hours < 10 ? "0" + hours : hours) + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
+                if (--timer < 0) timer = duration;
+            }, 1000);
         }
-        
+
+        // Reveal Animations
         window.addEventListener('scroll', () => {
             document.querySelectorAll('.reveal').forEach(el => {
                 if (el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add('active');
             });
         });
+
+        window.onload = () => { 
+            startTimer(17940, document.querySelector('.promo-bar span'));
+            document.querySelector('.hero').classList.add('active'); 
+        };
+
+        // Logic
+        let urlCheck = '';
+        function openWarningModal(url) { urlCheck = url; document.getElementById('smartTvModal').style.display = 'flex'; }
+        function closeWarningModal() { document.getElementById('smartTvModal').style.display = 'none'; }
+        function proceedToCheckout() { if(urlCheck) window.open(urlCheck, '_blank'); closeWarningModal(); }
+        function toggleChat() { document.getElementById('chat-widget').classList.toggle('active'); }
+
+        function userAction(text, type) {
+            const content = document.getElementById('chat-content');
+            content.innerHTML += `<div class="wa-msg wa-msg-user" style="align-self:flex-end; background:#dcf8c6; border-top-right-radius:0;">${text}</div>`;
+            setTimeout(() => {
+                if(type === 'preco') content.innerHTML += `<div class="wa-msg wa-msg-bot">Planos: Mensal R$ 24,90 | Anual R$ 189,90.</div>`;
+                if(type === 'smart_tv_select') content.innerHTML += `<div class="wa-msg wa-msg-bot">Temos guias para LG/Samsung no blog! Use uma TV Box ou app compatível.</div>`;
+                if(type === 'pre_download') content.innerHTML += `<div class="wa-msg wa-msg-bot">Baixe o APK na aba de Downloads aqui do site!</div>`;
+                content.scrollTop = content.scrollHeight;
+            }, 800);
+        }
     </script>
 </body>
 </html>
