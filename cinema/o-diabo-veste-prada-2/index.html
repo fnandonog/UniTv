@@ -13,7 +13,6 @@
     <link rel="icon" href="../../img/logo-unitv.png" type="image/png">
 
     <style>
-        /* DESIGN SYSTEM E HEADER */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         :root { --bg-body: #050505; --bg-card: #0a0a0a; --neon-azul: #00f3ff; --neon-laranja: #ff7300; --gradiente-premium: linear-gradient(135deg, #FF512F 0%, #DD2476 100%); --borda-sutil: 1px solid rgba(255, 255, 255, 0.08); --wa-header: #075e54; --wa-bg: #e5ddd5; --wa-msg-user: #dcf8c6; }
         html, body { background-color: var(--bg-body); color: #f0f0f0; overflow-x: hidden; scroll-behavior: smooth; }
@@ -25,38 +24,36 @@
         .nav-links { display: flex; gap: 25px; list-style: none; } .nav-links a { color: #bbb; text-decoration: none; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; transition: 0.3s; } .nav-links a:hover { color: #fff; } 
         .btn-header { background: var(--gradiente-premium); color: white; padding: 10px 25px; border-radius: 50px; text-decoration: none; font-size: 0.75rem; font-weight: 800; box-shadow: 0 4px 15px rgba(221, 36, 118, 0.3); transition: 0.3s; }
 
-        /* HERO FILME */
-        .movie-hero { height: 75vh; width: 100%; background: url('[https://image.tmdb.org/t/p/original](https://image.tmdb.org/t/p/original)/y3fQa7pytlysovXzovpXc1OQlTW.jpg') center top / cover no-repeat; position: relative; margin-top: 38px; }
-        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, var(--bg-body) 0%, rgba(5,5,5,0.8) 50%, rgba(5,5,5,0.3) 100%); display: flex; align-items: flex-end; padding: 0 5% 50px; }
-        .btn-voltar { position: absolute; top: 30px; left: 5%; background: rgba(0,0,0,0.5); color: #fff; padding: 10px 20px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 0.9rem; border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(5px); z-index: 10; transition: 0.3s; } .btn-voltar:hover { background: var(--neon-laranja); border-color: var(--neon-laranja); }
+        .movie-hero { width: 100%; height: 75vh; position: relative; overflow: hidden; margin-top: 38px; background: #000; }
+        .hero-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4); z-index: 1; }
+        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, var(--bg-body) 0%, transparent 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 0 5% 50px; z-index: 2; }
         
-        .hero-info { max-width: 1000px; display: flex; gap: 40px; align-items: flex-end; }
-        .hero-poster { width: 220px; border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.1); }
-        .hero-text h1 { font-family: 'Montserrat', sans-serif; font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1; color: #fff; text-transform: uppercase; font-weight: 900; margin-bottom: 15px; text-shadow: 2px 2px 20px rgba(0,0,0,0.8); }
-        .hero-tags { display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 20px; }
-        .hero-tags span { background: rgba(255,255,255,0.1); padding: 5px 12px; border-radius: 6px; font-size: 0.85rem; font-weight: 700; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(5px); }
+        .btn-voltar { align-self: flex-start; background: rgba(0,0,0,0.5); color: #fff; padding: 10px 20px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 0.9rem; border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(5px); transition: 0.3s; margin-bottom: auto; margin-top: 20px; } .btn-voltar:hover { background: var(--neon-laranja); border-color: var(--neon-laranja); }
+        
+        .hero-text h1 { font-family: 'Montserrat', sans-serif; font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1.1; color: #fff; text-transform: uppercase; font-weight: 900; margin-bottom: 15px; text-shadow: 2px 2px 20px rgba(0,0,0,0.8); max-width: 1000px; }
+        .hero-tags { display: flex; gap: 15px; flex-wrap: wrap; }
+        .hero-tags span { background: rgba(255,255,255,0.1); padding: 6px 15px; border-radius: 6px; font-size: 0.9rem; font-weight: 700; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(5px); }
         .hero-tags .nota { color: #ffcc00; border-color: rgba(255,204,0,0.4); background: rgba(0,0,0,0.6); }
         .hero-tags .quatrok { background: var(--gradiente-premium); color: #fff; border: none; }
 
-        /* CONTEÚDO PRINCIPAL (GRID) */
         .content-wrapper { max-width: 1400px; margin: 50px auto; padding: 0 5%; display: grid; grid-template-columns: 1fr 350px; gap: 60px; align-items: start; }
-        
         .main-article { font-size: 1.15rem; line-height: 1.8; color: #ccc; }
-        .main-article h2 { color: #fff; margin: 40px 0 20px; font-size: 2rem; font-weight: 800; border-bottom: 2px solid rgba(255, 115, 0, 0.3); padding-bottom: 10px; display: inline-block; }
+        .main-article h2 { color: #fff; margin: 40px 0 20px; font-size: 1.8rem; font-weight: 800; border-left: 4px solid #ff0080; padding-left: 15px; }
         .main-article p { margin-bottom: 25px; }
         .main-article blockquote { background: rgba(255, 115, 0, 0.05); border-left: 4px solid var(--neon-laranja); padding: 25px; margin: 30px 0; font-size: 1.2rem; font-style: italic; border-radius: 0 12px 12px 0; color: #eee; }
-        .mid-backdrop { width: 100%; border-radius: 16px; margin: 30px 0; border: 1px solid #222; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .mid-backdrop { width: 100%; border-radius: 16px; margin: 30px 0; border: 1px solid #222; box-shadow: 0 10px 30px rgba(0,0,0,0.5); object-fit: cover; }
 
-        /* SIDEBAR (FICHA TÉCNICA) */
         .sidebar { background: #0a0a0a; border: 1px solid #1a1a1a; padding: 30px; border-radius: 16px; position: sticky; top: 130px; }
         .sidebar h3 { color: #fff; font-size: 1.3rem; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #222; }
         .ficha-item { margin-bottom: 20px; }
         .ficha-item span { display: block; font-size: 0.8rem; color: #777; text-transform: uppercase; font-weight: 700; margin-bottom: 5px; }
         .ficha-item strong { display: block; color: #ddd; font-size: 1rem; }
         .ficha-item .elenco-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 5px; }
-        .ficha-item .elenco-tags div { background: #151515; padding: 5px 10px; border-radius: 4px; font-size: 0.85rem; border: 1px solid #222; color: #bbb; }
+        .ficha-item .elenco-tags div { background: #151515; padding: 6px 12px; border-radius: 4px; font-size: 0.85rem; border: 1px solid #222; color: #bbb; font-weight: 600; }
 
-        /* SESSÃO CTA: O QUE É A UNITV */
+        .btn-cta { display: block; background: var(--gradiente-premium); color: #fff; text-align: center; padding: 18px; border-radius: 10px; text-decoration: none; font-weight: 800; margin-top: 30px; box-shadow: 0 10px 20px rgba(221, 36, 118, 0.3); transition: 0.3s; }
+        .btn-cta:hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(221, 36, 118, 0.5); }
+
         .about-unitv { padding: 100px 5%; background: radial-gradient(circle at right bottom, #1a0525 0%, #050505 60%); border-top: 1px solid #111; margin-top: 50px; }
         .about-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 60px; max-width: 1300px; margin: 0 auto; }
         .about-text h2 { font-size: 2.8rem; font-weight: 900; line-height: 1.1; margin-bottom: 20px; color: #fff; } .about-text h2 span { background: var(--gradiente-premium); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
@@ -65,7 +62,6 @@
         .btn-cta-about { background: var(--gradiente-premium); color: white; padding: 18px 45px; border-radius: 50px; font-size: 1.1rem; font-weight: 800; text-decoration: none; display: inline-flex; align-items: center; gap: 12px; transition: 0.4s; box-shadow: 0 10px 30px -5px rgba(221, 36, 118, 0.4); text-transform: uppercase; letter-spacing: 1px; } .btn-cta-about:hover { transform: translateY(-5px); box-shadow: 0 15px 35px -5px rgba(221, 36, 118, 0.6); }
         .about-img img { width: 100%; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.8)); transform: perspective(1000px) rotateY(-15deg); transition: 0.5s; } .about-grid:hover .about-img img { transform: perspective(1000px) rotateY(0deg); }
 
-        /* FOOTER & CHATBOT COPIADOS EXATAMENTE */
         footer { background: #050505; border-top: 1px solid #1a1a1a; padding: 80px 20px 40px; color: #777; font-size: 0.9rem; }
         .footer-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 50px; }
         .footer-logo { margin-bottom: 20px; filter: brightness(1.2); height: 40px; }
@@ -92,7 +88,7 @@
         .typing span { height: 8px; width: 8px; background: #bbb; display: inline-block; border-radius: 50%; margin-right: 3px; animation: waTyping 1s infinite; } @keyframes waTyping { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
         .float-zap { position: fixed; bottom: 25px; right: 25px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; z-index: 10000; box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4); cursor: pointer; transition: 0.3s; } .float-zap:hover { transform: scale(1.1); }
 
-        @media (max-width: 992px) { .content-wrapper { grid-template-columns: 1fr; } .hero-info { flex-direction: column; align-items: center; text-align: center; } .hero-tags { justify-content: center; } .about-grid { grid-template-columns: 1fr; text-align: center; } .about-features li { justify-content: center; } }
+        @media (max-width: 992px) { .content-wrapper { grid-template-columns: 1fr; } .about-grid { grid-template-columns: 1fr; text-align: center; } .about-features li { justify-content: center; } }
         @media (max-width: 768px) { header { padding: 10px 20px; } .nav-links { display: none; } .hero-text h1 { font-size: 2.2rem; } .footer-container { grid-template-columns: 1fr; text-align: center; } .footer-links a { justify-content: center; } .payment-methods { justify-content: center; } .wa-widget { width: calc(100% - 40px); left: 20px; right: 20px; bottom: 95px; max-height: 75vh; } }
     </style>
 </head>
@@ -112,18 +108,16 @@
     </header>
 
     <div class="movie-hero">
+        <img src="https://image.pollinations.ai/prompt/cinematic%20scene%20from%20movie%20O%20Diabo%20Veste%20Prada%202%20ultra%20detailed%204k?width=1280&height=720&nologo=true" class="hero-img" alt="Fundo">
         <div class="hero-overlay">
             <a href="../index.html" class="btn-voltar"><i class="fa-solid fa-arrow-left"></i> Voltar ao Catálogo</a>
-            <div class="hero-info">
-                <img src="[https://image.tmdb.org/t/p/w500](https://image.tmdb.org/t/p/w500)/6HXVhyLPMiOJdHKVw1nCI2dk6IQ.jpg" alt="O Diabo Veste Prada 2" class="hero-poster">
-                <div class="hero-text">
-                    <h1>O Diabo Veste Prada 2</h1>
-                    <div class="hero-tags">
-                        <span class="nota"><i class="fa-solid fa-star"></i> 0.0</span>
-                        <span>2026</span>
-                        <span>2h 0m</span>
-                        <span class="quatrok">4K UHD</span>
-                    </div>
+            <div class="hero-text">
+                <h1>O Diabo Veste Prada 2</h1>
+                <div class="hero-tags">
+                    <span class="nota"><i class="fa-solid fa-star"></i> 0.0</span>
+                    <span>2026</span>
+                    <span>120 min</span>
+                    <span class="quatrok">4K UHD</span>
                 </div>
             </div>
         </div>
@@ -131,31 +125,35 @@
 
     <div class="content-wrapper">
         <main class="main-article">
-            <article>
-    <h1>O Diabo Veste Prada 2: Uma Sequência Ácida e Ambiciosa (Se Você Souber O Que Esperar)</h1>
-    <p>Dezesseis anos após o lançamento do filme que definiu uma geração, "O Diabo Veste Prada 2" chega aos cinemas e, preparem-se, divide opiniões. A sequência nos transporta de volta ao universo implacável de Miranda Priestly (Meryl Streep, magnética como sempre), agora enfrentando um cenário ainda mais hostil: o declínio das revistas impressas. A trama se desenrola com a Runway lutando para se manter relevante em um mundo dominado pelas mídias digitais, enquanto Miranda busca desesperadamente financiamento para manter seu império intacto.</p>
+            <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resenha: O Diabo Veste Prada 2</title>
+</head>
+<body>
 
-    <p>O ponto de virada surge com o retorno de Emily Charlton (Emily Blunt, roubando a cena com seu sarcasmo afiado), que ascendeu ao posto de executiva poderosa em um conglomerado de luxo. A rivalidade entre as duas se intensifica à medida que Emily controla as verbas publicitárias que Miranda precisa para salvar a Runway. Assistimos a uma batalha de inteligência e poder, repleta de alfinetadas venenosas e manobras estratégicas no mundo da moda.</p>
+    <h2>O Diabo Veste Prada 2: Um Retorno Estiloso e Impecável – Agora em Glorioso 4K!</h2>
 
-    <h2>A Trama</h2>
-    <p>A narrativa explora temas como a obsolescência no mundo moderno, a luta pelo poder em ambientes corporativos e a complexidade das relações femininas. Miranda, confrontada com sua própria mortalidade profissional, revela camadas surpreendentes de vulnerabilidade, ainda que mantendo sua pose impecável. Emily, por sua vez, demonstra que o sucesso tem um preço e que a vingança, às vezes, é um prato que se come frio (e vestindo alta costura, claro!).</p>
-    <p>O filme equilibra momentos de drama intenso com toques de humor ácido, característicos da franquia. No entanto, a ausência de Andy Sachs (Anne Hathaway) é sentida, e a nova protagonista, Sophie (interpretada por uma promissora atriz revelação), tenta ocupar seu lugar, mas a sombra de Andy é longa e persistente.</p>
+    <p>Preparem seus Manolos e afiem seus saltos agulha, porque Andy Sachs está de volta! "O Diabo Veste Prada 2" não é apenas uma sequência; é uma reinvenção audaciosa e hilária que eleva o legado do original a um novo patamar de elegância e intriga. Desta vez, Andy (Anne Hathaway, radiante como nunca) e Emily (Emily Blunt, roubando cada cena) estão à frente da sua própria revista de casamento de sucesso, "The Plunge". Mas o passado volta a assombrar quando Miranda Priestly (Meryl Streep, em uma performance diabólica e ainda mais icônica) cruza seus caminhos novamente, desta vez com uma proposta... e uma ameaça sutilmente velada.</p>
 
-    <h2>Por Trás das Câmeras</h2>
-    <p>A produção de "O Diabo Veste Prada 2" não poupou esforços para recriar o glamour e a sofisticação do universo da moda. Para as cenas do desfile de alta costura, a equipe contratou verdadeiros modelos de agências renomadas e utilizou roupas e acessórios de grifes como Chanel, Dior e Versace, garantindo autenticidade visual.</p>
-    <p>Um dos desafios técnicos da produção foi criar os efeitos visuais para simular a redação da Runway em plena crise. A equipe utilizou técnicas de projeção em larga escala e computação gráfica para dar a impressão de caos e desespero no ambiente, sem comprometer a estética elegante da revista.</p>
+    <p>A trama tece uma teia complexa de ambição, lealdade, e o eterno dilema entre o sucesso profissional e a felicidade pessoal. Vemos Andy lutar com a pressão de manter seu império em ascensão, enquanto lida com os fantasmas da sua experiência em "Runway". Emily, por sua vez, revela camadas surpreendentes de ambição e vulnerabilidade, demonstrando que até as personagens mais aparentemente duras têm seus próprios demônios a enfrentar.</p>
 
-    <h2>Público-Alvo e Análise da Nota (0.0/10)</h2>
-    <p>A nota absurdamente baixa (0.0/10) reflete uma expectativa não atendida. Fãs esperavam uma repetição da fórmula do primeiro filme, com uma nova "patinho feio" florescendo sob a tutela (ou terror) de Miranda. A mudança de foco, priorizando a rivalidade entre Miranda e Emily e a crise da Runway, desagradou parte do público.</p>
-    <p>Este filme é recomendado para quem aprecia dramas corporativos com personagens complexos e para aqueles que se interessam pela dinâmica em constante transformação da indústria da moda. Se você busca uma comédia leve e inspiradora como o primeiro filme, talvez se decepcione. Mas se estiver aberto a uma análise mais ácida e reflexiva sobre o poder e a obsolescência, "O Diabo Veste Prada 2" pode surpreender.</p>
+    <blockquote>
+        <p>"Se você pensou que já tinha visto o pior de Miranda Priestly, prepare-se para ser surpreendido. Meryl Streep entrega uma performance que redefine o conceito de 'icônico'. A cada olhar, a cada sussurro, ela domina a tela."</p>
+        <cite>– UniTV Críticas</cite>
+    </blockquote>
 
-    <blockquote>A melhor coisa do filme é, sem dúvida, o duelo de atrizes entre Meryl Streep e Emily Blunt. A química entre as duas é palpável, e cada cena em que contracenam é um deleite para os amantes da boa atuação. A complexidade de seus personagens, a ambiguidade moral e a inteligência afiada garantem momentos de tensão e humor memoráveis.</blockquote>
+    <p>Mas o verdadeiro destaque, além das performances impecáveis, é a experiência visual arrebatadora. "O Diabo Veste Prada 2" foi filmado e restaurado em glorioso 4K, e cada detalhe – desde a textura dos tecidos de alta costura até a expressão nos olhos de Miranda – ganha uma nova dimensão. As cores explodem na tela, a nitidez é de tirar o fôlego, e a profundidade de campo te transporta diretamente para o mundo glamouroso (e implacável) da moda. Se você tem uma TV 4K, esta é a desculpa perfeita para testar seus limites.</p>
 
-    <h2>Por que assistir em 4K na UniTV?</h2>
-    <p>Assista "O Diabo Veste Prada 2" em 4K na UniTV e mergulhe no glamour e na sofisticação do universo da moda como nunca antes. A qualidade de imagem impecável revela cada detalhe dos figurinos deslumbrantes, das locações luxuosas e das expressões faciais das atrizes, intensificando a experiência cinematográfica.</p>
-    <p>Com a UniTV, você desfruta de uma transmissão fluida e sem travamentos, mesmo em momentos de alta demanda. O áudio cristalino te transporta para o centro da ação, permitindo que você ouça cada diálogo afiado e cada trilha sonora envolvente com clareza e precisão. Não perca nenhum detalhe dessa sequência que promete reacender a paixão pelo mundo da moda e pelos personagens inesquecíveis de "O Diabo Veste Prada".</p>
-</article>
-            <img src="[https://image.tmdb.org/t/p/original](https://image.tmdb.org/t/p/original)/y3fQa7pytlysovXzovpXc1OQlTW.jpg" alt="Cena do Filme" class="mid-backdrop" onerror="this.style.display='none'">
+    <p><b>Por que assistir em 4K?</b> Simples: porque este filme foi feito para ser apreciado em sua máxima glória visual. Cada detalhe do figurino, cada cenário luxuoso, cada expressão facial dos atores é aprimorado pela resolução superior, proporcionando uma experiência imersiva e inesquecível. Não se contente com menos; "O Diabo Veste Prada 2" em 4K é um deleite para os olhos e um banquete para os amantes do cinema.</p>
+
+    <p>Em resumo, "O Diabo Veste Prada 2" é uma sequência que honra o original e o eleva a novas alturas. Com uma trama envolvente, performances brilhantes e uma apresentação visual deslumbrante em 4K, este filme é imperdível para fãs da moda, amantes de comédias dramáticas e todos aqueles que apreciam um bom cinema. Corra para assistir – e prepare-se para se apaixonar (e temer) Miranda Priestly novamente!</p>
+
+</body>
+</html>
+            <img src="https://image.pollinations.ai/prompt/action%20scene%20from%20movie%20O%20Diabo%20Veste%20Prada%202%20cinematic%204k?width=1200&height=600&nologo=true" alt="Cena do Filme" class="mid-backdrop">
         </main>
         
         <aside class="sidebar">
@@ -171,12 +169,10 @@
             <div class="ficha-item">
                 <span>Elenco Principal</span>
                 <div class="elenco-tags">
-                    <div>Meryl Streep</div><div>Anne Hathaway</div><div>Emily Blunt</div>
+                    <div>Meryl Streep</div><div>Anne Hathaway</div><div>Emily Blunt</div><div>Stanley Tucci</div>
                 </div>
             </div>
-            <div class="ficha-item" style="margin-top: 30px;">
-                <a href="../../index.html#comprar" style="display: block; text-align: center; background: var(--gradiente-premium); color: #fff; text-decoration: none; padding: 15px; border-radius: 8px; font-weight: 800; font-size: 1rem;"><i class="fa-solid fa-play"></i> LIBERAR ACESSO</a>
-            </div>
+            <a href="../../index.html#comprar" class="btn-cta"><i class="fa-solid fa-play"></i> ASSISTIR NA UNITV</a>
         </aside>
     </div>
 
@@ -274,7 +270,6 @@
             if (window.scrollY > 50) { header.classList.add('scrolled'); } else { header.classList.remove('scrolled'); }
         });
 
-        // Chatbot VIP
         function toggleChat() { document.getElementById('chat-widget').classList.toggle('active'); }
         function showTyping(callback) {
             const status = document.getElementById('wa-status'), typing = document.getElementById('typing-indicator'), content = document.getElementById('chat-content');
