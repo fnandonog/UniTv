@@ -2,9 +2,11 @@ import os
 import csv
 import unicodedata
 import re
+import random
+import subprocess
 
 # ==========================================
-# 1. CONFIGURAÇÕES
+# 1. CONFIGURAÇÕES E SPINTAX
 # ==========================================
 ARQUIVO_CSV = "municipios.csv"
 PASTA_DESTINO = "localidade" 
@@ -18,6 +20,31 @@ UF_MAP = {
     '41': 'PR', '42': 'SC', '43': 'RS',
     '50': 'MS', '51': 'MT', '52': 'GO', '53': 'DF'
 }
+
+# --- CARDÁPIO DE VARIAÇÕES PARA O GOOGLE ---
+VARIACOES_TAG = [
+    "Atendimento Prioritário em [CIDADE]",
+    "Sinal Liberado para [CIDADE] e Região",
+    "Técnicos Online em [CIDADE]",
+    "Acesso VIP Exclusivo - [CIDADE]",
+    "Revenda Autorizada em [CIDADE]"
+]
+
+VARIACOES_TITULO = [
+    "A Melhor TV Box e IPTV <br>em <span>[CIDADE] - [SIGLA]</span>",
+    "UniTV Oficial: Instalação Rápida <br>para <span>[CIDADE]</span>",
+    "Assista Tudo em 4K <br>Morando em <span>[CIDADE]</span>",
+    "O Fim dos Travamentos <br>Chegou em <span>[CIDADE]</span>",
+    "Recarga e Assinatura UniTV <br>Direto em <span>[CIDADE]</span>"
+]
+
+VARIACOES_TEXTO = [
+    "Pare de pagar caro em TV a cabo ou sofrer com listas grátis que travam no gol. Assine a UniTV Oficial. Servidores dedicados para a região de <strong>[CIDADE]</strong> garantindo imagem 4K real sem atraso.",
+    "Atenção moradores de <strong>[CIDADE]</strong>! A melhor experiência de cinema e futebol ao vivo está aqui. Liberação imediata via Pix com suporte especializado para toda a nossa região.",
+    "Procurando um IPTV que não trava em <strong>[CIDADE]</strong>? Nossa revenda oficial garante a melhor rota de internet para sua casa, seja via TV Box, celular ou computador.",
+    "Mais de 500 canais ao vivo disponíveis agora para <strong>[CIDADE]</strong> e cidades vizinhas em [SIGLA]. Teste nosso sistema P2P e descubra o verdadeiro entretenimento 4K.",
+    "Chega de buffering no final de semana! Se você é de <strong>[CIDADE]</strong>, fale com nossa equipe agora mesmo. Ativamos seu acesso UniTV em menos de 1 minuto."
+]
 
 # ==========================================
 # 2. TEMPLATE DE ALTA CONVERSÃO (SEO LOCAL + CHATBOT VIP)
@@ -101,9 +128,9 @@ TEMPLATE_LOCAL = """<!DOCTYPE html>
     </header>
 
     <section class="hero-local">
-        <div class="tag-local"><i class="fa-solid fa-location-dot"></i> Atendimento Prioritário em [CIDADE]</div>
-        <h1>A Melhor TV Box e IPTV <br>em <span>[CIDADE] - [SIGLA]</span></h1>
-        <p>Pare de pagar caro em TV a cabo ou sofrer com listas grátis que travam no gol. Assine a UniTV Oficial. Servidores dedicados para a região de <strong>[CIDADE]</strong> garantindo imagem 4K real sem atraso.</p>
+        <div class="tag-local"><i class="fa-solid fa-location-dot"></i> [TAG_DINAMICA]</div>
+        <h1>[TITULO_DINAMICO]</h1>
+        <p>[TEXTO_DINAMICO]</p>
         
         <a href="https://wa.me/5519981765840?text=Olá,%20sou%20de%20[CIDADE]%20-%20[SIGLA]%20e%20gostaria%20de%20assinar%20a%20UniTV." target="_blank" class="btn-whatsapp-giant">
             <i class="fa-brands fa-whatsapp"></i> ATIVAR AGORA VIA WHATSAPP
@@ -247,10 +274,9 @@ def gerar_paginas_locais():
         print("Crie o arquivo com as colunas 'COD UF', 'COD' e 'NOME' e tente novamente.")
         return
 
-    print("🚀 INICIANDO DOMINAÇÃO NACIONAL (SEO LOCAL)...")
+    print("🚀 INICIANDO DOMINAÇÃO NACIONAL COM SPINTAX...")
     
     with open(ARQUIVO_CSV, 'r', encoding='utf-8') as f:
-        # Usando DictReader para ler o CSV ignorando espaços extras nos cabeçalhos
         leitor = csv.reader(f)
         cabecalho = next(leitor) # Pula a primeira linha (cabeçalhos)
         
@@ -271,23 +297,39 @@ def gerar_paginas_locais():
             slug_estado = sigla_estado.lower()
             slug_cidade = criar_slug(cidade_nome)
             
-            # Cria a estrutura de pastas: /localidade/sp/campinas
             caminho_pasta = os.path.join(PASTA_DESTINO, slug_estado, slug_cidade)
             os.makedirs(caminho_pasta, exist_ok=True)
             
-            # Preenche o HTML
-            html_final = TEMPLATE_LOCAL.replace("[CIDADE]", cidade_nome).replace("[SIGLA]", sigla_estado)
+            # --- O SEGREDO AQUI: SORTEANDO OS TEXTOS PARA CADA CIDADE ---
+            tag_sorteada = random.choice(VARIACOES_TAG)
+            titulo_sorteado = random.choice(VARIACOES_TITULO)
+            texto_sorteado = random.choice(VARIACOES_TEXTO)
+            
+            # Substitui primeiro as tags de Spintax
+            html_final = TEMPLATE_LOCAL.replace("[TAG_DINAMICA]", tag_sorteada)
+            html_final = html_final.replace("[TITULO_DINAMICO]", titulo_sorteado)
+            html_final = html_final.replace("[TEXTO_DINAMICO]", texto_sorteado)
+            
+            # Depois substitui a cidade nas partes sorteadas
+            html_final = html_final.replace("[CIDADE]", cidade_nome).replace("[SIGLA]", sigla_estado)
             
             # Salva o index.html na pasta da cidade
             caminho_arquivo = os.path.join(caminho_pasta, "index.html")
             with open(caminho_arquivo, "w", encoding="utf-8") as arquivo_html:
                 arquivo_html.write(html_final)
                 
-            print(f"📍 Sucesso: unitvsite.com.br/{PASTA_DESTINO}/{slug_estado}/{slug_cidade}/")
+            print(f"📍 Página Única Criada: unitvsite.com.br/{PASTA_DESTINO}/{slug_estado}/{slug_cidade}/")
             contador += 1
 
-    print(f"\\n✅ {contador} Páginas de Venda Locais criadas com sucesso!")
-    print("Execute 'python3 gerador_sitemap.py' para enviar tudo para o Google!")
+    print(f"\n📦 Sincronizando com o GitHub...")
+    subprocess.run(["git", "add", "."])
+    subprocess.run(["git", "commit", "-m", f"Auto-SEO Local: {contador} cidades (Textos Dinâmicos)"])
+    try:
+        subprocess.run(["git", "pull", "origin", "main", "--rebase"])
+        subprocess.run(["git", "push", "origin", "main"])
+        print("✅ SUCESSO! Cidades publicadas de forma orgânica e protegida contra SPAM.")
+    except Exception as e:
+        print(f"❌ Erro ao enviar para o GitHub: {e}")
 
 if __name__ == "__main__":
     gerar_paginas_locais()
