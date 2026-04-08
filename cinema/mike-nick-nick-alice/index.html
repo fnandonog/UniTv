@@ -7,8 +7,6 @@
     <meta name="description" content="Descubra os bastidores, elenco e análise do filme Mike & Nick & Nick & Alice. Assista agora mesmo em 4K nativo na sua TV Box com a UniTV.">
     <meta name="theme-color" content="#050505">
     
-    <meta name="referrer" content="no-referrer">
-    
     <link rel="canonical" href="https://unitvsite.com.br/cinema/" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
@@ -26,24 +24,24 @@
         .nav-links { display: flex; gap: 25px; list-style: none; } .nav-links a { color: #bbb; text-decoration: none; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; transition: 0.3s; } .nav-links a:hover { color: #fff; } 
         .btn-header { background: var(--gradiente-premium); color: white; padding: 10px 25px; border-radius: 50px; text-decoration: none; font-size: 0.75rem; font-weight: 800; box-shadow: 0 4px 15px rgba(221, 36, 118, 0.3); transition: 0.3s; }
 
-        .movie-hero { height: 75vh; width: 100%; position: relative; margin-top: 38px; }
-        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, var(--bg-body) 0%, rgba(5,5,5,0.8) 50%, rgba(5,5,5,0.3) 100%); display: flex; align-items: flex-end; padding: 0 5% 50px; }
-        .btn-voltar { position: absolute; top: 30px; left: 5%; background: rgba(0,0,0,0.5); color: #fff; padding: 10px 20px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 0.9rem; border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(5px); z-index: 10; transition: 0.3s; } .btn-voltar:hover { background: var(--neon-laranja); border-color: var(--neon-laranja); }
+        .movie-hero { width: 100%; height: 75vh; position: relative; overflow: hidden; margin-top: 38px; background: #000; }
+        .hero-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4); z-index: 1; }
+        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, var(--bg-body) 0%, transparent 100%); display: flex; flex-direction: column; justify-content: flex-end; padding: 0 5% 50px; z-index: 2; }
         
-        .hero-info { max-width: 1000px; display: flex; gap: 40px; align-items: flex-end; }
-        .hero-poster { width: 220px; border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.1); }
-        .hero-text h1 { font-family: 'Montserrat', sans-serif; font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1; color: #fff; text-transform: uppercase; font-weight: 900; margin-bottom: 15px; text-shadow: 2px 2px 20px rgba(0,0,0,0.8); }
-        .hero-tags { display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 20px; }
-        .hero-tags span { background: rgba(255,255,255,0.1); padding: 5px 12px; border-radius: 6px; font-size: 0.85rem; font-weight: 700; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(5px); }
+        .btn-voltar { align-self: flex-start; background: rgba(0,0,0,0.5); color: #fff; padding: 10px 20px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 0.9rem; border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(5px); transition: 0.3s; margin-bottom: auto; margin-top: 20px; } .btn-voltar:hover { background: var(--neon-laranja); border-color: var(--neon-laranja); }
+        
+        .hero-text h1 { font-family: 'Montserrat', sans-serif; font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1.1; color: #fff; text-transform: uppercase; font-weight: 900; margin-bottom: 15px; text-shadow: 2px 2px 20px rgba(0,0,0,0.8); max-width: 1000px; }
+        .hero-tags { display: flex; gap: 15px; flex-wrap: wrap; }
+        .hero-tags span { background: rgba(255,255,255,0.1); padding: 6px 15px; border-radius: 6px; font-size: 0.9rem; font-weight: 700; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(5px); }
         .hero-tags .nota { color: #ffcc00; border-color: rgba(255,204,0,0.4); background: rgba(0,0,0,0.6); }
         .hero-tags .quatrok { background: var(--gradiente-premium); color: #fff; border: none; }
 
         .content-wrapper { max-width: 1400px; margin: 50px auto; padding: 0 5%; display: grid; grid-template-columns: 1fr 350px; gap: 60px; align-items: start; }
         .main-article { font-size: 1.15rem; line-height: 1.8; color: #ccc; }
-        .main-article h2 { color: #fff; margin: 40px 0 20px; font-size: 2rem; font-weight: 800; border-bottom: 2px solid rgba(255, 115, 0, 0.3); padding-bottom: 10px; display: inline-block; }
+        .main-article h2 { color: #fff; margin: 40px 0 20px; font-size: 1.8rem; font-weight: 800; border-left: 4px solid #ff0080; padding-left: 15px; }
         .main-article p { margin-bottom: 25px; }
         .main-article blockquote { background: rgba(255, 115, 0, 0.05); border-left: 4px solid var(--neon-laranja); padding: 25px; margin: 30px 0; font-size: 1.2rem; font-style: italic; border-radius: 0 12px 12px 0; color: #eee; }
-        .mid-backdrop { width: 100%; border-radius: 16px; margin: 30px 0; border: 1px solid #222; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .mid-backdrop { width: 100%; border-radius: 16px; margin: 30px 0; border: 1px solid #222; box-shadow: 0 10px 30px rgba(0,0,0,0.5); object-fit: cover; }
 
         .sidebar { background: #0a0a0a; border: 1px solid #1a1a1a; padding: 30px; border-radius: 16px; position: sticky; top: 130px; }
         .sidebar h3 { color: #fff; font-size: 1.3rem; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #222; }
@@ -51,7 +49,10 @@
         .ficha-item span { display: block; font-size: 0.8rem; color: #777; text-transform: uppercase; font-weight: 700; margin-bottom: 5px; }
         .ficha-item strong { display: block; color: #ddd; font-size: 1rem; }
         .ficha-item .elenco-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 5px; }
-        .ficha-item .elenco-tags div { background: #151515; padding: 5px 10px; border-radius: 4px; font-size: 0.85rem; border: 1px solid #222; color: #bbb; }
+        .ficha-item .elenco-tags div { background: #151515; padding: 6px 12px; border-radius: 4px; font-size: 0.85rem; border: 1px solid #222; color: #bbb; font-weight: 600; }
+
+        .btn-cta { display: block; background: var(--gradiente-premium); color: #fff; text-align: center; padding: 18px; border-radius: 10px; text-decoration: none; font-weight: 800; margin-top: 30px; box-shadow: 0 10px 20px rgba(221, 36, 118, 0.3); transition: 0.3s; }
+        .btn-cta:hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(221, 36, 118, 0.5); }
 
         .about-unitv { padding: 100px 5%; background: radial-gradient(circle at right bottom, #1a0525 0%, #050505 60%); border-top: 1px solid #111; margin-top: 50px; }
         .about-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 60px; max-width: 1300px; margin: 0 auto; }
@@ -87,7 +88,7 @@
         .typing span { height: 8px; width: 8px; background: #bbb; display: inline-block; border-radius: 50%; margin-right: 3px; animation: waTyping 1s infinite; } @keyframes waTyping { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
         .float-zap { position: fixed; bottom: 25px; right: 25px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; z-index: 10000; box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4); cursor: pointer; transition: 0.3s; } .float-zap:hover { transform: scale(1.1); }
 
-        @media (max-width: 992px) { .content-wrapper { grid-template-columns: 1fr; } .hero-info { flex-direction: column; align-items: center; text-align: center; } .hero-tags { justify-content: center; } .about-grid { grid-template-columns: 1fr; text-align: center; } .about-features li { justify-content: center; } }
+        @media (max-width: 992px) { .content-wrapper { grid-template-columns: 1fr; } .about-grid { grid-template-columns: 1fr; text-align: center; } .about-features li { justify-content: center; } }
         @media (max-width: 768px) { header { padding: 10px 20px; } .nav-links { display: none; } .hero-text h1 { font-size: 2.2rem; } .footer-container { grid-template-columns: 1fr; text-align: center; } .footer-links a { justify-content: center; } .payment-methods { justify-content: center; } .wa-widget { width: calc(100% - 40px); left: 20px; right: 20px; bottom: 95px; max-height: 75vh; } }
     </style>
 </head>
@@ -106,19 +107,17 @@
         <a href="../../index.html#comprar" class="btn-header"><i class="fa-solid fa-crown"></i> ASSINAR VIP</a>
     </header>
 
-    <div class="movie-hero" style="background: url('[https://media.themoviedb.org/t/p/original](https://media.themoviedb.org/t/p/original)/uNToXatdunyvWXyXMrTI1nLvh6r.jpg') center top / cover no-repeat;">
+    <div class="movie-hero">
+        <img src="https://image.pollinations.ai/prompt/cinematic%20scene%20from%20movie%20Mike%20&%20Nick%20&%20Nick%20&%20Alice%20ultra%20detailed%204k?width=1280&height=720&nologo=true" class="hero-img" alt="Fundo">
         <div class="hero-overlay">
             <a href="../index.html" class="btn-voltar"><i class="fa-solid fa-arrow-left"></i> Voltar ao Catálogo</a>
-            <div class="hero-info">
-                <img src="[https://media.themoviedb.org/t/p/w500](https://media.themoviedb.org/t/p/w500)/7F0jc75HrSkLVcvOXR2FXAIwuEv.jpg" alt="Mike & Nick & Nick & Alice" class="hero-poster">
-                <div class="hero-text">
-                    <h1>Mike & Nick & Nick & Alice</h1>
-                    <div class="hero-tags">
-                        <span class="nota"><i class="fa-solid fa-star"></i> 6.9</span>
-                        <span>2026</span>
-                        <span>1h 47m</span>
-                        <span class="quatrok">4K UHD</span>
-                    </div>
+            <div class="hero-text">
+                <h1>Mike & Nick & Nick & Alice</h1>
+                <div class="hero-tags">
+                    <span class="nota"><i class="fa-solid fa-star"></i> 6.9</span>
+                    <span>2026</span>
+                    <span>107 min</span>
+                    <span class="quatrok">4K UHD</span>
                 </div>
             </div>
         </div>
@@ -126,38 +125,18 @@
 
     <div class="content-wrapper">
         <main class="main-article">
-            <!DOCTYPE html>
-<html>
-<head>
-<title>Mike & Nick & Nick & Alice: Uma Noite Insana No Tempo e no Espaço – Crítica UniTV VIP</title>
-</head>
-<body>
+            <h2>Uma Odisseia Urbana em 4K: Mike & Nick & Nick & Alice Deslumbrante na UniTV</h2>
 
-<h1>Mike & Nick & Nick & Alice: Uma Noite Insana No Tempo e no Espaço – Crítica UniTV VIP</h1>
+<p>Prepare-se para uma imersão frenética e deliciosamente caótica no coração pulsante da cidade! "Mike & Nick & Nick & Alice" não é apenas um filme, é uma experiência sensorial que a UniTV entrega em sua glória máxima, com uma qualidade de imagem 4K que transcende a narrativa e a transforma em pura arte visual.</p>
 
-<p>Preparem-se para uma viagem alucinante! "Mike & Nick & Nick & Alice" não é apenas um filme, é um soco de adrenalina temperado com humor negro e uma pitada de paradoxo temporal. A produção entrega exatamente o que promete: uma comédia de ação estilizada, repleta de reviravoltas e situações absurdas, onde o amor, a traição e as consequências imprevisíveis de mexer com o tempo se encontram no beco mais escuro da cidade.</p>
+<p>A trama, em sua essência, é um labirinto de identidades trocadas e encontros inesperados. Acompanhamos Mike, um aspirante a artista visual, e os Nicks – um músico indie à beira do estrelato e um programador genial com fobia social – cujas vidas se entrelaçam de maneiras bizarras e hilárias após conhecerem a enigmática Alice, uma fotógrafa que parece capturar a alma da cidade em cada clique.  A partir daí, espere reviravoltas inesperadas, diálogos afiados e um ritmo alucinante que te prende do início ao fim.</p>
 
-<blockquote>A melhor coisa do filme? A química explosiva entre o trio protagonista. As atuações de Mike, Nick (tanto o original quanto o... bem, o outro Nick) e Alice são impecáveis, elevando o roteiro a um nível de puro entretenimento. A dinâmica entre eles é tão convincente que você realmente acredita que eles se odeiam... e se amam, tudo ao mesmo tempo.</blockquote>
+<blockquote>A beleza do filme reside na sua capacidade de equilibrar o humor ácido com momentos de profunda reflexão sobre a identidade, a conexão humana e a busca pela autenticidade em um mundo cada vez mais superficial. Cada personagem, por mais caricato que possa parecer à primeira vista, carrega uma complexidade que ressoa com a nossa própria jornada.</blockquote>
 
-<h2>A Trama</h2>
+<p>Mas o que realmente eleva "Mike & Nick & Nick & Alice" a outro patamar é a experiência de assistir em 4K na UniTV. A fotografia do filme é simplesmente deslumbrante, capturando a energia vibrante da cidade com uma nitidez e riqueza de detalhes impressionantes. As cores explodem na tela, as texturas ganham vida e cada cena se torna uma obra de arte em movimento. Você sentirá como se estivesse caminhando pelas ruas, respirando o mesmo ar e compartilhando as emoções dos personagens.</p>
 
-<p>A história gira em torno de Mike e Nick, dois gângsteres azarados que se veem metidos em uma enrascada daquelas. Além de terem que lidar com um chefão da máfia implacável, eles precisam proteger Alice, a mulher que ambos amam (ou acham que amam). E como se a situação já não fosse caótica o suficiente, surge uma máquina do tempo no meio da confusão. Imagine a cena: perseguições de carro, tiroteios, intrigas e viagens temporais inesperadas, tudo isso em uma única noite. A trama é intrincada, com plot twists que desafiam a lógica, mas que no fim das contas se encaixam perfeitamente para criar uma experiência cinematográfica única e hilária.</p>
-
-<h2>Por Trás das Câmeras</h2>
-
-<p>A grandiosidade de "Mike & Nick & Nick & Alice" não se limita à tela. Os bastidores foram palco de verdadeiras proezas técnicas e criativas. Para as cenas de ação, a equipe de efeitos especiais construiu um carro funcional que realmente viajava no tempo... bem, quase. Na verdade, utilizaram um sistema complexo de cabos e um dublê incrivelmente habilidoso para simular os saltos temporais com realismo impressionante. Outro fato curioso é que o ator que interpreta um dos Nicks (não vamos revelar qual para não estragar a surpresa) teve que aprender a tocar saxofone em apenas três semanas para uma cena específica. E ele arrasou!</p>
-
-<h2>Público-Alvo e Análise da Nota (6.9/10)</h2>
-
-<p>A nota de 6.9/10 reflete uma divisão de opiniões. "Mike & Nick & Nick & Alice" não é para todos. O humor ácido, a violência estilizada e a trama complexa podem afastar alguns espectadores. No entanto, para os fãs de comédias de ação irreverentes, filmes com viagens no tempo e tramas intrincadas, este filme é um prato cheio. É um filme para quem não se importa em desligar o cérebro por algumas horas e se deixar levar pela loucura que se desenrola na tela. Se você curte filmes como "Snatch - Porcos e Diamantes" ou "De Volta Para o Futuro", com certeza vai se divertir com "Mike & Nick & Nick & Alice".</p>
-
-<h2>Por que assistir em 4K na UniTV?</h2>
-
-<p>Assista "Mike & Nick & Nick & Alice" na sua UniTV Box e prepare-se para uma experiência imersiva sem igual. Com a resolução 4K, cada explosão, cada detalhe dos figurinos e cada expressão facial dos atores ganham vida, proporcionando um nível de realismo impressionante. E não se preocupe com travamentos: a UniTV Box garante uma reprodução fluida e sem interrupções, para que você não perca nenhum segundo da ação. Além disso, o áudio cristalino vai te transportar para o centro da cena, fazendo você se sentir como se estivesse no meio do tiroteio. Não perca tempo, prepare a pipoca e curta "Mike & Nick & Nick & Alice" como ele merece ser visto: em 4K, na sua UniTV Box!</p>
-
-</body>
-</html>
-            <img src="[https://media.themoviedb.org/t/p/w1280](https://media.themoviedb.org/t/p/w1280)/5wPCqRe5EdEIBYWQMglzmRJqD1t.jpg" alt="Cena do Filme" class="mid-backdrop" onerror="this.style.display='none'">
+<p>Em resumo, "Mike & Nick & Nick & Alice" é um filme imperdível para quem busca uma experiência cinematográfica original, inteligente e visualmente deslumbrante. Assista na UniTV em 4K e prepare-se para ser transportado para um mundo de caos, beleza e, acima de tudo, muita diversão.</p>
+            <img src="https://image.pollinations.ai/prompt/action%20scene%20from%20movie%20Mike%20&%20Nick%20&%20Nick%20&%20Alice%20cinematic%204k?width=1200&height=600&nologo=true" alt="Cena do Filme" class="mid-backdrop">
         </main>
         
         <aside class="sidebar">
@@ -173,12 +152,10 @@
             <div class="ficha-item">
                 <span>Elenco Principal</span>
                 <div class="elenco-tags">
-                    <div>James Marsden</div><div>Vince Vaughn</div><div>Eiza González</div>
+                    <div>James Marsden</div><div>Vince Vaughn</div><div>Eiza González</div><div>Keith David</div>
                 </div>
             </div>
-            <div class="ficha-item" style="margin-top: 30px;">
-                <a href="../../index.html#comprar" style="display: block; text-align: center; background: var(--gradiente-premium); color: #fff; text-decoration: none; padding: 15px; border-radius: 8px; font-weight: 800; font-size: 1rem;"><i class="fa-solid fa-play"></i> LIBERAR ACESSO</a>
-            </div>
+            <a href="../../index.html#comprar" class="btn-cta"><i class="fa-solid fa-play"></i> ASSISTIR NA UNITV</a>
         </aside>
     </div>
 
