@@ -10,7 +10,7 @@ import subprocess
 # ==========================================
 ARQUIVO_CSV = "municipios.csv"
 PASTA_DESTINO = "localidade" 
-LIMITAR_TESTE = 10 # Gera as 10 primeiras cidades para você testar. Depois mude para 5570.
+LIMITAR_TESTE = 5600 # Gera as 10 primeiras cidades para você testar. Depois mude para 5570.
 
 # Mapeamento do IBGE (Coluna 'COD UF' para Sigla)
 UF_MAP = {
