@@ -26,3 +26,4 @@ destruicao-final-2
 o-justiceiro-uma-ultima-morte
 ataque-brutal
 consequencia
+wasteman
