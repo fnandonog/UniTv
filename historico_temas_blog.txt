@@ -47,3 +47,6 @@ UniTV: Filmes e Séries Sem Sair de Casa.
 TV Box: Potência e Streaming Acessível.
 IPTV: Descubra o Futuro da Sua TV.
 UniTV: Seu Streaming, Seu Cinema.
+TV Box: Streaming Turbinado e Apps Essenciais.
+IPTV: Esporte Ao Vivo e Mais Canais.
+UniTV: Filmes 4K e Séries On-Demand.
