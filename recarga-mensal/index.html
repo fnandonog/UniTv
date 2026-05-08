@@ -5,41 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Comprar Recarga UniTV Mensal Oficial | Envio Imediato 30 Dias</title>
     
-    <!-- SEO AVANÇADO & META TAGS -->
     <meta name="description" content="Adquira sua Recarga UniTV Oficial Mensal (30 Dias) por apenas R$ 24,90. Envio automático do código VIP via WhatsApp. Assista em 4K sem fidelidade.">
     <meta name="keywords" content="recarga unitv, unitv oficial, plano mensal unitv, unitv 30 dias, comprar unitv, renovar unitv, unitv tv box, aplicativo unitv, streaming, smart tv, tecnologia">
     <meta name="author" content="UniTV Oficial Revenda">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta name="theme-color" content="#1a0525">
-
-    <!-- Meta Pixel -->
-    <script>
-        window.UNITV_META_PIXEL_ID = '2204821377087872';
-        window.UNITV_META_CAPI = {
-            enabled: true,
-            endpoint: '/api/meta-capi.php'
-        };
-        window.UNITV_META_USER_DATA = {};
-
-        !function(f,b,e,v,n,t,s)
-        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-        n.queue=[];t=b.createElement(e);t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t,s)}(window, document,'script',
-        'https://connect.facebook.net/en_US/fbevents.js');
-
-        fbq('init', window.UNITV_META_PIXEL_ID);
-        fbq('track', 'PageView');
-    </script>
     
-    <!-- PRECONNECTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
 
-    <!-- CANONICAL E OPEN GRAPH -->
     <link rel="canonical" href="https://unitvsite.com.br/recarga-mensal.html" />
     <meta property="og:locale" content="pt_BR" />
     <meta property="og:type" content="product" />
@@ -54,7 +29,6 @@
     <meta property="product:price:amount" content="24.90" />
     <meta property="product:price:currency" content="BRL" />
 
-    <!-- TWITTER -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Recarga UniTV Oficial Mensal - 30 Dias (Envio Imediato)">
     <meta name="twitter:description" content="Adquira sua Recarga UniTV Oficial Mensal (30 Dias) por apenas R$ 24,90. Envio automático via WhatsApp.">
@@ -64,7 +38,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="icon" href="/img/logo-unitv.png" type="image/png">
 
-    <!-- SEO SCHEMA -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -369,11 +342,6 @@
     </style>
 </head>
 <body>
-    <noscript>
-        <img height="1" width="1" style="display:none"
-             src="https://www.facebook.com/tr?id=2204821377087872&ev=PageView&noscript=1"/>
-    </noscript>
-
     <div class="top-bars-container">
         <div class="promo-bar">
             🔥 OFERTA: Liberação Imediata via Pix! Sem mensalidade automática.
@@ -392,9 +360,9 @@
         <nav id="nav-menu">
             <ul>
                 <li><a href="/">Início</a></li>
-                <li><a href="/tutorial">Instalação</a></li>
-                <li><a href="/blog">Blog</a></li>
-                <li><a href="/ajuda">Ajuda</a></li>
+                <li><a href="/tutorial" data-meta-guide="nav_tutorial">Instalação</a></li>
+                <li><a href="/blog" data-meta-guide="nav_blog">Blog</a></li>
+                <li><a href="/ajuda" data-meta-guide="nav_ajuda">Ajuda</a></li>
             </ul>
         </nav>
         
@@ -581,15 +549,15 @@
                 <h4>Acesso Rápido</h4>
                 <ul class="footer-links">
                     <li><a href="/">Voltar ao Início</a></li>
-                    <li><a href="/tutorial">Guia de Instalação</a></li>
-                    <li><a href="/blog">Blog de Tecnologia</a></li>
-                    <li><a href="/velocidade">Teste de Velocidade</a></li>
+                    <li><a href="/tutorial" data-meta-guide="footer_tutorial">Guia de Instalação</a></li>
+                    <li><a href="/blog" data-meta-guide="footer_blog">Blog de Tecnologia</a></li>
+                    <li><a href="/velocidade" data-meta-guide="footer_velocidade">Teste de Velocidade</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <h4>Suporte Dedicado</h4>
                 <ul class="footer-links">
-                    <li><a href="/ajuda">Central de Ajuda (FAQ)</a></li>
+                    <li><a href="/ajuda" data-meta-guide="footer_ajuda">Central de Ajuda (FAQ)</a></li>
                     <li><a href="javascript:void(0)" onclick="toggleChat()" data-meta-contact="footer-whatsapp">Atendimento WhatsApp</a></li>
                     <li><span style="color:#666; font-size:0.8rem; margin-top:5px; display:block;">Horário: Seg a Sex, das 08h às 22h</span></li>
                 </ul>
@@ -678,293 +646,14 @@
         </div>
     </div>
 
+    <script src="/js/meta-tracking.js"></script>
     <script>
-        const MetaTracker = (() => {
-            const CAPI_CONFIG = window.UNITV_META_CAPI || { enabled: false, endpoint: '/api/meta-capi.php' };
-            const STANDARD_EVENTS = new Set([
-                'PageView',
-                'ViewContent',
-                'InitiateCheckout',
-                'Contact',
-                'Lead',
-                'Purchase',
-                'CompleteRegistration',
-                'Search',
-                'AddToCart'
-            ]);
-
-            const state = {
-                userData: window.UNITV_META_USER_DATA || {},
-                scrollMarks: {25:false,50:false,75:false,90:false}
-            };
-
-            function normalizeEmail(value) {
-                return (value || '').toString().trim().toLowerCase();
-            }
-
-            function normalizePhone(value) {
-                return (value || '').toString().replace(/\D+/g, '');
-            }
-
-            function normalizeText(value) {
-                return (value || '').toString().trim().toLowerCase();
-            }
-
-            function mergeUserData(data = {}) {
-                const next = { ...state.userData };
-
-                if (data.em) next.em = normalizeEmail(data.em);
-                if (data.ph) next.ph = normalizePhone(data.ph);
-                if (data.fn) next.fn = normalizeText(data.fn);
-                if (data.ln) next.ln = normalizeText(data.ln);
-
-                Object.keys(next).forEach(key => {
-                    if (!next[key]) delete next[key];
-                });
-
-                state.userData = next;
-                window.UNITV_META_USER_DATA = next;
-            }
-
-            function inferFieldKey(el) {
-                const attrs = [
-                    el.name || '',
-                    el.id || '',
-                    el.placeholder || '',
-                    el.autocomplete || '',
-                    el.getAttribute('aria-label') || ''
-                ].join(' ').toLowerCase();
-
-                if (el.type === 'email' || /e-?mail|mail/.test(attrs)) return 'em';
-                if (el.type === 'tel' || /phone|telefone|celular|whatsapp/.test(attrs)) return 'ph';
-                if (/first.?name|nome\b/.test(attrs) && !/sobrenome|last/.test(attrs)) return 'fn';
-                if (/last.?name|sobrenome/.test(attrs)) return 'ln';
-
-                return null;
-            }
-
-            function captureField(el) {
-                if (!el || !('value' in el)) return;
-                const key = inferFieldKey(el);
-                if (!key) return;
-                mergeUserData({ [key]: el.value });
-            }
-
-            function bindAdvancedMatching() {
-                document.querySelectorAll('input, textarea, select').forEach(captureField);
-                document.addEventListener('input', e => captureField(e.target), true);
-                document.addEventListener('change', e => captureField(e.target), true);
-                document.addEventListener('blur', e => captureField(e.target), true);
-            }
-
-            function generateEventId(prefix = 'meta') {
-                return `${prefix}_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`;
-            }
-
-            function getCookie(name) {
-                const match = document.cookie.match(new RegExp('(^|;\\s*)' + name + '=([^;]+)'));
-                return match ? decodeURIComponent(match[2]) : '';
-            }
-
-            function trackBrowser(eventName, params = {}, eventID) {
-                if (!window.fbq) return;
-
-                if (STANDARD_EVENTS.has(eventName)) {
-                    fbq('track', eventName, params, { eventID });
-                } else {
-                    fbq('trackCustom', eventName, params, { eventID });
-                }
-            }
-
-            function sendToCAPI(payload) {
-                if (!CAPI_CONFIG.enabled || !CAPI_CONFIG.endpoint) return;
-
-                try {
-                    const body = JSON.stringify(payload);
-
-                    if (navigator.sendBeacon) {
-                        const blob = new Blob([body], { type: 'application/json' });
-                        navigator.sendBeacon(CAPI_CONFIG.endpoint, blob);
-                    } else {
-                        fetch(CAPI_CONFIG.endpoint, {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body,
-                            keepalive: true
-                        }).catch(() => {});
-                    }
-                } catch (e) {}
-            }
-
-            function track(eventName, params = {}, options = {}) {
-                const eventID = options.eventID || generateEventId(eventName.toLowerCase());
-
-                const payload = {
-                    event_name: eventName,
-                    event_time: Math.floor(Date.now() / 1000),
-                    event_id: eventID,
-                    event_source_url: window.location.href,
-                    action_source: 'website',
-                    user_data: {
-                        ...state.userData,
-                        fbp: getCookie('_fbp'),
-                        fbc: getCookie('_fbc')
-                    },
-                    custom_data: params
-                };
-
-                trackBrowser(eventName, params, eventID);
-                sendToCAPI(payload);
-
-                return eventID;
-            }
-
-            function trackMonthlyPageView() {
-                track('ViewContent', {
-                    content_name: 'Plano Mensal UniTV',
-                    content_category: 'Recarga UniTV',
-                    content_type: 'product',
-                    value: 24.90,
-                    currency: 'BRL'
-                });
-            }
-
-            function trackCheckout(planName = 'Plano Mensal UniTV', value = 24.90, currency = 'BRL', source = 'mensal_page') {
-                track('ViewContent', {
-                    content_name: planName,
-                    content_category: 'Recarga UniTV',
-                    content_type: 'product',
-                    value,
-                    currency,
-                    source
-                });
-
-                return track('InitiateCheckout', {
-                    content_name: planName,
-                    content_category: 'Recarga UniTV',
-                    content_type: 'product',
-                    value,
-                    currency,
-                    source
-                });
-            }
-
-            function trackContact(origin = 'whatsapp') {
-                return track('Contact', {
-                    content_name: 'Suporte UniTV Mensal',
-                    contact_channel: origin
-                });
-            }
-
-            function trackTutorial(origin = 'tutorial') {
-                return track('ViewContent', {
-                    content_name: 'Tutorial de Instalação UniTV',
-                    content_category: 'Tutorial',
-                    content_type: 'guide',
-                    origin
-                });
-            }
-
-            function trackPlansView(origin = 'plans') {
-                return track('ViewContent', {
-                    content_name: 'Seção de Planos UniTV',
-                    content_category: 'Planos',
-                    content_type: 'product_group',
-                    origin
-                });
-            }
-
-            function trackCheckoutIntent(source = 'cta') {
-                return track('CheckoutIntent', {
-                    page: 'mensal',
-                    source
-                });
-            }
-
-            function bindPageInteractions() {
-                document.addEventListener('click', function(e) {
-                    const contactEl = e.target.closest('[data-meta-contact]');
-                    if (contactEl) {
-                        trackContact(contactEl.dataset.metaContact || 'support');
-                        return;
-                    }
-
-                    const tutorialEl = e.target.closest('[data-meta-view-tutorial]');
-                    if (tutorialEl) {
-                        trackTutorial(tutorialEl.dataset.metaViewTutorial || 'tutorial');
-                        return;
-                    }
-
-                    const plansEl = e.target.closest('[data-meta-view-plans]');
-                    if (plansEl) {
-                        trackPlansView(plansEl.dataset.metaViewPlans || 'plans');
-                        return;
-                    }
-
-                    const waLink = e.target.closest("a[href*='wa.me/']");
-                    if (waLink) {
-                        trackContact('whatsapp_link');
-                    }
-                }, true);
-            }
-
-            function bindScrollDepth() {
-                window.addEventListener('scroll', () => {
-                    const doc = document.documentElement;
-                    const total = doc.scrollHeight - window.innerHeight;
-                    if (total <= 0) return;
-
-                    const pct = Math.round((window.scrollY / total) * 100);
-
-                    [25, 50, 75, 90].forEach(mark => {
-                        if (pct >= mark && !state.scrollMarks[mark]) {
-                            state.scrollMarks[mark] = true;
-                            track('ScrollDepth', {
-                                page: 'mensal',
-                                percent: mark
-                            });
-                        }
-                    });
-                }, { passive: true });
-            }
-
-            function bindTimeEvents() {
-                setTimeout(() => {
-                    track('LandingEngaged', {
-                        page: 'mensal',
-                        seconds: 15
-                    });
-                }, 15000);
-
-                setTimeout(() => {
-                    track('LandingEngaged', {
-                        page: 'mensal',
-                        seconds: 30
-                    });
-                }, 30000);
-            }
-
-            return {
-                bindAdvancedMatching,
-                bindPageInteractions,
-                bindScrollDepth,
-                bindTimeEvents,
-                track,
-                trackCheckout,
-                trackContact,
-                trackTutorial,
-                trackPlansView,
-                trackCheckoutIntent,
-                trackMonthlyPageView
-            };
-        })();
-
         function toggleMenu() {
             const navMenu = document.getElementById('nav-menu');
             const icon = document.getElementById('menu-icon');
             navMenu.classList.toggle('active');
-            
-            if(navMenu.classList.contains('active')) {
+
+            if (navMenu.classList.contains('active')) {
                 icon.classList.replace('fa-bars', 'fa-xmark');
             } else {
                 icon.classList.replace('fa-xmark', 'fa-bars');
@@ -983,194 +672,17 @@
             const question = item.querySelector('.faq-question');
             question.addEventListener('click', () => {
                 const isActive = item.classList.contains('active');
-                faqItems.forEach(i => { 
-                    i.classList.remove('active'); 
+
+                faqItems.forEach(i => {
+                    i.classList.remove('active');
                     i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
                 });
+
                 if (!isActive) {
                     item.classList.add('active');
                     question.setAttribute('aria-expanded', 'true');
                     MetaTracker.track('FAQOpened', {
                         page: 'mensal',
-                        question: question.textContent.replace(/\s+/g, ' ').trim()
-                    });
-                }
-            });
-        });
+                        question: question.textContent.replace(/\s+/g,
 
-        function toggleChat() {
-            document.getElementById('chat-widget').classList.toggle('active');
-        }
-
-        function showTyping(callback) {
-            const status = document.getElementById('wa-status'),
-                  typing = document.getElementById('typing-indicator'),
-                  content = document.getElementById('chat-content');
-
-            status.innerText = "A escrever...";
-            typing.style.display = "block";
-            content.appendChild(typing);
-            content.scrollTop = content.scrollHeight;
-
-            setTimeout(() => {
-                typing.style.display = "none";
-                status.innerText = "Online";
-                callback();
-            }, 1200);
-        }
-
-        function addMessage(text, side) {
-            const content = document.getElementById('chat-content'),
-                  now = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}),
-                  checks = side === 'user' ? ' <i class="fa-solid fa-check-double" style="color:#34b7f1; font-size: 0.7rem"></i>' : '';
-
-            content.innerHTML += `<div class="wa-msg wa-msg-${side}">${text}<span class="wa-time">${now}${checks}</span></div>`;
-            content.scrollTop = content.scrollHeight;
-        }
-
-        function setOptions(options) {
-            const container = document.getElementById('wa-options');
-            container.innerHTML = "";
-            options.forEach(opt => {
-                const btn = document.createElement('button');
-                btn.innerHTML = opt.label;
-                btn.onclick = () => userAction(opt.label.replace(/<[^>]*>?/gm, ''), opt.type);
-                container.appendChild(btn);
-            });
-        }
-        
-        function userAction(text, type) {
-            addMessage(text, 'user');
-            setOptions([]);
-
-            MetaTracker.track('ChatOptionSelected', {
-                page: 'mensal',
-                option_type: type,
-                option_text: text
-            });
-
-            showTyping(() => {
-                if(type === 'fidelidade') {
-                    addMessage("<strong>Nenhuma!</strong> O plano mensal de R$ 24,90 é pré-pago. Terminou os 30 dias, ele pausa sozinho e não cobra nada do seu cartão. Você só renova se quiser!", 'bot');
-                    setOptions([{label: 'Ótimo, quero comprar', type: 'comprar_agora'}, {label: 'Como funciona a entrega?', type: 'entrega'}]);
-                } else if(type === 'entrega') {
-                    addMessage("Se você pagar no PIX, o nosso sistema robô envia o seu código de 16 dígitos imediatamente pelo WhatsApp e também para o seu e-mail.", 'bot');
-                    setOptions([{label: 'Entendi, vou comprar', type: 'comprar_agora'}, {label: 'Voltar', type: 'reset'}]);
-                } else if(type === 'comprar_agora') {
-                    MetaTracker.track('Lead', {
-                        page: 'mensal',
-                        source: 'chat_purchase_intent'
-                    });
-
-                    addMessage("Excelente escolha! Clique no link oficial abaixo para garantir o seu mês sem travamentos:", 'bot');
-                    addMessage("👉 <a href='javascript:void(0)' onclick=\"openWarningModal('https://pay.kirvano.com/07f96a4e-ecdf-4538-83ca-01e5c35f1425','chat_cta')\" style='color: var(--cor-destaque); font-weight: bold;'>Link de Pagamento R$ 24,90</a>", 'bot');
-                    setOptions([{label: 'Já paguei o Pix!', type: 'pix_feito'}, {label: 'Preciso de ajuda', type: 'suporte_humano'}]);
-                } else if(type === 'pix_feito') {
-                    addMessage("Fantástico. O seu código vai chegar a qualquer segundo no E-mail e no WhatsApp (verifique o Spam). Se demorar mais de 5 minutos, chame o humano.", 'bot');
-                    MetaTracker.track('Lead', {
-                        page: 'mensal',
-                        source: 'chat_pix_feito'
-                    });
-                    setOptions([{label: 'Falar com Humano', type: 'suporte_humano'}]);
-                } else if(type === 'smart_tv_select' || type === 'smart_tv_solution') {
-                    addMessage("Nessas marcas (LG/Samsung) o UniTV não roda direito. Para não travar, instalamos um app parceiro chamado <strong>ULTRA PLAYER</strong>.", 'bot');
-                    setTimeout(() => showTyping(() => { 
-                        addMessage("Vá na loja de apps da sua TV e pesquise por 'Ultra Player'.", 'bot'); 
-                        setOptions([{label: 'Baixei, e agora?', type: 'baixou_ultra'}, {label: 'Não achei', type: 'suporte_humano'}]); 
-                    }), 1500);
-                } else if(type === 'baixou_ultra') {
-                    addMessage("Ótimo. Abra o app, tire foto do código MAC na tela e me envie no WhatsApp humano para eu liberar seu acesso.", 'bot');
-                    const btn = document.createElement('button');
-                    btn.innerText = "ENVIAR FOTO DO MAC";
-                    btn.style.background = "#25d366";
-                    btn.style.color = "white";
-                    btn.onclick = () => {
-                        MetaTracker.trackContact('whatsapp_mac_monthly');
-                        window.open("https://wa.me/5519981765840?text=Baixei o Ultra Player na Smart TV, foto do MAC:", '_blank', 'noopener,noreferrer');
-                    };
-                    document.getElementById('wa-options').appendChild(btn);
-                } else if(type === 'suporte_humano') {
-                    addMessage("Certo, estou direcionando você para um especialista da equipa.", 'bot');
-                    const btn = document.createElement('button');
-                    btn.innerText = "Conversar no WhatsApp";
-                    btn.style.background = "#25d366";
-                    btn.style.color = "white";
-                    btn.onclick = () => {
-                        MetaTracker.trackContact('whatsapp_humano_monthly');
-                        window.open("https://wa.me/5519981765840?text=Preciso de atendimento para fechar o plano mensal.", '_blank', 'noopener,noreferrer');
-                    };
-                    document.getElementById('wa-options').appendChild(btn);
-                } else if(type === 'reset') {
-                    addMessage("Posso ajudar com mais alguma coisa?", 'bot');
-                    setOptions([{label: 'Tem fidelidade?', type: 'fidelidade'}, {label: 'Como recebo?', type: 'entrega'}, {label: 'Quero comprar', type: 'comprar_agora'}]);
-                }
-            });
-        }
-
-        let checkoutUrlToRedirect = '';
-        let checkoutSource = 'mensal_page';
-
-        function openWarningModal(url, source = 'cta') {
-            checkoutUrlToRedirect = url;
-            checkoutSource = source;
-
-            MetaTracker.trackCheckoutIntent(source);
-            MetaTracker.track('ViewContent', {
-                content_name: 'Modal Compatibilidade Smart TV',
-                content_category: 'Compatibilidade',
-                content_type: 'modal',
-                page: 'mensal',
-                source
-            });
-
-            document.getElementById('smartTvModal').classList.add('active');
-        }
-
-        function closeWarningModal() {
-            document.getElementById('smartTvModal').classList.remove('active');
-        }
-
-        function proceedToCheckout() {
-            if(checkoutUrlToRedirect) {
-                MetaTracker.trackCheckout('Plano Mensal UniTV', 24.90, 'BRL', checkoutSource || 'smart_tv_modal');
-                window.open(checkoutUrlToRedirect, '_blank', 'noopener,noreferrer');
-                closeWarningModal();
-            }
-        }
-
-        document.addEventListener("DOMContentLoaded", function() {
-            MetaTracker.bindAdvancedMatching();
-            MetaTracker.bindPageInteractions();
-            MetaTracker.bindScrollDepth();
-            MetaTracker.bindTimeEvents();
-            MetaTracker.trackMonthlyPageView();
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            document.querySelectorAll('.fade-in').forEach((el) => {
-                observer.observe(el);
-            });
-
-            const stickyCta = document.getElementById('sticky-cta');
-            const heroSection = document.getElementById('comprar');
-            
-            window.addEventListener('scroll', () => {
-                if (window.innerWidth <= 768) {
-                    const heroBottom = heroSection.getBoundingClientRect().bottom;
-                    if (heroBottom < 0) {
-                        stickyCta.classList.add('show');
-                    } else {
-                        stickyCta.classList.remove('show');
-                    }
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+[Erro] O provedor está indisponível no momento. Tente novamente em instantes.
