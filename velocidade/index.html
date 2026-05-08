@@ -6,28 +6,6 @@
     <title>Teste de Velocidade UniTV | Sua Internet aguenta 4K?</title>
     <meta name="description" content="Verifique agora se sua conexão é estável para assistir UniTV VIP em 4K. Teste de latência, download e compatibilidade com tecnologia P2P.">
     <meta name="theme-color" content="#1a0525">
-
-    <!-- Meta Pixel -->
-    <script>
-        window.UNITV_META_PIXEL_ID = '2204821377087872';
-        window.UNITV_META_CAPI = {
-            enabled: true,
-            endpoint: '/api/meta-capi.php'
-        };
-        window.UNITV_META_USER_DATA = {};
-
-        !function(f,b,e,v,n,t,s)
-        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-        n.queue=[];t=b.createElement(e);t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t,s)}(window, document,'script',
-        'https://connect.facebook.net/en_US/fbevents.js');
-
-        fbq('init', window.UNITV_META_PIXEL_ID);
-        fbq('track', 'PageView');
-    </script>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&family=Montserrat:wght@900&display=swap" rel="stylesheet">
@@ -797,552 +775,239 @@
             box-shadow: 0 10px 30px rgba(37,211,102,0.4);
         }
 
-        @media (max-width: 992px) {
-            .hero-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
         @media (max-width: 768px) {
-            .speed-hero { padding-top: 130px; }
-            h1 { font-size: 2.2rem; }
-            .nav-links { display: none; }
             .pricing-grid { flex-direction: column; align-items: center; }
             .price-card.destaque { transform: scale(1); }
             .footer-container { grid-template-columns: 1fr; text-align: center; }
-            .diag-grid { grid-template-columns: 1fr; }
             .wa-widget { width: auto; left: 15px; right: 15px; bottom: 90px; }
-            .search-free { display: none; }
         }
     </style>
 </head>
 <body>
-    <noscript>
-        <img height="1" width="1" style="display:none"
-             src="https://www.facebook.com/tr?id=2204821377087872&ev=PageView&noscript=1"/>
-    </noscript>
-
-    <div class="page-wrap">
-        <div class="promo-bar">
-            DIAGNÓSTICO VIP: descubra em segundos se sua conexão está pronta para 4K. <span id="timer">04:59:00</span>
-        </div>
-
-        <header>
-            <a href="../index.html" class="logo">
-                <img src="https://unitvsite.com.br/img/logo-unitv.png" alt="UniTV Oficial">
-            </a>
-            <nav class="nav-links">
-                <a href="../index.html">Página Inicial</a>
-                <a href="../baixar/index.html" data-meta-guide="header-downloads">Downloads</a>
-                <a href="../tv-box/index.html" data-meta-guide="header-tvbox">Guia TV Box</a>
-                <a href="../blog/index.html" data-meta-guide="header-blog">Blog Oficial</a>
-            </nav>
-            <a href="#comprar" class="btn-header" data-meta-view-plans="speed-header">COMPRAR VIP</a>
-        </header>
-
-        <section class="speed-hero reveal">
-            <span class="badge"><i class="fa-solid fa-wave-square"></i> Diagnóstico de Rede 2026</span>
-            <h1>Sua internet aguenta <br><span class="text-gradient">UniTV em 4K Real?</span></h1>
-            <p class="hero-sub">Teste velocidade, latência e estabilidade. Em poucos segundos você descobre se a sua rede está pronta para jogos, esportes ao vivo e cinema 4K sem travamentos.</p>
-
-            <div class="hero-grid">
-                <div class="card speed-card">
-                    <div class="speed-card-header">
-                        <div>
-                            <div class="speed-card-title">Teste de Velocidade UniTV</div>
-                            <div class="speed-card-sub">Simulação orientada para compatibilidade com streaming</div>
-                        </div>
-                        <div class="connection-pill"><i class="fa-solid fa-circle"></i> Diagnóstico em tempo real</div>
-                    </div>
-
-                    <div class="gauge-wrap">
-                        <div class="gauge-inner">
-                            <div id="status-text" class="gauge-status">Pronto para teste</div>
-                            <div class="gauge-val" id="speed-val">0</div>
-                            <div class="gauge-unit">Mbps</div>
-                        </div>
-                    </div>
-
-                    <button class="btn-test" id="start-btn" onclick="runSpeedTest()">
-                        <i class="fa-solid fa-gauge-high"></i> INICIAR TESTE AGORA
-                    </button>
-
-                    <div class="micro-note">Leitura estimada para avaliar consumo de canais ao vivo, VOD e 4K.</div>
-                </div>
-
-                <div class="card results-card">
-                    <div>
-                        <div class="results-title">Resumo técnico da sua conexão</div>
-                        <div class="results-sub">Acompanhe os principais indicadores que mais impactam o UniTV.</div>
-
-                        <div class="diag-grid">
-                            <div class="diag-item">
-                                <label>Download</label>
-                                <div class="big"><span id="download-val">--</span></div>
-                                <small>Mbps estimados</small>
-                            </div>
-                            <div class="diag-item">
-                                <label>Latência</label>
-                                <div class="big"><span id="ping-val">--</span></div>
-                                <small>ms</small>
-                            </div>
-                            <div class="diag-item">
-                                <label>Jitter</label>
-                                <div class="big"><span id="jitter-val">--</span></div>
-                                <small>ms</small>
-                            </div>
-                            <div class="diag-item">
-                                <label>Estabilidade</label>
-                                <div class="big"><span id="stable-val">--</span></div>
-                                <small>Consistência</small>
-                            </div>
-                        </div>
-
-                        <div class="compat-box">
-                            <div class="compat-label">Compatibilidade UniTV</div>
-                            <div class="compat-result" id="compat-result">Aguardando teste</div>
-                            <div class="compat-desc" id="compat-desc">Inicie o diagnóstico para descobrir se sua rede está pronta para SD, HD, Full HD ou 4K.</div>
-                        </div>
-
-                        <div class="recommendation" id="recommendation-box"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="content-section reveal">
-            <h2 class="section-title">Requisitos mínimos recomendados</h2>
-            <p class="section-sub">Essas faixas ajudam a entender se o seu aparelho e sua conexão vão entregar uma experiência estável na prática.</p>
-
-            <div class="requirements-grid">
-                <div class="req-card">
-                    <i class="fa-solid fa-gauge-high"></i>
-                    <h3>Canais SD</h3>
-                    <p>Mínimo recomendado de <strong>5 Mbps</strong> estáveis. Ideal para conexões básicas e uso ocasional.</p>
-                </div>
-                <div class="req-card">
-                    <i class="fa-solid fa-tv"></i>
-                    <h3>HD / Full HD</h3>
-                    <p>Mínimo recomendado de <strong>10 a 15 Mbps</strong>. Faixa segura para canais e filmes em alta definição.</p>
-                </div>
-                <div class="req-card">
-                    <i class="fa-solid fa-film"></i>
-                    <h3>4K Ultra HD</h3>
-                    <p>Mínimo recomendado de <strong>25 Mbps</strong> com boa estabilidade e jitter baixo para evitar buffering.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="content-section reveal">
-            <h2 class="section-title">Como melhorar sua experiência</h2>
-            <p class="section-sub">Se o resultado não foi ideal, estes ajustes costumam resolver a maioria dos travamentos em streaming.</p>
-
-            <div class="tips-grid">
-                <div class="tip-card">
-                    <i class="fa-solid fa-ethernet"></i>
-                    <h3>Use cabo de rede</h3>
-                    <p>O cabo de rede entrega mais estabilidade do que o Wi-Fi, principalmente para canais ao vivo e 4K.</p>
-                </div>
-                <div class="tip-card">
-                    <i class="fa-solid fa-rotate-right"></i>
-                    <h3>Reinicie modem e roteador</h3>
-                    <p>Uma reinicialização simples limpa oscilações, reduz perda de pacotes e melhora a resposta da rede.</p>
-                </div>
-                <div class="tip-card">
-                    <i class="fa-solid fa-mobile-screen-button"></i>
-                    <h3>Evite aparelhos lentos</h3>
-                    <p>Mesmo com internet boa, um aparelho fraco pode travar. Dê preferência a TV Box Android atualizada.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="comprar" class="pricing-section reveal">
-            <h2 style="font-size: 3rem; font-weight: 900; color: #fff;">Sua conexão é boa? Então seja VIP.</h2>
-            <p style="color: #666; max-width: 760px; margin: 12px auto 0;">Se o teste mostrou estabilidade, agora você pode aproveitar nossa infraestrutura otimizada para sinal forte, imagem limpa e esportes sem atraso.</p>
-            
-            <div class="pricing-grid">
-                <div class="price-card">
-                    <div class="price-header">
-                        <h3 class="price-title">Recarga Mensal</h3>
-                        <div class="price-val">R$ 24,90</div>
-                    </div>
-                    <ul class="features-list" style="list-style:none; text-align:left; margin-bottom: 30px;">
-                        <li><i class="fa-solid fa-check"></i> Liberação Automática</li>
-                        <li><i class="fa-solid fa-check"></i> 2 Telas VIP</li>
-                        <li><i class="fa-solid fa-check"></i> 4K Ultra HD</li>
-                    </ul>
-                    <a href="javascript:void(0)" onclick="openWarningModal('https://pay.kirvano.com/07f96a4e-ecdf-4538-83ca-01e5c35f1425','speed_monthly_card','Plano Mensal UniTV',24.90)" class="btn-price">ATIVAR AGORA</a>
-                </div>
-
-                <div class="price-card destaque">
-                    <div class="economy-tag">🔥 RECOMENDADO - ECONOMIZE R$ 100 HOJE</div>
-                    <div class="price-header">
-                        <h3 class="price-title" style="color: var(--cor-destaque);">Anual VIP Premium</h3>
-                        <div class="price-val">R$ 189,90</div>
-                    </div>
-                    <ul class="features-list" style="list-style:none; text-align:left; margin-bottom: 30px;">
-                        <li><i class="fa-solid fa-star" style="color: #ffcc00"></i> 365 Dias de Acesso</li>
-                        <li><i class="fa-solid fa-check"></i> Garantia Anti-Travamento</li>
-                        <li><i class="fa-solid fa-check"></i> Suporte Prioritário 24h</li>
-                    </ul>
-                    <a href="javascript:void(0)" onclick="openWarningModal('https://pay.kirvano.com/0aadf253-f4b6-47dd-8d0a-f5f16714ce98','speed_yearly_card','Plano Anual VIP UniTV',189.90)" class="btn-price">PEGAR PROMOÇÃO</a>
-                </div>
-            </div>
-        </section>
-
-        <footer>
-            <div class="footer-container">
-                <div class="footer-col">
-                    <img src="https://unitvsite.com.br/img/logo-unitv.png" alt="UniTV" class="footer-logo">
-                    <p>Revenda Oficial UniTV Brasil. Tecnologia e entretenimento de elite com segurança total para sua família.</p>
-                    <div style="color: #00ff88; font-size: 0.8rem; margin-top: 15px; display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-shield-halved"></i> Site 100% Protegido</div>
-                </div>
-                <div class="footer-col">
-                    <h4>Navegação VIP</h4>
-                    <ul class="footer-links">
-                        <li><a href="../index.html"><i class="fa-solid fa-chevron-right"></i> Home Page</a></li>
-                        <li><a href="../baixar/index.html" data-meta-guide="footer-downloads"><i class="fa-solid fa-chevron-right"></i> Downloads</a></li>
-                        <li><a href="../tv-box/index.html" data-meta-guide="footer-tvbox"><i class="fa-solid fa-chevron-right"></i> Guia TV Box</a></li>
-                        <li><a href="../blog/index.html" data-meta-guide="footer-blog"><i class="fa-solid fa-chevron-right"></i> Blog Oficial</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Suporte</h4>
-                    <ul class="footer-links">
-                        <li><a href="../ajuda/index.html" data-meta-guide="footer-ajuda"><i class="fa-solid fa-chevron-right"></i> Ajuda & Erros</a></li>
-                        <li><a href="javascript:void(0)" onclick="toggleChat()" data-meta-contact="footer-chat"><i class="fa-solid fa-chevron-right"></i> Chat Online</a></li>
-                        <li><a href="https://wa.me/5519981765840" target="_blank" rel="noopener noreferrer" data-meta-contact="footer-whatsapp"><i class="fa-solid fa-chevron-right"></i> WhatsApp Oficial</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Pagamento Pix</h4>
-                    <div class="payment-methods">
-                        <i class="fa-brands fa-pix" style="color:#32bcad;"></i>
-                        <i class="fa-brands fa-cc-mastercard"></i>
-                        <i class="fa-brands fa-cc-visa"></i>
-                    </div>
-                </div>
-            </div>
-            <div style="text-align: center; margin-top: 60px; padding-top: 20px; border-top: 1px solid #111; font-size: 0.75rem; color: #444;">
-                &copy; 2024 UniTV Revenda Oficial. CNPJ: 00.000.000/0001-00
-            </div>
-        </footer>
-
-        <div id="smartTvModal" class="modal-overlay">
-            <div class="modal-content">
-                <button class="modal-close-x" onclick="closeWarningModal()">×</button>
-                <i class="fa-solid fa-triangle-exclamation" style="color: #ffcc00; font-size: 3.5rem; margin-bottom: 20px;"></i>
-                <h3 style="color: #fff; font-size: 1.5rem; margin-bottom: 15px; font-weight: 900;">APP SÓ PARA ANDROID!</h3>
-                <p style="color: #888; font-size: 0.95rem;">O UniTV VIP funciona exclusivamente em dispositivos <strong>ANDROID</strong>.</p>
-                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; text-align: left; margin: 20px 0;">
-                    <p style="color: #fff; font-weight: 700;">Sua TV é LG ou Samsung?</p>
-                    <p style="font-size: 0.8rem; color: #aaa; margin-top: 5px;">Se sim, não compre esta recarga. Temos outros apps para sua TV. Chame no suporte!</p>
-                </div>
-                <button class="btn-modal-buy" onclick="proceedToCheckout()">MEU APARELHO É ANDROID</button>
-            </div>
-        </div>
-
-        <div id="chat-widget" class="wa-widget">
-            <div class="wa-header">
-                <div class="wa-profile">
-                    <img src="../img/logo-unitv.png" alt="UniTV">
-                    <div class="wa-info">
-                        <span class="wa-name">Suporte UniTV</span>
-                        <span class="wa-status">Online</span>
-                    </div>
-                </div>
-                <button onclick="toggleChat()" class="wa-close" style="background:none;border:none;color:white;font-size:1.5rem;cursor:pointer;">×</button>
-            </div>
-            <div id="chat-content" class="wa-chat-body">
-                <div class="wa-msg">Olá! 👋 Sua internet deu boa no teste? Quer saber como otimizar o UniTV no seu aparelho?</div>
-            </div>
-            <div id="wa-options" class="wa-options">
-                <button onclick="userAction('Como otimizar?', 'otimizar')">Como otimizar?</button>
-                <button onclick="userAction('Planos VIP', 'preco')">Ver Planos VIP</button>
-                <button onclick="userAction('Ajuda Técnica', 'ajuda')">Ajuda Técnica</button>
-            </div>
-        </div>
-
-        <div class="float-zap" onclick="toggleChat()" data-meta-contact="float-whatsapp"><i class="fa-brands fa-whatsapp"></i></div>
+    <div class="promo-bar">
+        DIAGNÓSTICO VIP: descubra em segundos se sua conexão está pronta para 4K. <span id="timer">04:59:00</span>
     </div>
 
+    <header>
+        <a href="../index.html" class="logo">
+            <img src="https://unitvsite.com.br/img/logo-unitv.png" alt="UniTV Oficial">
+        </a>
+        <nav class="nav-links">
+            <a href="../index.html">Página Inicial</a>
+            <a href="../baixar/index.html" data-meta-guide="nav_downloads">Downloads</a>
+            <a href="../tv-box/index.html" data-meta-guide="nav_tvbox">Guia TV Box</a>
+            <a href="../blog/index.html" data-meta-guide="nav_blog">Blog Oficial</a>
+        </nav>
+        <a href="#comprar" class="btn-header" data-meta-view-plans="speed-header">COMPRAR VIP</a>
+    </header>
+
+    <section class="speed-hero reveal">
+        <span class="badge"><i class="fa-solid fa-wave-square"></i> Diagnóstico de Rede 2026</span>
+        <h1>Sua internet aguenta <br><span class="text-gradient">UniTV em 4K Real?</span></h1>
+        
+        <div class="gauge-container">
+            <div id="status-text" style="color: #666; font-weight: 800;">PRONTO PARA TESTE</div>
+            <div class="gauge-val" id="speed-val">0</div>
+            <div class="gauge-unit">MBPS</div>
+        </div>
+
+        <button class="btn-test" id="start-btn" onclick="runSpeedTest()">
+            <i class="fa-solid fa-gauge-high"></i> INICIAR TESTE AGORA
+        </button>
+
+        <div class="diag-grid" style="max-width: 800px; margin: 40px auto;">
+            <div class="diag-item">
+                <label>Latência (Ping)</label>
+                <span id="ping-val">--</span> <small>ms</small>
+            </div>
+            <div class="diag-item">
+                <label>Jitter</label>
+                <span id="jitter-val">--</span> <small>ms</small>
+            </div>
+            <div class="diag-item">
+                <label>Estabilidade</label>
+                <span id="stable-val">--</span>
+            </div>
+            <div class="diag-item">
+                <label>Download</label>
+                <span id="download-val">--</span> <small>Mbps</small>
+            </div>
+        </div>
+
+        <div id="compat-result-wrap" style="max-width: 800px; margin: 0 auto;">
+            <div class="compat-box">
+                <div class="compat-label">Compatibilidade UniTV</div>
+                <div class="compat-result" id="compat-result">Aguardando teste</div>
+                <div class="compat-desc" id="compat-desc">Inicie o diagnóstico para descobrir se sua rede está pronta para SD, HD, Full HD ou 4K.</div>
+            </div>
+            <div class="recommendation" id="recommendation-box"></div>
+        </div>
+    </section>
+
+    <section class="content-section reveal">
+        <h2 class="section-title">Requisitos mínimos recomendados</h2>
+        <p class="section-sub">Essas faixas ajudam a entender se o seu aparelho e sua conexão vão entregar uma experiência estável na prática.</p>
+
+        <div class="requirements-grid">
+            <div class="req-card">
+                <i class="fa-solid fa-gauge-high"></i>
+                <h3>Canais SD</h3>
+                <p>Mínimo recomendado de <strong>5 Mbps</strong> estáveis. Ideal para conexões básicas e uso ocasional.</p>
+            </div>
+            <div class="req-card">
+                <i class="fa-solid fa-tv"></i>
+                <h3>HD / Full HD</h3>
+                <p>Mínimo recomendado de <strong>10 a 15 Mbps</strong>. Faixa segura para canais e filmes em alta definição.</p>
+            </div>
+            <div class="req-card">
+                <i class="fa-solid fa-film"></i>
+                <h3>4K Ultra HD</h3>
+                <p>Mínimo recomendado de <strong>25 Mbps</strong> com boa estabilidade e jitter baixo para evitar buffering.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section reveal">
+        <h2 class="section-title">Como melhorar sua experiência</h2>
+        <p class="section-sub">Se o resultado não foi ideal, estes ajustes costumam resolver a maioria dos travamentos em streaming.</p>
+
+        <div class="tips-grid">
+            <div class="tip-card">
+                <i class="fa-solid fa-ethernet"></i>
+                <h3>Use cabo de rede</h3>
+                <p>O cabo de rede entrega mais estabilidade do que o Wi-Fi, principalmente para canais ao vivo e 4K.</p>
+            </div>
+            <div class="tip-card">
+                <i class="fa-solid fa-rotate-right"></i>
+                <h3>Reinicie modem e roteador</h3>
+                <p>Uma reinicialização simples limpa oscilações, reduz perda de pacotes e melhora a resposta da rede.</p>
+            </div>
+            <div class="tip-card">
+                <i class="fa-solid fa-mobile-screen-button"></i>
+                <h3>Evite aparelhos lentos</h3>
+                <p>Mesmo com internet boa, um aparelho fraco pode travar. Dê preferência a TV Box Android atualizada.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="comprar" class="pricing-section reveal">
+        <h2 style="font-size: 3rem; font-weight: 900; color: #fff;">Sua conexão é boa? Então seja VIP.</h2>
+        <p style="color: #666; max-width: 760px; margin: 12px auto 0;">Se o teste mostrou estabilidade, agora você pode aproveitar nossa infraestrutura otimizada para sinal forte, imagem limpa e esportes sem atraso.</p>
+        
+        <div class="pricing-grid">
+            <div class="price-card">
+                <div class="price-header">
+                    <h3 class="price-title">Recarga Mensal</h3>
+                    <div class="price-val">R$ 24,90</div>
+                </div>
+                <ul class="features-list" style="list-style:none; text-align:left; margin-bottom: 30px;">
+                    <li><i class="fa-solid fa-check"></i> Liberação Automática</li>
+                    <li><i class="fa-solid fa-check"></i> 2 Telas VIP</li>
+                    <li><i class="fa-solid fa-check"></i> 4K Ultra HD</li>
+                </ul>
+                <a href="javascript:void(0)" onclick="openWarningModal('https://pay.kirvano.com/07f96a4e-ecdf-4538-83ca-01e5c35f1425','speed_monthly_card','Plano Mensal UniTV',24.90)" class="btn-price">ATIVAR AGORA</a>
+            </div>
+
+            <div class="price-card destaque">
+                <div class="economy-tag">🔥 RECOMENDADO - ECONOMIZE R$ 100 HOJE</div>
+                <div class="price-header">
+                    <h3 class="price-title" style="color: var(--cor-destaque);">Anual VIP Premium</h3>
+                    <div class="price-val">R$ 189,90</div>
+                </div>
+                <ul class="features-list" style="list-style:none; text-align:left; margin-bottom: 30px;">
+                    <li><i class="fa-solid fa-star" style="color: #ffcc00"></i> 365 Dias de Acesso</li>
+                    <li><i class="fa-solid fa-check"></i> Garantia Anti-Travamento</li>
+                    <li><i class="fa-solid fa-check"></i> Suporte Prioritário 24h</li>
+                </ul>
+                <a href="javascript:void(0)" onclick="openWarningModal('https://pay.kirvano.com/0aadf253-f4b6-47dd-8d0a-f5f16714ce98','speed_yearly_card','Plano Anual VIP UniTV',189.90)" class="btn-price">PEGAR PROMOÇÃO</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <img src="https://unitvsite.com.br/img/logo-unitv.png" alt="UniTV" class="footer-logo">
+                <p>Revenda Oficial UniTV Brasil. Tecnologia e entretenimento de elite com segurança total para sua família.</p>
+                <div style="color: #00ff88; font-size: 0.8rem; margin-top: 15px; display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-shield-halved"></i> Site 100% Protegido</div>
+            </div>
+            <div class="footer-col">
+                <h4>Navegação VIP</h4>
+                <ul class="footer-links">
+                    <li><a href="../index.html"><i class="fa-solid fa-chevron-right"></i> Home Page</a></li>
+                    <li><a href="../baixar/index.html" data-meta-guide="footer-downloads"><i class="fa-solid fa-chevron-right"></i> Downloads</a></li>
+                    <li><a href="../tv-box/index.html" data-meta-guide="footer-tvbox"><i class="fa-solid fa-chevron-right"></i> Guia TV Box</a></li>
+                    <li><a href="../blog/index.html" data-meta-guide="footer-blog"><i class="fa-solid fa-chevron-right"></i> Blog Oficial</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Suporte</h4>
+                <ul class="footer-links">
+                    <li><a href="../ajuda/index.html" data-meta-guide="footer-ajuda"><i class="fa-solid fa-chevron-right"></i> Ajuda & Erros</a></li>
+                    <li><a href="javascript:void(0)" onclick="toggleChat()" data-meta-contact="footer-chat"><i class="fa-solid fa-chevron-right"></i> Chat Online</a></li>
+                    <li><a href="https://wa.me/5519981765840" target="_blank" rel="noopener noreferrer" data-meta-contact="footer-whatsapp"><i class="fa-solid fa-chevron-right"></i> WhatsApp Oficial</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Pagamento Pix</h4>
+                <div class="payment-methods">
+                    <i class="fa-brands fa-pix" style="color:#32bcad;"></i>
+                    <i class="fa-brands fa-cc-mastercard"></i>
+                    <i class="fa-brands fa-cc-visa"></i>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 60px; padding-top: 20px; border-top: 1px solid #111; font-size: 0.75rem; color: #444;">
+            &copy; 2024 UniTV Revenda Oficial. CNPJ: 00.000.000/0001-00
+        </div>
+    </footer>
+
+    <div id="smartTvModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close-x" onclick="closeWarningModal()">×</button>
+            <i class="fa-solid fa-triangle-exclamation" style="color: #ffcc00; font-size: 3.5rem; margin-bottom: 20px;"></i>
+            <h3 style="color: #fff; font-size: 1.5rem; margin-bottom: 15px; font-weight: 900;">APP SÓ PARA ANDROID!</h3>
+            <p style="color: #888; font-size: 0.95rem;">O UniTV VIP funciona exclusivamente em dispositivos <strong>ANDROID</strong>.</p>
+            <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; text-align: left; margin: 20px 0;">
+                <p style="color: #fff; font-weight: 700;">Sua TV é LG ou Samsung?</p>
+                <p style="font-size: 0.8rem; color: #aaa; margin-top: 5px;">Se sim, não compre esta recarga. Temos outros apps para sua TV. Chame no suporte!</p>
+            </div>
+            <button class="btn-modal-buy" onclick="proceedToCheckout()">MEU APARELHO É ANDROID</button>
+        </div>
+    </div>
+
+    <div id="chat-widget" class="wa-widget">
+        <div class="wa-header">
+            <div class="wa-profile">
+                <img src="../img/logo-unitv.png" alt="UniTV">
+                <div class="wa-info">
+                    <span class="wa-name">Suporte UniTV</span>
+                    <span class="wa-status">Online</span>
+                </div>
+            </div>
+            <button onclick="toggleChat()" class="wa-close" style="background:none;border:none;color:white;font-size:1.5rem;cursor:pointer;">×</button>
+        </div>
+        <div id="chat-content" class="wa-chat-body">
+            <div class="wa-msg">Olá! 👋 Sua internet deu boa no teste? Quer saber como otimizar o UniTV no seu aparelho?</div>
+        </div>
+        <div id="wa-options" class="wa-options">
+            <button onclick="userAction('Como otimizar?', 'otimizar')">Como otimizar?</button>
+            <button onclick="userAction('Planos VIP', 'preco')">Ver Planos VIP</button>
+            <button onclick="userAction('Ajuda Técnica', 'ajuda')">Ajuda Técnica</button>
+        </div>
+    </div>
+
+    <div class="float-zap" onclick="toggleChat()" data-meta-contact="float_whatsapp"><i class="fa-brands fa-whatsapp"></i></div>
+
+    <script src="/js/meta-tracking.js"></script>
     <script>
-        const MetaTracker = (() => {
-            const CAPI_CONFIG = window.UNITV_META_CAPI || { enabled: false, endpoint: '/api/meta-capi.php' };
-            const STANDARD_EVENTS = new Set([
-                'PageView',
-                'ViewContent',
-                'InitiateCheckout',
-                'Contact',
-                'Lead',
-                'Purchase',
-                'CompleteRegistration',
-                'Search',
-                'AddToCart'
-            ]);
-
-            const state = {
-                userData: window.UNITV_META_USER_DATA || {},
-                scrollMarks: {25:false,50:false,75:false,90:false}
-            };
-
-            function normalizeEmail(value) {
-                return (value || '').toString().trim().toLowerCase();
-            }
-
-            function normalizePhone(value) {
-                return (value || '').toString().replace(/\D+/g, '');
-            }
-
-            function normalizeText(value) {
-                return (value || '').toString().trim().toLowerCase();
-            }
-
-            function mergeUserData(data = {}) {
-                const next = { ...state.userData };
-
-                if (data.em) next.em = normalizeEmail(data.em);
-                if (data.ph) next.ph = normalizePhone(data.ph);
-                if (data.fn) next.fn = normalizeText(data.fn);
-                if (data.ln) next.ln = normalizeText(data.ln);
-
-                Object.keys(next).forEach(key => {
-                    if (!next[key]) delete next[key];
-                });
-
-                state.userData = next;
-                window.UNITV_META_USER_DATA = next;
-            }
-
-            function inferFieldKey(el) {
-                const attrs = [
-                    el.name || '',
-                    el.id || '',
-                    el.placeholder || '',
-                    el.autocomplete || '',
-                    el.getAttribute('aria-label') || ''
-                ].join(' ').toLowerCase();
-
-                if (el.type === 'email' || /e-?mail|mail/.test(attrs)) return 'em';
-                if (el.type === 'tel' || /phone|telefone|celular|whatsapp/.test(attrs)) return 'ph';
-                if (/first.?name|nome\b/.test(attrs) && !/sobrenome|last/.test(attrs)) return 'fn';
-                if (/last.?name|sobrenome/.test(attrs)) return 'ln';
-
-                return null;
-            }
-
-            function captureField(el) {
-                if (!el || !('value' in el)) return;
-                const key = inferFieldKey(el);
-                if (!key) return;
-                mergeUserData({ [key]: el.value });
-            }
-
-            function bindAdvancedMatching() {
-                document.querySelectorAll('input, textarea, select').forEach(captureField);
-                document.addEventListener('input', e => captureField(e.target), true);
-                document.addEventListener('change', e => captureField(e.target), true);
-                document.addEventListener('blur', e => captureField(e.target), true);
-            }
-
-            function generateEventId(prefix = 'meta') {
-                return `${prefix}_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`;
-            }
-
-            function getCookie(name) {
-                const match = document.cookie.match(new RegExp('(^|;\\s*)' + name + '=([^;]+)'));
-                return match ? decodeURIComponent(match[2]) : '';
-            }
-
-            function trackBrowser(eventName, params = {}, eventID) {
-                if (!window.fbq) return;
-
-                if (STANDARD_EVENTS.has(eventName)) {
-                    fbq('track', eventName, params, { eventID });
-                } else {
-                    fbq('trackCustom', eventName, params, { eventID });
-                }
-            }
-
-            function sendToCAPI(payload) {
-                if (!CAPI_CONFIG.enabled || !CAPI_CONFIG.endpoint) return;
-
-                try {
-                    const body = JSON.stringify(payload);
-
-                    if (navigator.sendBeacon) {
-                        const blob = new Blob([body], { type: 'application/json' });
-                        navigator.sendBeacon(CAPI_CONFIG.endpoint, blob);
-                    } else {
-                        fetch(CAPI_CONFIG.endpoint, {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body,
-                            keepalive: true
-                        }).catch(() => {});
-                    }
-                } catch (e) {}
-            }
-
-            function track(eventName, params = {}, options = {}) {
-                const eventID = options.eventID || generateEventId(eventName.toLowerCase());
-
-                const payload = {
-                    event_name: eventName,
-                    event_time: Math.floor(Date.now() / 1000),
-                    event_id: eventID,
-                    event_source_url: window.location.href,
-                    action_source: 'website',
-                    user_data: {
-                        ...state.userData,
-                        fbp: getCookie('_fbp'),
-                        fbc: getCookie('_fbc')
-                    },
-                    custom_data: params
-                };
-
-                trackBrowser(eventName, params, eventID);
-                sendToCAPI(payload);
-
-                return eventID;
-            }
-
-            function trackSpeedPageView() {
-                track('ViewContent', {
-                    content_name: 'Teste de Velocidade UniTV',
-                    content_category: 'Ferramenta',
-                    content_type: 'speed_test',
-                    page: 'velocidade'
-                });
-            }
-
-            function trackPlansView(origin = 'speed_plans') {
-                track('ViewContent', {
-                    content_name: 'Seção de Planos UniTV',
-                    content_category: 'Planos',
-                    content_type: 'product_group',
-                    origin
-                });
-            }
-
-            function trackGuide(origin = 'speed_guide') {
-                track('GuideClick', {
-                    page: 'velocidade',
-                    origin
-                });
-            }
-
-            function trackContact(origin = 'support') {
-                return track('Contact', {
-                    content_name: 'Suporte Velocidade UniTV',
-                    contact_channel: origin
-                });
-            }
-
-            function trackCheckout(planName, value, currency = 'BRL', source = 'speed_page') {
-                track('ViewContent', {
-                    content_name: planName,
-                    content_category: 'Recarga UniTV',
-                    content_type: 'product',
-                    value,
-                    currency,
-                    source
-                });
-
-                return track('InitiateCheckout', {
-                    content_name: planName,
-                    content_category: 'Recarga UniTV',
-                    content_type: 'product',
-                    value,
-                    currency,
-                    source
-                });
-            }
-
-            function bindPageInteractions() {
-                document.addEventListener('click', function(e) {
-                    const plansEl = e.target.closest('[data-meta-view-plans]');
-                    if (plansEl) {
-                        trackPlansView(plansEl.dataset.metaViewPlans || 'speed_plans');
-                        return;
-                    }
-
-                    const guideEl = e.target.closest('[data-meta-guide]');
-                    if (guideEl) {
-                        trackGuide(guideEl.dataset.metaGuide || 'speed_guide');
-                        return;
-                    }
-
-                    const contactEl = e.target.closest('[data-meta-contact]');
-                    if (contactEl) {
-                        trackContact(contactEl.dataset.metaContact || 'support');
-                        return;
-                    }
-
-                    const waLink = e.target.closest("a[href*='wa.me/']");
-                    if (waLink) {
-                        trackContact('whatsapp_link');
-                    }
-                }, true);
-            }
-
-            function bindScrollDepth() {
-                window.addEventListener('scroll', () => {
-                    const doc = document.documentElement;
-                    const total = doc.scrollHeight - window.innerHeight;
-                    if (total <= 0) return;
-
-                    const pct = Math.round((window.scrollY / total) * 100);
-
-                    [25, 50, 75, 90].forEach(mark => {
-                        if (pct >= mark && !state.scrollMarks[mark]) {
-                            state.scrollMarks[mark] = true;
-                            track('ScrollDepth', {
-                                page: 'velocidade',
-                                percent: mark
-                            });
-                        }
-                    });
-                }, { passive: true });
-            }
-
-            function bindTimeEvents() {
-                setTimeout(() => {
-                    track('LandingEngaged', {
-                        page: 'velocidade',
-                        seconds: 15
-                    });
-                }, 15000);
-
-                setTimeout(() => {
-                    track('LandingEngaged', {
-                        page: 'velocidade',
-                        seconds: 30
-                    });
-                }, 30000);
-            }
-
-            return {
-                bindAdvancedMatching,
-                bindPageInteractions,
-                bindScrollDepth,
-                bindTimeEvents,
-                track,
-                trackSpeedPageView,
-                trackPlansView,
-                trackGuide,
-                trackContact,
-                trackCheckout
-            };
-        })();
-
         let checkoutUrl = '';
         let checkoutSource = 'speed_page';
         let checkoutPlanName = 'Plano UniTV';
         let checkoutValue = 0;
 
         function startTimer(duration, display) {
-            var timer = duration, hours, minutes, seconds;
+            let timer = duration, hours, minutes, seconds;
             setInterval(function () {
                 if (!display) return;
                 hours = Math.floor(timer / 3600);
@@ -1385,7 +1050,7 @@
         }
 
         function proceedToCheckout() {
-            if(checkoutUrl) {
+            if (checkoutUrl) {
                 MetaTracker.trackCheckout(checkoutPlanName, checkoutValue, 'BRL', checkoutSource);
                 window.open(checkoutUrl, '_blank', 'noopener,noreferrer');
             }
@@ -1412,18 +1077,24 @@
             });
 
             setTimeout(() => {
-                if(type === 'preco') {
+                if (type === 'preco') {
                     content.innerHTML += `<div class="wa-msg">Planos: Mensal R$ 24,90 | Anual R$ 189,90. Entrega imediata!</div>`;
-                    MetaTracker.trackPlansView('speed_chat_price');
+                    MetaTracker.track('ViewContent', {
+                        page: 'velocidade',
+                        content_name: 'Seção de Planos UniTV',
+                        content_category: 'Planos',
+                        content_type: 'product_group',
+                        origin: 'speed_chat_price'
+                    });
                 }
-                if(type === 'otimizar') {
+                if (type === 'otimizar') {
                     content.innerHTML += `<div class="wa-msg">Use cabo de rede, reinicie o roteador e evite Wi-Fi distante da TV Box para ter mais estabilidade no 4K.</div>`;
                     MetaTracker.track('HelpTopicViewed', {
                         page: 'velocidade',
                         topic: 'otimizacao_rede'
                     });
                 }
-                if(type === 'ajuda') {
+                if (type === 'ajuda') {
                     content.innerHTML += `<div class="wa-msg">Me chame no WhatsApp para um suporte técnico personalizado!</div>`;
                     MetaTracker.trackContact('speed_chat_technical_help');
                 }
@@ -1441,34 +1112,28 @@
 
         function setResultVisuals(speed, ping, jitter, stability) {
             const speedNum = parseFloat(speed);
-            const compatResult = document.getElementById('compat-result');
-            const compatDesc = document.getElementById('compat-desc');
-            const recBox = document.getElementById('recommendation-box');
+            const recommendation = document.getElementById('recommendation-box');
 
-            let level = 'Baixa para UniTV 4K';
-            let desc = 'Sua rede pode rodar SD com limitações. Para HD ou 4K, será necessário melhorar estabilidade e velocidade.';
-            let rec = 'Tente cabo de rede, aproxime o roteador da TV Box e evite muitos aparelhos usando a mesma rede.';
-            let color = 'var(--bad)';
+            let compatText = '';
+            let compatDesc = '';
 
-            if (speedNum >= 10 && speedNum < 25) {
-                level = 'Boa para HD / Full HD';
-                desc = 'Sua conexão já entra em uma faixa adequada para canais HD e boa parte do conteúdo com boa fluidez.';
-                rec = 'Se quiser melhor desempenho em eventos ao vivo, prefira cabo de rede e mantenha o roteador reiniciado.';
-                color = 'var(--warn)';
+            if (speedNum < 10) {
+                compatText = 'Sua conexão é limitada para HD e 4K';
+                compatDesc = 'Você pode ter travamentos frequentes em conteúdos mais pesados.';
+                recommendation.textContent = 'Recomendamos usar cabo de rede, reiniciar modem/roteador e evitar muitos dispositivos usando a mesma rede.';
+            } else if (speedNum >= 10 && speedNum < 25) {
+                compatText = 'Sua conexão é boa para HD / Full HD';
+                compatDesc = 'Você já tem uma boa base para assistir com estabilidade.';
+                recommendation.textContent = 'Para eventos ao vivo e mais estabilidade, prefira cabo de rede e mantenha o roteador otimizado.';
+            } else {
+                compatText = 'Sua conexão está ótima para 4K';
+                compatDesc = 'Você tem uma ótima compatibilidade para aproveitar o UniTV com máxima qualidade.';
+                recommendation.textContent = 'Sua rede está pronta para usar o UniTV VIP com mais estabilidade e qualidade.';
             }
 
-            if (speedNum >= 25 && jitter <= 8 && ping <= 35) {
-                level = 'Excelente para 4K UniTV';
-                desc = 'Sua rede está em uma faixa muito boa para conteúdos 4K, VOD e canais ao vivo com alta estabilidade.';
-                rec = 'Resultado ideal para aproveitar o UniTV VIP com máxima qualidade. Sua rede está pronta.';
-                color = 'var(--ok)';
-            }
-
-            compatResult.textContent = level;
-            compatResult.style.color = color;
-            compatDesc.textContent = desc;
-            recBox.textContent = rec;
-            recBox.classList.add('show');
+            document.getElementById('compat-result').textContent = compatText;
+            document.getElementById('compat-desc').textContent = compatDesc;
+            recommendation.classList.add('show');
         }
 
         function runSpeedTest() {
@@ -1499,6 +1164,7 @@
                 if (count === 10) status.innerText = "Verificando download";
                 if (count === 20) status.innerText = "Calculando latência";
                 if (count === 30) status.innerText = "Medindo estabilidade";
+
                 if (count > 40) {
                     clearInterval(interval);
                     finalizeTest();
@@ -1537,11 +1203,16 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            MetaTracker.bindAdvancedMatching();
-            MetaTracker.bindPageInteractions();
-            MetaTracker.bindScrollDepth();
-            MetaTracker.bindTimeEvents();
-            MetaTracker.trackSpeedPageView();
+            MetaTracker.init({
+                page: 'velocidade',
+                pixelId: '2204821377087872',
+                capiEndpoint: '/api/meta-capi.php',
+                capiEnabled: true,
+                trackViewContent: true,
+                content_name: 'Teste de Velocidade UniTV',
+                content_category: 'Ferramenta',
+                content_type: 'speed_test'
+            });
 
             startTimer(17940, document.getElementById('timer'));
             revealOnScroll();
