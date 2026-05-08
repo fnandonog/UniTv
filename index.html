@@ -8,39 +8,6 @@
     <meta name="theme-color" content="#1a0525">
     <meta name="google-site-verification" content="VU2cRXwZNkSWwzriuubykrzlnB85oJPWnbANUAqf9N8" />
     
-    <!-- Meta Pixel -->
-    <script>
-        window.UNITV_META_PIXEL_ID = '2204821377087872';
-
-        /*
-          CAPI PREPARADA:
-          - Não exponha o Access Token da Meta no frontend.
-          - Configure o seu backend para receber os eventos em /api/meta/capi
-          - Nesse backend, use o Pixel ID + Access Token para enviar ao endpoint da Meta.
-          - Use o mesmo event_id enviado pelo navegador para deduplicação Pixel + CAPI.
-        */
-        window.UNITV_META_CAPI = {
-    enabled: true,
-    endpoint: 'https://unitvsite.com.br/api/meta-capi.php'
-};
-
-
-
-        window.UNITV_META_USER_DATA = {};
-
-        !function(f,b,e,v,n,t,s)
-        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-        n.queue=[];t=b.createElement(e);t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t,s)}(window, document,'script',
-        'https://connect.facebook.net/en_US/fbevents.js');
-
-        fbq('init', window.UNITV_META_PIXEL_ID);
-        fbq('track', 'PageView');
-    </script>
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
@@ -392,11 +359,6 @@
     </style>
 </head>
 <body>
-    <noscript>
-        <img height="1" width="1" style="display:none"
-             src="https://www.facebook.com/tr?id=2204821377087872&ev=PageView&noscript=1"/>
-    </noscript>
-
     <div class="promo-bar">
         🔥 OFERTA RELÂMPAGO: Preços reduzidos por tempo limitado! Encerra em: <span id="timer">04:59:00</span>
     </div>
@@ -422,9 +384,9 @@
             <ul>
                 <li><a href="/" class="active">Início</a></li>
                 <li><a href="#comprar">Planos</a></li>
-                <li><a href="cinema/">Cinema VIP</a></li>
-                <li><a href="tutorial">Instalação</a></li>
-                <li><a href="blog">Blog</a></li>
+                <li><a href="cinema/" data-meta-guide="nav_cinema">Cinema VIP</a></li>
+                <li><a href="tutorial" data-meta-guide="nav_tutorial">Instalação</a></li>
+                <li><a href="blog" data-meta-guide="nav_blog">Blog</a></li>
                 <li><a href="#faq">Dúvidas</a></li>
             </ul>
         </nav>
@@ -546,7 +508,7 @@
             </div>
 
             <div style="text-align: center; margin-top: 40px; padding: 0 20px;">
-                <a href="cinema/" class="btn-cta" style="font-size: 0.95rem; padding: 15px 35px; background: transparent; border: 2px solid var(--cor-destaque); color: #fff; box-shadow: none;">
+                <a href="cinema/" class="btn-cta" data-meta-guide="catalogo_cinema" style="font-size: 0.95rem; padding: 15px 35px; background: transparent; border: 2px solid var(--cor-destaque); color: #fff; box-shadow: none;">
                     <i class="fa-solid fa-popcorn"></i> ACESSAR RESENHAS E CATÁLOGO COMPLETO
                 </a>
             </div>
@@ -635,13 +597,13 @@
                     <i class="fa-solid fa-gauge-high" style="color: var(--cor-destaque);"></i>
                     <h3>Teste sua Conexão</h3>
                     <p>O aplicativo UniTV requer estabilidade. Recomendamos pelo menos 15 Mbps para conteúdos em HD e esportes ao vivo. Faça o teste oficial da nossa plataforma e evite engasgos.</p>
-                    <a href="velocidade" class="btn-outline">Testar Velocidade Agora</a>
+                    <a href="velocidade" class="btn-outline" data-meta-guide="infra_velocidade">Testar Velocidade Agora</a>
                 </div>
                 <div class="info-card">
                     <i class="fa-solid fa-newspaper" style="color: #00ff88;"></i>
                     <h3>Central de Novidades (Blog)</h3>
                     <p>Acesse o nosso blog para tutoriais detalhados de configuração em TV Box, guias para remover travamentos, e descubra os filmes e séries que estão bombando nesta semana.</p>
-                    <a href="blog" class="btn-outline" style="border-color: #00ff88; color: #00ff88;">Ler Artigos do Blog</a>
+                    <a href="blog" class="btn-outline" data-meta-guide="infra_blog" style="border-color: #00ff88; color: #00ff88;">Ler Artigos do Blog</a>
                 </div>
             </div>
         </section>
@@ -654,13 +616,13 @@
                     <div class="dl-icon"><i class="fa-solid fa-tv"></i></div>
                     <h3>TV Box & Fire Stick</h3>
                     <p>Utilize o aplicativo oficial <strong>Downloader</strong> da sua loja. O nosso código seguro de instalação rápida é o <strong>867283</strong>.</p>
-                    <a href="tutorial" class="btn-dl-card"><i class="fa-solid fa-book"></i> Ver Passo a Passo</a>
+                    <a href="tutorial" class="btn-dl-card" data-meta-guide="download_tutorial"><i class="fa-solid fa-book"></i> Ver Passo a Passo</a>
                 </div>
                 <div class="dl-card">
                     <div class="dl-icon"><i class="fa-solid fa-mobile-screen"></i></div>
                     <h3>Celular Android</h3>
                     <p>A versão Mobile possui interface otimizada para o toque na tela. Baixe o APK oficial de forma segura diretamente no nosso servidor.</p>
-                    <button onclick="window.open('http://mkdw.qrdldunitvss.com/download','_blank', 'noopener,noreferrer')" class="btn-dl-card dark"><i class="fa-solid fa-download"></i> Baixar APK Celular</button>
+                    <button onclick="window.open('http://mkdw.qrdldunitvss.com/download','_blank', 'noopener,noreferrer')" class="btn-dl-card dark" data-meta-download="home_android_apk"><i class="fa-solid fa-download"></i> Baixar APK Celular</button>
                 </div>
             </div>
         </section>
@@ -708,7 +670,7 @@
                 </div>
             </div>
             <div style="text-align: center; margin-top: 40px;">
-                <a href="ajuda" class="btn-outline">Ver Central de Ajuda Completa</a>
+                <a href="ajuda" class="btn-outline" data-meta-guide="faq_central_ajuda">Ver Central de Ajuda Completa</a>
             </div>
         </section>
 
@@ -721,7 +683,7 @@
                 <p>A internet está cheia de golpes e sites falsos como o UnitvNet. Aqui, somos uma revenda com autorização direta, fornecendo apenas códigos de 16 dígitos 100% originais. O pagamento com liberação via Pix é processado por gateways de segurança máxima (Kirvano/Kiwify), assegurando o envio automático do plano mensal ou anual para o seu WhatsApp no ato da compra.</p>
                 
                 <h3>Como a tecnologia P2P acaba com o "Buffering"</h3>
-                <p>O que mais incomoda num serviço de IPTV comum é o travamento durante os desportos (futebol, NBA, UFC). A nossa plataforma resolve isso com um sistema dinâmico. Quanto mais utilizadores assistem, mais forte o servidor fica, garantindo fluidez em UHD (4K) em televisores modernos. Para tutoriais avançados, resolução de problemas ou para testar se a sua rede suporta nossa qualidade, visite a nossa aba de <a href="blog">Blog</a> ou a ferramenta de <a href="velocidade">Velocímetro</a>.</p>
+                <p>O que mais incomoda num serviço de IPTV comum é o travamento durante os desportos (futebol, NBA, UFC). A nossa plataforma resolve isso com um sistema dinâmico. Quanto mais utilizadores assistem, mais forte o servidor fica, garantindo fluidez em UHD (4K) em televisores modernos. Para tutoriais avançados, resolução de problemas ou para testar se a sua rede suporta nossa qualidade, visite a nossa aba de <a href="blog" data-meta-guide="seo_blog">Blog</a> ou a ferramenta de <a href="velocidade" data-meta-guide="seo_velocidade">Velocímetro</a>.</p>
 
                 <h3>Loja Oficial: Como Comprar e Renovar a Sua Recarga UniTV</h3>
                 <p>Na nossa <strong>loja online</strong>, facilitamos o processo de compra do produto digital. Se você deseja <strong>comprar recarga unitv mensal</strong> ou garantir o desconto do nosso <strong>código unitv anual vip</strong>, todo o processo ocorre em ambiente criptografado. Este é o canal oficial de vendas para adquirir a licença (código de 16 dígitos) necessária para o desbloqueio do aplicativo em sua plenitude, garantindo uma experiência de produto premium para você e sua família.</p>
@@ -744,16 +706,16 @@
                 <h4>Acesso Rápido</h4>
                 <ul class="footer-links">
                     <li><a href="#comprar">Planos e Recargas</a></li>
-                    <li><a href="cinema/">Cinema VIP</a></li>
-                    <li><a href="tutorial">Guia de Instalação</a></li>
-                    <li><a href="blog">Blog de Tecnologia</a></li>
-                    <li><a href="velocidade">Teste de Velocidade</a></li>
+                    <li><a href="cinema/" data-meta-guide="footer_cinema">Cinema VIP</a></li>
+                    <li><a href="tutorial" data-meta-guide="footer_tutorial">Guia de Instalação</a></li>
+                    <li><a href="blog" data-meta-guide="footer_blog">Blog de Tecnologia</a></li>
+                    <li><a href="velocidade" data-meta-guide="footer_velocidade">Teste de Velocidade</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <h4>Suporte Dedicado</h4>
                 <ul class="footer-links">
-                    <li><a href="ajuda">Central de Ajuda (FAQ)</a></li>
+                    <li><a href="ajuda" data-meta-guide="footer_ajuda">Central de Ajuda (FAQ)</a></li>
                     <li><a href="#" onclick="toggleChat()" data-meta-contact="footer-support">Atendimento WhatsApp</a></li>
                     <li><span style="color:#666; font-size:0.8rem; margin-top:5px; display:block;">Horário: Seg a Sex, das 08h às 22h</span></li>
                 </ul>
@@ -831,252 +793,13 @@
         </div>
     </div>
 
+    <script src="/js/meta-tracking.js"></script>
     <script>
-        const MetaTracker = (() => {
-            const PIXEL_ID = window.UNITV_META_PIXEL_ID;
-            const CAPI_CONFIG = window.UNITV_META_CAPI || { enabled: false, endpoint: '/api/meta/capi' };
-            const STANDARD_EVENTS = new Set([
-                'PageView',
-                'ViewContent',
-                'InitiateCheckout',
-                'Contact',
-                'Lead',
-                'Purchase',
-                'CompleteRegistration',
-                'Search',
-                'AddToCart'
-            ]);
-
-            const state = {
-                userData: window.UNITV_META_USER_DATA || {}
-            };
-
-            function normalizeEmail(value) {
-                return (value || '').toString().trim().toLowerCase();
-            }
-
-            function normalizePhone(value) {
-                return (value || '').toString().replace(/\D+/g, '');
-            }
-
-            function normalizeText(value) {
-                return (value || '').toString().trim().toLowerCase();
-            }
-
-            function mergeUserData(data = {}) {
-                const next = { ...state.userData };
-
-                if (data.em) next.em = normalizeEmail(data.em);
-                if (data.ph) next.ph = normalizePhone(data.ph);
-                if (data.fn) next.fn = normalizeText(data.fn);
-                if (data.ln) next.ln = normalizeText(data.ln);
-
-                Object.keys(next).forEach(key => {
-                    if (!next[key]) delete next[key];
-                });
-
-                state.userData = next;
-                window.UNITV_META_USER_DATA = next;
-            }
-
-            function inferFieldKey(el) {
-                const attrs = [
-                    el.name || '',
-                    el.id || '',
-                    el.placeholder || '',
-                    el.autocomplete || '',
-                    el.getAttribute('aria-label') || ''
-                ].join(' ').toLowerCase();
-
-                if (el.type === 'email' || /e-?mail|correo|mail/.test(attrs)) return 'em';
-                if (el.type === 'tel' || /phone|telefone|celular|whatsapp/.test(attrs)) return 'ph';
-                if (/first.?name|nome\b/.test(attrs) && !/sobrenome|last/.test(attrs)) return 'fn';
-                if (/last.?name|sobrenome/.test(attrs)) return 'ln';
-
-                return null;
-            }
-
-            function captureField(el) {
-                if (!el || !('value' in el)) return;
-                const key = inferFieldKey(el);
-                if (!key) return;
-                mergeUserData({ [key]: el.value });
-            }
-
-            function bindAdvancedMatching() {
-                document.querySelectorAll('input, textarea, select').forEach(captureField);
-
-                document.addEventListener('input', e => captureField(e.target), true);
-                document.addEventListener('change', e => captureField(e.target), true);
-                document.addEventListener('blur', e => captureField(e.target), true);
-            }
-
-            function generateEventId(prefix = 'meta') {
-                return `${prefix}_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`;
-            }
-
-            function trackBrowser(eventName, params = {}, eventID) {
-                if (!window.fbq) return;
-
-                if (STANDARD_EVENTS.has(eventName)) {
-                    fbq('track', eventName, params, { eventID });
-                } else {
-                    fbq('trackCustom', eventName, params, { eventID });
-                }
-            }
-
-            function sendToCAPI(payload) {
-                if (!CAPI_CONFIG.enabled || !CAPI_CONFIG.endpoint) return;
-
-                try {
-                    const body = JSON.stringify(payload);
-
-                    if (navigator.sendBeacon) {
-                        const blob = new Blob([body], { type: 'application/json' });
-                        navigator.sendBeacon(CAPI_CONFIG.endpoint, blob);
-                    } else {
-                        fetch(CAPI_CONFIG.endpoint, {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body,
-                            keepalive: true
-                        }).catch(() => {});
-                    }
-                } catch (e) {}
-            }
-
-            function track(eventName, params = {}, options = {}) {
-                const eventID = options.eventID || generateEventId(eventName.toLowerCase());
-
-                const payload = {
-                    event_name: eventName,
-                    event_time: Math.floor(Date.now() / 1000),
-                    event_id: eventID,
-                    event_source_url: window.location.href,
-                    action_source: 'website',
-                    user_data: state.userData,
-                    custom_data: params
-                };
-
-                trackBrowser(eventName, params, eventID);
-                sendToCAPI(payload);
-
-                return eventID;
-            }
-
-            function trackPlansView(origin = 'plans_cta') {
-                return track('ViewContent', {
-                    content_name: 'Seção de Planos UniTV',
-                    content_category: 'Planos',
-                    content_type: 'product_group',
-                    origin
-                });
-            }
-
-            function trackContact(origin = 'support') {
-                return track('Contact', {
-                    content_name: 'Suporte UniTV',
-                    contact_channel: origin
-                });
-            }
-
-            function trackCheckout(planName = 'Plano UniTV', value = undefined, currency = 'BRL', source = 'site') {
-                track('ViewContent', {
-                    content_name: planName,
-                    content_category: 'Recarga UniTV',
-                    content_type: 'product',
-                    value,
-                    currency,
-                    source
-                });
-
-                return track('InitiateCheckout', {
-                    content_name: planName,
-                    content_category: 'Recarga UniTV',
-                    content_type: 'product',
-                    value,
-                    currency,
-                    source
-                });
-            }
-
-            function handleCheckoutElement(el) {
-                const planName = el.dataset.planName || el.textContent.trim() || 'Plano UniTV';
-                const value = el.dataset.value ? parseFloat(el.dataset.value) : undefined;
-                const currency = el.dataset.currency || 'BRL';
-                const source = el.dataset.metaCheckout || 'site';
-
-                return trackCheckout(planName, value, currency, source);
-            }
-
-            function parseValueFromText(text) {
-                const match = (text || '').match(/R\$\s*([\d.,]+)/i);
-                if (!match) return undefined;
-                return parseFloat(match[1].replace(/\./g, '').replace(',', '.'));
-            }
-
-            function bindClicks() {
-                document.addEventListener('click', function(e) {
-                    const viewPlansEl = e.target.closest('[data-meta-view-plans]');
-                    if (viewPlansEl) {
-                        trackPlansView(viewPlansEl.dataset.metaViewPlans || 'plans_cta');
-                        return;
-                    }
-
-                    const checkoutEl = e.target.closest('a[data-meta-checkout]');
-                    if (checkoutEl) {
-                        const href = checkoutEl.getAttribute('href');
-                        const target = checkoutEl.getAttribute('target');
-
-                        if (target !== '_blank' && href && !href.startsWith('#') && !href.startsWith('javascript:')) {
-                            e.preventDefault();
-                            handleCheckoutElement(checkoutEl);
-                            setTimeout(() => {
-                                window.location.href = href;
-                            }, 140);
-                        } else {
-                            handleCheckoutElement(checkoutEl);
-                        }
-                        return;
-                    }
-
-                    const kirvanoLink = e.target.closest("a[href*='pay.kirvano.com']");
-                    if (kirvanoLink) {
-                        const label = kirvanoLink.textContent.replace(/\s+/g, ' ').trim() || 'Checkout UniTV';
-                        const value = parseValueFromText(label);
-                        trackCheckout(label, value, 'BRL', 'kirvano');
-                        return;
-                    }
-
-                    const waLink = e.target.closest("a[href*='wa.me/']");
-                    if (waLink) {
-                        trackContact('whatsapp_link');
-                        return;
-                    }
-
-                    const contactEl = e.target.closest('[data-meta-contact]');
-                    if (contactEl) {
-                        trackContact(contactEl.dataset.metaContact || 'support');
-                    }
-                }, true);
-            }
-
-            return {
-                bindAdvancedMatching,
-                bindClicks,
-                track,
-                trackPlansView,
-                trackContact,
-                trackCheckout,
-                handleCheckoutElement
-            };
-        })();
-
         function toggleMenu() {
             const navMenu = document.getElementById('nav-menu');
             const icon = document.getElementById('menu-icon');
             navMenu.classList.toggle('active');
-            if(navMenu.classList.contains('active')) {
+            if (navMenu.classList.contains('active')) {
                 icon.classList.replace('fa-bars', 'fa-xmark');
             } else {
                 icon.classList.replace('fa-xmark', 'fa-bars');
@@ -1091,12 +814,15 @@
         });
 
         function startTimer(duration, display) {
-            var timer = duration, hours, minutes, seconds;
+            let timer = duration, hours, minutes, seconds;
             setInterval(function () {
                 hours = Math.floor(timer / 3600);
                 minutes = Math.floor((timer % 3600) / 60);
                 seconds = Math.floor(timer % 60);
-                display.textContent = (hours < 10 ? "0" + hours : hours) + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
+                display.textContent =
+                    (hours < 10 ? "0" + hours : hours) + ":" +
+                    (minutes < 10 ? "0" + minutes : minutes) + ":" +
+                    (seconds < 10 ? "0" + seconds : seconds);
                 if (--timer < 0) timer = duration;
             }, 1000);
         }
@@ -1106,20 +832,26 @@
             const question = item.querySelector('.faq-question');
             question.addEventListener('click', () => {
                 const isActive = item.classList.contains('active');
-                faqItems.forEach(i => { 
+
+                faqItems.forEach(i => {
                     i.classList.remove('active');
                     i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
                 });
+
                 if (!isActive) {
                     item.classList.add('active');
                     question.setAttribute('aria-expanded', 'true');
+
+                    MetaTracker.track('FAQOpened', {
+                        page: 'home',
+                        question: question.textContent.replace(/\s+/g, ' ').trim()
+                    });
                 }
             });
         });
 
         const apiKey = '9cb2f018163da4a3f89d718ee6be8677';
         const imageBase = 'https://image.tmdb.org/t/p/w500';
-        const backdropBase = 'https://image.tmdb.org/t/p/original';
 
         async function fetchContent() {
             try {
@@ -1130,50 +862,64 @@
                 const resTV = await fetch(`https://api.themoviedb.org/3/trending/tv/week?api_key=${apiKey}&language=pt-BR`);
                 const dataTV = await resTV.json();
                 populateSlider('slider-series', dataTV.results);
-                
+
                 const resKids = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_genres=16&language=pt-BR&sort_by=popularity.desc`);
                 const dataKids = await resKids.json();
                 populateSlider('slider-kids', dataKids.results);
-            } catch (error) { console.log("Erro API Catálogo."); }
+            } catch (error) {
+                console.log("Erro API Catálogo.");
+            }
         }
 
         function populateSlider(elementId, items) {
             const slider = document.getElementById(elementId);
             if (!slider) return;
             slider.innerHTML = '';
+
             items.slice(0, 15).forEach(item => {
-                if(item.poster_path) {
+                if (item.poster_path) {
                     const title = item.title || item.name;
-                    const html = `<div class="movie-card"><img src="${imageBase}${item.poster_path}" alt="${title}" loading="lazy"><div class="movie-info"><div class="movie-title">${title}</div><div class="movie-rating"><i class="fa-solid fa-star"></i> ${item.vote_average.toFixed(1)}</div></div></div>`;
+                    const html = `
+                        <div class="movie-card">
+                            <img src="${imageBase}${item.poster_path}" alt="${title}" loading="lazy">
+                            <div class="movie-info">
+                                <div class="movie-title">${title}</div>
+                                <div class="movie-rating"><i class="fa-solid fa-star"></i> ${item.vote_average.toFixed(1)}</div>
+                            </div>
+                        </div>`;
                     slider.innerHTML += html;
                 }
             });
         }
 
-        window.onload = function () {
-            startTimer(17940, document.querySelector('#timer'));
-            fetchContent();
-            MetaTracker.bindAdvancedMatching();
-            MetaTracker.bindClicks();
-        };
-
         function toggleChat() {
-            const widget = document.getElementById('chat-widget');
-            const willOpen = !widget.classList.contains('active');
-            if (willOpen) {
-                MetaTracker.trackContact('chat_widget');
-            }
-            widget.classList.toggle('active');
+            document.getElementById('chat-widget').classList.toggle('active');
         }
 
         function showTyping(callback) {
-            const status = document.getElementById('wa-status'), typing = document.getElementById('typing-indicator'), content = document.getElementById('chat-content');
-            status.innerText = "Digitando..."; typing.style.display = "block"; content.appendChild(typing); content.scrollTop = content.scrollHeight;
-            setTimeout(() => { typing.style.display = "none"; status.innerText = "Online"; callback(); }, 1200);
+            const status = document.getElementById('wa-status');
+            const typing = document.getElementById('typing-indicator');
+            const content = document.getElementById('chat-content');
+
+            status.innerText = "Digitando...";
+            typing.style.display = "block";
+            content.appendChild(typing);
+            content.scrollTop = content.scrollHeight;
+
+            setTimeout(() => {
+                typing.style.display = "none";
+                status.innerText = "Online";
+                callback();
+            }, 1200);
         }
 
         function addMessage(text, side) {
-            const content = document.getElementById('chat-content'), now = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}), checks = side === 'user' ? ' <i class="fa-solid fa-check-double" style="color:#34b7f1; font-size: 0.7rem"></i>' : '';
+            const content = document.getElementById('chat-content');
+            const now = new Date().toLocaleTimeString([], { hour: '2-digit', minute:'2-digit' });
+            const checks = side === 'user'
+                ? ' <i class="fa-solid fa-check-double" style="color:#34b7f1; font-size: 0.7rem"></i>'
+                : '';
+
             content.innerHTML += `<div class="wa-msg wa-msg-${side}">${text}<span class="wa-time">${now}${checks}</span></div>`;
             content.scrollTop = content.scrollHeight;
         }
@@ -1181,6 +927,7 @@
         function setOptions(options) {
             const container = document.getElementById('wa-options');
             container.innerHTML = "";
+
             options.forEach(opt => {
                 const btn = document.createElement('button');
                 btn.innerText = opt.label;
@@ -1188,20 +935,36 @@
                 container.appendChild(btn);
             });
         }
-        
+
         function userAction(text, type) {
             addMessage(text, 'user');
+
+            MetaTracker.track('ChatOptionSelected', {
+                page: 'home',
+                option_type: type,
+                option_text: text
+            });
+
             setOptions([]);
 
             showTyping(() => {
-                if(type === 'preco') {
+                if (type === 'preco') {
                     addMessage("<strong>Planos Oficiais Sem Mensalidade:</strong><br><br>💳 <a href='https://pay.kirvano.com/07f96a4e-ecdf-4538-83ca-01e5c35f1425' target='_blank' rel='noopener noreferrer'><strong>PLANO 30 DIAS (R$ 24,90)</strong></a><br>🚀 <a href='https://pay.kirvano.com/0aadf253-f4b6-47dd-8d0a-f5f16714ce98' target='_blank' rel='noopener noreferrer'><strong>ANUAL VIP (R$ 189,90)</strong></a>", 'bot');
+                    MetaTracker.track('Lead', {
+                        page: 'home',
+                        source: 'chat_preco'
+                    });
                     setOptions([{label: 'Já fiz o pagamento', type: 'pix_feito'}, {label: 'Quero testar antes', type: 'suporte_humano'}]);
-                } else if(type === 'pix_feito') {
-                    addMessage("Perfeito! Se você pagou via Pix, o código é enviado automaticamente em menos de 1 minuto para o seu WhatsApp e E-mail. Olhe a caixa de SPAM.", 'bot'); 
+                } else if (type === 'pix_feito') {
+                    addMessage("Perfeito! Se você pagou via Pix, o código é enviado automaticamente em menos de 1 minuto para o seu WhatsApp e E-mail. Olhe a caixa de SPAM.", 'bot');
+                    MetaTracker.track('Lead', {
+                        page: 'home',
+                        source: 'chat_pix_feito'
+                    });
                     setOptions([{label: 'Não recebi ainda', type: 'atraso_codigo'}, {label: 'Voltar ao início', type: 'reset'}]);
-                } else if(type === 'atraso_codigo') {
+                } else if (type === 'atraso_codigo') {
                     addMessage("Vou te transferir para um especialista da equipe. Tenha o comprovante em mãos.", 'bot');
+
                     const btn = document.createElement('button');
                     btn.innerText = "Falar com Humano";
                     btn.style.background = "#25d366";
@@ -1211,14 +974,17 @@
                         window.open("https://wa.me/5519981765840?text=Comprei e meu código não chegou, segue o comprovante:", '_blank', 'noopener,noreferrer');
                     };
                     document.getElementById('wa-options').appendChild(btn);
-                } else if(type === 'smart_tv_select') {
+                } else if (type === 'smart_tv_select' || type === 'smart_tv_solution') {
                     addMessage("Nessas marcas (LG/Samsung) o UniTV não roda direito. Para não travar, instalamos um app parceiro chamado <strong>ULTRA PLAYER</strong>.", 'bot');
-                    setTimeout(() => showTyping(() => { 
-                        addMessage("Vá na loja de apps da sua TV e pesquise por 'Ultra Player'.", 'bot'); 
-                        setOptions([{label: 'Baixei, e agora?', type: 'baixou_ultra'}, {label: 'Não achei', type: 'suporte_humano'}]); 
+
+                    setTimeout(() => showTyping(() => {
+                        addMessage("Vá na loja de apps da sua TV e pesquise por 'Ultra Player'.", 'bot');
+                        setOptions([{label: 'Baixei, e agora?', type: 'baixou_ultra'}, {label: 'Não achei', type: 'suporte_humano'}]);
                     }), 1500);
-                } else if(type === 'baixou_ultra') {
+
+                } else if (type === 'baixou_ultra') {
                     addMessage("Ótimo. Abra o app, tire foto do código MAC na tela e me envie no WhatsApp humano para eu liberar.", 'bot');
+
                     const btn = document.createElement('button');
                     btn.innerText = "ENVIAR FOTO DO MAC";
                     btn.style.background = "#25d366";
@@ -1228,14 +994,18 @@
                         window.open("https://wa.me/5519981765840?text=Baixei o Ultra Player na Smart TV, foto do MAC:", '_blank', 'noopener,noreferrer');
                     };
                     document.getElementById('wa-options').appendChild(btn);
-                } else if(type === 'pre_download') {
-                    addMessage("A instalação é simples! Em TV Box ou Firestick, use o app Downloader e digite o código <strong>867283</strong>.", 'bot'); 
-                    setTimeout(() => showTyping(() => { 
-                        addMessage("Para Android de celular, use nosso link oficial: <a href='http://mkdw.qrdldunitvss.com/download' target='_blank' rel='noopener noreferrer'>Baixar APK Mobile</a>", 'bot'); 
-                        setOptions([{label: 'Instalado. Quero assinar!', type: 'preco'}, {label: 'Deu erro', type: 'suporte_humano'}]); 
+
+                } else if (type === 'pre_download') {
+                    addMessage("A instalação é simples! Em TV Box ou Firestick, use o app Downloader e digite o código <strong>867283</strong>.", 'bot');
+
+                    setTimeout(() => showTyping(() => {
+                        addMessage("Para Android de celular, use nosso link oficial: <a href='http://mkdw.qrdldunitvss.com/download' target='_blank' rel='noopener noreferrer'>Baixar APK Mobile</a>", 'bot');
+                        setOptions([{label: 'Instalado. Quero assinar!', type: 'preco'}, {label: 'Deu erro', type: 'suporte_humano'}]);
                     }), 1500);
-                } else if(type === 'suporte_humano') {
+
+                } else if (type === 'suporte_humano') {
                     addMessage("Ok, vou abrir o chat com nosso time humano de suporte técnico.", 'bot');
+
                     const btn = document.createElement('button');
                     btn.innerText = "Conversar no WhatsApp";
                     btn.style.background = "#25d366";
@@ -1245,9 +1015,14 @@
                         window.open("https://wa.me/5519981765840?text=Preciso de atendimento humano VIP", '_blank', 'noopener,noreferrer');
                     };
                     document.getElementById('wa-options').appendChild(btn);
-                } else if(type === 'reset') {
-                    addMessage("Como mais posso te ajudar a garantir sua diversão?", 'bot'); 
-                    setOptions([{label: 'Ver Planos', type: 'preco'}, {label: 'Instalação', type: 'pre_download'}, {label: 'Atendimento Humano', type: 'suporte_humano'}]);
+
+                } else if (type === 'reset') {
+                    addMessage("Como mais posso te ajudar a garantir sua diversão?", 'bot');
+                    setOptions([
+                        {label: 'Ver Planos', type: 'preco'},
+                        {label: 'Instalação', type: 'pre_download'},
+                        {label: 'Atendimento Humano', type: 'suporte_humano'}
+                    ]);
                 }
             });
         }
@@ -1257,6 +1032,13 @@
         function openWarningModal(url) {
             checkoutUrlToRedirect = url;
             document.getElementById('smartTvModal').classList.add('active');
+
+            MetaTracker.track('ViewContent', {
+                page: 'home',
+                content_name: 'Modal Compatibilidade Smart TV',
+                content_category: 'Compatibilidade',
+                content_type: 'modal'
+            });
         }
 
         function closeWarningModal() {
@@ -1264,12 +1046,28 @@
         }
 
         function proceedToCheckout() {
-            if(checkoutUrlToRedirect) {
+            if (checkoutUrlToRedirect) {
                 MetaTracker.trackCheckout('Checkout UniTV', undefined, 'BRL', 'smart_tv_modal');
                 window.open(checkoutUrlToRedirect, '_blank', 'noopener,noreferrer');
                 closeWarningModal();
             }
         }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            MetaTracker.init({
+                page: 'home',
+                pixelId: '2204821377087872',
+                capiEndpoint: 'https://unitvsite.com.br/api/meta-capi.php',
+                capiEnabled: true,
+                trackViewContent: true,
+                content_name: 'Home UniTV',
+                content_category: 'Landing Page',
+                content_type: 'page'
+            });
+
+            startTimer(17940, document.querySelector('#timer'));
+            fetchContent();
+        });
     </script>
 </body>
 </html>
