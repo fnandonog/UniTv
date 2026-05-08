@@ -3,38 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <!-- SEO: Foco em Suporte e Solução de Erros -->
     <title>Suporte UniTV Oficial | Ajuda, Tutoriais e Soluções de Erros</title>
     <meta name="description" content="Precisa de ajuda com seu UniTV? Veja como resolver erros de login, problemas de carregamento e como ativar sua recarga oficial. Suporte 24h especializado.">
     <meta name="theme-color" content="#1a0525">
 
-    <!-- Meta Pixel -->
-    <script>
-        window.UNITV_META_PIXEL_ID = '2204821377087872';
-        window.UNITV_META_CAPI = {
-            enabled: true,
-            endpoint: '/api/meta-capi.php'
-        };
-        window.UNITV_META_USER_DATA = {};
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
 
-        !function(f,b,e,v,n,t,s)
-        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-        n.queue=[];t=b.createElement(e);t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t,s)}(window, document,'script',
-        'https://connect.facebook.net/en_US/fbevents.js');
-
-        fbq('init', window.UNITV_META_PIXEL_ID);
-        fbq('track', 'PageView');
-    </script>
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="icon" href="https://unitvsite.com.br/img/logo-unitv.png" type="image/png">
 
-    <!-- SEO SCHEMA: FAQ PARA O GOOGLE -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -61,7 +41,6 @@
     </script>
 
     <style>
-        /* --- ESTILOS GERAIS (Sincronizados com o Padrão) --- */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         
         :root {
@@ -90,7 +69,6 @@
         .reveal { opacity: 0; transform: translateY(30px); transition: all 1s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* --- BARRA DE PROMOÇÃO --- */
         .promo-bar {
             background: linear-gradient(90deg, #1a0b2e, #2d0b1e);
             color: #e0e0e0;
@@ -111,7 +89,6 @@
             margin-left: 5px;
         }
 
-        /* --- HEADER --- */
         header {
             display: flex;
             justify-content: space-between;
@@ -139,6 +116,7 @@
             transition: 0.3s;
         }
         nav a:hover { color: white; }
+
         .btn-header {
             background: rgba(255, 255, 255, 0.1);
             color: white;
@@ -150,7 +128,6 @@
             border: 1px solid rgba(255,255,255,0.1);
         }
 
-        /* --- HERO --- */
         .hero {
             padding: 140px 5% 80px;
             background: radial-gradient(circle at 50% 20%, #1a0525 0%, #050505 60%);
@@ -197,7 +174,6 @@
             display: inline-block;
         }
 
-        /* --- AJUDA CONTENT --- */
         .help-grid {
             max-width: 1100px;
             margin: 0 auto;
@@ -248,7 +224,6 @@
 
         .btn-action:hover { background: #333; }
 
-        /* --- PRICING --- */
         .pricing-section {
             background: #020202;
             position: relative;
@@ -323,7 +298,6 @@
             box-shadow: 0 10px 30px -5px rgba(221, 36, 118, 0.4);
         }
 
-        /* --- FOOTER COMPLETO --- */
         footer {
             background: #050505;
             border-top: 1px solid #1a1a1a;
@@ -347,7 +321,6 @@
         .footer-links a:hover { color: white; }
         .payment-methods { display: flex; gap: 15px; font-size: 1.8rem; margin-top: 15px; color: #444; }
 
-        /* --- WIDGETS --- */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -468,11 +441,6 @@
     </style>
 </head>
 <body>
-    <noscript>
-        <img height="1" width="1" style="display:none"
-             src="https://www.facebook.com/tr?id=2204821377087872&ev=PageView&noscript=1"/>
-    </noscript>
-
     <div class="promo-bar">
         🆘 SUPORTE 24H: Resolva problemas e ative sua recarga agora! <span id="timer">04:59:00</span>
     </div>
@@ -497,14 +465,12 @@
     </section>
 
     <section class="help-grid">
-        <!-- ERRO DE LOGIN -->
         <div class="help-card reveal">
             <h3><i class="fa-solid fa-user-lock"></i> Erro de Login ou Código Expirado</h3>
             <p>Se o seu app diz "Login falhou" ou "Conta expirada", significa que seu período VIP terminou. Compre uma nova recarga oficial para liberar o acesso instantaneamente.</p>
             <a href="#comprar" class="btn-action" data-meta-view-plans="help-login-error">VER PLANOS VIP</a>
         </div>
 
-        <!-- COMO INSTALAR -->
         <div class="help-card reveal">
             <h3><i class="fa-solid fa-download"></i> Como Instalar o App?</h3>
             <p>Temos guias específicos para cada aparelho. Escolha o seu para ver o tutorial passo a passo com fotos e vídeos.</p>
@@ -515,7 +481,6 @@
             </div>
         </div>
 
-        <!-- TRAVAMENTOS -->
         <div class="help-card reveal">
             <h3><i class="fa-solid fa-signal"></i> App Travando ou Não Carrega</h3>
             <p>90% dos travamentos são causados por oscilação na internet. Tente reiniciar seu roteador e o aparelho. Caso continue, mude o servidor nas configurações do app.</p>
@@ -523,7 +488,6 @@
         </div>
     </section>
 
-    <!-- SECTION PRICING -->
     <section id="comprar" class="pricing-section reveal">
         <h2 class="section-title">Renove seu Acesso VIP</h2>
         <p style="color: #666;">Liberação imediata após o Pix 24 horas por dia.</p>
@@ -550,7 +514,6 @@
         </div>
     </section>
 
-    <!-- FOOTER COMPLETO -->
     <footer>
         <div class="footer-container">
             <div class="footer-col">
@@ -586,7 +549,6 @@
         </div>
     </footer>
 
-    <!-- MODAL AVISO SMART TV -->
     <div id="smartTvModal" class="modal-overlay">
         <div class="modal-content">
             <i class="fa-solid fa-triangle-exclamation" style="color: #ffcc00; font-size: 3rem; margin-bottom: 20px;"></i>
@@ -601,7 +563,6 @@
         </div>
     </div>
 
-    <!-- WIDGET CHATBOT -->
     <div id="chat-widget" class="wa-widget">
         <div class="wa-header">
             <span>Suporte UniTV</span>
@@ -619,279 +580,10 @@
 
     <div class="float-zap" onclick="toggleChat()" data-meta-contact="float-whatsapp"><i class="fa-brands fa-whatsapp"></i></div>
 
+    <script src="/js/meta-tracking.js"></script>
     <script>
-        const MetaTracker = (() => {
-            const CAPI_CONFIG = window.UNITV_META_CAPI || { enabled: false, endpoint: '/api/meta-capi.php' };
-            const STANDARD_EVENTS = new Set([
-                'PageView',
-                'ViewContent',
-                'InitiateCheckout',
-                'Contact',
-                'Lead',
-                'Purchase',
-                'CompleteRegistration',
-                'Search',
-                'AddToCart'
-            ]);
-
-            const state = {
-                userData: window.UNITV_META_USER_DATA || {},
-                scrollMarks: {25:false,50:false,75:false,90:false}
-            };
-
-            function normalizeEmail(value) {
-                return (value || '').toString().trim().toLowerCase();
-            }
-
-            function normalizePhone(value) {
-                return (value || '').toString().replace(/\D+/g, '');
-            }
-
-            function normalizeText(value) {
-                return (value || '').toString().trim().toLowerCase();
-            }
-
-            function mergeUserData(data = {}) {
-                const next = { ...state.userData };
-
-                if (data.em) next.em = normalizeEmail(data.em);
-                if (data.ph) next.ph = normalizePhone(data.ph);
-                if (data.fn) next.fn = normalizeText(data.fn);
-                if (data.ln) next.ln = normalizeText(data.ln);
-
-                Object.keys(next).forEach(key => {
-                    if (!next[key]) delete next[key];
-                });
-
-                state.userData = next;
-                window.UNITV_META_USER_DATA = next;
-            }
-
-            function inferFieldKey(el) {
-                const attrs = [
-                    el.name || '',
-                    el.id || '',
-                    el.placeholder || '',
-                    el.autocomplete || '',
-                    el.getAttribute('aria-label') || ''
-                ].join(' ').toLowerCase();
-
-                if (el.type === 'email' || /e-?mail|mail/.test(attrs)) return 'em';
-                if (el.type === 'tel' || /phone|telefone|celular|whatsapp/.test(attrs)) return 'ph';
-                if (/first.?name|nome\b/.test(attrs) && !/sobrenome|last/.test(attrs)) return 'fn';
-                if (/last.?name|sobrenome/.test(attrs)) return 'ln';
-
-                return null;
-            }
-
-            function captureField(el) {
-                if (!el || !('value' in el)) return;
-                const key = inferFieldKey(el);
-                if (!key) return;
-                mergeUserData({ [key]: el.value });
-            }
-
-            function bindAdvancedMatching() {
-                document.querySelectorAll('input, textarea, select').forEach(captureField);
-                document.addEventListener('input', e => captureField(e.target), true);
-                document.addEventListener('change', e => captureField(e.target), true);
-                document.addEventListener('blur', e => captureField(e.target), true);
-            }
-
-            function generateEventId(prefix = 'meta') {
-                return `${prefix}_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`;
-            }
-
-            function getCookie(name) {
-                const match = document.cookie.match(new RegExp('(^|;\\s*)' + name + '=([^;]+)'));
-                return match ? decodeURIComponent(match[2]) : '';
-            }
-
-            function trackBrowser(eventName, params = {}, eventID) {
-                if (!window.fbq) return;
-
-                if (STANDARD_EVENTS.has(eventName)) {
-                    fbq('track', eventName, params, { eventID });
-                } else {
-                    fbq('trackCustom', eventName, params, { eventID });
-                }
-            }
-
-            function sendToCAPI(payload) {
-                if (!CAPI_CONFIG.enabled || !CAPI_CONFIG.endpoint) return;
-
-                try {
-                    const body = JSON.stringify(payload);
-
-                    if (navigator.sendBeacon) {
-                        const blob = new Blob([body], { type: 'application/json' });
-                        navigator.sendBeacon(CAPI_CONFIG.endpoint, blob);
-                    } else {
-                        fetch(CAPI_CONFIG.endpoint, {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body,
-                            keepalive: true
-                        }).catch(() => {});
-                    }
-                } catch (e) {}
-            }
-
-            function track(eventName, params = {}, options = {}) {
-                const eventID = options.eventID || generateEventId(eventName.toLowerCase());
-
-                const payload = {
-                    event_name: eventName,
-                    event_time: Math.floor(Date.now() / 1000),
-                    event_id: eventID,
-                    event_source_url: window.location.href,
-                    action_source: 'website',
-                    user_data: {
-                        ...state.userData,
-                        fbp: getCookie('_fbp'),
-                        fbc: getCookie('_fbc')
-                    },
-                    custom_data: params
-                };
-
-                trackBrowser(eventName, params, eventID);
-                sendToCAPI(payload);
-
-                return eventID;
-            }
-
-            function trackHelpPageView() {
-                track('ViewContent', {
-                    content_name: 'Central de Ajuda UniTV',
-                    content_category: 'Suporte',
-                    content_type: 'help_center',
-                    page: 'ajuda'
-                });
-            }
-
-            function trackPlansView(origin = 'help_plans') {
-                track('ViewContent', {
-                    content_name: 'Seção de Planos UniTV',
-                    content_category: 'Planos',
-                    content_type: 'product_group',
-                    origin
-                });
-            }
-
-            function trackGuide(origin = 'help_guide') {
-                track('TutorialGuideClick', {
-                    page: 'ajuda',
-                    origin
-                });
-            }
-
-            function trackContact(origin = 'support') {
-                return track('Contact', {
-                    content_name: 'Suporte UniTV',
-                    contact_channel: origin
-                });
-            }
-
-            function trackCheckout(planName, value, currency = 'BRL', source = 'help_page') {
-                track('ViewContent', {
-                    content_name: planName,
-                    content_category: 'Recarga UniTV',
-                    content_type: 'product',
-                    value,
-                    currency,
-                    source
-                });
-
-                return track('InitiateCheckout', {
-                    content_name: planName,
-                    content_category: 'Recarga UniTV',
-                    content_type: 'product',
-                    value,
-                    currency,
-                    source
-                });
-            }
-
-            function bindPageInteractions() {
-                document.addEventListener('click', function(e) {
-                    const plansEl = e.target.closest('[data-meta-view-plans]');
-                    if (plansEl) {
-                        trackPlansView(plansEl.dataset.metaViewPlans || 'help_plans');
-                        return;
-                    }
-
-                    const contactEl = e.target.closest('[data-meta-contact]');
-                    if (contactEl) {
-                        trackContact(contactEl.dataset.metaContact || 'support');
-                        return;
-                    }
-
-                    const guideEl = e.target.closest('[data-meta-guide]');
-                    if (guideEl) {
-                        trackGuide(guideEl.dataset.metaGuide || 'help_guide');
-                        return;
-                    }
-
-                    const waLink = e.target.closest("a[href*='wa.me/']");
-                    if (waLink) {
-                        trackContact('whatsapp_link');
-                    }
-                }, true);
-            }
-
-            function bindScrollDepth() {
-                window.addEventListener('scroll', () => {
-                    const doc = document.documentElement;
-                    const total = doc.scrollHeight - window.innerHeight;
-                    if (total <= 0) return;
-
-                    const pct = Math.round((window.scrollY / total) * 100);
-
-                    [25, 50, 75, 90].forEach(mark => {
-                        if (pct >= mark && !state.scrollMarks[mark]) {
-                            state.scrollMarks[mark] = true;
-                            track('ScrollDepth', {
-                                page: 'ajuda',
-                                percent: mark
-                            });
-                        }
-                    });
-                }, { passive: true });
-            }
-
-            function bindTimeEvents() {
-                setTimeout(() => {
-                    track('LandingEngaged', {
-                        page: 'ajuda',
-                        seconds: 15
-                    });
-                }, 15000);
-
-                setTimeout(() => {
-                    track('LandingEngaged', {
-                        page: 'ajuda',
-                        seconds: 30
-                    });
-                }, 30000);
-            }
-
-            return {
-                bindAdvancedMatching,
-                bindPageInteractions,
-                bindScrollDepth,
-                bindTimeEvents,
-                track,
-                trackHelpPageView,
-                trackPlansView,
-                trackGuide,
-                trackContact,
-                trackCheckout
-            };
-        })();
-
-        // Timer
         function startTimer(duration, display) {
-            var timer = duration, hours, minutes, seconds;
+            let timer = duration, hours, minutes, seconds;
             setInterval(function () {
                 if (!display) return;
                 hours = Math.floor(timer / 3600);
@@ -905,7 +597,6 @@
             }, 1000);
         }
 
-        // Reveal
         function handleReveal() {
             document.querySelectorAll('.reveal').forEach(el => {
                 if (el.getBoundingClientRect().top < window.innerHeight - 100) {
@@ -981,20 +672,26 @@
             });
 
             setTimeout(() => {
-                if(type === 'login_error') {
+                if (type === 'login_error') {
                     MetaTracker.track('HelpTopicViewed', {
                         page: 'ajuda',
                         topic: 'erro_login'
                     });
                     addMessage("O erro de login geralmente é causado por plano expirado. Verifique sua data ou renove no site!", 'bot');
-                    MetaTracker.trackPlansView('help_login_error_chat');
-                } else if(type === 'install_help') {
+                    MetaTracker.track('ViewContent', {
+                        page: 'ajuda',
+                        content_name: 'Seção de Planos UniTV',
+                        content_category: 'Planos',
+                        content_type: 'product_group',
+                        origin: 'help_login_error_chat'
+                    });
+                } else if (type === 'install_help') {
                     MetaTracker.track('HelpTopicViewed', {
                         page: 'ajuda',
                         topic: 'instalacao'
                     });
                     addMessage("Veja nossos guias oficiais clicando nos botões de download na página!", 'bot');
-                } else if(type === 'human') {
+                } else if (type === 'human') {
                     MetaTracker.trackContact('chat_human_redirect');
                     window.open('https://wa.me/5519981765840?text=Olá, preciso de ajuda com erro no UniTV', '_blank', 'noopener,noreferrer');
                 }
@@ -1002,11 +699,16 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            MetaTracker.bindAdvancedMatching();
-            MetaTracker.bindPageInteractions();
-            MetaTracker.bindScrollDepth();
-            MetaTracker.bindTimeEvents();
-            MetaTracker.trackHelpPageView();
+            MetaTracker.init({
+                page: 'ajuda',
+                pixelId: '2204821377087872',
+                capiEndpoint: 'https://unitvsite.com.br/api/meta-capi.php',
+                capiEnabled: true,
+                trackViewContent: true,
+                content_name: 'Central de Ajuda UniTV',
+                content_category: 'Suporte',
+                content_type: 'help_center'
+            });
 
             startTimer(17940, document.querySelector('#timer'));
             handleReveal();
