@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Pagamento Aprovado | UniTV Mensal</title>
+  <meta name="description" content="Pagamento aprovado com sucesso. Seu atendimento UniTV está sendo preparado e você será redirecionado para o WhatsApp.">
+  <meta name="theme-color" content="#1a0525">
+  <meta name="robots" content="noindex, nofollow">
+
+  <script>
+    window.UNITV_META_PIXEL_ID = '2204821377087872';
+    window.UNITV_META_CAPI = {
+      enabled: true,
+      endpoint: '/api/meta-capi.php'
+    };
+    window.UNITV_META_USER_DATA = {};
+
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+
+    fbq('init', window.UNITV_META_PIXEL_ID);
+    fbq('track', 'PageView');
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="icon" href="/img/logo-unitv.png" type="image/png">
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+    :root{
+      --bg-body:#050505;
+      --bg-card:#0f0f0f;
+      --gradiente-premium:linear-gradient(135deg,#FF512F 0%,#DD2476 100%);
+      --gradiente-texto:linear-gradient(90deg,#ff8c00,#ff0080,#7928ca);
+      --borda-sutil:1px solid rgba(255,255,255,.08);
+      --cor-destaque:#ff0080;
+      --verde:#25D366;
+      --texto:#f0f0f0;
+      --texto-soft:#9a9a9a;
+      --ok:#00ff88;
+    }
+
+    html,body{
+      background:var(--bg-body);
+      color:var(--texto);
+      min-height:100%;
+      overflow-x:hidden;
+      scroll-behavior:smooth;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:0;
+      background:
+        radial-gradient(circle at 20% 0%,rgba(255,0,128,.10),transparent 30%),
+        radial-gradient(circle at 80% 15%,rgba(255,115,0,.08),transparent 25%),
+        linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);
+      background-size:auto,auto,40px 40px,40px 40px;
+    }
+
+    .page{
+      position:relative;
+      z-index:1;
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+    }
+
+    .topbar{
+      background:linear-gradient(90deg,#1a0b2e,#2d0b1e);
+      color:#f2d9e6;
+      text-align:center;
+      padding:10px 14px;
+      font-size:.82rem;
+      font-weight:600;
+      border-bottom:1px solid rgba(255,255,255,.05);
+    }
+
+    .topbar strong{color:#fff}
+
+    header{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:22px 20px 8px;
+    }
+
+    .logo img{
+      height:42px;
+      filter:brightness(1.15);
+    }
+
+    .hero{
+      flex:1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px 20px 60px;
+      background:
+        radial-gradient(circle at 50% 10%,rgba(255,0,128,.12) 0%,transparent 38%),
+        radial-gradient(circle at 80% 0%,rgba(255,115,0,.08) 0%,transparent 28%);
+    }
+
+    .hero-inner{
+      width:100%;
+      max-width:880px;
+    }
+
+    .success-card{
+      background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.015));
+      border:var(--borda-sutil);
+      border-radius:30px;
+      padding:44px 34px;
+      box-shadow:0 24px 60px rgba(0,0,0,.45);
+      overflow:hidden;
+      position:relative;
+    }
+
+    .success-card::after{
+      content:"";
+      position:absolute;
+      top:-120px;
+      right:-100px;
+      width:280px;
+      height:280px;
+      background:radial-gradient(circle,rgba(255,0,128,.12),transparent 65%);
+      pointer-events:none;
+    }
+
+    .status-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 18px;
+      border-radius:999px;
+      border:1px solid rgba(0,255,136,.25);
+      background:rgba(0,255,136,.08);
+      color:#b8ffe0;
+      font-size:.8rem;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      margin-bottom:22px;
+    }
+
+    .status-badge i{color:var(--ok)}
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:26px;
+      align-items:center;
+    }
+
+    h1{
+      font-size:clamp(2.1rem,5vw,3.8rem);
+      line-height:1.02;
+      letter-spacing:-2px;
+      margin-bottom:18px;
+      font-weight:900;
+    }
+
+    .text-gradient{
+      background:var(--gradiente-texto);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .lead{
+      color:var(--texto-soft);
+      font-size:1.02rem;
+      max-width:540px;
+      margin-bottom:28px;
+    }
+
+    .steps{
+      display:grid;
+      gap:12px;
+      margin-bottom:28px;
+    }
+
+    .step{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      background:rgba(255,255,255,.025);
+      border:1px solid rgba(255,255,255,.06);
+      padding:14px 16px;
+      border-radius:16px;
+    }
+
+    .step-icon{
+      width:34px;
+      height:34px;
+      flex:0 0 34px;
+      border-radius:12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(255,0,128,.08);
+      color:var(--cor-destaque);
+      font-size:1rem;
+    }
+
+    .step strong{
+      display:block;
+      color:#fff;
+      font-size:.95rem;
+      margin-bottom:2px;
+    }
+
+    .step span{
+      color:#9b9b9b;
+      font-size:.9rem;
+    }
+
+    .actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      align-items:center;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:16px 24px;
+      border-radius:16px;
+      text-decoration:none;
+      font-weight:800;
+      transition:.25s ease;
+      border:none;
+      cursor:pointer;
+      font-size:.95rem;
+    }
+
+    .btn:hover{transform:translateY(-2px)}
+
+    .btn-whatsapp{
+      background:linear-gradient(180deg,#25D366,#1fb65a);
+      color:#04140b;
+      box-shadow:0 10px 24px rgba(37,211,102,.22);
+    }
+
+    .btn-home{
+      background:#181818;
+      color:#fff;
+      border:1px solid rgba(255,255,255,.08);
+    }
+
+    .info-panel{
+      background:#0a0a0a;
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:24px;
+      padding:26px;
+      text-align:center;
+    }
+
+    .check-wrap{
+      width:96px;
+      height:96px;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin:0 auto 18px;
+      background:radial-gradient(circle at center,rgba(0,255,136,.18),rgba(0,255,136,.04));
+      border:1px solid rgba(0,255,136,.16);
+      box-shadow:0 0 35px rgba(0,255,136,.10);
+    }
+
+    .check-wrap i{
+      color:var(--ok);
+      font-size:2.3rem;
+    }
+
+    .panel-title{
+      font-size:1.2rem;
+      font-weight:900;
+      color:#fff;
+      margin-bottom:8px;
+    }
+
+    .panel-sub{
+      color:#8e8e8e;
+      font-size:.92rem;
+      margin-bottom:22px;
+    }
+
+    .countdown-card{
+      background:linear-gradient(180deg,#101010,#0b0b0b);
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:20px;
+      padding:18px 16px;
+      margin-bottom:18px;
+    }
+
+    .countdown-label{
+      font-size:.72rem;
+      color:#747474;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.1em;
+      margin-bottom:10px;
+    }
+
+    .countdown-time{
+      font-size:2rem;
+      line-height:1;
+      font-weight:900;
+      color:#fff;
+      letter-spacing:-1px;
+    }
+
+    .small-note{
+      color:#8f8f8f;
+      font-size:.88rem;
+      line-height:1.5;
+    }
+
+    .footer-mini{
+      text-align:center;
+      padding:0 20px 26px;
+      color:#555;
+      font-size:.74rem;
+    }
+
+    @media (max-width: 860px){
+      .hero-grid{
+        grid-template-columns:1fr;
+      }
+
+      .info-panel{
+        order:-1;
+      }
+
+      .success-card{
+        padding:30px 20px;
+        border-radius:24px;
+      }
+
+      .actions{
+        flex-direction:column;
+        align-items:stretch;
+      }
+
+      .btn{
+        width:100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+         src="https://www.facebook.com/tr?id=2204821377087872&ev=PageView&noscript=1"/>
+  </noscript>
+
+  <div class="page">
+    <div class="topbar">
+      <strong>Pagamento aprovado</strong> • Seu atendimento mensal já está sendo preparado
+    </div>
+
+    <header>
+      <a href="/" class="logo" aria-label="UniTV">
+        <img src="/img/logo-unitv.png" alt="UniTV Oficial">
+      </a>
+    </header>
+
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="success-card">
+          <div class="status-badge">
+            <i class="fa-solid fa-circle-check"></i>
+            Compra confirmada
+          </div>
+
+          <div class="hero-grid">
+            <div>
+              <h1>Seu plano mensal foi <span class="text-gradient">confirmado</span>.</h1>
+              <p class="lead">
+                Recebemos seu pagamento e já estamos encaminhando você para o atendimento no WhatsApp para continuidade da liberação.
+              </p>
+
+              <div class="steps">
+                <div class="step">
+                  <div class="step-icon"><i class="fa-solid fa-bolt"></i></div>
+                  <div>
+                    <strong>Pagamento identificado</strong>
+                    <span>Sua compra foi reconhecida com sucesso no sistema.</span>
+                  </div>
+                </div>
+
+                <div class="step">
+                  <div class="step-icon"><i class="fa-brands fa-whatsapp"></i></div>
+                  <div>
+                    <strong>Encaminhamento para atendimento</strong>
+                    <span>Você será direcionado para o WhatsApp oficial em instantes.</span>
+                  </div>
+                </div>
+
+                <div class="step">
+                  <div class="step-icon"><i class="fa-solid fa-key"></i></div>
+                  <div>
+                    <strong>Próxima etapa</strong>
+                    <span>No atendimento você recebe a continuidade do processo do seu acesso mensal.</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="actions">
+                <a id="waBtn" class="btn btn-whatsapp" href="https://wa.me/5519996434764?text=Ol%C3%A1!%20Acabei%20de%20finalizar%20o%20pagamento%20do%20plano%20mensal%20UniTV.%20Pode%20dar%20continuidade%20no%20meu%20atendimento%3F" target="_blank" rel="noopener noreferrer">
+                  <i class="fa-brands fa-whatsapp"></i>
+                  Abrir WhatsApp agora
+                </a>
+
+                <a href="/" class="btn btn-home">
+                  <i class="fa-solid fa-house"></i>
+                  Voltar ao início
+                </a>
+              </div>
+            </div>
+
+            <div class="info-panel">
+              <div class="check-wrap">
+                <i class="fa-solid fa-check"></i>
+              </div>
+
+              <div class="panel-title">Tudo certo por aqui</div>
+              <div class="panel-sub">Estamos preparando seu redirecionamento.</div>
+
+              <div class="countdown-card">
+                <div class="countdown-label">Abrindo WhatsApp em</div>
+                <div class="countdown-time" id="countdown">00:03</div>
+              </div>
+
+              <div class="small-note">
+                Se preferir, você também pode tocar no botão de WhatsApp e seguir imediatamente para o atendimento.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer-mini">
+      © 2024 - 2026 UniTV Revenda Oficial
+    </div>
+  </div>
+
+  <script>
+    const MetaTracker = (() => {
+      const CAPI_CONFIG = window.UNITV_META_CAPI || { enabled: false, endpoint: '/api/meta-capi.php' };
+      const STANDARD_EVENTS = new Set([
+        'PageView',
+        'ViewContent',
+        'InitiateCheckout',
+        'Contact',
+        'Lead',
+        'Purchase',
+        'CompleteRegistration',
+        'Search',
+        'AddToCart'
+      ]);
+
+      const state = {
+        userData: window.UNITV_META_USER_DATA || {}
+      };
+
+      function getCookie(name) {
+        const match = document.cookie.match(new RegExp('(^|;\\s*)' + name + '=([^;]+)'));
+        return match ? decodeURIComponent(match[2]) : '';
+      }
+
+      function generateEventId(prefix = 'meta') {
+        return `${prefix}_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`;
+      }
+
+      function trackBrowser(eventName, params = {}, eventID) {
+        if (!window.fbq) return;
+
+        if (STANDARD_EVENTS.has(eventName)) {
+          fbq('track', eventName, params, { eventID });
+        } else {
+          fbq('trackCustom', eventName, params, { eventID });
+        }
+      }
+
+      function sendToCAPI(payload) {
+        if (!CAPI_CONFIG.enabled || !CAPI_CONFIG.endpoint) return;
+
+        try {
+          const body = JSON.stringify(payload);
+
+          if (navigator.sendBeacon) {
+            const blob = new Blob([body], { type: 'application/json' });
+            navigator.sendBeacon(CAPI_CONFIG.endpoint, blob);
+          } else {
+            fetch(CAPI_CONFIG.endpoint, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body,
+              keepalive: true
+            }).catch(() => {});
+          }
+        } catch (e) {}
+      }
+
+      function track(eventName, params = {}, options = {}) {
+        const eventID = options.eventID || generateEventId(eventName.toLowerCase());
+
+        const payload = {
+          event_name: eventName,
+          event_time: Math.floor(Date.now() / 1000),
+          event_id: eventID,
+          event_source_url: window.location.href,
+          action_source: 'website',
+          user_data: {
+            ...state.userData,
+            fbp: getCookie('_fbp'),
+            fbc: getCookie('_fbc')
+          },
+          custom_data: params
+        };
+
+        trackBrowser(eventName, params, eventID);
+        sendToCAPI(payload);
+
+        return eventID;
+      }
+
+      return { track };
+    })();
+
+    const WHATSAPP_URL = 'https://wa.me/5519996434764?text=' + encodeURIComponent(
+      'Olá! Acabei de finalizar o pagamento do plano mensal UniTV. Pode dar continuidade no meu atendimento?'
+    );
+
+    let purchaseFired = false;
+
+    function fireMonthlyPurchase() {
+      if (purchaseFired) return;
+      purchaseFired = true;
+
+      MetaTracker.track('Purchase', {
+        content_name: 'Plano Mensal UniTV',
+        content_category: 'Recarga UniTV',
+        content_type: 'product',
+        value: 24.90,
+        currency: 'BRL',
+        page: 'obrigado_mensal'
+      });
+
+      MetaTracker.track('CompleteRegistration', {
+        plan_name: 'Plano Mensal UniTV',
+        value: 24.90,
+        currency: 'BRL',
+        page: 'obrigado_mensal'
+      });
+    }
+
+    function bindActions() {
+      const waBtn = document.getElementById('waBtn');
+      waBtn.addEventListener('click', function() {
+        MetaTracker.track('Contact', {
+          content_name: 'WhatsApp Obrigado Mensal',
+          contact_channel: 'whatsapp_button',
+          page: 'obrigado_mensal'
+        });
+      }, { passive: true });
+    }
+
+    function startRedirectCountdown(seconds = 3) {
+      const countdownEl = document.getElementById('countdown');
+      let remaining = seconds;
+
+      function render(sec) {
+        countdownEl.textContent = `00:${String(sec).padStart(2, '0')}`;
+      }
+
+      render(remaining);
+
+      const timer = setInterval(() => {
+        remaining -= 1;
+        if (remaining <= 0) {
+          clearInterval(timer);
+          countdownEl.textContent = '00:00';
+
+          MetaTracker.track('Contact', {
+            content_name: 'WhatsApp Obrigado Mensal',
+            contact_channel: 'auto_redirect',
+            page: 'obrigado_mensal'
+          });
+
+          window.location.href = WHATSAPP_URL;
+          return;
+        }
+        render(remaining);
+      }, 1000);
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      fireMonthlyPurchase();
+      bindActions();
+      startRedirectCountdown(3);
+    });
+  </script>
+</body>
+</html>
