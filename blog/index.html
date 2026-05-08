@@ -5,6 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Blog UniTV Oficial 2026 | Dicas, Tutoriais e Lançamentos VIP</title>
     <meta name="description" content="Acesse o portal oficial UniTV. Confira guias de instalação para Smart TV, otimização 4K, lista de canais, lançamentos de cinema e futebol ao vivo sem delay.">
+    <meta name="theme-color" content="#1a0525">
+
+    <!-- Meta Pixel -->
+    <script>
+        window.UNITV_META_PIXEL_ID = '2204821377087872';
+        window.UNITV_META_CAPI = {
+            enabled: true,
+            endpoint: '/api/meta-capi.php'
+        };
+        window.UNITV_META_USER_DATA = {};
+
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+
+        fbq('init', window.UNITV_META_PIXEL_ID);
+        fbq('track', 'PageView');
+    </script>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
@@ -72,7 +95,7 @@
         .post-tag { background: rgba(255, 0, 85, 0.1); color: #ff0055; font-size: 0.65rem; font-weight: 800; padding: 6px 15px; border-radius: 50px; text-transform: uppercase; margin-bottom: 15px; display: inline-block; width: fit-content; }
         .post-content h2 { font-size: 1.4rem; margin-bottom: 15px; color: #fff; font-weight: 800; line-height: 1.2; }
         .post-content p { color: #777; font-size: 0.9rem; margin-bottom: 25px; line-height: 1.6; flex-grow: 1; }
-        .btn-read { color: var(--cor-destaque); text-decoration: none; font-weight: 800; font-size: 0.85rem; display: flex; align-items: center; gap: 10px; text-transform: uppercase; margin-top: auto; }
+        .btn-read { color: #ff0080; text-decoration: none; font-weight: 800; font-size: 0.85rem; display: flex; align-items: center; gap: 10px; text-transform: uppercase; margin-top: auto; }
 
         /* --- PRICING SECTION AGRESSIVA --- */
         .pricing-section { background: #020202; padding: 120px 5%; text-align: center; border-top: 1px solid #111; }
@@ -117,6 +140,7 @@
         .wa-profile { display: flex; align-items: center; gap: 10px; } .wa-profile img { width: 38px; height: 38px; border-radius: 50%; background: #eee; }
         .wa-chat-body { height: 380px; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png'); background-size: contain; }
         .wa-msg { max-width: 85%; padding: 12px 16px; border-radius: 12px; font-size: 0.88rem; box-shadow: 0 1px 1px rgba(0,0,0,0.1); color: #333; background: white; border-top-left-radius: 0; align-self: flex-start; }
+        .wa-msg-user { background: #dcf8c6; align-self: flex-end; border-top-right-radius: 0; border-top-left-radius: 12px; }
         .wa-options { padding: 12px; background: #f0f0f0; border-top: 1px solid #ddd; display: flex; flex-direction: column; gap: 8px; }
         .wa-options button { background: white; border: 1px solid #ddd; padding: 10px; border-radius: 20px; font-size: 0.85rem; color: #075e54; font-weight: 600; cursor: pointer; }
         .float-zap { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; width: 65px; height: 65px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; z-index: 10000; cursor: pointer; box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4); }
@@ -126,10 +150,15 @@
             .tools-section { flex-direction: column; align-items: stretch; } .search-box { max-width: 100%; } .cat-tags { justify-content: center; }
             .pricing-grid { flex-direction: column; align-items: center; } .price-card.destaque { transform: scale(1); }
             .footer-container { grid-template-columns: 1fr; text-align: center; } .footer-links a { justify-content: center; }
+            .wa-widget { width: auto; left: 15px; right: 15px; bottom: 90px; }
         }
     </style>
 </head>
 <body>
+    <noscript>
+        <img height="1" width="1" style="display:none"
+             src="https://www.facebook.com/tr?id=2204821377087872&ev=PageView&noscript=1"/>
+    </noscript>
 
     <div class="promo-bar">
         ⚡ PORTAL VIP: Conteúdos exclusivos para assinantes UniTV 2026. <span id="timer">04:59:00</span>
@@ -141,11 +170,11 @@
         </div>
         <nav class="nav-links">
             <a href="../index.html">Início</a>
-            <a href="../baixar/index.html">Downloads</a>
-            <a href="../tv-box/index.html">Guia TV Box</a>
-            <a href="../cinema/index.html">Cinema</a>
+            <a href="../baixar/index.html" data-meta-guide="header-downloads">Downloads</a>
+            <a href="../tv-box/index.html" data-meta-guide="header-tvbox">Guia TV Box</a>
+            <a href="../cinema/index.html" data-meta-guide="header-cinema">Cinema</a>
         </nav>
-        <a href="#comprar" class="btn-header">ADQUIRIR VIP</a>
+        <a href="#comprar" class="btn-header" data-meta-view-plans="blog-header">ADQUIRIR VIP</a>
     </header>
 
     <section class="hero reveal">
@@ -731,6 +760,7 @@
                 <span class="btn-read" style="color: #ff0080; text-decoration: none; font-weight: 800; font-size: 0.85rem; display: flex; align-items: center; gap: 10px; text-transform: uppercase; margin-top: auto;">LER GUIA <i class="fa-solid fa-arrow-right"></i></span>
             </div>
         </a>
+
         <a href="revolucao-unitv-2026/index.html" class="post-card reveal">
             <div class="post-thumb">
                 <img src="https://images.unsplash.com/photo-1593784991095-a205069470b6?auto=format&fit=crop&w=800&q=80" alt="Revolução 4K">
@@ -820,7 +850,7 @@
                     <li><i class="fa-solid fa-check"></i> 2 Telas VIP</li>
                     <li><i class="fa-solid fa-check"></i> Suporte Especializado</li>
                 </ul>
-                <a href="javascript:void(0)" onclick="openWarningModal('https://pay.kirvano.com/07f96a4e-ecdf-4538-83ca-01e5c35f1425')" class="btn-price">COMPRAR MENSAL</a>
+                <a href="javascript:void(0)" onclick="openWarningModal('https://pay.kirvano.com/07f96a4e-ecdf-4538-83ca-01e5c35f1425','blog_monthly_card','Plano Mensal UniTV',24.90)" class="btn-price">COMPRAR MENSAL</a>
             </div>
 
             <div class="price-card destaque">
@@ -836,7 +866,7 @@
                     <li><i class="fa-solid fa-check"></i> 2 Telas em 4K Real</li>
                     <li><i class="fa-solid fa-check"></i> Atualizações Prioritárias</li>
                 </ul>
-                <a href="javascript:void(0)" onclick="openWarningModal('https://pay.kirvano.com/0aadf253-f4b6-47dd-8d0a-f5f16714ce98')" class="btn-price">PEGAR PROMOÇÃO</a>
+                <a href="javascript:void(0)" onclick="openWarningModal('https://pay.kirvano.com/0aadf253-f4b6-47dd-8d0a-f5f16714ce98','blog_yearly_card','Plano Anual VIP UniTV',189.90)" class="btn-price">PEGAR PROMOÇÃO</a>
             </div>
         </div>
     </section>
@@ -852,17 +882,17 @@
                 <h4>Navegação</h4>
                 <ul class="footer-links">
                     <li><a href="../index.html"><i class="fa-solid fa-chevron-right"></i> Home Page</a></li>
-                    <li><a href="../baixar/index.html"><i class="fa-solid fa-chevron-right"></i> Downloads</a></li>
-                    <li><a href="../tv-box/index.html"><i class="fa-solid fa-chevron-right"></i> Guia TV Box</a></li>
-                    <li><a href="../confiavel/index.html"><i class="fa-solid fa-chevron-right"></i> É Confiável?</a></li>
+                    <li><a href="../baixar/index.html" data-meta-guide="footer-downloads"><i class="fa-solid fa-chevron-right"></i> Downloads</a></li>
+                    <li><a href="../tv-box/index.html" data-meta-guide="footer-tvbox"><i class="fa-solid fa-chevron-right"></i> Guia TV Box</a></li>
+                    <li><a href="../confiavel/index.html" data-meta-guide="footer-confiavel"><i class="fa-solid fa-chevron-right"></i> É Confiável?</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <h4>Suporte Técnico</h4>
                 <ul class="footer-links">
-                    <li><a href="../ajuda/index.html"><i class="fa-solid fa-chevron-right"></i> Ajuda & Erros</a></li>
-                    <li><a href="javascript:void(0)" onclick="toggleChat()"><i class="fa-solid fa-chevron-right"></i> Chat Online</a></li>
-                    <li><a href="https://wa.me/5519981765840" target="_blank"><i class="fa-solid fa-chevron-right"></i> WhatsApp Oficial</a></li>
+                    <li><a href="../ajuda/index.html" data-meta-guide="footer-ajuda"><i class="fa-solid fa-chevron-right"></i> Ajuda & Erros</a></li>
+                    <li><a href="javascript:void(0)" onclick="toggleChat()" data-meta-contact="footer-chat"><i class="fa-solid fa-chevron-right"></i> Chat Online</a></li>
+                    <li><a href="https://wa.me/5519981765840" target="_blank" rel="noopener noreferrer" data-meta-contact="footer-whatsapp"><i class="fa-solid fa-chevron-right"></i> WhatsApp Oficial</a></li>
                 </ul>
             </div>
             <div class="footer-col">
@@ -919,13 +949,298 @@
         </div>
     </div>
 
-    <div class="float-zap" onclick="toggleChat()"><i class="fa-brands fa-whatsapp"></i></div>
+    <div class="float-zap" onclick="toggleChat()" data-meta-contact="float-whatsapp"><i class="fa-brands fa-whatsapp"></i></div>
 
     <script>
+        const MetaTracker = (() => {
+            const CAPI_CONFIG = window.UNITV_META_CAPI || { enabled: false, endpoint: '/api/meta-capi.php' };
+            const STANDARD_EVENTS = new Set([
+                'PageView',
+                'ViewContent',
+                'InitiateCheckout',
+                'Contact',
+                'Lead',
+                'Purchase',
+                'CompleteRegistration',
+                'Search',
+                'AddToCart'
+            ]);
+
+            const state = {
+                userData: window.UNITV_META_USER_DATA || {},
+                scrollMarks: {25:false,50:false,75:false,90:false}
+            };
+
+            function normalizeEmail(value) {
+                return (value || '').toString().trim().toLowerCase();
+            }
+
+            function normalizePhone(value) {
+                return (value || '').toString().replace(/\D+/g, '');
+            }
+
+            function normalizeText(value) {
+                return (value || '').toString().trim().toLowerCase();
+            }
+
+            function mergeUserData(data = {}) {
+                const next = { ...state.userData };
+
+                if (data.em) next.em = normalizeEmail(data.em);
+                if (data.ph) next.ph = normalizePhone(data.ph);
+                if (data.fn) next.fn = normalizeText(data.fn);
+                if (data.ln) next.ln = normalizeText(data.ln);
+
+                Object.keys(next).forEach(key => {
+                    if (!next[key]) delete next[key];
+                });
+
+                state.userData = next;
+                window.UNITV_META_USER_DATA = next;
+            }
+
+            function inferFieldKey(el) {
+                const attrs = [
+                    el.name || '',
+                    el.id || '',
+                    el.placeholder || '',
+                    el.autocomplete || '',
+                    el.getAttribute('aria-label') || ''
+                ].join(' ').toLowerCase();
+
+                if (el.type === 'email' || /e-?mail|mail/.test(attrs)) return 'em';
+                if (el.type === 'tel' || /phone|telefone|celular|whatsapp/.test(attrs)) return 'ph';
+                if (/first.?name|nome\b/.test(attrs) && !/sobrenome|last/.test(attrs)) return 'fn';
+                if (/last.?name|sobrenome/.test(attrs)) return 'ln';
+
+                return null;
+            }
+
+            function captureField(el) {
+                if (!el || !('value' in el)) return;
+                const key = inferFieldKey(el);
+                if (!key) return;
+                mergeUserData({ [key]: el.value });
+            }
+
+            function bindAdvancedMatching() {
+                document.querySelectorAll('input, textarea, select').forEach(captureField);
+                document.addEventListener('input', e => captureField(e.target), true);
+                document.addEventListener('change', e => captureField(e.target), true);
+                document.addEventListener('blur', e => captureField(e.target), true);
+            }
+
+            function generateEventId(prefix = 'meta') {
+                return `${prefix}_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`;
+            }
+
+            function getCookie(name) {
+                const match = document.cookie.match(new RegExp('(^|;\\s*)' + name + '=([^;]+)'));
+                return match ? decodeURIComponent(match[2]) : '';
+            }
+
+            function trackBrowser(eventName, params = {}, eventID) {
+                if (!window.fbq) return;
+
+                if (STANDARD_EVENTS.has(eventName)) {
+                    fbq('track', eventName, params, { eventID });
+                } else {
+                    fbq('trackCustom', eventName, params, { eventID });
+                }
+            }
+
+            function sendToCAPI(payload) {
+                if (!CAPI_CONFIG.enabled || !CAPI_CONFIG.endpoint) return;
+
+                try {
+                    const body = JSON.stringify(payload);
+
+                    if (navigator.sendBeacon) {
+                        const blob = new Blob([body], { type: 'application/json' });
+                        navigator.sendBeacon(CAPI_CONFIG.endpoint, blob);
+                    } else {
+                        fetch(CAPI_CONFIG.endpoint, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body,
+                            keepalive: true
+                        }).catch(() => {});
+                    }
+                } catch (e) {}
+            }
+
+            function track(eventName, params = {}, options = {}) {
+                const eventID = options.eventID || generateEventId(eventName.toLowerCase());
+
+                const payload = {
+                    event_name: eventName,
+                    event_time: Math.floor(Date.now() / 1000),
+                    event_id: eventID,
+                    event_source_url: window.location.href,
+                    action_source: 'website',
+                    user_data: {
+                        ...state.userData,
+                        fbp: getCookie('_fbp'),
+                        fbc: getCookie('_fbc')
+                    },
+                    custom_data: params
+                };
+
+                trackBrowser(eventName, params, eventID);
+                sendToCAPI(payload);
+
+                return eventID;
+            }
+
+            function trackBlogPageView() {
+                track('ViewContent', {
+                    content_name: 'Blog UniTV',
+                    content_category: 'Blog',
+                    content_type: 'content_hub',
+                    page: 'blog_index'
+                });
+            }
+
+            function trackPlansView(origin = 'blog_plans') {
+                track('ViewContent', {
+                    content_name: 'Seção de Planos UniTV',
+                    content_category: 'Planos',
+                    content_type: 'product_group',
+                    origin
+                });
+            }
+
+            function trackContact(origin = 'chat') {
+                return track('Contact', {
+                    content_name: 'Suporte Blog UniTV',
+                    contact_channel: origin
+                });
+            }
+
+            function trackGuide(origin = 'guide') {
+                track('ViewContent', {
+                    content_name: 'Guia UniTV',
+                    content_category: 'Tutorial',
+                    content_type: 'guide',
+                    origin
+                });
+            }
+
+            function trackCheckout(planName, value, currency = 'BRL', source = 'blog_page') {
+                track('ViewContent', {
+                    content_name: planName,
+                    content_category: 'Recarga UniTV',
+                    content_type: 'product',
+                    value,
+                    currency,
+                    source
+                });
+
+                return track('InitiateCheckout', {
+                    content_name: planName,
+                    content_category: 'Recarga UniTV',
+                    content_type: 'product',
+                    value,
+                    currency,
+                    source
+                });
+            }
+
+            function bindPageInteractions() {
+                document.addEventListener('click', function(e) {
+                    const plansEl = e.target.closest('[data-meta-view-plans]');
+                    if (plansEl) {
+                        trackPlansView(plansEl.dataset.metaViewPlans || 'blog_plans');
+                        return;
+                    }
+
+                    const contactEl = e.target.closest('[data-meta-contact]');
+                    if (contactEl) {
+                        trackContact(contactEl.dataset.metaContact || 'support');
+                        return;
+                    }
+
+                    const guideEl = e.target.closest('[data-meta-guide]');
+                    if (guideEl) {
+                        trackGuide(guideEl.dataset.metaGuide || 'guide');
+                        return;
+                    }
+
+                    const articleEl = e.target.closest('.post-card');
+                    if (articleEl) {
+                        const titleEl = articleEl.querySelector('h2');
+                        const tagEl = articleEl.querySelector('.post-tag');
+                        track('ArticleClick', {
+                            page: 'blog_index',
+                            article_title: titleEl ? titleEl.innerText.trim() : '',
+                            article_category: tagEl ? tagEl.innerText.trim() : '',
+                            article_href: articleEl.getAttribute('href') || ''
+                        });
+                        return;
+                    }
+
+                    const waLink = e.target.closest("a[href*='wa.me/']");
+                    if (waLink) {
+                        trackContact('whatsapp_link');
+                    }
+                }, true);
+            }
+
+            function bindScrollDepth() {
+                window.addEventListener('scroll', () => {
+                    const doc = document.documentElement;
+                    const total = doc.scrollHeight - window.innerHeight;
+                    if (total <= 0) return;
+
+                    const pct = Math.round((window.scrollY / total) * 100);
+
+                    [25, 50, 75, 90].forEach(mark => {
+                        if (pct >= mark && !state.scrollMarks[mark]) {
+                            state.scrollMarks[mark] = true;
+                            track('ScrollDepth', {
+                                page: 'blog_index',
+                                percent: mark
+                            });
+                        }
+                    });
+                }, { passive: true });
+            }
+
+            function bindTimeEvents() {
+                setTimeout(() => {
+                    track('LandingEngaged', {
+                        page: 'blog_index',
+                        seconds: 15
+                    });
+                }, 15000);
+
+                setTimeout(() => {
+                    track('LandingEngaged', {
+                        page: 'blog_index',
+                        seconds: 30
+                    });
+                }, 30000);
+            }
+
+            return {
+                bindAdvancedMatching,
+                bindPageInteractions,
+                bindScrollDepth,
+                bindTimeEvents,
+                track,
+                trackBlogPageView,
+                trackPlansView,
+                trackContact,
+                trackGuide,
+                trackCheckout
+            };
+        })();
+
         // Timer Regressivo
         function startTimer(duration, display) {
             var timer = duration, hours, minutes, seconds;
             setInterval(function () {
+                if (!display) return;
                 hours = Math.floor(timer / 3600);
                 minutes = Math.floor((timer % 3600) / 60);
                 seconds = Math.floor(timer % 60);
@@ -943,56 +1258,144 @@
             });
         });
 
-        window.onload = () => { 
-            startTimer(17940, document.getElementById('timer'));
-            document.querySelectorAll('.reveal').forEach(el => {
-                if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('active');
-            });
-        };
-
         // PESQUISA E FILTROS DO BLOG
-        document.getElementById('searchBlog').addEventListener('input', function(e) {
-            let term = e.target.value.toLowerCase();
-            let cards = document.querySelectorAll('.post-card');
-            let hasResults = false;
-            cards.forEach(card => {
-                let title = card.querySelector('h2').innerText.toLowerCase();
-                let tag = card.querySelector('.post-tag').innerText.toLowerCase();
-                if(title.includes(term) || tag.includes(term)) {
-                    card.style.display = 'flex';
-                    hasResults = true;
-                } else {
-                    card.style.display = 'none';
+        let searchDebounce;
+        function bindBlogSearch() {
+            const input = document.getElementById('searchBlog');
+            input.addEventListener('input', function(e) {
+                let term = e.target.value.toLowerCase().trim();
+                let cards = document.querySelectorAll('.post-card');
+                let hasResults = false;
+
+                cards.forEach(card => {
+                    let title = card.querySelector('h2').innerText.toLowerCase();
+                    let tag = card.querySelector('.post-tag').innerText.toLowerCase();
+                    if(title.includes(term) || tag.includes(term)) {
+                        card.style.display = 'flex';
+                        hasResults = true;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                document.getElementById('noResults').style.display = hasResults || term === '' ? 'none' : 'block';
+
+                clearTimeout(searchDebounce);
+                if (term.length >= 2) {
+                    searchDebounce = setTimeout(() => {
+                        MetaTracker.track('Search', {
+                            search_string: term,
+                            page: 'blog_index'
+                        });
+                    }, 700);
                 }
             });
-            document.getElementById('noResults').style.display = hasResults || term === '' ? 'none' : 'block';
-        });
 
-        document.querySelectorAll('.cat-tag').forEach(tag => {
-            tag.addEventListener('click', function() {
-                let searchInput = document.getElementById('searchBlog');
-                searchInput.value = this.innerText;
-                searchInput.dispatchEvent(new Event('input'));
+            document.querySelectorAll('.cat-tag').forEach(tag => {
+                tag.addEventListener('click', function() {
+                    let value = this.innerText.trim();
+                    input.value = value;
+                    input.dispatchEvent(new Event('input'));
+                    MetaTracker.track('BlogCategoryFilter', {
+                        page: 'blog_index',
+                        category: value
+                    });
+                });
             });
-        });
+        }
 
         // Modal & Chat Logic
-        let urlCheck = '';
-        function openWarningModal(url) { urlCheck = url; document.getElementById('smartTvModal').style.display = 'flex'; }
-        function closeWarningModal() { document.getElementById('smartTvModal').style.display = 'none'; }
-        function proceedToCheckout() { if(urlCheck) window.open(urlCheck, '_blank'); closeWarningModal(); }
-        function toggleChat() { document.getElementById('chat-widget').classList.toggle('active'); }
+        let checkoutUrl = '';
+        let checkoutSource = 'blog_page';
+        let checkoutPlanName = 'Plano UniTV';
+        let checkoutValue = 0;
+
+        function openWarningModal(url, source = 'blog_page', planName = 'Plano UniTV', value = 0) {
+            checkoutUrl = url;
+            checkoutSource = source;
+            checkoutPlanName = planName;
+            checkoutValue = value;
+
+            MetaTracker.track('CheckoutIntent', {
+                page: 'blog_index',
+                source,
+                plan_name: planName,
+                value
+            });
+
+            MetaTracker.track('ViewContent', {
+                content_name: 'Modal Compatibilidade Smart TV',
+                content_category: 'Compatibilidade',
+                content_type: 'modal',
+                page: 'blog_index',
+                source
+            });
+
+            document.getElementById('smartTvModal').style.display = 'flex';
+        }
+
+        function closeWarningModal() {
+            document.getElementById('smartTvModal').style.display = 'none';
+        }
+
+        function proceedToCheckout() {
+            if(checkoutUrl) {
+                MetaTracker.trackCheckout(checkoutPlanName, checkoutValue, 'BRL', checkoutSource);
+                window.open(checkoutUrl, '_blank', 'noopener,noreferrer');
+            }
+            closeWarningModal();
+        }
+
+        function toggleChat() {
+            const widget = document.getElementById('chat-widget');
+            const willOpen = !widget.classList.contains('active');
+            if (willOpen) {
+                MetaTracker.trackContact('chat_widget_blog');
+            }
+            widget.classList.toggle('active');
+        }
 
         function userAction(text, type) {
             const content = document.getElementById('chat-content');
-            content.innerHTML += `<div class="wa-msg wa-msg-user" style="align-self:flex-end; background:#dcf8c6; border-top-right-radius:0;">${text}</div>`;
+            content.innerHTML += `<div class="wa-msg wa-msg-user">${text}</div>`;
+
+            MetaTracker.track('ChatOptionSelected', {
+                page: 'blog_index',
+                option_type: type,
+                option_text: text
+            });
+
             setTimeout(() => {
-                if(type === 'preco') content.innerHTML += `<div class="wa-msg wa-msg-bot">Planos: Mensal R$ 24,90 | Anual R$ 189,90.</div>`;
-                if(type === 'smart_tv_select') content.innerHTML += `<div class="wa-msg wa-msg-bot">Temos guias para LG/Samsung no blog! Use uma TV Box ou app compatível.</div>`;
-                if(type === 'pre_download') content.innerHTML += `<div class="wa-msg wa-msg-bot">Baixe o APK na aba de Downloads aqui do site!</div>`;
+                if(type === 'preco') {
+                    content.innerHTML += `<div class="wa-msg">Planos: Mensal R$ 24,90 | Anual R$ 189,90.</div>`;
+                    MetaTracker.trackPlansView('blog_chat_price');
+                }
+                if(type === 'smart_tv_select') {
+                    content.innerHTML += `<div class="wa-msg">Temos guias para LG/Samsung no blog! Use uma TV Box ou app compatível.</div>`;
+                    MetaTracker.trackGuide('blog_chat_smarttv');
+                }
+                if(type === 'pre_download') {
+                    content.innerHTML += `<div class="wa-msg">Baixe o APK na aba de Downloads aqui do site!</div>`;
+                    MetaTracker.trackGuide('blog_chat_download');
+                }
                 content.scrollTop = content.scrollHeight;
             }, 800);
         }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            MetaTracker.bindAdvancedMatching();
+            MetaTracker.bindPageInteractions();
+            MetaTracker.bindScrollDepth();
+            MetaTracker.bindTimeEvents();
+            MetaTracker.trackBlogPageView();
+
+            startTimer(17940, document.getElementById('timer'));
+            bindBlogSearch();
+
+            document.querySelectorAll('.reveal').forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('active');
+            });
+        });
     </script>
 </body>
 </html>
