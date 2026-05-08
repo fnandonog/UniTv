@@ -10,6 +10,28 @@
     <meta name="author" content="UniTV Oficial Revenda">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta name="theme-color" content="#1a0525">
+
+    <!-- Meta Pixel -->
+    <script>
+        window.UNITV_META_PIXEL_ID = '2204821377087872';
+        window.UNITV_META_CAPI = {
+            enabled: true,
+            endpoint: '/api/meta-capi.php'
+        };
+        window.UNITV_META_USER_DATA = {};
+
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+
+        fbq('init', window.UNITV_META_PIXEL_ID);
+        fbq('track', 'PageView');
+    </script>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -70,6 +92,7 @@
       }
     }
     </script>
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -96,7 +119,6 @@
     </script>
 
     <style>
-        /* --- ESTILOS GERAIS BASE --- */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         
         :root {
@@ -107,7 +129,7 @@
             --borda-sutil: 1px solid rgba(255, 255, 255, 0.08);
             --verde-zap: #25D366;
             --wa-header: #075e54; --wa-bg: #e5ddd5; --wa-msg-user: #dcf8c6;
-            --cor-destaque: #00ff88; /* Destaque verde para o anual */
+            --cor-destaque: #00ff88;
         }
 
         html, body { 
@@ -120,7 +142,6 @@
             scroll-behavior: smooth;
         }
 
-        /* --- HEADER & BARRAS --- */
         .top-bars-container { display: flex; flex-direction: column; width: 100%; }
         .promo-bar { background: linear-gradient(90deg, #1a0b2e, #2d0b1e); color: #e0e0e0; text-align: center; padding: 8px 10px; font-size: 0.85rem; font-weight: 500; border-bottom: 1px solid rgba(255,255,255,0.05); width: 100%; position: relative; z-index: 2000; }
         .promo-bar span { color: #ff0055; font-weight: 700; margin-left: 5px; }
@@ -134,13 +155,10 @@
         nav a { color: #bbb; text-decoration: none; font-size: 0.85rem; font-weight: 500; text-transform: uppercase; transition: 0.3s; }
         nav a:hover, nav a.active { color: var(--cor-destaque); }
         .header-actions { display: flex; align-items: center; gap: 15px; }
-        
         .btn-header { background: rgba(255, 255, 255, 0.1); color: white; padding: 8px 20px; border-radius: 6px; text-decoration: none; font-size: 0.8rem; font-weight: 600; border: 1px solid rgba(255,255,255,0.1); transition: 0.3s;}
         .btn-header:hover { background: #fff; color: #000; }
-        
         .menu-toggle { display: none; color: white; font-size: 1.6rem; cursor: pointer; outline: none; }
 
-        /* --- PRODUCT HERO (BUY BOX FOCADA EM CONVERSÃO - ANUAL) --- */
         .product-hero { padding: 60px 5% 80px; background: radial-gradient(circle at 70% 30%, #1a0525 0%, #050505 60%); display: flex; justify-content: center; border-bottom: 1px solid #111; }
         .product-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; max-width: 1100px; margin: 0 auto; align-items: center; width: 100%; max-width: 100%; }
         .product-image-container, .product-info { min-width: 0; width: 100%; }
@@ -153,6 +171,7 @@
         .product-info { text-align: left; }
         .product-category { color: var(--cor-destaque); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; margin-bottom: 10px; display: block; }
         .product-info h1 { font-size: 2.8rem; line-height: 1.1; margin-bottom: 15px; font-weight: 800; color: #fff; }
+        .text-gradient { background: var(--gradiente-texto); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .product-rating { display: flex; align-items: center; gap: 10px; color: #ffcc00; font-size: 1rem; margin-bottom: 25px; }
         .product-rating span { color: #888; font-size: 0.9rem; }
         
@@ -177,7 +196,6 @@
 
         @keyframes float { 0%, 100% {transform: translateY(0);} 50% {transform: translateY(-15px);} }
 
-        /* --- SEO TEXT "BÍBLIA" (VÁRIAS SEÇÕES) --- */
         .seo-section { padding: 80px 20px; border-bottom: 1px solid #111; }
         .seo-container { max-width: 900px; margin: 0 auto; color: #aaa; font-size: 1.05rem; line-height: 1.8; }
         .seo-container h2 { color: #fff; font-size: 2.2rem; margin-bottom: 25px; font-weight: 800; letter-spacing: -0.5px; }
@@ -190,20 +208,17 @@
         .info-box { background: var(--bg-card); border: var(--borda-sutil); padding: 30px; border-radius: 16px; }
         .info-box h4 { color: #fff; font-size: 1.2rem; margin-bottom: 10px; color: var(--cor-destaque); }
 
-        /* --- COMO FUNCIONA (STEPS) --- */
         .steps-wrapper { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 50px; }
         .step-item { text-align: center; padding: 30px; background: #0a0a0a; border: 1px solid #222; border-radius: 20px; position: relative; }
         .step-icon { width: 70px; height: 70px; background: rgba(0,255,136,0.1); color: var(--cor-destaque); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 20px; border: 1px solid rgba(0,255,136,0.2); }
         .step-item h4 { color: #fff; font-size: 1.2rem; margin-bottom: 10px; }
         .step-item p { color: #888; font-size: 0.9rem; }
 
-        /* --- AVISO DE COMPRA --- */
         .guarantee-box { background: linear-gradient(90deg, rgba(37, 211, 102, 0.1), rgba(0,0,0,0)); border-left: 4px solid #25D366; padding: 30px; border-radius: 12px; margin: 60px auto 0; max-width: 900px; display: flex; align-items: center; gap: 25px; }
         .guarantee-box i { font-size: 3rem; color: #25D366; }
         .guarantee-content h4 { color: #fff; font-size: 1.3rem; margin-bottom: 5px; }
         .guarantee-content p { color: #aaa; margin: 0; font-size: 0.95rem; }
 
-        /* --- MEGA FAQ --- */
         .faq-section { background: #050505; padding: 100px 20px; border-bottom: 1px solid #111; }
         .faq-container { max-width: 900px; margin: 0 auto; }
         .faq-item { background: var(--bg-card); border: 1px solid #222; margin-bottom: 15px; border-radius: 12px; overflow: hidden; transition: 0.3s; }
@@ -215,7 +230,6 @@
         .faq-item.active .faq-answer { padding: 0 25px 25px; max-height: 800px; border-top: 1px solid #222; margin-top: 10px; padding-top: 20px; }
         .faq-item.active .faq-question i { transform: rotate(180deg); }
 
-        /* --- PROVA SOCIAL (SIMPLIFICADA) --- */
         .reviews-compact { display: flex; gap: 20px; overflow-x: auto; padding: 20px 0; margin-top: 30px; scroll-behavior: smooth; }
         .reviews-compact::-webkit-scrollbar { display: none; }
         .review-card { min-width: 300px; background: #0a0a0a; border: 1px solid #222; padding: 20px; border-radius: 16px; }
@@ -224,16 +238,13 @@
         .review-card h5 { font-size: 0.9rem; color: #fff; }
         .review-card span { font-size: 0.7rem; color: #00ff88; text-transform: uppercase; }
 
-        /* --- ANIMAÇÕES DE SCROLL (INTERSECTION OBSERVER) --- */
         .fade-in { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1); }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
 
-        /* --- STICKY CTA (MOBILE CONVERSÃO) --- */
         .sticky-cta-mobile { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(5,5,5,0.95); backdrop-filter: blur(10px); padding: 15px 20px; border-top: 1px solid #222; z-index: 1400; display: none; transform: translateY(100%); transition: transform 0.4s ease; box-shadow: 0 -10px 30px rgba(0,0,0,0.6); }
         .sticky-cta-mobile.show { transform: translateY(0); }
         .sticky-btn { background: var(--gradiente-premium); color: white; width: 100%; padding: 15px; border-radius: 12px; font-weight: 800; font-size: 1.1rem; text-align: center; text-decoration: none; display: flex; justify-content: center; align-items: center; gap: 10px; text-transform: uppercase; box-shadow: 0 5px 20px rgba(221,36,118,0.4); border: none; cursor: pointer; }
 
-        /* --- FOOTER MEGA --- */
         footer { background: #020202; padding: 80px 20px 40px; color: #777; font-size: 0.9rem; }
         .footer-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 50px; }
         .footer-logo { margin-bottom: 20px; filter: brightness(1.2); height: 40px; }
@@ -248,7 +259,6 @@
         .legal-links a { color: #888; text-decoration: none; }
         .legal-links a:hover { color: #fff; text-decoration: underline; }
 
-        /* --- WHATSAPP WIDGET & MODAL --- */
         .wa-widget { position: fixed; bottom: 90px; right: 25px; width: 350px; background: var(--wa-bg); border-radius: 16px; z-index: 9999; box-shadow: 0 15px 35px rgba(0,0,0,0.4); display: flex; flex-direction: column; overflow: hidden; transform: scale(0); transform-origin: bottom right; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         .wa-widget.active { transform: scale(1); }
         .wa-header { background: var(--wa-header); color: white; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; }
@@ -276,7 +286,6 @@
         .float-zap { position: fixed; bottom: 25px; right: 25px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; z-index: 10000; box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4); cursor: pointer; transition: 0.3s; }
         .float-zap:hover { transform: scale(1.1); }
 
-        /* --- MODAL SMART TV --- */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); backdrop-filter: blur(8px); display: flex; justify-content: center; align-items: center; z-index: 100000; opacity: 0; visibility: hidden; transition: 0.3s ease; }
         .modal-overlay.active { opacity: 1; visibility: visible; }
         .modal-content { background: #111; border: 1px solid #333; border-radius: 20px; width: 90%; max-width: 500px; padding: 40px; text-align: center; transform: translateY(30px); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.8); }
@@ -294,7 +303,6 @@
         .btn-modal-support { background: #222; color: #fff; border: 1px solid #444; padding: 16px; font-weight: 600; font-size: 0.95rem; border-radius: 12px; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.3s; }
         .btn-modal-support:hover { background: #333; border-color: #666; }
 
-        /* --- RESPONSIVIDADE MÁXIMA E CORREÇÃO DE CORTE NO MOBILE --- */
         @media (max-width: 992px) {
             .product-grid { grid-template-columns: 1fr; gap: 40px; }
             .info-grid { grid-template-columns: 1fr; }
@@ -302,552 +310,13 @@
 
         @media (max-width: 768px) {
             html, body { overflow-x: hidden; position: relative; }
-            
-            /* Fix Header */
             .brand-alert { display: none; } 
             header { height: 60px; padding: 10px 15px; }
             .logo img { height: 26px; }
-            
-            /* Fix Menu Mobile */
             .menu-toggle { display: block; }
             nav { position: absolute; top: 60px; left: -100%; width: 100%; height: calc(100vh - 60px); background: rgba(10, 10, 10, 0.98); backdrop-filter: blur(15px); border-top: 1px solid #222; transition: 0.4s ease-in-out; padding: 30px 20px; display: flex; flex-direction: column; z-index: 999; }
             nav.active { left: 0; }
             nav ul { flex-direction: column; gap: 20px; width: 100%; }
-            nav a { font-size: 1.3rem; display: block; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-weight: 600; text-align: left; }
-            .header-actions .btn-header { display: none; } 
-            
-            /* --- SOLUÇÃO DO CORTE LATERAL DA TELA --- */
-            .product-hero { 
-                padding: 40px 15px 50px; 
-                display: block; 
-            }
-            .product-grid { 
-                display: flex; 
-                flex-direction: column; 
-                gap: 30px; 
-                width: 100%; 
-                margin: 0; 
-            }
-            
-            .product-image-container, .product-info { min-width: 0; width: 100%; } 
-            
-            .product-image-container { padding: 10px 0 0; border: none; background: transparent; position: relative; }
-            .product-image-container img { max-width: 100%; margin: 0 auto; display: block; }
-            
-            .product-badge { font-size: 0.85rem; padding: 12px 18px; top: -10px; left: 0; box-shadow: 0 5px 15px rgba(0, 255, 136, 0.4); border-width: 2px; }
-            
-            /* Fix Reviews Scroll */
-            .reviews-compact { 
-                padding: 10px 0 20px; 
-                gap: 15px; 
-                scroll-snap-type: x mandatory; 
-                width: 100%; 
-                display: flex; 
-                overflow-x: auto; 
-                -webkit-overflow-scrolling: touch; 
-                scrollbar-width: none; 
-            }
-            .reviews-compact::-webkit-scrollbar { display: none; }
-            .review-card { 
-                flex: 0 0 85%; 
-                scroll-snap-align: center; 
-                padding: 18px; 
-                text-align: left; 
-                background: #0d0d0d;
-                border: 1px solid #222;
-            }
-            
-            /* Fix Product Info Alinhamento */
-            .product-info { text-align: center; padding: 0; } 
-            .product-info h1 { font-size: 2rem; line-height: 1.2; text-align: center; letter-spacing: -0.5px; word-wrap: break-word; }
-            .product-category { font-size: 0.75rem; text-align: center; display: inline-block; background: rgba(0,255,136,0.1); padding: 5px 15px; border-radius: 20px; margin-bottom: 15px; width: auto; }
-            .product-rating { justify-content: center; margin-bottom: 25px; }
-            
-            .product-features { display: flex; flex-direction: column; gap: 10px; }
-            .product-features li { 
-                justify-content: flex-start; 
-                text-align: left; 
-                font-size: 0.9rem; 
-                align-items: center; 
-                background: rgba(255,255,255,0.03); 
-                border: 1px solid rgba(255,255,255,0.05); 
-                padding: 12px 15px; 
-                border-radius: 12px; 
-                margin: 0;
-            }
-            .product-features i { margin-top: 0; }
-            
-            .product-price-box { padding: 25px 15px; text-align: center; border-radius: 16px; margin-top: 20px; }
-            .price-current { font-size: 2.8rem; justify-content: center; }
-            
-            .btn-buy-huge { font-size: 1.1rem; padding: 18px; border-radius: 14px; }
-            .btn-tutorial { font-size: 0.9rem; padding: 14px; text-align: center; }
-            .delivery-info { flex-direction: column; text-align: center; gap: 10px; }
-            
-            /* Fix SEO Sections e Paddings Laterais para não colar na borda */
-            .seo-section, .faq-section { padding: 50px 15px; }
-            .seo-container h2 { font-size: 1.7rem; text-align: left; line-height: 1.3;}
-            .seo-container h3 { font-size: 1.3rem; flex-direction: column; align-items: flex-start; gap: 10px; }
-            .info-grid { gap: 20px; margin: 30px 0; }
-            .info-box { padding: 25px 20px; }
-            
-            .steps-wrapper { gap: 20px; margin-top: 30px; padding: 0 15px; }
-            .step-item { padding: 25px 20px; }
-            
-            .guarantee-box { flex-direction: column; text-align: center; padding: 30px 20px; gap: 15px; margin-top: 40px; }
-            
-            .faq-question { padding: 20px; font-size: 1rem; }
-            .faq-item.active .faq-answer { padding: 0 20px 20px; }
-            
-            footer { padding: 50px 15px 100px; text-align: center; }
-            .footer-container { grid-template-columns: 1fr; gap: 40px; }
-            .payment-methods { justify-content: center; }
-            .footer-links a { justify-content: center; }
-            
-            .sticky-cta-mobile { display: block; padding: 10px 15px; }
-            .sticky-btn { padding: 14px; font-size: 1.05rem; }
-            
-            .float-zap { bottom: 85px; width: 55px; height: 55px; font-size: 28px; transition: 0.3s; }
-            .wa-widget { width: calc(100% - 30px); left: 15px; right: auto; bottom: 85px; max-height: 75vh; }
-        }
-    </style>
-</head>
-<body>
+            nav a { font-size: 1.3rem; display: block; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255
 
-    <div class="top-bars-container">
-        <div class="promo-bar">
-            🔥 OFERTA RELÂMPAGO: Receba seu código no WhatsApp na mesma hora!
-        </div>
-        <div class="brand-alert">
-            <i class="fa-solid fa-shield-check"></i> 
-            <span>Atenção: Somos a <strong>Revenda UniTV Oficial</strong>. Evite falsificações.</span>
-        </div>
-    </div>
-
-    <header>
-        <div class="logo">
-            <a href="/"><img src="/img/logo-unitv.png" alt="Logo Oficial UniTV Revenda"></a>
-        </div>
-        
-        <nav id="nav-menu">
-            <ul>
-                <li><a href="/">Início</a></li>
-                <li><a href="/tutorial">Instalação</a></li>
-                <li><a href="/blog">Blog</a></li>
-                <li><a href="/ajuda">Ajuda</a></li>
-            </ul>
-        </nav>
-        
-        <div class="header-actions">
-            <a href="/#comprar" class="btn-header"><i class="fa-solid fa-tags"></i> Ver Planos</a>
-            
-            <div class="menu-toggle" onclick="toggleMenu()" aria-label="Abrir ou fechar menu de navegação mobile" role="button" tabindex="0">
-                <i class="fa-solid fa-bars" id="menu-icon"></i>
-            </div>
-        </div>
-    </header>
-
-    <section class="product-hero" id="comprar">
-        <div class="product-grid">
-            <div class="product-image-container">
-                <div class="product-badge">365<br>DIAS</div>
-                <img src="/img/hero-tv.png" alt="Recarga UniTV Oficial Plano Anual VIP rodando na Smart TV 4K e no celular" fetchpriority="high" decoding="async">
-                
-                <div class="reviews-compact">
-                    <div class="review-card">
-                        <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                        <p>"Comprei o anual e não me arrependo, economizei muito e não preciso ficar lembrando de pagar todo mês."</p>
-                        <h5>Fernando G. <span>✓ Verificado</span></h5>
-                    </div>
-                    <div class="review-card">
-                        <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                        <p>"Chegou o código em 10 segundos no WhatsApp. Já ativei nas minhas duas TVs. Fantástico!"</p>
-                        <h5>Cláudia Silva <span>✓ Verificado</span></h5>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="product-info">
-                <span class="product-category"><i class="fa-solid fa-crown"></i> Plano de Melhor Custo-Benefício</span>
-                <h1>Recarga Oficial UniTV<br><span class="text-gradient">Plano Anual VIP (365 Dias)</span></h1>
-                
-                <div class="product-rating">
-                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                    <span>4.9/5 (3.421 avaliações)</span>
-                </div>
-                
-                <div class="product-price-box">
-                    <span class="price-old">De R$ 280,00 por:</span>
-                    <div class="price-current">R$ 189<span>,90</span></div>
-                    <p style="color: #00ff88; font-size: 0.9rem; margin-top: 5px; font-weight: 600;"><i class="fa-solid fa-check"></i> Você economiza R$ 100 na hora! (Apenas R$ 15,79/mês)</p>
-                </div>
-                
-                <ul class="product-features">
-                    <li><i class="fa-solid fa-star"></i> <span>Acesso Liberado e Contínuo por 365 Dias</span></li>
-                    <li><i class="fa-solid fa-mobile-screen"></i> <span>Pacote VIP: 2 Telas Simultâneas Inclusas</span></li>
-                    <li><i class="fa-solid fa-shield-halved"></i> <span>Proteção total contra reajuste de preço (1 ano)</span></li>
-                    <li><i class="fa-solid fa-headset"></i> <span>Suporte Técnico VIP e Prioritário</span></li>
-                </ul>
-                
-                <div class="buy-actions">
-                    <a href="javascript:void(0)" onclick="openWarningModal('https://pay.kirvano.com/0aadf253-f4b6-47dd-8d0a-f5f16714ce98')" class="btn-buy-huge" rel="noopener noreferrer">
-                        <i class="fa-solid fa-cart-shopping"></i> GARANTIR OFERTA ANUAL
-                    </a>
-                    
-                    <a href="/tutorial" class="btn-tutorial">
-                        <i class="fa-solid fa-book-open"></i> Quero ver o Tutorial de Instalação primeiro
-                    </a>
-                </div>
-                
-                <div class="delivery-info">
-                    <span><i class="fa-brands fa-whatsapp"></i> Código enviado no WhatsApp</span>
-                    <span><i class="fa-solid fa-envelope"></i> Enviado no E-mail</span>
-                </div>
-                <div style="margin-top: 15px; font-size: 0.8rem; color: #666; display: flex; align-items: center; justify-content: center; gap: 8px;">
-                    <i class="fa-solid fa-lock" style="color: #00ff88;"></i> Pagamento 100% Criptografado
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="seo-section fade-in">
-        <div class="seo-container">
-            <h2>Por que a Recarga Anual UniTV é a melhor escolha?</h2>
-            <p>O <strong>Plano Anual VIP UniTV</strong> foi desenhado para quem preza por <strong>tranquilidade absoluta</strong>. Ao escolher a recarga de 365 dias, você se liberta da preocupação de ter que gerar códigos de pagamento todo santo mês. É um ano inteiro de filmes, séries e futebol na sua TV Box Android sem interrupções.</p>
-            
-            <p>Além da conveniência, a matemática é simples: pagando o plano mensal durante 12 meses, você gastaria quase trezentos reais. Adquirindo a <strong>Recarga Anual Oficial</strong> na nossa plataforma, você recebe um desconto automático de R$ 100,00 reais. O valor fica equivalente a meros <strong>R$ 15,79 por mês</strong>. Menos que a mensalidade de streamings básicos que não têm nem metade do conteúdo.</p>
-            
-            <div class="info-grid">
-                <div class="info-box">
-                    <h4><i class="fa-solid fa-piggy-bank"></i> Congelamento de Preço</h4>
-                    <p>O mercado de tecnologia sofre reajustes constantes. Ao garantir o plano anual, você blinda a sua assinatura contra qualquer aumento de preço da plataforma oficial pelos próximos 12 meses. Você paga hoje e sua diversão está garantida até o ano que vem.</p>
-                </div>
-                <div class="info-box">
-                    <h4><i class="fa-solid fa-bolt"></i> Sistema P2P Premium</h4>
-                    <p>A garantia de não perder nenhum lance do Brasileirão ou da Champions League. A nossa arquitetura de rotas VIP não sofre congestionamento em dias de jogos, pois a rede estabiliza de forma independente, oferecendo uma genuína imagem em 4K UHD.</p>
-                </div>
-            </div>
-
-            <h3><i class="fa-solid fa-cubes"></i> Um verdadeiro Hub de Entretenimento</h3>
-            <p>Não estamos falando de uma lista instável de IPTV. O aplicativo UniTV transforma o menu da sua TV num sistema profissional, com capas de filmes em alta resolução, sinopses dubladas, sistema inteligente de pesquisa e <strong>Playback Automático</strong> (assista a uma corrida de F1 que passou ontem com um único clique no controle remoto).</p>
-        </div>
-    </section>
-
-    <section style="padding: 80px 0; background: #080808;" class="fade-in">
-        <div style="max-width: 1000px; margin: 0 auto;">
-            <h2 class="section-title" style="text-align: center; font-size: 2rem; margin-bottom: 20px;">Como garantir o seu ano inteiro?</h2>
-            <div class="steps-wrapper">
-                <div class="step-item">
-                    <div class="step-icon"><i class="fa-solid fa-credit-card"></i></div>
-                    <h4>1. Pagamento Seguro</h4>
-                    <p>Conclua a compra via Pix ou Cartão na plataforma Kirvano. Preencha seu e-mail e telefone com atenção.</p>
-                </div>
-                <div class="step-item">
-                    <div class="step-icon"><i class="fa-brands fa-whatsapp"></i></div>
-                    <h4>2. Entrega do Robô</h4>
-                    <p>O nosso sistema não dorme. Ao confirmar o Pix, ele envia na mesma hora um código VIP de 16 dígitos para o seu WhatsApp.</p>
-                </div>
-                <div class="step-item">
-                    <div class="step-icon"><i class="fa-solid fa-couch"></i></div>
-                    <h4>3. Diversão Ilimitada</h4>
-                    <p>Abra o UniTV, digite os 16 números e encoste no sofá. A sua assinatura está garantida por 365 dias sem cortes.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section style="padding: 60px 15px 0;" class="fade-in">
-        <div class="guarantee-box">
-            <i class="fa-solid fa-shield-halved"></i>
-            <div class="guarantee-content">
-                <h4>Sua Recarga Está Segura Conosco</h4>
-                <p>Nós utilizamos a Kirvano, um dos maiores e mais blindados gateways de pagamento do Brasil. Você recebe exatamente aquilo que comprou em segundos ou o sistema devolve o seu dinheiro. Risco Zero.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="faq-section fade-in" id="faq">
-        <h2 class="section-title" style="text-align: center; font-size: 2rem; margin-bottom: 40px;">Dúvidas Frequentes: Plano Anual VIP</h2>
-        
-        <div class="faq-container">
-            <div class="faq-item">
-                <button class="faq-question" aria-expanded="false">Posso parcelar o valor do plano Anual? <i class="fa-solid fa-chevron-down"></i></button>
-                <div class="faq-answer">
-                    <p>Sim! Ao clicar em comprar, você será redirecionado para a página de checkout seguro. Lá você pode selecionar a opção "Cartão de Crédito" e parcelar o valor de R$ 189,90 em até 12x, ficando um valor mensal absurdamente baixo pela qualidade entregue.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-question" aria-expanded="false">E se a minha TV Box queimar durante o ano? <i class="fa-solid fa-chevron-down"></i></button>
-                <div class="faq-answer">
-                    <p>Não há problema algum! O código de 16 dígitos que você comprou é <strong>seu</strong>. Se você comprar uma TV Box nova ou trocar de celular, basta instalar o UniTV no novo aparelho e inserir o mesmo código. O sistema fará o login e continuará contando os seus dias restantes.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-question" aria-expanded="false">O plano anual também dá direito a duas telas? <i class="fa-solid fa-chevron-down"></i></button>
-                <div class="faq-answer">
-                    <p>Com certeza. O Plano Anual é a nossa versão VIP. Você tem liberação para utilizar a mesma conta em até <strong>2 telas em simultâneo</strong> (por exemplo: assistindo o jogo na sala pela TV Box e as crianças assistindo desenho no quarto pelo celular Android).</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-question" aria-expanded="false">Os lançamentos de filmes são cobrados à parte? <i class="fa-solid fa-chevron-down"></i></button>
-                <div class="faq-answer">
-                    <p>Jamais. Todos os lançamentos que chegam aos cinemas ou outras plataformas são atualizados gratuitamente na aba VOD (Video On Demand) do UniTV. O valor que você pagou na Recarga Anual já engloba todos os updates e canais novos que entrarem na grade durante 1 ano.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-question" aria-expanded="false">Vou precisar de suporte. Vocês ajudam? <i class="fa-solid fa-chevron-down"></i></button>
-                <div class="faq-answer">
-                    <p>Nós somos uma Revenda Oficial. Diferente de vendedores amadores que desaparecem depois de vender a recarga anual, nós possuímos um suporte comercial humano no WhatsApp dedicado a ajudar você na instalação do Downloader, configurações da rede e suporte técnico VIP.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="footer-container">
-            <div class="footer-col">
-                <img src="/img/logo-unitv.png" alt="Logo UniTV Oficial" class="footer-logo" loading="lazy">
-                <p class="footer-desc">
-                    Somos revendedores autorizados da plataforma UniTV. Levamos entretenimento premium com qualidade 4K diretamente para a sua casa com suporte de excelência.
-                </p>
-                <div style="display: flex; align-items: center; gap: 10px; color: #fff; font-weight: bold; margin-top: 15px;">
-                    <i class="fa-solid fa-shield-halved" style="color:#00ff88"></i> Conexão 100% Segura
-                </div>
-            </div>
-            <div class="footer-col">
-                <h4>Acesso Rápido</h4>
-                <ul class="footer-links">
-                    <li><a href="/">Voltar ao Início</a></li>
-                    <li><a href="/tutorial">Guia de Instalação</a></li>
-                    <li><a href="/blog">Blog de Tecnologia</a></li>
-                    <li><a href="/velocidade">Teste de Velocidade</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Suporte Dedicado</h4>
-                <ul class="footer-links">
-                    <li><a href="/ajuda">Central de Ajuda (FAQ)</a></li>
-                    <li><a href="javascript:void(0)" onclick="toggleChat()">Atendimento WhatsApp</a></li>
-                    <li><span style="color:#666; font-size:0.8rem; margin-top:5px; display:block;">Horário: Seg a Sex, das 08h às 22h</span></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Transação Segura</h4>
-                <p style="margin-bottom: 15px; color: #777;">Aprovação imediata via Pix e Cartão de Crédito em 12x.</p>
-                <div class="payment-methods">
-                    <i class="fa-brands fa-pix" style="color:#32bcad;"></i>
-                    <i class="fa-brands fa-cc-mastercard"></i>
-                    <i class="fa-brands fa-cc-visa"></i>
-                </div>
-            </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <div class="legal-links">
-                <a href="#">Política de Privacidade</a>
-                <a href="#">Termos de Uso</a>
-                <a href="#">Política de Reembolso</a>
-            </div>
-            <div>&copy; 2024 - 2026 UniTV Revenda Oficial Autorizada. Todos os direitos reservados.</div>
-            <div style="color:#444;">Acesso Digital e Serviços Tecnológicos de Streaming</div>
-        </div>
-    </footer>
-
-    <div class="sticky-cta-mobile" id="sticky-cta">
-        <button onclick="openWarningModal('https://pay.kirvano.com/0aadf253-f4b6-47dd-8d0a-f5f16714ce98')" class="sticky-btn">
-            <i class="fa-solid fa-cart-shopping"></i> COMPRAR R$ 189,90
-        </button>
-    </div>
-
-    <div id="chat-widget" class="wa-widget">
-        <div class="wa-header">
-            <div class="wa-profile">
-                <img src="/img/logo-unitv.png" alt="Atendente Oficial UniTV WhatsApp" loading="lazy">
-                <div class="wa-info">
-                    <span class="wa-name">Atendimento VIP Anual</span>
-                    <span id="wa-status" class="wa-status">Online</span>
-                </div>
-            </div>
-            <button onclick="toggleChat()" class="wa-close" aria-label="Fechar janela do WhatsApp"><i class="fa-solid fa-times"></i></button>
-        </div>
-        <div id="chat-content" class="wa-chat-body">
-            <div class="wa-msg wa-msg-bot">Olá! 👋 Que ótimo ver você aqui. O <strong>Plano Anual</strong> é a nossa melhor oferta para não ter travamentos. <span class="wa-time">agora</span></div>
-            <div class="wa-msg wa-msg-bot">Tem alguma dúvida sobre a compra de 365 dias? <span class="wa-time">agora</span></div>
-        </div>
-        <div id="typing-indicator" class="wa-msg wa-msg-bot typing" style="display: none;"><span></span><span></span><span></span></div>
-        <div id="wa-options" class="wa-options">
-            <button onclick="userAction('Posso parcelar no cartão?', 'parcelamento')">Tem como parcelar?</button>
-            <button onclick="userAction('E se minha TV queimar?', 'troca_tv')">E se eu trocar de aparelho?</button>
-            <button onclick="userAction('Como recebo os 16 dígitos?', 'entrega')">Como funciona a entrega?</button>
-            <button onclick="userAction('Funciona na LG/Samsung?', 'smart_tv_select')">Minha TV é Samsung/LG</button>
-        </div>
-        <div class="wa-input-fake">
-            <div class="wa-input-box">Selecione uma opção...</div>
-            <i class="fa-solid fa-paper-plane" style="color: #075e54; font-size: 1.2rem;"></i>
-        </div>
-    </div>
-
-    <div class="float-zap" onclick="toggleChat()" aria-label="Botão para abrir chat de suporte no WhatsApp" role="button" tabindex="0"><i class="fa-brands fa-whatsapp"></i></div>
-
-    <div id="smartTvModal" class="modal-overlay">
-        <div class="modal-content">
-            <button class="btn-close-modal-x" onclick="closeWarningModal()" aria-label="Fechar alerta de compatibilidade Smart TV"><i class="fa-solid fa-xmark"></i></button>
-            <div class="modal-header">
-                <i class="fa-solid fa-triangle-exclamation"></i>
-                <h3>ATENÇÃO ANTES DE COMPRAR!</h3>
-            </div>
-            <div class="modal-body">
-                <p>O aplicativo <strong>UniTV Oficial</strong> requer sistema <strong>ANDROID</strong> nativo (TV Box, Celular Android, Android TV ou Firestick).</p>
-                <div class="alert-box">
-                    <p>🚫 ELE NÃO RODA diretamente nas Smart TVs LG (WebOS), Samsung (Tizen), Roku ou marcas paralelas.</p>
-                </div>
-                <p style="font-size: 0.9rem; color: #aaa;">A sua TV é Samsung ou LG? <strong>Não compre o plano anual ainda!</strong> Chame nosso suporte no chat para ativarmos um painel alternativo compatível com a sua marca.</p>
-            </div>
-            <div class="modal-actions">
-                <button class="btn-modal-buy" onclick="proceedToCheckout()"><i class="fa-solid fa-check"></i> MEU APARELHO É ANDROID (Comprar)</button>
-                <a href="javascript:void(0)" onclick="closeWarningModal(); document.getElementById('chat-widget').classList.add('active'); userAction('Minha TV é LG/Samsung', 'smart_tv_solution');" class="btn-modal-support"><i class="fa-solid fa-headset"></i> MINHA TV É LG/SAMSUNG (Ajuda)</a>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // MENU HAMBÚRGUER MOBILE
-        function toggleMenu() {
-            const navMenu = document.getElementById('nav-menu');
-            const icon = document.getElementById('menu-icon');
-            navMenu.classList.toggle('active');
-            
-            if(navMenu.classList.contains('active')) {
-                icon.classList.replace('fa-bars', 'fa-xmark');
-            } else {
-                icon.classList.replace('fa-xmark', 'fa-bars');
-            }
-        }
-        document.querySelectorAll('#nav-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                document.getElementById('nav-menu').classList.remove('active');
-                document.getElementById('menu-icon').classList.replace('fa-xmark', 'fa-bars');
-            });
-        });
-
-        // FAQ ACCORDION LOGIC
-        const faqItems = document.querySelectorAll('.faq-item');
-        faqItems.forEach(item => {
-            const question = item.querySelector('.faq-question');
-            question.addEventListener('click', () => {
-                const isActive = item.classList.contains('active');
-                faqItems.forEach(i => { 
-                    i.classList.remove('active'); 
-                    i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
-                });
-                if (!isActive) {
-                    item.classList.add('active');
-                    question.setAttribute('aria-expanded', 'true');
-                }
-            });
-        });
-
-        // CHATBOT LOGIC (Customizado para Venda Anual)
-        function toggleChat() { document.getElementById('chat-widget').classList.toggle('active'); }
-        function showTyping(callback) {
-            const status = document.getElementById('wa-status'), typing = document.getElementById('typing-indicator'), content = document.getElementById('chat-content');
-            status.innerText = "A escrever..."; typing.style.display = "block"; content.appendChild(typing); content.scrollTop = content.scrollHeight;
-            setTimeout(() => { typing.style.display = "none"; status.innerText = "Online"; callback(); }, 1200);
-        }
-        function addMessage(text, side) {
-            const content = document.getElementById('chat-content'), now = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}), checks = side === 'user' ? ' <i class="fa-solid fa-check-double" style="color:#34b7f1; font-size: 0.7rem"></i>' : '';
-            content.innerHTML += `<div class="wa-msg wa-msg-${side}">${text}<span class="wa-time">${now}${checks}</span></div>`;
-            content.scrollTop = content.scrollHeight;
-        }
-        function setOptions(options) {
-            const container = document.getElementById('wa-options'); container.innerHTML = "";
-            options.forEach(opt => { const btn = document.createElement('button'); btn.innerHTML = opt.label; btn.onclick = () => userAction(opt.label.replace(/<[^>]*>?/gm, ''), opt.type); container.appendChild(btn); });
-        }
-        
-        function userAction(text, type) {
-            addMessage(text, 'user'); setOptions([]);
-            showTyping(() => {
-                if(type === 'parcelamento') {
-                    addMessage("<strong>Com certeza!</strong> Na tela de pagamento você pode parcelar o valor de R$ 189,90 em até 12x no cartão de crédito. Fica muito barato!", 'bot');
-                    setOptions([{label: 'Perfeito, quero comprar', type: 'comprar_agora'}, {label: 'Como funciona a entrega?', type: 'entrega'}]);
-                } else if(type === 'troca_tv') {
-                    addMessage("Não tem problema. A recarga anual é vinculada ao seu código. Se trocar de Box ou Celular, é só usar o mesmo código no aparelho novo que ele volta a funcionar onde parou.", 'bot');
-                    setOptions([{label: 'Entendi. Quero assinar!', type: 'comprar_agora'}]);
-                } else if(type === 'entrega') {
-                    addMessage("Se pagar via PIX ou Cartão, o nosso robô envia o seu código de 16 dígitos imediatamente pelo WhatsApp e também para o e-mail cadastrado.", 'bot'); 
-                    setOptions([{label: 'Vou pagar o Pix agora', type: 'comprar_agora'}, {label: 'Voltar', type: 'reset'}]);
-                } else if(type === 'comprar_agora') {
-                    addMessage("Excelente escolha! Clique no link oficial abaixo para garantir 365 dias de entretenimento em 4K:", 'bot');
-                    addMessage("👉 <a href='javascript:void(0)' onclick=\"openWarningModal('https://pay.kirvano.com/0aadf253-f4b6-47dd-8d0a-f5f16714ce98')\" style='color: var(--cor-destaque); font-weight: bold;'>Comprar Anual (R$ 189,90)</a>", 'bot');
-                    setOptions([{label: 'Já paguei o Pix!', type: 'pix_feito'}, {label: 'Preciso de ajuda', type: 'suporte_humano'}]);
-                } else if(type === 'pix_feito') {
-                    addMessage("Fantástico. O seu código vai chegar a qualquer segundo no E-mail e no WhatsApp (verifique o Spam). Se demorar mais de 5 minutos, chame o humano.", 'bot');
-                    setOptions([{label: 'Falar com Humano', type: 'suporte_humano'}]);
-                } else if(type === 'smart_tv_select') {
-                    addMessage("Nessas marcas (LG/Samsung) o UniTV não roda direito. Para não travar, instalamos um app parceiro chamado <strong>ULTRA PLAYER</strong>.", 'bot');
-                    setTimeout(() => showTyping(() => { 
-                        addMessage("Vá na loja de apps da sua TV e pesquise por 'Ultra Player'.", 'bot'); 
-                        setOptions([{label: 'Baixei, e agora?', type: 'baixou_ultra'}, {label: 'Não achei', type: 'suporte_humano'}]); 
-                    }), 1500);
-                } else if(type === 'baixou_ultra') {
-                    addMessage("Ótimo. Abra o app, tire foto do código MAC na tela e me envie no WhatsApp humano para eu liberar seu acesso.", 'bot');
-                    const btn = document.createElement('button'); btn.innerText = "ENVIAR FOTO DO MAC"; btn.style.background = "#25d366"; btn.style.color = "white"; btn.onclick = () => window.open("https://wa.me/5519981765840?text=Baixei o Ultra Player na Smart TV, foto do MAC:", '_blank', 'noopener,noreferrer'); document.getElementById('wa-options').appendChild(btn);
-                } else if(type === 'suporte_humano') {
-                    addMessage("Certo, estou direcionando você para um especialista da equipa.", 'bot');
-                    const btn = document.createElement('button'); btn.innerText = "Conversar no WhatsApp"; btn.style.background = "#25d366"; btn.style.color = "white"; btn.onclick = () => window.open("https://wa.me/5519981765840?text=Preciso de atendimento para fechar o plano anual.", '_blank', 'noopener,noreferrer'); document.getElementById('wa-options').appendChild(btn);
-                } else if(type === 'reset') {
-                    addMessage("Posso ajudar com mais alguma coisa?", 'bot'); 
-                    setOptions([{label: 'Pode parcelar?', type: 'parcelamento'}, {label: 'Como recebo?', type: 'entrega'}, {label: 'Quero comprar agora', type: 'comprar_agora'}]);
-                }
-            });
-        }
-
-        // LÓGICA DO MODAL SMART TV COM PROTEÇÃO NOOPENER NOREFERRER
-        let checkoutUrlToRedirect = '';
-        function openWarningModal(url) {
-            checkoutUrlToRedirect = url;
-            document.getElementById('smartTvModal').classList.add('active');
-        }
-        function closeWarningModal() {
-            document.getElementById('smartTvModal').classList.remove('active');
-        }
-        function proceedToCheckout() {
-            if(checkoutUrlToRedirect) {
-                window.open(checkoutUrlToRedirect, '_blank', 'noopener,noreferrer');
-                closeWarningModal();
-            }
-        }
-
-        // SCROLL ANIMATION (INTERSECTION OBSERVER) & STICKY CTA LOGIC
-        document.addEventListener("DOMContentLoaded", function() {
-            // Animação de Entrada
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            document.querySelectorAll('.fade-in').forEach((el) => {
-                observer.observe(el);
-            });
-
-            // Lógica do Botão Comprar Fixo no Mobile
-            const stickyCta = document.getElementById('sticky-cta');
-            const heroSection = document.getElementById('comprar');
-            
-            window.addEventListener('scroll', () => {
-                if (window.innerWidth <= 768) {
-                    const heroBottom = heroSection.getBoundingClientRect().bottom;
-                    if (heroBottom < 0) {
-                        stickyCta.classList.add('show');
-                    } else {
-                        stickyCta.classList.remove('show');
-                    }
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+[Erro] Falha temporária de conexão. Tente novamente.
