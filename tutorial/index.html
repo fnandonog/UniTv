@@ -5,6 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Como Instalar o UniTV Oficial - Guia Passo a Passo</title>
     <meta name="description" content="Aprenda a instalar a recarga oficial do UniTV na sua TV Box, Celular Android ou Fire Stick. Siga nosso tutorial simples com o código Downloader oficial.">
+    <meta name="theme-color" content="#1a0525">
+
+    <!-- Meta Pixel -->
+    <script>
+        window.UNITV_META_PIXEL_ID = '2204821377087872';
+        window.UNITV_META_CAPI = {
+            enabled: true,
+            endpoint: '/api/meta-capi.php'
+        };
+        window.UNITV_META_USER_DATA = {};
+
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+
+        fbq('init', window.UNITV_META_PIXEL_ID);
+        fbq('track', 'PageView');
+    </script>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -122,7 +145,7 @@
         }
         .brand-alert strong { color: #fff; text-decoration: underline; }
 
-        /* HEADER STICKY (Fixa no topo ao rolar, mas obedece ao fluxo inicial) */
+        /* HEADER STICKY */
         header {
             display: flex; justify-content: space-between; align-items: center;
             padding: 10px 5%; 
@@ -227,7 +250,7 @@
         .movie-title { font-size: 0.8rem; font-weight: 700; color: #fff; margin-bottom: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .movie-rating { font-size: 0.75rem; color: #00ff88; font-weight: bold; }
 
-        /* --- SEO TEXT "BÍBLIA" --- */
+        /* --- SEO TEXT --- */
         .seo-text-section { background: #020202; padding: 80px 20px; border-top: 1px solid #111; }
         .seo-content { max-width: 900px; margin: 0 auto; color: #888; font-size: 0.95rem; line-height: 1.8; }
         .seo-content h2 { color: #fff; font-size: 1.8rem; margin-bottom: 25px; font-weight: 700; letter-spacing: -0.5px; }
@@ -237,7 +260,7 @@
         .seo-content a { color: var(--cor-destaque); text-decoration: none; font-weight: bold; }
         .seo-content a:hover { text-decoration: underline; }
 
-        /* --- FOOTER MEGA --- */
+        /* --- FOOTER --- */
         footer { background: #050505; border-top: 1px solid #1a1a1a; padding: 80px 20px 40px; color: #777; font-size: 0.9rem; }
         .footer-container { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 50px; }
         .footer-logo { margin-bottom: 20px; filter: brightness(1.2); height: 40px; }
@@ -290,11 +313,8 @@
         .modal-overlay.active { opacity: 1; visibility: visible; }
         .modal-content { background: #111; border: 1px solid #333; border-radius: 20px; width: 90%; max-width: 500px; padding: 40px; text-align: center; transform: translateY(30px); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.8); }
         .modal-overlay.active .modal-content { transform: translateY(0); }
-        
-        /* BOTÃO X MODAL */
         .btn-close-modal-x { position: absolute; top: 15px; right: 15px; background: rgba(255,255,255,0.05); border: none; color: #888; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; cursor: pointer; transition: 0.3s; }
         .btn-close-modal-x:hover { background: rgba(255,0,85,0.8); color: white; transform: rotate(90deg); }
-        
         .modal-header i { color: #ffcc00; font-size: 3.5rem; margin-bottom: 20px; text-shadow: 0 0 20px rgba(255, 204, 0, 0.3); }
         .modal-header h3 { color: #fff; font-size: 1.6rem; font-weight: 800; margin-bottom: 20px; line-height: 1.2;}
         .modal-body p { color: #ccc; font-size: 1rem; margin-bottom: 15px; line-height: 1.6; }
@@ -313,11 +333,10 @@
         }
 
         @media (max-width: 768px) {
-            .brand-alert { display: none; } /* Oculta alerta longo no mobile para o header não ficar gigante */
+            .brand-alert { display: none; }
             header { height: 65px; padding: 10px 20px; }
             .logo img { height: 28px; }
             
-            /* Lógica do Menu Hambúrguer Otimizada */
             .menu-toggle { display: block; }
             nav {
                 position: absolute; top: 65px; left: -100%; width: 100%; height: calc(100vh - 65px);
@@ -329,7 +348,7 @@
             nav ul { flex-direction: column; gap: 20px; width: 100%; }
             nav a { font-size: 1.3rem; display: block; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-weight: 600; }
             
-            .header-actions .btn-header { display: none; } /* Esconde botão assinar no topo mobile para focar no nav */
+            .header-actions .btn-header { display: none; }
             
             .hero-tutorial { padding-top: 50px; }
             .hero-tutorial h1 { font-size: 2.4rem; }
@@ -346,8 +365,11 @@
     </style>
 </head>
 <body>
+    <noscript>
+        <img height="1" width="1" style="display:none"
+             src="https://www.facebook.com/tr?id=2204821377087872&ev=PageView&noscript=1"/>
+    </noscript>
 
-    <!-- CONTAINER DE BARRAS DE TOPO (Impede quebra no mobile) -->
     <div class="top-bars-container">
         <div class="promo-bar">
             🔥 OFERTA RELÂMPAGO: Preços reduzidos por tempo limitado! Encerra em: <span id="timer">04:59:00</span>
@@ -373,7 +395,7 @@
         </nav>
         
         <div class="header-actions">
-            <a href="#comprar" class="btn-header">Assinar Agora</a>
+            <a href="#comprar" class="btn-header" data-meta-view-plans="tutorial-header">Assinar Agora</a>
             <div class="menu-toggle" onclick="toggleMenu()">
                 <i class="fa-solid fa-bars" id="menu-icon"></i>
             </div>
@@ -415,7 +437,7 @@
             
             <div style="margin-top: 30px; text-align: center;">
                 <p style="color: #fff; font-weight: bold; margin-bottom: 15px;">Tudo pronto! Agora você só precisa do código VIP para acessar.</p>
-                <a href="#comprar" class="btn-cta"><i class="fa-solid fa-cart-shopping"></i> Comprar Recarga VIP</a>
+                <a href="#comprar" class="btn-cta" data-meta-view-plans="tutorial-tvbox-final"><i class="fa-solid fa-cart-shopping"></i> Comprar Recarga VIP</a>
             </div>
         </div>
     </div>
@@ -427,7 +449,7 @@
             <h3>Faça o Download do APK Oficial</h3>
             <p>Para celulares e tablets Android, basta fazer o download direto do nosso servidor otimizado clicando no botão abaixo. Esta versão possui uma interface Touch Screen perfeita para o uso diário.</p>
             <div style="text-align: center; margin-top: 25px;">
-                <a href="http://mkdw.qrdldunitvss.com/download" target="_blank" class="btn-cta" style="width: auto; padding: 15px 40px; font-size: 0.9rem;"><i class="fa-brands fa-android"></i> INICIAR DOWNLOAD MOBILE</a>
+                <a href="http://mkdw.qrdldunitvss.com/download" target="_blank" class="btn-cta" style="width: auto; padding: 15px 40px; font-size: 0.9rem;" data-meta-download="android-mobile-apk"><i class="fa-brands fa-android"></i> INICIAR DOWNLOAD MOBILE</a>
             </div>
         </div>
         <div class="step-card">
@@ -440,7 +462,7 @@
             <h3>Faça o Login</h3>
             <p>Instale o aplicativo, abra-o e insira o seu código de recarga de 16 dígitos que você recebeu no e-mail após a compra.</p>
             <div style="margin-top: 25px; text-align: center;">
-                <a href="#comprar" class="btn-cta"><i class="fa-solid fa-key"></i> Ainda não tenho código</a>
+                <a href="#comprar" class="btn-cta" data-meta-view-plans="tutorial-mobile-final"><i class="fa-solid fa-key"></i> Ainda não tenho código</a>
             </div>
         </div>
     </div>
@@ -463,7 +485,7 @@
                     <li><i class="fa-solid fa-check"></i> Qualidade 4K Ultra HD</li>
                     <li><i class="fa-solid fa-check"></i> Suporte Especializado</li>
                 </ul>
-                <a href="javascript:void(0)" onclick="openWarningModal('https://pay.kirvano.com/07f96a4e-ecdf-4538-83ca-01e5c35f1425')" class="btn-price normal">Comprar Mensal</a>
+                <a href="javascript:void(0)" onclick="openWarningModal('https://pay.kirvano.com/07f96a4e-ecdf-4538-83ca-01e5c35f1425','tutorial_monthly_card','Plano Mensal UniTV',24.90)" class="btn-price normal">Comprar Mensal</a>
             </div>
             <!-- PLANO ANUAL -->
             <div class="price-card destaque">
@@ -479,7 +501,7 @@
                     <li><i class="fa-solid fa-shield-halved"></i> Proteção contra Aumentos</li>
                     <li><i class="fa-solid fa-headset"></i> Suporte Técnico VIP</li>
                 </ul>
-                <a href="javascript:void(0)" onclick="openWarningModal('https://pay.kirvano.com/0aadf253-f4b6-47dd-8d0a-f5f16714ce98')" class="btn-price glow">GARANTIR OFERTA ANUAL</a>
+                <a href="javascript:void(0)" onclick="openWarningModal('https://pay.kirvano.com/0aadf253-f4b6-47dd-8d0a-f5f16714ce98','tutorial_yearly_card','Plano Anual VIP UniTV',189.90)" class="btn-price glow">GARANTIR OFERTA ANUAL</a>
             </div>
         </div>
     </section>
@@ -507,7 +529,7 @@
         </div>
     </section>
 
-    <!-- CATÁLOGO API TMDB EXPANDIDO PARA ENGAJAMENTO (SEO) -->
+    <!-- CATÁLOGO -->
     <section class="catalog-section" id="catalogo">
         <div class="catalog-container">
             <div class="catalog-header">
@@ -526,7 +548,7 @@
         </div>
     </section>
 
-    <!-- TEXTO BÍBLIA PARA SEO (DENSIDADE DE PALAVRAS-CHAVE) -->
+    <!-- TEXTO SEO -->
     <section class="seo-text-section">
         <div class="seo-content">
             <h2>Por que é importante usar a versão oficial do UniTV?</h2>
@@ -554,7 +576,7 @@
             <div class="footer-col">
                 <h4>Acesso Rápido</h4>
                 <ul class="footer-links">
-                    <li><a href="/#comprar">Planos e Recargas</a></li>
+                    <li><a href="/#comprar" data-meta-view-plans="footer-plans">Planos e Recargas</a></li>
                     <li><a href="/tutorial">Guia de Instalação</a></li>
                     <li><a href="/blog">Blog de Tecnologia</a></li>
                     <li><a href="/velocidade">Teste de Velocidade</a></li>
@@ -564,7 +586,7 @@
                 <h4>Suporte Dedicado</h4>
                 <ul class="footer-links">
                     <li><a href="/ajuda">Central de Ajuda (FAQ)</a></li>
-                    <li><a href="#" onclick="toggleChat()">Atendimento WhatsApp</a></li>
+                    <li><a href="#" onclick="toggleChat()" data-meta-contact="footer-whatsapp">Atendimento WhatsApp</a></li>
                     <li><span style="color:#666; font-size:0.8rem; margin-top:5px; display:block;">Horário: Seg a Sex, das 08h às 22h</span></li>
                 </ul>
             </div>
@@ -590,7 +612,7 @@
         </div>
     </footer>
 
-    <!-- WIDGET WHATSAPP INTERATIVO E HUMANIZADO -->
+    <!-- WIDGET WHATSAPP -->
     <div id="chat-widget" class="wa-widget">
         <div class="wa-header">
             <div class="wa-profile">
@@ -619,9 +641,9 @@
     </div>
 
     <!-- BOTÃO FLUTUANTE -->
-    <div class="float-zap" onclick="toggleChat()"><i class="fa-brands fa-whatsapp"></i></div>
+    <div class="float-zap" onclick="toggleChat()" data-meta-contact="float-whatsapp"><i class="fa-brands fa-whatsapp"></i></div>
 
-    <!-- MODAL AVISO SMART TV (ALERTA DE SEGURANÇA E CONVERSÃO) -->
+    <!-- MODAL AVISO SMART TV -->
     <div id="smartTvModal" class="modal-overlay">
         <div class="modal-content">
             <button class="btn-close-modal-x" onclick="closeWarningModal()"><i class="fa-solid fa-xmark"></i></button>
@@ -638,21 +660,334 @@
             </div>
             <div class="modal-actions">
                 <button class="btn-modal-buy" onclick="proceedToCheckout()"><i class="fa-solid fa-check"></i> MEU APARELHO É ANDROID (Comprar)</button>
-                <a href="javascript:void(0)" onclick="closeWarningModal(); document.getElementById('chat-widget').classList.add('active'); userAction('Minha TV é LG/Samsung', 'smart_tv_solution');" class="btn-modal-support"><i class="fa-solid fa-headset"></i> MINHA TV É LG/SAMSUNG (Ajuda)</a>
+                <a href="javascript:void(0)" onclick="closeWarningModal(); document.getElementById('chat-widget').classList.add('active'); userAction('Minha TV é LG/Samsung', 'smart_tv_solution');" class="btn-modal-support" data-meta-contact="modal-smarttv-support"><i class="fa-solid fa-headset"></i> MINHA TV É LG/SAMSUNG (Ajuda)</a>
             </div>
         </div>
     </div>
 
     <script>
-        // 1. TABS DO TUTORIAL
+        const MetaTracker = (() => {
+            const CAPI_CONFIG = window.UNITV_META_CAPI || { enabled: false, endpoint: '/api/meta-capi.php' };
+            const STANDARD_EVENTS = new Set([
+                'PageView',
+                'ViewContent',
+                'InitiateCheckout',
+                'Contact',
+                'Lead',
+                'Purchase',
+                'CompleteRegistration',
+                'Search',
+                'AddToCart'
+            ]);
+
+            const state = {
+                userData: window.UNITV_META_USER_DATA || {},
+                scrollMarks: {25:false,50:false,75:false,90:false}
+            };
+
+            function normalizeEmail(value) {
+                return (value || '').toString().trim().toLowerCase();
+            }
+
+            function normalizePhone(value) {
+                return (value || '').toString().replace(/\D+/g, '');
+            }
+
+            function normalizeText(value) {
+                return (value || '').toString().trim().toLowerCase();
+            }
+
+            function mergeUserData(data = {}) {
+                const next = { ...state.userData };
+
+                if (data.em) next.em = normalizeEmail(data.em);
+                if (data.ph) next.ph = normalizePhone(data.ph);
+                if (data.fn) next.fn = normalizeText(data.fn);
+                if (data.ln) next.ln = normalizeText(data.ln);
+
+                Object.keys(next).forEach(key => {
+                    if (!next[key]) delete next[key];
+                });
+
+                state.userData = next;
+                window.UNITV_META_USER_DATA = next;
+            }
+
+            function inferFieldKey(el) {
+                const attrs = [
+                    el.name || '',
+                    el.id || '',
+                    el.placeholder || '',
+                    el.autocomplete || '',
+                    el.getAttribute('aria-label') || ''
+                ].join(' ').toLowerCase();
+
+                if (el.type === 'email' || /e-?mail|mail/.test(attrs)) return 'em';
+                if (el.type === 'tel' || /phone|telefone|celular|whatsapp/.test(attrs)) return 'ph';
+                if (/first.?name|nome\b/.test(attrs) && !/sobrenome|last/.test(attrs)) return 'fn';
+                if (/last.?name|sobrenome/.test(attrs)) return 'ln';
+
+                return null;
+            }
+
+            function captureField(el) {
+                if (!el || !('value' in el)) return;
+                const key = inferFieldKey(el);
+                if (!key) return;
+                mergeUserData({ [key]: el.value });
+            }
+
+            function bindAdvancedMatching() {
+                document.querySelectorAll('input, textarea, select').forEach(captureField);
+                document.addEventListener('input', e => captureField(e.target), true);
+                document.addEventListener('change', e => captureField(e.target), true);
+                document.addEventListener('blur', e => captureField(e.target), true);
+            }
+
+            function generateEventId(prefix = 'meta') {
+                return `${prefix}_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`;
+            }
+
+            function getCookie(name) {
+                const match = document.cookie.match(new RegExp('(^|;\\s*)' + name + '=([^;]+)'));
+                return match ? decodeURIComponent(match[2]) : '';
+            }
+
+            function trackBrowser(eventName, params = {}, eventID) {
+                if (!window.fbq) return;
+
+                if (STANDARD_EVENTS.has(eventName)) {
+                    fbq('track', eventName, params, { eventID });
+                } else {
+                    fbq('trackCustom', eventName, params, { eventID });
+                }
+            }
+
+            function sendToCAPI(payload) {
+                if (!CAPI_CONFIG.enabled || !CAPI_CONFIG.endpoint) return;
+
+                try {
+                    const body = JSON.stringify(payload);
+
+                    if (navigator.sendBeacon) {
+                        const blob = new Blob([body], { type: 'application/json' });
+                        navigator.sendBeacon(CAPI_CONFIG.endpoint, blob);
+                    } else {
+                        fetch(CAPI_CONFIG.endpoint, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body,
+                            keepalive: true
+                        }).catch(() => {});
+                    }
+                } catch (e) {}
+            }
+
+            function track(eventName, params = {}, options = {}) {
+                const eventID = options.eventID || generateEventId(eventName.toLowerCase());
+
+                const payload = {
+                    event_name: eventName,
+                    event_time: Math.floor(Date.now() / 1000),
+                    event_id: eventID,
+                    event_source_url: window.location.href,
+                    action_source: 'website',
+                    user_data: {
+                        ...state.userData,
+                        fbp: getCookie('_fbp'),
+                        fbc: getCookie('_fbc')
+                    },
+                    custom_data: params
+                };
+
+                trackBrowser(eventName, params, eventID);
+                sendToCAPI(payload);
+
+                return eventID;
+            }
+
+            function trackTutorialPageView() {
+                track('ViewContent', {
+                    content_name: 'Tutorial de Instalação UniTV',
+                    content_category: 'Tutorial',
+                    content_type: 'guide',
+                    page: 'tutorial'
+                });
+            }
+
+            function trackTutorialStep(step) {
+                track('TutorialStepView', {
+                    page: 'tutorial',
+                    tutorial_step: step
+                });
+            }
+
+            function trackPlansView(origin = 'tutorial_plans') {
+                track('ViewContent', {
+                    content_name: 'Seção de Planos UniTV',
+                    content_category: 'Planos',
+                    content_type: 'product_group',
+                    origin
+                });
+            }
+
+            function trackDownload(origin = 'android-apk') {
+                track('DownloadAppClick', {
+                    page: 'tutorial',
+                    origin
+                });
+            }
+
+            function trackVideo(origin = 'youtube-tutorial') {
+                track('VideoTutorialClick', {
+                    page: 'tutorial',
+                    origin
+                });
+            }
+
+            function trackContact(origin = 'whatsapp') {
+                return track('Contact', {
+                    content_name: 'Suporte Tutorial UniTV',
+                    contact_channel: origin
+                });
+            }
+
+            function trackCheckout(planName, value, currency, source = 'tutorial_page') {
+                track('ViewContent', {
+                    content_name: planName,
+                    content_category: 'Recarga UniTV',
+                    content_type: 'product',
+                    value,
+                    currency,
+                    source
+                });
+
+                return track('InitiateCheckout', {
+                    content_name: planName,
+                    content_category: 'Recarga UniTV',
+                    content_type: 'product',
+                    value,
+                    currency,
+                    source
+                });
+            }
+
+            function bindPageInteractions() {
+                document.addEventListener('click', function(e) {
+                    const plansEl = e.target.closest('[data-meta-view-plans]');
+                    if (plansEl) {
+                        trackPlansView(plansEl.dataset.metaViewPlans || 'tutorial_plans');
+                        return;
+                    }
+
+                    const contactEl = e.target.closest('[data-meta-contact]');
+                    if (contactEl) {
+                        trackContact(contactEl.dataset.metaContact || 'support');
+                        return;
+                    }
+
+                    const downloadEl = e.target.closest('[data-meta-download]');
+                    if (downloadEl) {
+                        trackDownload(downloadEl.dataset.metaDownload || 'android-apk');
+                        return;
+                    }
+
+                    const videoEl = e.target.closest('[data-meta-video]');
+                    if (videoEl) {
+                        trackVideo(videoEl.dataset.metaVideo || 'youtube-tutorial');
+                        return;
+                    }
+
+                    const waLink = e.target.closest("a[href*='wa.me/']");
+                    if (waLink) {
+                        trackContact('whatsapp_link');
+                        return;
+                    }
+
+                    const ytLink = e.target.closest("a[href*='youtu.be/'], a[href*='youtube.com/']");
+                    if (ytLink) {
+                        trackVideo('youtube-link');
+                        return;
+                    }
+
+                    const paymentLink = e.target.closest("a[href*='pay.kirvano.com']");
+                    if (paymentLink) {
+                        const href = paymentLink.getAttribute('href') || '';
+                        if (href.includes('07f96a4e-ecdf-4538-83ca-01e5c35f1425')) {
+                            trackCheckout('Plano Mensal UniTV', 24.90, 'BRL', 'chat_direct_link_monthly');
+                        } else if (href.includes('0aadf253-f4b6-47dd-8d0a-f5f16714ce98')) {
+                            trackCheckout('Plano Anual VIP UniTV', 189.90, 'BRL', 'chat_direct_link_yearly');
+                        }
+                    }
+                }, true);
+            }
+
+            function bindScrollDepth() {
+                window.addEventListener('scroll', () => {
+                    const doc = document.documentElement;
+                    const total = doc.scrollHeight - window.innerHeight;
+                    if (total <= 0) return;
+
+                    const pct = Math.round((window.scrollY / total) * 100);
+
+                    [25, 50, 75, 90].forEach(mark => {
+                        if (pct >= mark && !state.scrollMarks[mark]) {
+                            state.scrollMarks[mark] = true;
+                            track('ScrollDepth', {
+                                page: 'tutorial',
+                                percent: mark
+                            });
+                        }
+                    });
+                }, { passive: true });
+            }
+
+            function bindTimeEvents() {
+                setTimeout(() => {
+                    track('LandingEngaged', {
+                        page: 'tutorial',
+                        seconds: 15
+                    });
+                }, 15000);
+
+                setTimeout(() => {
+                    track('LandingEngaged', {
+                        page: 'tutorial',
+                        seconds: 30
+                    });
+                }, 30000);
+            }
+
+            return {
+                bindAdvancedMatching,
+                bindPageInteractions,
+                bindScrollDepth,
+                bindTimeEvents,
+                track,
+                trackTutorialPageView,
+                trackTutorialStep,
+                trackPlansView,
+                trackDownload,
+                trackVideo,
+                trackContact,
+                trackCheckout
+            };
+        })();
+
+        let checkoutUrlToRedirect = '';
+        let checkoutSource = 'tutorial_page';
+        let checkoutPlanName = 'Plano UniTV';
+        let checkoutValue = 0;
+
         function showTab(id, event) {
             document.querySelectorAll('.step-container').forEach(c => c.classList.remove('active'));
             document.querySelectorAll('.device-btn').forEach(b => b.classList.remove('active'));
             document.getElementById(id).classList.add('active');
             if(event) event.currentTarget.classList.add('active');
+
+            MetaTracker.trackTutorialStep(id);
         }
 
-        // 2. MENU HAMBÚRGUER MOBILE
         function toggleMenu() {
             const navMenu = document.getElementById('nav-menu');
             const icon = document.getElementById('menu-icon');
@@ -664,6 +999,7 @@
                 icon.classList.replace('fa-xmark', 'fa-bars');
             }
         }
+
         document.querySelectorAll('#nav-menu a').forEach(link => {
             link.addEventListener('click', () => {
                 document.getElementById('nav-menu').classList.remove('active');
@@ -671,7 +1007,6 @@
             });
         });
 
-        // 3. CRONÔMETRO
         function startTimer(duration, display) {
             var timer = duration, hours, minutes, seconds;
             setInterval(function () {
@@ -683,10 +1018,8 @@
             }, 1000);
         }
 
-        // 4. FETCH API (TMDB - Catálogos Dinâmicos)
         const apiKey = '9cb2f018163da4a3f89d718ee6be8677';
         const imageBase = 'https://image.tmdb.org/t/p/w500';
-        const backdropBase = 'https://image.tmdb.org/t/p/original';
 
         async function fetchContent() {
             try {
@@ -713,42 +1046,64 @@
             });
         }
 
-        window.onload = function () {
-            startTimer(17940, document.querySelector('#timer'));
-            fetchContent();
-        };
+        function toggleChat() {
+            const widget = document.getElementById('chat-widget');
+            const willOpen = !widget.classList.contains('active');
+            if (willOpen) {
+                MetaTracker.trackContact('chat_widget_tutorial');
+            }
+            widget.classList.toggle('active');
+        }
 
-        // 5. CHATBOT LOGIC (Focado em Instalação e YouTube)
-        function toggleChat() { document.getElementById('chat-widget').classList.toggle('active'); }
         function showTyping(callback) {
             const status = document.getElementById('wa-status'), typing = document.getElementById('typing-indicator'), content = document.getElementById('chat-content');
             status.innerText = "Digitando..."; typing.style.display = "block"; content.appendChild(typing); content.scrollTop = content.scrollHeight;
             setTimeout(() => { typing.style.display = "none"; status.innerText = "Online"; callback(); }, 1200);
         }
+
         function addMessage(text, side) {
             const content = document.getElementById('chat-content'), now = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}), checks = side === 'user' ? ' <i class="fa-solid fa-check-double" style="color:#34b7f1; font-size: 0.7rem"></i>' : '';
             content.innerHTML += `<div class="wa-msg wa-msg-${side}">${text}<span class="wa-time">${now}${checks}</span></div>`;
             content.scrollTop = content.scrollHeight;
         }
+
         function setOptions(options) {
             const container = document.getElementById('wa-options'); container.innerHTML = "";
-            options.forEach(opt => { const btn = document.createElement('button'); btn.innerHTML = opt.label; btn.onclick = () => userAction(opt.label.replace(/<[^>]*>?/gm, ''), opt.type); container.appendChild(btn); });
+            options.forEach(opt => { 
+                const btn = document.createElement('button'); 
+                btn.innerHTML = opt.label; 
+                btn.onclick = () => userAction(opt.label.replace(/<[^>]*>?/gm, ''), opt.type); 
+                container.appendChild(btn); 
+            });
         }
         
         function userAction(text, type) {
-            addMessage(text, 'user'); setOptions([]);
+            addMessage(text, 'user');
+            setOptions([]);
+
+            MetaTracker.track('ChatOptionSelected', {
+                page: 'tutorial',
+                option_type: type,
+                option_text: text
+            });
+
             showTyping(() => {
                 if(type === 'preco') {
-                    addMessage("<strong>Planos Oficiais Sem Mensalidade:</strong><br><br>💳 <a href='https://pay.kirvano.com/07f96a4e-ecdf-4538-83ca-01e5c35f1425' target='_blank'><strong>PLANO 30 DIAS (R$ 24,90)</strong></a><br>🚀 <a href='https://pay.kirvano.com/0aadf253-f4b6-47dd-8d0a-f5f16714ce98' target='_blank'><strong>ANUAL VIP (R$ 189,90)</strong></a>", 'bot');
+                    addMessage("<strong>Planos Oficiais Sem Mensalidade:</strong><br><br>💳 <a href='https://pay.kirvano.com/07f96a4e-ecdf-4538-83ca-01e5c35f1425' target='_blank' rel='noopener noreferrer'><strong>PLANO 30 DIAS (R$ 24,90)</strong></a><br>🚀 <a href='https://pay.kirvano.com/0aadf253-f4b6-47dd-8d0a-f5f16714ce98' target='_blank' rel='noopener noreferrer'><strong>ANUAL VIP (R$ 189,90)</strong></a>", 'bot');
                     setOptions([{label: 'Já fiz o pagamento', type: 'pix_feito'}, {label: 'Chamar Humano', type: 'suporte_humano'}]);
                 } else if(type === 'pix_feito') {
                     addMessage("Perfeito! Se você pagou via Pix, o código é enviado automaticamente em menos de 1 minuto para o seu WhatsApp e E-mail. Olhe a caixa de SPAM.", 'bot'); 
+                    MetaTracker.track('Lead', {
+                        page: 'tutorial',
+                        source: 'chat_pix_feito'
+                    });
                     setOptions([{label: 'Voltar ao início', type: 'reset'}]);
                 } else if(type === 'erro_box') {
                     addMessage("Se o código 867283 não funcionou, tente o código alternativo: <strong>645641</strong>. Ou assista ao nosso passo a passo em vídeo. Deu certo?", 'bot');
-                    setOptions([{label: 'Sim, instalou!', type: 'sucesso_instalar'}, {label: '<i class="fa-brands fa-youtube" style="color:red;"></i> Ver Vídeo no YouTube', type: 'video_youtube'}, {label: 'Não, erro de rede', type: 'erro_rede'}, {label: 'Não, erro de fonte', type: 'erro_fonte'}]);
+                    setOptions([{label: 'Sim, instalou!', type: 'sucesso_instalar'}, {label: '<i class=\"fa-brands fa-youtube\" style=\"color:red;\"></i> Ver Vídeo no YouTube', type: 'video_youtube'}, {label: 'Não, erro de rede', type: 'erro_rede'}, {label: 'Não, erro de fonte', type: 'erro_fonte'}]);
                 } else if(type === 'video_youtube') {
-                    addMessage("Preparamos um passo a passo completo no YouTube para não ter erro!<br><br>👉 <a href='https://youtu.be/HCLfafWRvx8' target='_blank' style='color: var(--cor-destaque); font-weight: bold; text-decoration: underline;'>Assistir Vídeo Tutorial</a>", 'bot');
+                    MetaTracker.trackVideo('chat_youtube_option');
+                    addMessage("Preparamos um passo a passo completo no YouTube para não ter erro!<br><br>👉 <a href='https://youtu.be/HCLfafWRvx8' target='_blank' rel='noopener noreferrer' style='color: var(--cor-destaque); font-weight: bold; text-decoration: underline;'>Assistir Vídeo Tutorial</a>", 'bot');
                     setOptions([{label: 'Consegui, quero assinar', type: 'preco'}, {label: 'Ainda com erro', type: 'erro_box'}, {label: 'Voltar', type: 'reset'}]);
                 } else if(type === 'erro_rede') {
                     addMessage("Erro de rede no Downloader significa que falta um plugin. Vá na barra de pesquisa e digite: browser.AFTVnews.com e instale o plugin. Depois tente nosso código de novo.", 'bot');
@@ -759,7 +1114,7 @@
                 } else if(type === 'sucesso_instalar') {
                     addMessage("Maravilha! Agora é só assinar e curtir.", 'bot');
                     setOptions([{label: 'Ver Planos', type: 'preco'}]);
-                } else if(type === 'smart_tv_select') {
+                } else if(type === 'smart_tv_select' || type === 'smart_tv_solution') {
                     addMessage("Nessas marcas (LG/Samsung) o UniTV não roda direito. Para não travar, instalamos um app parceiro chamado <strong>ULTRA PLAYER</strong>.", 'bot');
                     setTimeout(() => showTyping(() => { 
                         addMessage("Vá na loja de apps da sua TV e pesquise por 'Ultra Player'.", 'bot'); 
@@ -767,32 +1122,85 @@
                     }), 1500);
                 } else if(type === 'baixou_ultra') {
                     addMessage("Ótimo. Abra o app, tire foto do código MAC na tela e me envie no WhatsApp humano para eu liberar.", 'bot');
-                    const btn = document.createElement('button'); btn.innerText = "ENVIAR FOTO DO MAC"; btn.style.background = "#25d366"; btn.style.color = "white"; btn.onclick = () => window.open("https://wa.me/5519981765840?text=Baixei o Ultra Player na Smart TV, foto do MAC:"); document.getElementById('wa-options').appendChild(btn);
+                    const btn = document.createElement('button');
+                    btn.innerText = "ENVIAR FOTO DO MAC";
+                    btn.style.background = "#25d366";
+                    btn.style.color = "white";
+                    btn.onclick = () => {
+                        MetaTracker.trackContact('whatsapp_mac_tutorial');
+                        window.open("https://wa.me/5519981765840?text=Baixei o Ultra Player na Smart TV, foto do MAC:", '_blank', 'noopener,noreferrer');
+                    };
+                    document.getElementById('wa-options').appendChild(btn);
                 } else if(type === 'suporte_humano') {
                     addMessage("Ok, vou abrir o chat com nosso time humano de suporte técnico.", 'bot');
-                    const btn = document.createElement('button'); btn.innerText = "Conversar no WhatsApp"; btn.style.background = "#25d366"; btn.style.color = "white"; btn.onclick = () => window.open("https://wa.me/5519981765840?text=Preciso de atendimento humano VIP para instalação"); document.getElementById('wa-options').appendChild(btn);
+                    const btn = document.createElement('button');
+                    btn.innerText = "Conversar no WhatsApp";
+                    btn.style.background = "#25d366";
+                    btn.style.color = "white";
+                    btn.onclick = () => {
+                        MetaTracker.trackContact('whatsapp_humano_tutorial');
+                        window.open("https://wa.me/5519981765840?text=Preciso de atendimento humano VIP para instalação", '_blank', 'noopener,noreferrer');
+                    };
+                    document.getElementById('wa-options').appendChild(btn);
                 } else if(type === 'reset') {
                     addMessage("Como mais posso te ajudar a garantir sua diversão?", 'bot'); 
-                    setOptions([{label: 'Ver Planos', type: 'preco'}, {label: 'Erro na TV Box', type: 'erro_box'}, {label: '<i class="fa-brands fa-youtube" style="color:red;"></i> Ver vídeo de Instalação', type: 'video_youtube'}, {label: 'Atendimento Humano', type: 'suporte_humano'}]);
+                    setOptions([
+                        {label: 'Ver Planos', type: 'preco'},
+                        {label: 'Erro na TV Box', type: 'erro_box'},
+                        {label: '<i class=\"fa-brands fa-youtube\" style=\"color:red;\"></i> Ver vídeo de Instalação', type: 'video_youtube'},
+                        {label: 'Atendimento Humano', type: 'suporte_humano'}
+                    ]);
                 }
             });
         }
 
-        // 6. LÓGICA DO MODAL SMART TV
-        let checkoutUrlToRedirect = '';
-        function openWarningModal(url) {
+        function openWarningModal(url, source = 'tutorial_cta', planName = 'Plano UniTV', value = 0) {
             checkoutUrlToRedirect = url;
+            checkoutSource = source;
+            checkoutPlanName = planName;
+            checkoutValue = value;
+
+            MetaTracker.track('CheckoutIntent', {
+                page: 'tutorial',
+                source,
+                plan_name: planName,
+                value
+            });
+
+            MetaTracker.track('ViewContent', {
+                content_name: 'Modal Compatibilidade Smart TV',
+                content_category: 'Compatibilidade',
+                content_type: 'modal',
+                page: 'tutorial',
+                source
+            });
+
             document.getElementById('smartTvModal').classList.add('active');
         }
+
         function closeWarningModal() {
             document.getElementById('smartTvModal').classList.remove('active');
         }
+
         function proceedToCheckout() {
             if(checkoutUrlToRedirect) {
-                window.open(checkoutUrlToRedirect, '_blank');
+                MetaTracker.trackCheckout(checkoutPlanName, checkoutValue, 'BRL', checkoutSource || 'tutorial_modal');
+                window.open(checkoutUrlToRedirect, '_blank', 'noopener,noreferrer');
                 closeWarningModal();
             }
         }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            MetaTracker.bindAdvancedMatching();
+            MetaTracker.bindPageInteractions();
+            MetaTracker.bindScrollDepth();
+            MetaTracker.bindTimeEvents();
+            MetaTracker.trackTutorialPageView();
+            MetaTracker.trackTutorialStep('tvbox');
+
+            startTimer(17940, document.querySelector('#timer'));
+            fetchContent();
+        });
     </script>
 </body>
 </html>
