@@ -8,27 +8,6 @@
   <meta name="theme-color" content="#1a0525">
   <meta name="robots" content="noindex, nofollow">
 
-  <script>
-    window.UNITV_META_PIXEL_ID = '2204821377087872';
-    window.UNITV_META_CAPI = {
-      enabled: true,
-      endpoint: '/api/meta-capi.php'
-    };
-    window.UNITV_META_USER_DATA = {};
-
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-
-    fbq('init', window.UNITV_META_PIXEL_ID);
-    fbq('track', 'PageView');
-  </script>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
@@ -368,11 +347,6 @@
   </style>
 </head>
 <body>
-  <noscript>
-    <img height="1" width="1" style="display:none"
-         src="https://www.facebook.com/tr?id=2204821377087872&ev=PageView&noscript=1"/>
-  </noscript>
-
   <div class="page">
     <div class="topbar">
       <strong>Pagamento aprovado</strong> • Seu atendimento mensal já está sendo preparado
@@ -465,90 +439,8 @@
     </div>
   </div>
 
+  <script src="/js/meta-tracking.js"></script>
   <script>
-    const MetaTracker = (() => {
-      const CAPI_CONFIG = window.UNITV_META_CAPI || { enabled: false, endpoint: '/api/meta-capi.php' };
-      const STANDARD_EVENTS = new Set([
-        'PageView',
-        'ViewContent',
-        'InitiateCheckout',
-        'Contact',
-        'Lead',
-        'Purchase',
-        'CompleteRegistration',
-        'Search',
-        'AddToCart'
-      ]);
-
-      const state = {
-        userData: window.UNITV_META_USER_DATA || {}
-      };
-
-      function getCookie(name) {
-        const match = document.cookie.match(new RegExp('(^|;\\s*)' + name + '=([^;]+)'));
-        return match ? decodeURIComponent(match[2]) : '';
-      }
-
-      function generateEventId(prefix = 'meta') {
-        return `${prefix}_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`;
-      }
-
-      function trackBrowser(eventName, params = {}, eventID) {
-        if (!window.fbq) return;
-
-        if (STANDARD_EVENTS.has(eventName)) {
-          fbq('track', eventName, params, { eventID });
-        } else {
-          fbq('trackCustom', eventName, params, { eventID });
-        }
-      }
-
-      function sendToCAPI(payload) {
-        if (!CAPI_CONFIG.enabled || !CAPI_CONFIG.endpoint) return;
-
-        try {
-          const body = JSON.stringify(payload);
-
-          if (navigator.sendBeacon) {
-            const blob = new Blob([body], { type: 'application/json' });
-            navigator.sendBeacon(CAPI_CONFIG.endpoint, blob);
-          } else {
-            fetch(CAPI_CONFIG.endpoint, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body,
-              keepalive: true
-            }).catch(() => {});
-          }
-        } catch (e) {}
-      }
-
-      function track(eventName, params = {}, options = {}) {
-        const eventID = options.eventID || generateEventId(eventName.toLowerCase());
-
-        const payload = {
-          event_name: eventName,
-          event_time: Math.floor(Date.now() / 1000),
-          event_id: eventID,
-          event_source_url: window.location.href,
-          action_source: 'website',
-          user_data: {
-            ...state.userData,
-            fbp: getCookie('_fbp'),
-            fbc: getCookie('_fbc')
-          },
-          custom_data: params
-        };
-
-        trackBrowser(eventName, params, eventID);
-        sendToCAPI(payload);
-
-        return eventID;
-      }
-
-      return { track };
-    })();
-
     const WHATSAPP_URL = 'https://wa.me/5519996434764?text=' + encodeURIComponent(
       'Olá! Acabei de finalizar o pagamento do plano mensal UniTV. Pode dar continuidade no meu atendimento?'
     );
@@ -559,31 +451,13 @@
       if (purchaseFired) return;
       purchaseFired = true;
 
-      MetaTracker.track('Purchase', {
-        content_name: 'Plano Mensal UniTV',
-        content_category: 'Recarga UniTV',
-        content_type: 'product',
-        value: 24.90,
-        currency: 'BRL',
-        page: 'obrigado_mensal'
-      });
-
-      MetaTracker.track('CompleteRegistration', {
-        plan_name: 'Plano Mensal UniTV',
-        value: 24.90,
-        currency: 'BRL',
-        page: 'obrigado_mensal'
-      });
+      MetaTracker.trackPurchase('Plano Mensal UniTV', 24.90, 'BRL', 'obrigado_mensal');
     }
 
     function bindActions() {
       const waBtn = document.getElementById('waBtn');
       waBtn.addEventListener('click', function() {
-        MetaTracker.track('Contact', {
-          content_name: 'WhatsApp Obrigado Mensal',
-          contact_channel: 'whatsapp_button',
-          page: 'obrigado_mensal'
-        });
+        MetaTracker.trackContact('whatsapp_button_mensal');
       }, { passive: true });
     }
 
@@ -599,24 +473,31 @@
 
       const timer = setInterval(() => {
         remaining -= 1;
+
         if (remaining <= 0) {
           clearInterval(timer);
           countdownEl.textContent = '00:00';
 
-          MetaTracker.track('Contact', {
-            content_name: 'WhatsApp Obrigado Mensal',
-            contact_channel: 'auto_redirect',
-            page: 'obrigado_mensal'
-          });
-
+          MetaTracker.trackContact('auto_redirect_mensal');
           window.location.href = WHATSAPP_URL;
           return;
         }
+
         render(remaining);
       }, 1000);
     }
 
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
+      MetaTracker.init({
+        page: 'obrigado_mensal',
+        pixelId: '2204821377087872',
+        capiEndpoint: 'https://unitvsite.com.br/api/meta-capi.php',
+        capiEnabled: true,
+        trackViewContent: false,
+        trackScrollDepth: false,
+        trackTimeEngagement: false
+      });
+
       fireMonthlyPurchase();
       bindActions();
       startRedirectCountdown(3);
