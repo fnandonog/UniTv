@@ -298,7 +298,27 @@
         .wa-input-box { background: white; flex: 1; padding: 10px 20px; border-radius: 25px; color: #999; font-size: 0.9rem; border: 1px solid #ccc; }
         .typing span { height: 8px; width: 8px; background: #bbb; display: inline-block; border-radius: 50%; margin-right: 3px; animation: waTyping 1s infinite; }
         @keyframes waTyping { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
-        
+
+        .wa-msg a { color: #075e54; font-weight: 700; text-decoration: none; }
+        .wa-msg a:hover { text-decoration: underline; }
+        .wa-mini-note { background: #fff7d6; border-left: 4px solid #ffcc00; padding: 10px 12px; border-radius: 8px; margin-top: 10px; font-size: 0.85rem; color: #5b4a00; }
+        .wa-step-list { margin: 10px 0 0 18px; padding: 0; }
+        .wa-step-list li { margin-bottom: 7px; }
+        .wa-chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+        .wa-chip { background: #f4f7f7; border: 1px solid #dfe6e6; color: #075e54; border-radius: 50px; padding: 6px 10px; font-size: 0.75rem; font-weight: 700; }
+        .wa-media-card,
+        .wa-video-card { display: block; margin-top: 10px; background: #fff; border: 1px solid #ddd; border-radius: 14px; overflow: hidden; text-decoration: none; }
+        .wa-media-card img,
+        .wa-video-card img { display: block; width: 100%; max-width: 100%; }
+        .wa-media-card span,
+        .wa-video-card span { display: block; padding: 10px 12px; color: #075e54; font-size: 0.84rem; font-weight: 700; }
+        .wa-inline-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+        .wa-inline-link { display: inline-flex; align-items: center; gap: 6px; background: #075e54; color: #fff !important; padding: 10px 14px; border-radius: 999px; font-size: 0.82rem; font-weight: 700; text-decoration: none !important; }
+        .wa-inline-link.alt { background: #222; }
+        .wa-info-box { background: #f7f7f7; border: 1px solid #e5e5e5; border-radius: 12px; padding: 12px; margin-top: 10px; }
+        .wa-info-box strong { color: #111; }
+        .wa-actions-inline { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+
         .float-zap { position: fixed; bottom: 25px; right: 25px; background: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; z-index: 10000; box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4); cursor: pointer; transition: 0.3s; }
         .float-zap:hover { transform: scale(1.1); }
 
@@ -350,7 +370,7 @@
             .hero { padding-top: 50px; }
             h1 { font-size: 2.6rem; }
             
-            .wa-widget { width: calc(100% - 40px); left: 20px; right: 20px; bottom: 95px; max-height: 75vh; }
+            .wa-widget { width: calc(100% - 40px); left: 20px; right: 20px; bottom: 95px; max-height: 78vh; }
             
             .footer-container { grid-template-columns: 1fr; text-align: center; gap: 40px; }
             .payment-methods { justify-content: center; }
@@ -755,15 +775,15 @@
             <button onclick="toggleChat()" class="wa-close" aria-label="Fechar janela de chat"><i class="fa-solid fa-times"></i></button>
         </div>
         <div id="chat-content" class="wa-chat-body">
-            <div class="wa-msg wa-msg-bot">Olá! 👋 Bem-vindo ao suporte oficial UniTV. Sou o atendente virtual focado em vendas e instalação. <span class="wa-time">agora</span></div>
-            <div class="wa-msg wa-msg-bot">Sobre o que deseja falar? <span class="wa-time">agora</span></div>
+            <div class="wa-msg wa-msg-bot">Olá! 👋 Bem-vindo ao suporte oficial UniTV. Vou te ajudar a <strong>baixar o app certo no seu aparelho</strong> e chegar no WhatsApp já com tudo adiantado. <span class="wa-time">agora</span></div>
+            <div class="wa-msg wa-msg-bot">📌 Se for Android, o app correto é o <strong>UniTV</strong>. E o <strong>teste aparece só na primeira vez</strong> que o UniTV é baixado e aberto no aparelho. <span class="wa-time">agora</span></div>
         </div>
         <div id="typing-indicator" class="wa-msg wa-msg-bot typing" style="display: none;"><span></span><span></span><span></span></div>
         <div id="wa-options" class="wa-options">
-            <button onclick="userAction('Quero assinar / ver planos', 'preco')">Ver planos disponíveis</button>
-            <button onclick="userAction('Funciona na minha Smart TV?', 'smart_tv_select')">Minha TV é Samsung/LG</button>
-            <button onclick="userAction('Como instalar o app?', 'pre_download')">Dúvidas sobre Instalação</button>
-            <button onclick="userAction('Comprei e não chegou', 'atraso_codigo')">Comprei e o código não chegou</button>
+            <button onclick="userAction('Quero baixar o app no meu aparelho', 'baixar_app')">Quero baixar o app no meu aparelho</button>
+            <button onclick="userAction('Quero comprar minha recarga', 'ver_planos')">Quero comprar minha recarga</button>
+            <button onclick="userAction('Já comprei e quero ativar', 'ja_comprei')">Já comprei e quero ativar</button>
+            <button onclick="userAction('Minha TV é LG / Samsung', 'smart_tv_select')">Minha TV é LG / Samsung</button>
         </div>
         <div class="wa-input-fake">
             <div class="wa-input-box">Selecione uma opção...</div>
@@ -843,7 +863,7 @@
                     item.classList.add('active');
                     question.setAttribute('aria-expanded', 'true');
 
-                    MetaTracker.track('FAQOpened', {
+                    safeTrack('FAQOpened', {
                         page: 'home',
                         question: question.textContent.replace(/\s+/g, ' ').trim()
                     });
@@ -897,7 +917,7 @@
             document.getElementById('chat-widget').classList.toggle('active');
         }
 
-        function showTyping(callback) {
+        function showTyping(callback, delay = 1100) {
             const status = document.getElementById('wa-status');
             const typing = document.getElementById('typing-indicator');
             const content = document.getElementById('chat-content');
@@ -911,7 +931,7 @@
                 typing.style.display = "none";
                 status.innerText = "Online";
                 callback();
-            }, 1200);
+            }, delay);
         }
 
         function addMessage(text, side) {
@@ -932,15 +952,196 @@
             options.forEach(opt => {
                 const btn = document.createElement('button');
                 btn.innerText = opt.label;
-                btn.onclick = () => userAction(opt.label, opt.type);
+
+                if (opt.style === 'primary') {
+                    btn.style.background = '#075e54';
+                    btn.style.color = '#fff';
+                    btn.style.borderColor = '#075e54';
+                }
+
+                if (opt.style === 'success') {
+                    btn.style.background = '#25d366';
+                    btn.style.color = '#000';
+                    btn.style.borderColor = '#25d366';
+                }
+
+                if (opt.style === 'dark') {
+                    btn.style.background = '#222';
+                    btn.style.color = '#fff';
+                    btn.style.borderColor = '#222';
+                }
+
+                btn.onclick = opt.onClick ? opt.onClick : () => userAction(opt.label, opt.type);
                 container.appendChild(btn);
             });
+        }
+
+        function safeTrack(eventName, payload = {}) {
+            try {
+                if (window.MetaTracker && typeof MetaTracker.track === 'function') {
+                    MetaTracker.track(eventName, payload);
+                }
+            } catch (e) {}
+        }
+
+        function safeTrackContact(label) {
+            try {
+                if (window.MetaTracker && typeof MetaTracker.trackContact === 'function') {
+                    MetaTracker.trackContact(label);
+                }
+            } catch (e) {}
+        }
+
+        function safeTrackCheckout(name, value, currency, source) {
+            try {
+                if (window.MetaTracker && typeof MetaTracker.trackCheckout === 'function') {
+                    MetaTracker.trackCheckout(name, value, currency, source);
+                }
+            } catch (e) {}
+        }
+
+        const CHAT = {
+            WA: '5519981765840',
+            ANDROID_APK: 'http://mkdw.qrdldunitvss.com/download',
+            DOWNLOADER_CODE: '867283',
+            VIDEO_URL: 'https://youtu.be/HCLfafWRvx8',
+            PC_SMARTERS_URL: 'https://dw.uptodown.net/dwn/aZt0Hapn6bRc9FuYY59ANCG7_-fd-8o1IzAYzRrhcRRNEgIjiV54-ioi4h2NEkbTwOYmOxhwx8vZgWQ013qBYwC7qIJsfLXS8GdZbWxRJVITNEBlNbpXyy2XcL6O_RwI/3P3ZDBaQr_V3gNikG-GEl45x_PmSAnD5SQvKQiuwgfUP6i56oF8SwqkfjEnbJIHZ3S9pBSPtGHLiNvZPfzS3LLll0fq0Q2cqDo923graUdxF_nIv3kGnkokhgVadu8Ds/nu0pMgl4HG_kmnGV4_caCIsVam8-U8xcSceEEZFs4NeQsQUujD_jZtzRD3d8iVSoKwAcZcj4dLDRuhBZycDbJSVK74Vbc5dkFqVrFxNVFb8=/iptv-smarters-pro-1-1-2.exe',
+            IMG: {
+                unitvLogo: 'img/logo-unitv.png',
+                ultraPlayer: 'https://i.ibb.co/N6psnx4r/ultraplayer.png',
+                funPlay: 'https://i.ibb.co/vvCvKgXp/funlay.png',
+                funPlayMac: 'https://i.ibb.co/Nn93knVz/funplaymac.png',
+                smartersLite: 'https://i.ibb.co/TD8Q4zD3/smarterslite.jpg',
+                ntdownDl: 'https://i.ibb.co/fYd60p0G/donwloaderntdown.jpg',
+                ntdownDig: 'https://i.ibb.co/RTS5jS9p/ntdowndigitar.png',
+                ntdownInst: 'https://i.ibb.co/srMBWHM/ntdowninstalar.png',
+                dlDig: 'https://i.ibb.co/b57xMBFT/donwloaderdigitar.png'
+            }
+        };
+
+        const chatState = {
+            device: '',
+            app: '',
+            hasPurchase: false
+        };
+
+        function resetChat() {
+            const content = document.getElementById('chat-content');
+            content.innerHTML = `
+                <div class="wa-msg wa-msg-bot">Olá! 👋 Bem-vindo ao suporte oficial UniTV. Vou te ajudar a <strong>baixar o app certo no seu aparelho</strong> e chegar no WhatsApp já com tudo adiantado. <span class="wa-time">agora</span></div>
+                <div class="wa-msg wa-msg-bot">📌 Se for Android, o app correto é o <strong>UniTV</strong>. E o <strong>teste aparece só na primeira vez</strong> que o UniTV é baixado e aberto no aparelho. <span class="wa-time">agora</span></div>
+            `;
+            chatState.device = '';
+            chatState.app = '';
+            chatState.hasPurchase = false;
+
+            setOptions([
+                { label: 'Quero baixar o app no meu aparelho', type: 'baixar_app' },
+                { label: 'Quero comprar minha recarga', type: 'ver_planos' },
+                { label: 'Já comprei e quero ativar', type: 'ja_comprei' },
+                { label: 'Minha TV é LG / Samsung', type: 'smart_tv_select' }
+            ]);
+        }
+
+        function videoCardHtml(label = 'Ver vídeo tutorial UniTV') {
+            return `
+                <a class="wa-video-card" href="${CHAT.VIDEO_URL}" target="_blank" rel="noopener noreferrer" onclick="trackTutorialVideo('${label}')">
+                    <img src="https://img.youtube.com/vi/HCLfafWRvx8/hqdefault.jpg" alt="${label}">
+                    <span><i class="fa-solid fa-circle-play"></i> ${label}</span>
+                </a>
+            `;
+        }
+
+        function imageCardHtml(src, caption) {
+            return `
+                <a class="wa-media-card" href="${src}" target="_blank" rel="noopener noreferrer">
+                    <img src="${src}" alt="${caption}" loading="lazy">
+                    <span>${caption}</span>
+                </a>
+            `;
+        }
+
+        function trackTutorialVideo(context) {
+            safeTrack('ViewContent', {
+                page: 'home',
+                content_name: 'Vídeo tutorial UniTV',
+                content_category: 'chat_video',
+                content_type: context
+            });
+        }
+
+        function openWhatsApp(prefill, trackLabel = 'whatsapp_chat') {
+            safeTrackContact(trackLabel);
+
+            const device = chatState.device ? `\n📱 Aparelho: ${chatState.device}` : '';
+            const app = chatState.app ? `\n📦 App: ${chatState.app}` : '';
+            const msg = `Olá! Vim pelo site da UniTV e já adiantei a instalação.${device}${app}\n\n${prefill}`;
+            window.open(`https://wa.me/${CHAT.WA}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener,noreferrer');
+        }
+
+        function goPlan(url, name, value) {
+            safeTrackCheckout(name, value, 'BRL', 'chat');
+            window.location.href = url;
+        }
+
+        function showInitialHelpAfterInstall() {
+            if (chatState.device.includes('Smart TV')) {
+                addMessage(`Perfeito. Agora abra o app e localize o <strong>MAC</strong> na tela principal.${imageCardHtml(CHAT.IMG.funPlayMac, 'Exemplo de onde localizar o MAC no app alternativo')}<div class="wa-mini-note"><strong>Próximo passo:</strong> quando o MAC aparecer, envie a foto no WhatsApp para a equipe liberar o acesso compatível com sua TV.</div>`, 'bot');
+                setOptions([
+                    { label: 'Já achei o MAC', style: 'success', onClick: () => openWhatsApp('Já instalei o app na Smart TV e já estou com a foto do MAC. Pode liberar o acesso compatível?', 'whatsapp_mac_pronto') },
+                    { label: 'Ainda não encontrei o MAC', type: 'mac_help' },
+                    { label: 'Ver vídeo tutorial', type: 'ver_video' },
+                    { label: 'Voltar ao início', type: 'reset' }
+                ]);
+                return;
+            }
+
+            if (chatState.device === 'iPhone / iPad' || chatState.device === 'PC / Notebook') {
+                addMessage(`App instalado. Agora o ideal é chamar a equipe já com isso pronto para receber o acesso compatível.`,'bot');
+                setOptions([
+                    { label: 'Abrir WhatsApp com tudo adiantado', style: 'success', onClick: () => openWhatsApp('Já instalei o app no aparelho e preciso apenas receber os dados/acesso para finalizar.', 'whatsapp_app_pronto') },
+                    { label: 'Ver vídeo tutorial', type: 'ver_video' },
+                    { label: 'Voltar ao início', type: 'reset' }
+                ]);
+                return;
+            }
+
+            addMessage(`
+                App instalado ✅<div class="wa-mini-note"><strong>Importante sobre o teste:</strong> no UniTV, o teste aparece <strong>somente na primeira vez</strong> que o aplicativo é baixado e aberto naquele aparelho. Se já instalou antes, basta usar sua recarga/código.</div>
+            `, 'bot');
+
+            if (chatState.hasPurchase) {
+                addMessage(`
+                    Agora faça assim:
+                    <ol class="wa-step-list">
+                        <li>Abra o <strong>UniTV</strong>.</li>
+                        <li>Entre na tela de <strong>ativação / login</strong>.</li>
+                        <li>Digite sua <strong>recarga/código de 16 dígitos</strong>.</li>
+                        <li>Confirme e aguarde liberar.</li>
+                    </ol>
+                `, 'bot');
+
+                setOptions([
+                    { label: 'Já estou com meu código', type: 'ativar_codigo' },
+                    { label: 'Ainda não recebi meu código', type: 'codigo_nao_chegou' },
+                    { label: 'Ver vídeo tutorial', type: 'ver_video' },
+                    { label: 'Voltar ao início', type: 'reset' }
+                ]);
+            } else {
+                addMessage(`Se essa for a primeira instalação, você pode verificar o <strong>teste inicial</strong>. Se já quer liberar tudo direto, eu te levo para a compra da recarga agora.`, 'bot');
+                setOptions([
+                    { label: 'Quero comprar minha recarga', type: 'ver_planos', style: 'primary' },
+                    { label: 'Já tenho meu código', type: 'ativar_codigo' },
+                    { label: 'Ver vídeo tutorial', type: 'ver_video' },
+                    { label: 'Voltar ao início', type: 'reset' }
+                ]);
+            }
         }
 
         function userAction(text, type) {
             addMessage(text, 'user');
 
-            MetaTracker.track('ChatOptionSelected', {
+            safeTrack('ChatOptionSelected', {
                 page: 'home',
                 option_type: type,
                 option_text: text
@@ -949,81 +1150,351 @@
             setOptions([]);
 
             showTyping(() => {
-                if (type === 'preco') {
-                    addMessage("<strong>Planos Oficiais Sem Mensalidade:</strong><br><br>💳 <a href='https://pay.kirvano.com/07f96a4e-ecdf-4538-83ca-01e5c35f1425' target='_blank' rel='noopener noreferrer'><strong>PLANO 30 DIAS (R$ 24,90)</strong></a><br>🚀 <a href='https://pay.kirvano.com/0aadf253-f4b6-47dd-8d0a-f5f16714ce98' target='_blank' rel='noopener noreferrer'><strong>ANUAL VIP (R$ 189,90)</strong></a>", 'bot');
-                    MetaTracker.track('Lead', {
-                        page: 'home',
-                        source: 'chat_preco'
-                    });
-                    setOptions([{label: 'Já fiz o pagamento', type: 'pix_feito'}, {label: 'Quero testar antes', type: 'suporte_humano'}]);
-                } else if (type === 'pix_feito') {
-                    addMessage("Perfeito! Se você pagou via Pix, o código é enviado automaticamente em menos de 1 minuto para o seu WhatsApp e E-mail. Olhe a caixa de SPAM.", 'bot');
-                    MetaTracker.track('Lead', {
-                        page: 'home',
-                        source: 'chat_pix_feito'
-                    });
-                    setOptions([{label: 'Não recebi ainda', type: 'atraso_codigo'}, {label: 'Voltar ao início', type: 'reset'}]);
-                } else if (type === 'atraso_codigo') {
-                    addMessage("Vou te transferir para um especialista da equipe. Tenha o comprovante em mãos.", 'bot');
+                switch (type) {
+                    case 'baixar_app':
+                        addMessage('Perfeito. Me diz em qual aparelho você quer usar o UniTV para eu te passar o app certo e o caminho mais rápido.', 'bot');
+                        setOptions([
+                            { label: 'Celular Android', type: 'android_phone', style: 'primary' },
+                            { label: 'TV Box / Android TV / Fire Stick', type: 'android_tv' },
+                            { label: 'Smart TV LG / Samsung / Roku', type: 'smart_tv_select' },
+                            { label: 'iPhone / iPad', type: 'ios' },
+                            { label: 'PC / Notebook', type: 'pc' },
+                            { label: 'Voltar ao início', type: 'reset' }
+                        ]);
+                        break;
 
-                    const btn = document.createElement('button');
-                    btn.innerText = "Falar com Humano";
-                    btn.style.background = "#25d366";
-                    btn.style.color = "white";
-                    btn.onclick = () => {
-                        MetaTracker.trackContact('whatsapp_humano_atraso_codigo');
-                        window.open("https://wa.me/5519981765840?text=Comprei e meu código não chegou, segue o comprovante:", '_blank', 'noopener,noreferrer');
-                    };
-                    document.getElementById('wa-options').appendChild(btn);
-                } else if (type === 'smart_tv_select' || type === 'smart_tv_solution') {
-                    addMessage("Nessas marcas (LG/Samsung) o UniTV não roda direito. Para não travar, instalamos um app parceiro chamado <strong>ULTRA PLAYER</strong>.", 'bot');
+                    case 'ver_planos':
+                        addMessage(`
+                            <strong>Planos oficiais UniTV:</strong>
+                            <div class="wa-info-box">
+                                <strong>Plano Mensal:</strong> R$ 24,90<br>
+                                <strong>Anual VIP:</strong> R$ 189,90
+                            </div>
+                            <div class="wa-mini-note"><strong>Atenção:</strong> se sua TV for LG/Samsung/Roku, baixe antes o app alternativo compatível no chat para evitar erro de aparelho.</div>
+                        `, 'bot');
+                        setOptions([
+                            { label: 'Quero o Plano Mensal', style: 'success', onClick: () => goPlan('recarga-mensal/', 'Plano Mensal UniTV', 24.90) },
+                            { label: 'Quero o Anual VIP', style: 'success', onClick: () => goPlan('recarga-anual/', 'Plano Anual VIP UniTV', 189.90) },
+                            { label: 'Minha TV é LG / Samsung antes de pagar', type: 'smart_tv_select' },
+                            { label: 'Quero baixar o app primeiro', type: 'baixar_app' },
+                            { label: 'Voltar ao início', type: 'reset' }
+                        ]);
+                        break;
 
-                    setTimeout(() => showTyping(() => {
-                        addMessage("Vá na loja de apps da sua TV e pesquise por 'Ultra Player'.", 'bot');
-                        setOptions([{label: 'Baixei, e agora?', type: 'baixou_ultra'}, {label: 'Não achei', type: 'suporte_humano'}]);
-                    }), 1500);
+                    case 'ja_comprei':
+                        chatState.hasPurchase = true;
+                        addMessage('Ótimo. Você já está com o código de 16 dígitos ou quer primeiro instalar o app no aparelho?', 'bot');
+                        setOptions([
+                            { label: 'Já recebi meu código', type: 'ja_comprei_codigo', style: 'primary' },
+                            { label: 'Ainda não recebi meu código', type: 'codigo_nao_chegou' },
+                            { label: 'Quero instalar o app primeiro', type: 'baixar_app' },
+                            { label: 'Voltar ao início', type: 'reset' }
+                        ]);
+                        break;
 
-                } else if (type === 'baixou_ultra') {
-                    addMessage("Ótimo. Abra o app, tire foto do código MAC na tela e me envie no WhatsApp humano para eu liberar.", 'bot');
+                    case 'ja_comprei_codigo':
+                        chatState.hasPurchase = true;
+                        addMessage('Perfeito. Agora me fala em qual aparelho você vai ativar para eu te passar o app e o caminho certo.', 'bot');
+                        setOptions([
+                            { label: 'Celular Android', type: 'android_phone', style: 'primary' },
+                            { label: 'TV Box / Android TV / Fire Stick', type: 'android_tv' },
+                            { label: 'Smart TV LG / Samsung / Roku', type: 'smart_tv_select' },
+                            { label: 'iPhone / iPad', type: 'ios' },
+                            { label: 'PC / Notebook', type: 'pc' },
+                            { label: 'Voltar ao início', type: 'reset' }
+                        ]);
+                        break;
 
-                    const btn = document.createElement('button');
-                    btn.innerText = "ENVIAR FOTO DO MAC";
-                    btn.style.background = "#25d366";
-                    btn.style.color = "white";
-                    btn.onclick = () => {
-                        MetaTracker.trackContact('whatsapp_envio_mac');
-                        window.open("https://wa.me/5519981765840?text=Baixei o Ultra Player na Smart TV, foto do MAC:", '_blank', 'noopener,noreferrer');
-                    };
-                    document.getElementById('wa-options').appendChild(btn);
+                    case 'android_phone':
+                        chatState.device = 'Celular Android';
+                        chatState.app = 'UniTV';
+                        addMessage(`
+                            Para <strong>Celular Android</strong>, o app correto é o <strong>UniTV</strong>.
+                            <div class="wa-info-box">
+                                <strong>Passo a passo:</strong>
+                                <ol class="wa-step-list">
+                                    <li>Toque no botão de baixar APK.</li>
+                                    <li>Se o celular bloquear, permita instalar apps do navegador.</li>
+                                    <li>Instale o <strong>UniTV</strong>.</li>
+                                    <li>Abra o app após instalar.</li>
+                                </ol>
+                            </div>
+                            <div class="wa-mini-note"><strong>Teste:</strong> o teste do UniTV é só na <strong>primeira vez</strong> que o app é baixado e aberto nesse aparelho.</div>
+                            ${imageCardHtml(CHAT.IMG.unitvLogo, 'App UniTV para Android')}
+                            ${videoCardHtml('Ver vídeo do UniTV para Android')}
+                        `, 'bot');
+                        setOptions([
+                            { label: 'Baixar APK do UniTV', style: 'success', onClick: () => window.open(CHAT.ANDROID_APK, '_blank', 'noopener,noreferrer') },
+                            { label: 'Já instalei o UniTV', type: 'android_phone_installed', style: 'primary' },
+                            { label: 'Deu erro para instalar', type: 'android_phone_error' },
+                            { label: 'Ver vídeo tutorial', type: 'ver_video' },
+                            { label: 'Voltar ao início', type: 'reset' }
+                        ]);
+                        break;
 
-                } else if (type === 'pre_download') {
-                    addMessage("A instalação é simples! Em TV Box ou Firestick, use o app Downloader e digite o código <strong>867283</strong>.", 'bot');
+                    case 'android_phone_installed':
+                        addMessage('Boa. Se o UniTV já está instalado no celular, você já está na reta final.', 'bot');
+                        showInitialHelpAfterInstall();
+                        break;
 
-                    setTimeout(() => showTyping(() => {
-                        addMessage("Para Android de celular, use nosso link oficial: <a href='http://mkdw.qrdldunitvss.com/download' target='_blank' rel='noopener noreferrer'>Baixar APK Mobile</a>", 'bot');
-                        setOptions([{label: 'Instalado. Quero assinar!', type: 'preco'}, {label: 'Deu erro', type: 'suporte_humano'}]);
-                    }), 1500);
+                    case 'android_phone_error':
+                        addMessage(`
+                            Isso normalmente é só bloqueio do Android.
+                            <div class="wa-info-box">
+                                <strong>Faça assim:</strong>
+                                <ol class="wa-step-list">
+                                    <li>Abra <strong>Configurações</strong>.</li>
+                                    <li>Procure <strong>Instalar apps desconhecidos</strong> ou <strong>Fontes desconhecidas</strong>.</li>
+                                    <li>Libere para o navegador que baixou o APK.</li>
+                                    <li>Tente instalar de novo.</li>
+                                </ol>
+                            </div>
+                            ${videoCardHtml('Ver vídeo para instalar o UniTV no Android')}
+                        `, 'bot');
+                        setOptions([
+                            { label: 'Tentar baixar de novo', style: 'success', onClick: () => window.open(CHAT.ANDROID_APK, '_blank', 'noopener,noreferrer') },
+                            { label: 'Já consegui instalar', type: 'android_phone_installed', style: 'primary' },
+                            { label: 'Continuo com problema', style: 'success', onClick: () => openWhatsApp('Meu celular Android está bloqueando a instalação do UniTV. Preciso de ajuda para concluir o download.', 'whatsapp_android_bloqueio') },
+                            { label: 'Voltar ao início', type: 'reset' }
+                        ]);
+                        break;
 
-                } else if (type === 'suporte_humano') {
-                    addMessage("Ok, vou abrir o chat com nosso time humano de suporte técnico.", 'bot');
+                    case 'android_tv':
+                        chatState.device = 'TV Box / Android TV / Fire Stick';
+                        chatState.app = 'UniTV';
+                        addMessage(`
+                            Para <strong>TV Box / Android TV / Fire Stick</strong>, baixe o app <strong>Downloader</strong> na loja e use o código abaixo para instalar o <strong>UniTV</strong>.
+                            ${imageCardHtml(CHAT.IMG.ntdownDl, 'Baixe o Downloader na loja do aparelho')}
+                            ${imageCardHtml(CHAT.IMG.dlDig, 'No Downloader, digite o código 867283')}
+                            <div class="wa-info-box">
+                                <strong>Passo a passo:</strong>
+                                <ol class="wa-step-list">
+                                    <li>Abra a loja do aparelho.</li>
+                                    <li>Instale o app <strong>Downloader</strong>.</li>
+                                    <li>Abra o Downloader e digite <strong>${CHAT.DOWNLOADER_CODE}</strong>.</li>
+                                    <li>Baixe e instale o <strong>UniTV</strong>.</li>
+                                </ol>
+                            </div>
+                            <div class="wa-mini-note"><strong>Teste:</strong> no UniTV, o teste é só na <strong>primeira instalação/primeira abertura</strong> daquele aparelho.</div>
+                            ${videoCardHtml('Ver vídeo do UniTV para TV Box / Android TV')}
+                        `, 'bot');
+                        setOptions([
+                            { label: 'Já instalei o UniTV', type: 'android_tv_installed', style: 'primary' },
+                            { label: 'Não achei o Downloader', type: 'downloader_nao_achou' },
+                            { label: 'Ver vídeo tutorial', type: 'ver_video' },
+                            { label: 'Quero comprar minha recarga', type: 'ver_planos' },
+                            { label: 'Voltar ao início', type: 'reset' }
+                        ]);
+                        break;
 
-                    const btn = document.createElement('button');
-                    btn.innerText = "Conversar no WhatsApp";
-                    btn.style.background = "#25d366";
-                    btn.style.color = "white";
-                    btn.onclick = () => {
-                        MetaTracker.trackContact('whatsapp_suporte_humano');
-                        window.open("https://wa.me/5519981765840?text=Preciso de atendimento humano VIP", '_blank', 'noopener,noreferrer');
-                    };
-                    document.getElementById('wa-options').appendChild(btn);
+                    case 'android_tv_installed':
+                        addMessage('Excelente. Se o UniTV já instalou na TV Box/Android TV, agora é só ativar.', 'bot');
+                        showInitialHelpAfterInstall();
+                        break;
 
-                } else if (type === 'reset') {
-                    addMessage("Como mais posso te ajudar a garantir sua diversão?", 'bot');
-                    setOptions([
-                        {label: 'Ver Planos', type: 'preco'},
-                        {label: 'Instalação', type: 'pre_download'},
-                        {label: 'Atendimento Humano', type: 'suporte_humano'}
-                    ]);
+                    case 'downloader_nao_achou':
+                        addMessage(`
+                            Procure pelo nome exato <strong>Downloader by AFTVnews</strong>. Em algumas lojas também aparece ao lado do NTdown.
+                            ${imageCardHtml(CHAT.IMG.ntdownDl, 'Exemplo do app Downloader na loja')}
+                            <div class="wa-mini-note">Se só aparecer outro instalador ou se a loja do seu aparelho estiver diferente, me chama no WhatsApp com a foto da tela que a equipe te passa o caminho certo.</div>
+                        `, 'bot');
+                        setOptions([
+                            { label: 'Consegui achar o Downloader', type: 'android_tv', style: 'primary' },
+                            { label: 'Quero enviar foto da tela', style: 'success', onClick: () => openWhatsApp('Não encontrei o Downloader na loja da minha TV Box / Android TV. Vou te mandar a foto da tela.', 'whatsapp_downloader_nao_achou') },
+                            { label: 'Ver vídeo tutorial', type: 'ver_video' },
+                            { label: 'Voltar ao início', type: 'reset' }
+                        ]);
+                        break;
+
+                    case 'smart_tv_select':
+                    case 'smart_tv_solution':
+                        chatState.device = 'Smart TV LG / Samsung / Roku';
+                        chatState.app = 'Ultra Player / Fun Play';
+                        addMessage(`
+                            Em <strong>LG, Samsung, Roku e Smart TVs fechadas</strong>, o UniTV não roda direto. Nesses casos, você precisa usar um app compatível.
+                            <div class="wa-info-box">
+                                <strong>Primeira opção:</strong> procure na loja da TV por <strong>Ultra Player</strong>.<br>
+                                <strong>Se não achar:</strong> procure por <strong>Fun Play</strong>.
+                            </div>
+                            ${imageCardHtml(CHAT.IMG.ultraPlayer, 'Ícone do Ultra Player')}
+                            ${imageCardHtml(CHAT.IMG.funPlay, 'Ícone do Fun Play')}
+                            <div class="wa-mini-note">Depois de instalar, abra o app e procure o <strong>MAC</strong> na tela principal. Com isso em mãos, no WhatsApp a equipe só finaliza a liberação.</div>
+                            ${videoCardHtml('Ver vídeo tutorial para dúvidas de instalação')}
+                        `, 'bot');
+                        setOptions([
+                            { label: 'Instalei o Ultra Player', type: 'smart_installed', style: 'primary' },
+                            { label: 'Instalei o Fun Play', type: 'smart_installed', style: 'primary' },
+                            { label: 'Não achei nenhum dos dois', type: 'smart_not_found' },
+                            { label: 'Já estou com a foto do MAC', style: 'success', onClick: () => openWhatsApp('Minha TV é LG/Samsung/Roku, já instalei o app compatível e já estou com a foto do MAC. Pode liberar?', 'whatsapp_mac_pronto') },
+                            { label: 'Voltar ao início', type: 'reset' }
+                        ]);
+                        break;
+
+                    case 'smart_installed':
+                        addMessage(`
+                            Ótimo. Agora abra o app e procure o <strong>MAC</strong> na tela principal.
+                            ${imageCardHtml(CHAT.IMG.funPlayMac, 'Exemplo de onde fica o MAC')}
+                            <div class="wa-mini-note">Quando achar o MAC, tire a foto e envie no WhatsApp. Assim o cliente já chega com o app baixado e o MAC pronto.</div>
+                        `, 'bot');
+                        setOptions([
+                            { label: 'Já achei o MAC', style: 'success', onClick: () => openWhatsApp('Já instalei o app compatível na Smart TV e já estou com a foto do MAC para liberação.', 'whatsapp_mac_pronto') },
+                            { label: 'Ainda não achei o MAC', type: 'mac_help' },
+                            { label: 'Ver vídeo tutorial', type: 'ver_video' },
+                            { label: 'Voltar ao início', type: 'reset' }
+                        ]);
+                        break;
+
+                    case 'mac_help':
+                        addMessage(`
+                            O MAC normalmente aparece na <strong>tela inicial</strong> do app compatível.
+                            <div class="wa-info-box">
+                                <ol class="wa-step-list">
+                                    <li>Abra o app recém-instalado.</li>
+                                    <li>Aguarde alguns segundos na tela inicial.</li>
+                                    <li>Procure por <strong>MAC</strong>, <strong>Device ID</strong> ou um código parecido com <strong>00:1A:2B:3C:4D:5E</strong>.</li>
+                                </ol>
+                            </div>
+                            ${imageCardHtml(CHAT.IMG.funPlayMac, 'Referência visual do local do MAC')}
+                        `, 'bot');
+                        setOptions([
+                            { label: 'Agora achei o MAC', style: 'success', onClick: () => openWhatsApp('Achei o MAC da Smart TV e vou te enviar a foto agora para liberar.', 'whatsapp_mac_achado') },
+                            { label: 'Ainda preciso de ajuda', style: 'success', onClick: () => openWhatsApp('Ainda não encontrei o MAC no app da Smart TV. Posso te mandar a foto da tela?', 'whatsapp_mac_ajuda') },
+                            { label: 'Voltar ao início', type: 'reset' }
+                        ]);
+                        break;
+
+                    case 'smart_not_found':
+                        addMessage(`
+                            Tenta procurar só por <strong>Ultra</strong> ou só por <strong>Fun</strong> na loja da TV.
+                            <div class="wa-mini-note">Se mesmo assim não aparecer, pode ser limitação da loja do modelo. Nesse caso, manda a foto da tela da loja no WhatsApp e a equipe te passa a melhor saída.</div>
+                        `, 'bot');
+                        setOptions([
+                            { label: 'Vou mandar foto da loja', style: 'success', onClick: () => openWhatsApp('Não encontrei Ultra Player nem Fun Play na loja da Smart TV. Vou te mandar a foto da tela.', 'whatsapp_smart_not_found') },
+                            { label: 'Voltar ao início', type: 'reset' }
+                        ]);
+                        break;
+
+                    case 'ios':
+                        chatState.device = 'iPhone / iPad';
+                        chatState.app = 'IPTV Smarters Lite';
+                        addMessage(`
+                            Para <strong>iPhone / iPad</strong>, use o app <strong>IPTV Smarters Lite</strong> na App Store.
+                            ${imageCardHtml(CHAT.IMG.smartersLite, 'Ícone do IPTV Smarters Lite')}
+                            <div class="wa-info-box">
+                                <strong>Passo a passo:</strong>
+                                <ol class="wa-step-list">
+                                    <li>Abra a App Store.</li>
+                                    <li>Pesquise por <strong>Smarters Lite</strong>.</li>
+                                    <li>Instale o app.</li>
+                                    <li>Depois fale com a equipe para receber os dados/acesso compatíveis.</li>
+                                </ol>
+                            </div>
+                            ${videoCardHtml('Ver vídeo tutorial em caso de dúvida')}
+                        `, 'bot');
+                        setOptions([
+                            { label: 'Já instalei no iPhone/iPad', type: 'ios_installed', style: 'primary' },
+                            { label: 'Não encontrei na App Store', type: 'ios_not_found' },
+                            { label: 'Ver vídeo tutorial', type: 'ver_video' },
+                            { label: 'Voltar ao início', type: 'reset' }
+                        ]);
+                        break;
+
+                    case 'ios_installed':
+                        addMessage('Perfeito. Com o app já instalado, você já pode chamar a equipe para receber o acesso compatível com iPhone/iPad.', 'bot');
+                        showInitialHelpAfterInstall();
+                        break;
+
+                    case 'ios_not_found':
+                        addMessage(`
+                            Tenta pesquisar por:
+                            <div class="wa-chip-row">
+                                <span class="wa-chip">Smarters Lite</span>
+                                <span class="wa-chip">IPTV Smarters</span>
+                                <span class="wa-chip">Smarters Player</span>
+                            </div>
+                            <div class="wa-mini-note">Se ainda não achar, verifica se a App Store está na região Brasil.</div>
+                        `, 'bot');
+                        setOptions([
+                            { label: 'Achei agora', type: 'ios_installed', style: 'primary' },
+                            { label: 'Continuo sem achar', style: 'success', onClick: () => openWhatsApp('Não encontrei o app Smarters Lite na App Store do meu iPhone/iPad. Pode me orientar?', 'whatsapp_ios_nao_achou') },
+                            { label: 'Voltar ao início', type: 'reset' }
+                        ]);
+                        break;
+
+                    case 'pc':
+                        chatState.device = 'PC / Notebook';
+                        chatState.app = 'IPTV Smarters / IBO Player';
+                        addMessage(`
+                            Para <strong>PC / Notebook</strong>, a opção mais prática é usar o <strong>IPTV Smarters</strong>.
+                            <div class="wa-info-box">
+                                <strong>Link direto do player:</strong><br>
+                                <a href="${CHAT.PC_SMARTERS_URL}" target="_blank" rel="noopener noreferrer">Baixar IPTV Smarters para PC</a>
+                            </div>
+                            <div class="wa-mini-note">Depois que instalar, pode chamar a equipe já com o app pronto para receber o acesso/configuração.</div>
+                            ${videoCardHtml('Ver vídeo tutorial em caso de dúvida')}
+                        `, 'bot');
+                        setOptions([
+                            { label: 'Baixar IPTV Smarters', style: 'success', onClick: () => window.open(CHAT.PC_SMARTERS_URL, '_blank', 'noopener,noreferrer') },
+                            { label: 'Já instalei no PC', type: 'pc_installed', style: 'primary' },
+                            { label: 'Quero ajuda no WhatsApp', style: 'success', onClick: () => openWhatsApp('Quero configurar no PC/Notebook e preciso do acesso/dados corretos.', 'whatsapp_pc_suporte') },
+                            { label: 'Voltar ao início', type: 'reset' }
+                        ]);
+                        break;
+
+                    case 'pc_installed':
+                        addMessage('Perfeito. Com o player instalado no PC, você já pode falar com a equipe para receber o acesso e finalizar.', 'bot');
+                        showInitialHelpAfterInstall();
+                        break;
+
+                    case 'ativar_codigo':
+                        addMessage(`
+                            Se você já está com a <strong>recarga/código de 16 dígitos</strong>, faça assim:
+                            <div class="wa-info-box">
+                                <ol class="wa-step-list">
+                                    <li>Abra o app no aparelho.</li>
+                                    <li>Entre na tela de <strong>ativar / login</strong>.</li>
+                                    <li>Digite o código exatamente como recebeu.</li>
+                                    <li>Confirme e aguarde carregar.</li>
+                                </ol>
+                            </div>
+                            <div class="wa-mini-note">No Android, se aparecer teste, lembre que isso é só na <strong>primeira instalação</strong>. Depois disso, o normal é usar a recarga.</div>
+                        `, 'bot');
+                        setOptions([
+                            { label: 'Ainda não recebi meu código', type: 'codigo_nao_chegou' },
+                            { label: 'Quero ver os planos', type: 'ver_planos' },
+                            { label: 'Ver vídeo tutorial', type: 'ver_video' },
+                            { label: 'Falar com suporte', style: 'success', onClick: () => openWhatsApp('Estou com dúvida na hora de digitar/ativar meu código de 16 dígitos.', 'whatsapp_duvida_codigo') },
+                            { label: 'Voltar ao início', type: 'reset' }
+                        ]);
+                        break;
+
+                    case 'codigo_nao_chegou':
+                        addMessage('Nesse caso eu já vou te adiantar o atendimento. Se pagou e o código ainda não chegou, o ideal é mandar o comprovante para a equipe humana.', 'bot');
+                        setOptions([
+                            { label: 'Enviar comprovante no WhatsApp', style: 'success', onClick: () => openWhatsApp('Comprei e meu código de 16 dígitos ainda não chegou. Vou enviar o comprovante.', 'whatsapp_codigo_nao_chegou') },
+                            { label: 'Voltar ao início', type: 'reset' }
+                        ]);
+                        break;
+
+                    case 'ver_video':
+                        addMessage(`Se tiver qualquer dúvida, segue o vídeo oficial para acompanhar junto com a instalação.${videoCardHtml('Abrir vídeo tutorial UniTV')}`, 'bot');
+                        setOptions([
+                            { label: 'Voltar para o início', type: 'reset', style: 'primary' },
+                            { label: 'Falar com suporte', style: 'success', onClick: () => openWhatsApp('Assisti ao vídeo, mas ainda fiquei com dúvida na instalação.', 'whatsapp_duvida_apos_video') }
+                        ]);
+                        break;
+
+                    case 'reset':
+                        resetChat();
+                        break;
+
+                    default:
+                        addMessage('Vou te passar para o time humano com tudo adiantado.', 'bot');
+                        setOptions([
+                            { label: 'Abrir WhatsApp', style: 'success', onClick: () => openWhatsApp('Preciso de atendimento humano para seguir com a instalação/compra.', 'whatsapp_geral') },
+                            { label: 'Voltar ao início', type: 'reset' }
+                        ]);
+                        break;
                 }
             });
         }
@@ -1034,7 +1505,7 @@
             checkoutUrlToRedirect = url;
             document.getElementById('smartTvModal').classList.add('active');
 
-            MetaTracker.track('ViewContent', {
+            safeTrack('ViewContent', {
                 page: 'home',
                 content_name: 'Modal Compatibilidade Smart TV',
                 content_category: 'Compatibilidade',
@@ -1048,26 +1519,29 @@
 
         function proceedToCheckout() {
             if (checkoutUrlToRedirect) {
-                MetaTracker.trackCheckout('Checkout UniTV', undefined, 'BRL', 'smart_tv_modal');
+                safeTrackCheckout('Checkout UniTV', undefined, 'BRL', 'smart_tv_modal');
                 window.open(checkoutUrlToRedirect, '_blank', 'noopener,noreferrer');
                 closeWarningModal();
             }
         }
 
         document.addEventListener('DOMContentLoaded', function () {
-            MetaTracker.init({
-                page: 'home',
-                pixelId: '2204821377087872',
-                capiEndpoint: 'https://unitvsite.com.br/api/meta-capi.php',
-                capiEnabled: true,
-                trackViewContent: true,
-                content_name: 'Home UniTV',
-                content_category: 'Landing Page',
-                content_type: 'page'
-            });
+            if (window.MetaTracker && typeof MetaTracker.init === 'function') {
+                MetaTracker.init({
+                    page: 'home',
+                    pixelId: '2204821377087872',
+                    capiEndpoint: 'https://unitvsite.com.br/api/meta-capi.php',
+                    capiEnabled: true,
+                    trackViewContent: true,
+                    content_name: 'Home UniTV',
+                    content_category: 'Landing Page',
+                    content_type: 'page'
+                });
+            }
 
             startTimer(17940, document.querySelector('#timer'));
             fetchContent();
+            resetChat();
         });
     </script>
 </body>
