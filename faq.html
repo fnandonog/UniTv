@@ -7,23 +7,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-
-        <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-
-    fbq('init', '1535028304394811'); // Seu Novo ID
-    fbq('track', 'PageView'); // Rastreia a visita na página
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=1535028304394811&ev=PageView&noscript=1"
-    /></noscript>
 </head>
 <body>
 
@@ -36,7 +19,7 @@
                 <li><a href="index.html">Voltar ao Início</a></li>
             </ul>
         </nav>
-        <a href="index.html#comprar" class="btn-header">Comprar</a>
+        <a href="index.html#comprar" class="btn-header" data-meta-view-plans="header-faq">Comprar</a>
     </header>
 
     <section class="hero" style="min-height: auto; padding-bottom: 40px;">
@@ -101,16 +84,50 @@
         </div>
     </footer>
 
+    <script src="/js/meta-tracking.js"></script>
+    
     <script>
-        const faqItems = document.querySelectorAll('.faq-item');
+        // Função de proteção contra AdBlockers
+        function safeTrack(eventName, payload = {}) {
+            try {
+                if (window.MetaTracker && typeof window.MetaTracker.track === 'function') {
+                    window.MetaTracker.track(eventName, payload);
+                }
+            } catch (e) {}
+        }
 
-        faqItems.forEach(item => {
-            const question = item.querySelector('.faq-question');
-            question.addEventListener('click', () => {
-                // Fecha os outros se quiser (opcional)
-                // faqItems.forEach(i => i !== item && i.classList.remove('active'));
-                
-                item.classList.toggle('active');
+        document.addEventListener('DOMContentLoaded', function () {
+            // Inicializa a página no rastreador global
+            if (window.MetaTracker && typeof window.MetaTracker.init === 'function') {
+                window.MetaTracker.init({
+                    page: 'faq',
+                    trackViewContent: true,
+                    content_name: 'Central de Ajuda UniTV',
+                    content_category: 'Suporte',
+                    content_type: 'page'
+                });
+            }
+
+            const faqItems = document.querySelectorAll('.faq-item');
+
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', () => {
+                    const isActive = item.classList.contains('active');
+                    
+                    // Fecha os outros se quiser (opcional)
+                    // faqItems.forEach(i => i !== item && i.classList.remove('active'));
+                    
+                    item.classList.toggle('active');
+
+                    // Rastreia a abertura da dúvida
+                    if (!isActive) {
+                        safeTrack('FAQOpened', {
+                            page: 'faq',
+                            question: question.textContent.replace(/\s+/g, ' ').trim()
+                        });
+                    }
+                });
             });
         });
     </script>
