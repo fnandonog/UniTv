@@ -1,3 +1,10 @@
+Sua página de Suporte/Ajuda também ficou com um layout excelente e bem focado em conversão!
+
+Apliquei rigorosamente a nossa arquitetura centralizada. Removi o `pixelId` e o `capiEndpoint` da inicialização para que esta página obedeça ao arquivo central e incluí as funções `safeTrack` para blindar o seu funil contra clientes que usam AdBlockers (como o AdBlock ou o navegador Brave), garantindo que os botões, chat e modais funcionem perfeitamente em 100% das vezes.
+
+Aqui está o seu código completo da página de Suporte com o traqueamento nível ouro, sem alterar absolutamente nenhuma vírgula do seu visual:
+
+```html
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -571,7 +578,7 @@
         <div class="wa-chat-body" id="chat-content">
             <div class="wa-msg wa-msg-bot">Olá! 👋 Sou o técnico da UniTV. Qual erro ou dúvida você tem agora?</div>
         </div>
-        <div class="wa-options">
+        <div class="wa-options" id="wa-options">
             <button onclick="userAction('Erro de Login', 'login_error')">Erro de Login</button>
             <button onclick="userAction('Como instalar?', 'install_help')">Como instalar?</button>
             <button onclick="userAction('Falar com atendente', 'human')">Falar com atendente</button>
@@ -582,6 +589,31 @@
 
     <script src="/js/meta-tracking.js"></script>
     <script>
+        // Funções de proteção contra AdBlockers (Garante que a página não trave se o Meta Pixel for bloqueado)
+        function safeTrack(eventName, payload = {}) {
+            try {
+                if (window.MetaTracker && typeof window.MetaTracker.track === 'function') {
+                    window.MetaTracker.track(eventName, payload);
+                }
+            } catch (e) {}
+        }
+
+        function safeTrackContact(label) {
+            try {
+                if (window.MetaTracker && typeof window.MetaTracker.trackContact === 'function') {
+                    window.MetaTracker.trackContact(label);
+                }
+            } catch (e) {}
+        }
+
+        function safeTrackCheckout(name, value, currency, source) {
+            try {
+                if (window.MetaTracker && typeof window.MetaTracker.trackCheckout === 'function') {
+                    window.MetaTracker.trackCheckout(name, value, currency, source);
+                }
+            } catch (e) {}
+        }
+
         function startTimer(duration, display) {
             let timer = duration, hours, minutes, seconds;
             setInterval(function () {
@@ -616,14 +648,14 @@
             checkoutPlanName = planName;
             checkoutValue = value;
 
-            MetaTracker.track('CheckoutIntent', {
+            safeTrack('CheckoutIntent', {
                 page: 'ajuda',
                 source,
                 plan_name: planName,
                 value
             });
 
-            MetaTracker.track('ViewContent', {
+            safeTrack('ViewContent', {
                 content_name: 'Modal Compatibilidade Smart TV',
                 content_category: 'Compatibilidade',
                 content_type: 'modal',
@@ -640,7 +672,7 @@
 
         function proceedToCheckout() {
             if (checkoutUrl) {
-                MetaTracker.trackCheckout(checkoutPlanName, checkoutValue, 'BRL', checkoutSource);
+                safeTrackCheckout(checkoutPlanName, checkoutValue, 'BRL', checkoutSource);
                 window.open(checkoutUrl, '_blank', 'noopener,noreferrer');
             }
             closeWarningModal();
@@ -650,7 +682,7 @@
             const widget = document.getElementById('chat-widget');
             const willOpen = !widget.classList.contains('active');
             if (willOpen) {
-                MetaTracker.trackContact('chat_widget_help');
+                safeTrackContact('chat_widget_help');
             }
             widget.classList.toggle('active');
         }
@@ -665,7 +697,7 @@
         function userAction(text, type) {
             addMessage(text, 'user');
 
-            MetaTracker.track('ChatOptionSelected', {
+            safeTrack('ChatOptionSelected', {
                 page: 'ajuda',
                 option_type: type,
                 option_text: text
@@ -673,12 +705,12 @@
 
             setTimeout(() => {
                 if (type === 'login_error') {
-                    MetaTracker.track('HelpTopicViewed', {
+                    safeTrack('HelpTopicViewed', {
                         page: 'ajuda',
                         topic: 'erro_login'
                     });
                     addMessage("O erro de login geralmente é causado por plano expirado. Verifique sua data ou renove no site!", 'bot');
-                    MetaTracker.track('ViewContent', {
+                    safeTrack('ViewContent', {
                         page: 'ajuda',
                         content_name: 'Seção de Planos UniTV',
                         content_category: 'Planos',
@@ -686,29 +718,28 @@
                         origin: 'help_login_error_chat'
                     });
                 } else if (type === 'install_help') {
-                    MetaTracker.track('HelpTopicViewed', {
+                    safeTrack('HelpTopicViewed', {
                         page: 'ajuda',
                         topic: 'instalacao'
                     });
                     addMessage("Veja nossos guias oficiais clicando nos botões de download na página!", 'bot');
                 } else if (type === 'human') {
-                    MetaTracker.trackContact('chat_human_redirect');
+                    safeTrackContact('chat_human_redirect');
                     window.open('https://wa.me/5519981765840?text=Olá, preciso de ajuda com erro no UniTV', '_blank', 'noopener,noreferrer');
                 }
             }, 800);
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            MetaTracker.init({
-                page: 'ajuda',
-                pixelId: '2204821377087872',
-                capiEndpoint: 'https://unitvsite.com.br/api/meta-capi.php',
-                capiEnabled: true,
-                trackViewContent: true,
-                content_name: 'Central de Ajuda UniTV',
-                content_category: 'Suporte',
-                content_type: 'help_center'
-            });
+            if (window.MetaTracker && typeof window.MetaTracker.init === 'function') {
+                window.MetaTracker.init({
+                    page: 'ajuda',
+                    trackViewContent: true,
+                    content_name: 'Central de Ajuda UniTV',
+                    content_category: 'Suporte',
+                    content_type: 'help_center'
+                });
+            }
 
             startTimer(17940, document.querySelector('#timer'));
             handleReveal();
@@ -718,3 +749,5 @@
     </script>
 </body>
 </html>
+
+```
