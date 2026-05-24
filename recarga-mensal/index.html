@@ -1,3 +1,10 @@
+O código foi interrompido na sua última mensagem, mas entendi perfeitamente onde parou (bem no meio do evento de clique do FAQ).
+
+Apliquei exatamente a mesma arquitetura de segurança anti-AdBlocker (`safeTrack`) e centralização de Pixel que fizemos na página Anual, mas agora com **todos os valores, links e lógicas do chat ajustados para o Plano Mensal (R$ 24,90)**.
+
+O visual, CSS e os textos permanecem intactos. Pode copiar o arquivo completo abaixo e substituir o seu `recarga-mensal.html`:
+
+```html
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -648,6 +655,31 @@
 
     <script src="/js/meta-tracking.js"></script>
     <script>
+        // Funções de proteção contra AdBlockers (Garante que a página não trave se o Meta Pixel for bloqueado)
+        function safeTrack(eventName, payload = {}) {
+            try {
+                if (window.MetaTracker && typeof window.MetaTracker.track === 'function') {
+                    window.MetaTracker.track(eventName, payload);
+                }
+            } catch (e) {}
+        }
+
+        function safeTrackContact(label) {
+            try {
+                if (window.MetaTracker && typeof window.MetaTracker.trackContact === 'function') {
+                    window.MetaTracker.trackContact(label);
+                }
+            } catch (e) {}
+        }
+
+        function safeTrackCheckout(name, value, currency, source) {
+            try {
+                if (window.MetaTracker && typeof window.MetaTracker.trackCheckout === 'function') {
+                    window.MetaTracker.trackCheckout(name, value, currency, source);
+                }
+            } catch (e) {}
+        }
+
         function toggleMenu() {
             const navMenu = document.getElementById('nav-menu');
             const icon = document.getElementById('menu-icon');
@@ -681,8 +713,198 @@
                 if (!isActive) {
                     item.classList.add('active');
                     question.setAttribute('aria-expanded', 'true');
-                    MetaTracker.track('FAQOpened', {
+                    
+                    safeTrack('FAQOpened', {
                         page: 'mensal',
-                        question: question.textContent.replace(/\s+/g,
+                        question: question.textContent.replace(/\s+/g, ' ').trim()
+                    });
+                }
+            });
+        });
 
-[Erro] O provedor está indisponível no momento. Tente novamente em instantes.
+        function toggleChat() {
+            document.getElementById('chat-widget').classList.toggle('active');
+        }
+
+        function showTyping(callback) {
+            const status = document.getElementById('wa-status');
+            const typing = document.getElementById('typing-indicator');
+            const content = document.getElementById('chat-content');
+
+            status.innerText = "A escrever...";
+            typing.style.display = "block";
+            content.appendChild(typing);
+            content.scrollTop = content.scrollHeight;
+
+            setTimeout(() => {
+                typing.style.display = "none";
+                status.innerText = "Online";
+                callback();
+            }, 1200);
+        }
+
+        function addMessage(text, side) {
+            const content = document.getElementById('chat-content');
+            const now = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            const checks = side === 'user' ? ' <i class="fa-solid fa-check-double" style="color:#34b7f1; font-size: 0.7rem"></i>' : '';
+            content.innerHTML += `<div class="wa-msg wa-msg-${side}">${text}<span class="wa-time">${now}${checks}</span></div>`;
+            content.scrollTop = content.scrollHeight;
+        }
+
+        function setOptions(options) {
+            const container = document.getElementById('wa-options');
+            container.innerHTML = "";
+            options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.innerHTML = opt.label;
+                btn.onclick = () => userAction(opt.label.replace(/<[^>]*>?/gm, ''), opt.type);
+                container.appendChild(btn);
+            });
+        }
+
+        function userAction(text, type) {
+            addMessage(text, 'user');
+
+            safeTrack('ChatOptionSelected', {
+                page: 'mensal',
+                option_type: type,
+                option_text: text
+            });
+
+            setOptions([]);
+
+            showTyping(() => {
+                if (type === 'fidelidade') {
+                    safeTrack('Lead', {
+                        page: 'mensal',
+                        source: 'chat_fidelidade_interest'
+                    });
+
+                    addMessage("Não tem fidelidade nem multa! A nossa recarga é totalmente pré-paga. Terminou os 30 dias, o acesso apenas pausa. Você só renova quando quiser.", 'bot');
+                    setOptions([{label: 'Ótimo, quero comprar', type: 'comprar_agora'}, {label: 'Como funciona a entrega?', type: 'entrega'}]);
+                } else if (type === 'entrega') {
+                    addMessage("Após o pagamento ser aprovado (o Pix cai na hora), o seu código de 16 dígitos é enviado instantaneamente para o WhatsApp e também para o e-mail cadastrado.", 'bot');
+                    setOptions([{label: 'Entendi, vou comprar', type: 'comprar_agora'}, {label: 'Voltar', type: 'reset'}]);
+                } else if (type === 'comprar_agora') {
+                    safeTrack('Lead', {
+                        page: 'mensal',
+                        source: 'chat_purchase_intent'
+                    });
+
+                    addMessage("Excelente! Clique no link oficial abaixo para garantir o seu acesso Mensal VIP:", 'bot');
+                    addMessage("👉 <a href='javascript:void(0)' onclick=\"openWarningModal('https://pay.kirvano.com/07f96a4e-ecdf-4538-83ca-01e5c35f1425','chat_cta')\" style='color: var(--cor-destaque); font-weight: bold;'>Link de Pagamento R$ 24,90</a>", 'bot');
+                    setOptions([{label: 'Já paguei o Pix!', type: 'pix_feito'}, {label: 'Preciso de ajuda', type: 'suporte_humano'}]);
+                } else if (type === 'pix_feito') {
+                    addMessage("Perfeito! O seu código mensal deve chegar em instantes no WhatsApp e no e-mail. Verifique também a caixa de spam, se necessário.", 'bot');
+                    safeTrack('Lead', {
+                        page: 'mensal',
+                        source: 'chat_pix_feito'
+                    });
+                    setOptions([{label: 'Falar com Humano', type: 'suporte_humano'}]);
+                } else if (type === 'smart_tv_select' || type === 'smart_tv_solution') {
+                    addMessage("Em TVs LG e Samsung, o aplicativo UniTV não roda diretamente. Para evitar travamentos, usamos apps alternativos compatíveis.", 'bot');
+                    setTimeout(() => showTyping(() => {
+                        addMessage("Nosso suporte te orienta com o aplicativo correto para sua TV. É só chamar no WhatsApp.", 'bot');
+                        setOptions([{label: 'Falar com Suporte', type: 'suporte_humano'}]);
+                    }), 1500);
+                } else if (type === 'suporte_humano') {
+                    addMessage("Perfeito. Vou te encaminhar para um atendente especializado agora mesmo.", 'bot');
+                    const btn = document.createElement('button');
+                    btn.innerText = "Conversar no WhatsApp";
+                    btn.style.background = "#25d366";
+                    btn.style.color = "white";
+                    btn.onclick = () => {
+                        safeTrackContact('whatsapp_humano_mensal');
+                        window.open("https://wa.me/5519981765840?text=Preciso de atendimento para fechar o plano mensal.", '_blank', 'noopener,noreferrer');
+                    };
+                    document.getElementById('wa-options').appendChild(btn);
+                } else if (type === 'reset') {
+                    addMessage("Posso ajudar com mais alguma coisa?", 'bot');
+                    setOptions([
+                        {label: 'Tem fidelidade no mensal?', type: 'fidelidade'},
+                        {label: 'Como recebo o código?', type: 'entrega'},
+                        {label: 'Quero comprar', type: 'comprar_agora'}
+                    ]);
+                }
+            });
+        }
+
+        let checkoutUrlToRedirect = '';
+        let checkoutSource = 'mensal_page';
+
+        function openWarningModal(url, source = 'cta') {
+            checkoutUrlToRedirect = url;
+            checkoutSource = source;
+
+            safeTrack('CheckoutIntent', {
+                page: 'mensal',
+                source
+            });
+
+            safeTrack('ViewContent', {
+                content_name: 'Modal Compatibilidade Smart TV',
+                content_category: 'Compatibilidade',
+                content_type: 'modal',
+                page: 'mensal',
+                source
+            });
+
+            document.getElementById('smartTvModal').classList.add('active');
+        }
+
+        function closeWarningModal() {
+            document.getElementById('smartTvModal').classList.remove('active');
+        }
+
+        function proceedToCheckout() {
+            if (checkoutUrlToRedirect) {
+                safeTrackCheckout('Plano Mensal UniTV', 24.90, 'BRL', checkoutSource || 'smart_tv_modal');
+                window.open(checkoutUrlToRedirect, '_blank', 'noopener,noreferrer');
+                closeWarningModal();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.MetaTracker && typeof window.MetaTracker.init === 'function') {
+                window.MetaTracker.init({
+                    page: 'mensal',
+                    trackViewContent: true,
+                    content_name: 'Plano Mensal UniTV',
+                    content_category: 'Recarga UniTV',
+                    content_type: 'product',
+                    value: 24.90,
+                    currency: 'BRL'
+                });
+            }
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.fade-in').forEach((el) => {
+                observer.observe(el);
+            });
+
+            const stickyCta = document.getElementById('sticky-cta');
+            const heroSection = document.getElementById('comprar');
+
+            window.addEventListener('scroll', () => {
+                if (window.innerWidth <= 768) {
+                    const heroBottom = heroSection.getBoundingClientRect().bottom;
+                    if (heroBottom < 0) {
+                        stickyCta.classList.add('show');
+                    } else {
+                        stickyCta.classList.remove('show');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
+```
