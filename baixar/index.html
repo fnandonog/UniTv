@@ -116,7 +116,7 @@
         
         <p>O download do instalador oficial começará após o clique abaixo.</p>
 
-        <a href="https://app.unitv-plus.site/app/unitv_RS-NPWN.apk" class="btn-download-direto">
+        <a href="https://app.unitv-plus.site/app/unitv_RS-NPWN.apk" class="btn-download-direto" data-meta-download="apk_direto_tvbox">
             <i class="fa-solid fa-cloud-arrow-down"></i>
             BAIXAR APP AGORA
         </a>
@@ -127,5 +127,19 @@
         </div>
     </main>
 
+    <script src="/js/meta-tracking.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (window.MetaTracker && typeof window.MetaTracker.init === 'function') {
+                window.MetaTracker.init({
+                    page: 'download_direto',
+                    trackViewContent: true,
+                    content_name: 'Página de Download Direto',
+                    content_category: 'Downloads',
+                    content_type: 'page'
+                });
+            }
+        });
+    </script>
 </body>
 </html>
