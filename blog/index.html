@@ -835,6 +835,31 @@
 
     <script src="/js/meta-tracking.js"></script>
     <script>
+        // Funções de proteção contra AdBlockers (Garante que a página não trave se o Meta Pixel for bloqueado)
+        function safeTrack(eventName, payload = {}) {
+            try {
+                if (window.MetaTracker && typeof window.MetaTracker.track === 'function') {
+                    window.MetaTracker.track(eventName, payload);
+                }
+            } catch (e) {}
+        }
+
+        function safeTrackContact(label) {
+            try {
+                if (window.MetaTracker && typeof window.MetaTracker.trackContact === 'function') {
+                    window.MetaTracker.trackContact(label);
+                }
+            } catch (e) {}
+        }
+
+        function safeTrackCheckout(name, value, currency, source) {
+            try {
+                if (window.MetaTracker && typeof window.MetaTracker.trackCheckout === 'function') {
+                    window.MetaTracker.trackCheckout(name, value, currency, source);
+                }
+            } catch (e) {}
+        }
+
         function startTimer(duration, display) {
             let timer = duration, hours, minutes, seconds;
             setInterval(function () {
@@ -874,7 +899,7 @@
                 clearTimeout(searchDebounce);
                 if (term.length >= 2) {
                     searchDebounce = setTimeout(() => {
-                        MetaTracker.track('Search', {
+                        safeTrack('Search', {
                             search_string: term,
                             page: 'blog_index'
                         });
@@ -888,7 +913,7 @@
                     input.value = value;
                     input.dispatchEvent(new Event('input'));
 
-                    MetaTracker.track('BlogCategoryFilter', {
+                    safeTrack('BlogCategoryFilter', {
                         page: 'blog_index',
                         category: value
                     });
@@ -922,14 +947,14 @@
             checkoutPlanName = planName;
             checkoutValue = value;
 
-            MetaTracker.track('CheckoutIntent', {
+            safeTrack('CheckoutIntent', {
                 page: 'blog_index',
                 source,
                 plan_name: planName,
                 value
             });
 
-            MetaTracker.track('ViewContent', {
+            safeTrack('ViewContent', {
                 content_name: 'Modal Compatibilidade Smart TV',
                 content_category: 'Compatibilidade',
                 content_type: 'modal',
@@ -946,7 +971,7 @@
 
         function proceedToCheckout() {
             if (checkoutUrl) {
-                MetaTracker.trackCheckout(checkoutPlanName, checkoutValue, 'BRL', checkoutSource);
+                safeTrackCheckout(checkoutPlanName, checkoutValue, 'BRL', checkoutSource);
                 window.open(checkoutUrl, '_blank', 'noopener,noreferrer');
             }
             closeWarningModal();
@@ -956,7 +981,7 @@
             const widget = document.getElementById('chat-widget');
             const willOpen = !widget.classList.contains('active');
             if (willOpen) {
-                MetaTracker.trackContact('chat_widget_blog');
+                safeTrackContact('chat_widget_blog');
             }
             widget.classList.toggle('active');
         }
@@ -965,7 +990,7 @@
             const content = document.getElementById('chat-content');
             content.innerHTML += `<div class="wa-msg wa-msg-user">${text}</div>`;
 
-            MetaTracker.track('ChatOptionSelected', {
+            safeTrack('ChatOptionSelected', {
                 page: 'blog_index',
                 option_type: type,
                 option_text: text
@@ -974,7 +999,7 @@
             setTimeout(() => {
                 if (type === 'preco') {
                     content.innerHTML += `<div class="wa-msg">Planos: Mensal R$ 24,90 | Anual R$ 189,90.</div>`;
-                    MetaTracker.track('ViewContent', {
+                    safeTrack('ViewContent', {
                         page: 'blog_index',
                         content_name: 'Seção de Planos UniTV',
                         content_category: 'Planos',
@@ -985,7 +1010,7 @@
 
                 if (type === 'smart_tv_select') {
                     content.innerHTML += `<div class="wa-msg">Temos guias para LG/Samsung no blog! Use uma TV Box ou app compatível.</div>`;
-                    MetaTracker.track('GuideClick', {
+                    safeTrack('GuideClick', {
                         page: 'blog_index',
                         origin: 'blog_chat_smarttv'
                     });
@@ -993,7 +1018,7 @@
 
                 if (type === 'pre_download') {
                     content.innerHTML += `<div class="wa-msg">Baixe o APK na aba de Downloads aqui do site!</div>`;
-                    MetaTracker.track('GuideClick', {
+                    safeTrack('GuideClick', {
                         page: 'blog_index',
                         origin: 'blog_chat_download'
                     });
@@ -1004,16 +1029,15 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            MetaTracker.init({
-                page: 'blog_index',
-                pixelId: '2204821377087872',
-                capiEndpoint: 'https://unitvsite.com.br/api/meta-capi.php',
-                capiEnabled: true,
-                trackViewContent: true,
-                content_name: 'Blog UniTV',
-                content_category: 'Blog',
-                content_type: 'content_hub'
-            });
+            if (window.MetaTracker && typeof window.MetaTracker.init === 'function') {
+                window.MetaTracker.init({
+                    page: 'blog_index',
+                    trackViewContent: true,
+                    content_name: 'Blog UniTV',
+                    content_category: 'Blog',
+                    content_type: 'content_hub'
+                });
+            }
 
             startTimer(17940, document.getElementById('timer'));
             bindBlogSearch();
