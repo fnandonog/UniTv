@@ -2,7 +2,7 @@
   if (window.MetaTracker) return;
 
   const CONFIG = {
-    pixelId: '2204821377087872',
+    pixelId: '1129134963615341',
     capiEndpoint: '/api/meta-capi.php',
     capiEnabled: true,
     debug: false
