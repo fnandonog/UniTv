@@ -649,6 +649,31 @@
 
     <script src="/js/meta-tracking.js"></script>
     <script>
+        // Funções de proteção contra AdBlockers (Garante que a página não trave se o Meta Pixel for bloqueado)
+        function safeTrack(eventName, payload = {}) {
+            try {
+                if (window.MetaTracker && typeof window.MetaTracker.track === 'function') {
+                    window.MetaTracker.track(eventName, payload);
+                }
+            } catch (e) {}
+        }
+
+        function safeTrackContact(label) {
+            try {
+                if (window.MetaTracker && typeof window.MetaTracker.trackContact === 'function') {
+                    window.MetaTracker.trackContact(label);
+                }
+            } catch (e) {}
+        }
+
+        function safeTrackCheckout(name, value, currency, source) {
+            try {
+                if (window.MetaTracker && typeof window.MetaTracker.trackCheckout === 'function') {
+                    window.MetaTracker.trackCheckout(name, value, currency, source);
+                }
+            } catch (e) {}
+        }
+
         function toggleMenu() {
             const navMenu = document.getElementById('nav-menu');
             const icon = document.getElementById('menu-icon');
@@ -683,7 +708,7 @@
                     item.classList.add('active');
                     question.setAttribute('aria-expanded', 'true');
 
-                    MetaTracker.track('FAQOpened', {
+                    safeTrack('FAQOpened', {
                         page: 'anual',
                         question: question.textContent.replace(/\s+/g, ' ').trim()
                     });
@@ -734,7 +759,7 @@
         function userAction(text, type) {
             addMessage(text, 'user');
 
-            MetaTracker.track('ChatOptionSelected', {
+            safeTrack('ChatOptionSelected', {
                 page: 'anual',
                 option_type: type,
                 option_text: text
@@ -744,7 +769,7 @@
 
             showTyping(() => {
                 if (type === 'economia') {
-                    MetaTracker.track('Lead', {
+                    safeTrack('Lead', {
                         page: 'anual',
                         source: 'chat_economia_interest'
                     });
@@ -755,7 +780,7 @@
                     addMessage("Após o pagamento aprovado, o seu código de 16 dígitos é enviado automaticamente para o WhatsApp e também para o e-mail cadastrado.", 'bot');
                     setOptions([{label: 'Entendi, vou comprar', type: 'comprar_agora'}, {label: 'Voltar', type: 'reset'}]);
                 } else if (type === 'comprar_agora') {
-                    MetaTracker.track('Lead', {
+                    safeTrack('Lead', {
                         page: 'anual',
                         source: 'chat_purchase_intent'
                     });
@@ -765,7 +790,7 @@
                     setOptions([{label: 'Já paguei o Pix!', type: 'pix_feito'}, {label: 'Preciso de ajuda', type: 'suporte_humano'}]);
                 } else if (type === 'pix_feito') {
                     addMessage("Perfeito! O seu código anual deve chegar em instantes no WhatsApp e no e-mail. Verifique também a caixa de spam, se necessário.", 'bot');
-                    MetaTracker.track('Lead', {
+                    safeTrack('Lead', {
                         page: 'anual',
                         source: 'chat_pix_feito'
                     });
@@ -783,7 +808,7 @@
                     btn.style.background = "#25d366";
                     btn.style.color = "white";
                     btn.onclick = () => {
-                        MetaTracker.trackContact('whatsapp_humano_anual');
+                        safeTrackContact('whatsapp_humano_anual');
                         window.open("https://wa.me/5519981765840?text=Preciso de atendimento para fechar o plano anual VIP.", '_blank', 'noopener,noreferrer');
                     };
                     document.getElementById('wa-options').appendChild(btn);
@@ -805,12 +830,12 @@
             checkoutUrlToRedirect = url;
             checkoutSource = source;
 
-            MetaTracker.track('CheckoutIntent', {
+            safeTrack('CheckoutIntent', {
                 page: 'anual',
                 source
             });
 
-            MetaTracker.track('ViewContent', {
+            safeTrack('ViewContent', {
                 content_name: 'Modal Compatibilidade Smart TV',
                 content_category: 'Compatibilidade',
                 content_type: 'modal',
@@ -827,25 +852,24 @@
 
         function proceedToCheckout() {
             if (checkoutUrlToRedirect) {
-                MetaTracker.trackCheckout('Plano Anual VIP UniTV', 189.90, 'BRL', checkoutSource || 'smart_tv_modal');
+                safeTrackCheckout('Plano Anual VIP UniTV', 189.90, 'BRL', checkoutSource || 'smart_tv_modal');
                 window.open(checkoutUrlToRedirect, '_blank', 'noopener,noreferrer');
                 closeWarningModal();
             }
         }
 
         document.addEventListener('DOMContentLoaded', function () {
-            MetaTracker.init({
-                page: 'anual',
-                pixelId: '2204821377087872',
-                capiEndpoint: 'https://unitvsite.com.br/api/meta-capi.php',
-                capiEnabled: true,
-                trackViewContent: true,
-                content_name: 'Plano Anual VIP UniTV',
-                content_category: 'Recarga UniTV',
-                content_type: 'product',
-                value: 189.90,
-                currency: 'BRL'
-            });
+            if (window.MetaTracker && typeof window.MetaTracker.init === 'function') {
+                window.MetaTracker.init({
+                    page: 'anual',
+                    trackViewContent: true,
+                    content_name: 'Plano Anual VIP UniTV',
+                    content_category: 'Recarga UniTV',
+                    content_type: 'product',
+                    value: 189.90,
+                    currency: 'BRL'
+                });
+            }
 
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
